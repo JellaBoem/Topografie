@@ -390,12 +390,24 @@ function vrijeHoogte() {
   const r = mapRect(), sh = el('sheet').getBoundingClientRect();
   return Math.max(0, Math.min(r.bottom, sh.top) - r.top);
 }
+// Schuiven alleen is niet genoeg. Bij landen onderaan de wereldkaart, zoals
+// Nieuw-Zeeland of Chili, houdt clampView de kaart tegen aan de rand: het land
+// blijft dan achter het paneel steken. Daarom na elke schuif nameten en zo
+// nodig verder inzoomen, want ingezoomd is er wel schuifruimte.
 function schuifOnderPaneel(c) {
-  const r = mapRect(), vrij = vrijeHoogte();
+  const vrij = vrijeHoogte();
   if (vrij < 60) return;
-  const nu = r.top + (c.cy - view.y) / view.h * r.height;
-  view.y += (nu - (r.top + vrij / 2)) / r.height * view.h;
-  clampView(); applyView();
+  for (let i = 0; i < 12; i++) {
+    const r = mapRect();
+    const nu = r.top + (c.cy - view.y) / view.h * r.height;
+    view.y += (nu - (r.top + vrij / 2)) / r.height * view.h;
+    clampView(); applyView();
+    const na = r.top + (c.cy - view.y) / view.h * r.height;
+    if (na > r.top && na < r.top + vrij) return;
+    const w = view.w;
+    zoomAt(c.cx, c.cy, 0.85);
+    if (view.w === w) return;   // zoomgrens bereikt, verder kan niet
+  }
 }
 
 // De aanzet onder de melding: één regel, geen tekst. Pas na een tik lees je.
