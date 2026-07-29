@@ -8,6 +8,7 @@ const INTERVALS = { 1: 1, 2: 3, 3: 10, 4: 30, 5: 90 }; // Leitner: bakje -> aant
 const MAX_BOX = 5;
 const MIN_TAP_PX = 22;        // kleinste tikcirkel op het scherm (voor mini-landen)
 const MOVE_TOL = 10;          // pixels: meer beweging = schuiven i.p.v. tikken
+const MIN_SHOW_PX = 28;       // zo groot moet het juiste land minstens in beeld staan
 
 // ---------------------------------------------------------------- state
 let MAP = null;               // map-data.json
@@ -285,12 +286,12 @@ function handleTap(clientX, clientY) {
     if (hitKey && hitKey !== key) hit = ' Je wees ' + byName.get(hitKey).nl + ' aan.';
     el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (groen omlijnd).' + hit;
     // zoom licht naar het juiste land toe zodat ze het ziet
-    focusOn(target);
+    focusOn(target, pt);
   }
   el('nextBtn').classList.remove('hidden');
 }
 
-function focusOn(c) {
+function focusOn(c, tap) {
   // Na een fout antwoord moet het juiste land ALTIJD in beeld komen, met de buren
   // eromheen. Ook als ze ver ingezoomd op een heel ander werelddeel zat; dan is
   // uitzoomen nodig. Het kader volgt de echte vorm van het land, zodat een lang
@@ -298,8 +299,21 @@ function focusOn(c) {
   const rings = quizPolys.get(c.name);
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
   for (const r of rings) for (const p of r) { if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0]; if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1]; }
-  const m = Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;   // omgeving eromheen
-  fitBounds({ x0: x0 - m, y0: y0 - m, x1: x1 + m, y1: y1 + m }, 0.12);
+  // Marge op basis van het land zelf, zodat de omgeving even ruim blijft
+  // ongeacht hoe ver ze ernaast zat.
+  const m = Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;
+  const box = { x0: x0 - m, y0: y0 - m, x1: x1 + m, y1: y1 + m };
+  if (tap) {
+    // Ook het aangewezen punt in beeld, zodat ze in een oogopslag ziet hoe ver
+    // ernaast het zat. Maar niet ten koste van alles: als het juiste land
+    // daardoor een groen streepje van niks wordt, gaat het antwoord voor.
+    const p = base.w * 0.02;
+    fitBounds({ x0: Math.min(box.x0, tap[0] - p), y0: Math.min(box.y0, tap[1] - p),
+                x1: Math.max(box.x1, tap[0] + p), y1: Math.max(box.y1, tap[1] + p) }, 0.12);
+    const r = mapRect();
+    if (Math.max((x1 - x0) / view.w * r.width, (y1 - y0) / view.h * r.height) >= MIN_SHOW_PX) return;
+  }
+  fitBounds(box, 0.12);
 }
 
 function clearMarks() { el('viewport').querySelectorAll('.target,.wrong').forEach(p => p.classList.remove('target', 'wrong')); }
