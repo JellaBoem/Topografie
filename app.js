@@ -13,6 +13,7 @@ const ASK_MIN_PX = 46;        // zo groot moet het opgelichte land staan bij 'Om
 
 // ---------------------------------------------------------------- state
 let MAP = null;               // map-data.json
+let INFO = {};                // land-info.json: tekst per land, mag leeg zijn
 let byName = new Map();       // naam -> country object
 let quizPolys = new Map();    // naam -> [ring[[x,y]...]...] voor klikdetectie
 let state = null;             // opgeslagen voortgang
@@ -54,6 +55,9 @@ async function boot() {
   load();
   const res = await fetch('map-data.json');
   MAP = await res.json();
+  // Landinformatie staat apart van de kaart: die tekst groeit en wordt bijgesteld,
+  // de kaart niet. Ontbreekt hij, dan werkt de app gewoon zonder.
+  INFO = await fetch('land-info.json').then(r => r.json()).catch(() => ({}));
   MAP.countries.forEach(c => byName.set(c.name, c));
   MAP.countries.filter(c => c.quiz).forEach(c => quizPolys.set(c.name, parsePath(c.d)));
   drawMap();
@@ -332,7 +336,35 @@ function recordResult(key, correct) {
   } else { it[F.no]++; it[F.box] = 1; it[F.due] = session.now + 1; }
   session.results.push({ key, correct });
   el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
+  toonMeer(byName.get(key));
   save();
+}
+
+const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+
+// Het uitklapblok onder de melding. Staat dicht: eerst zelf graven, dan pas
+// lezen. Wat er niet is, laten we weg in plaats van een leeg kopje te tonen.
+function toonMeer(c) {
+  const d = INFO[c.name] || {};
+  const brok = MAP.brokken.find(b => b.n === c.brok);
+  const r = [];
+  if (d.naam)  r.push('<p><b>De naam.</b> ' + esc(d.naam) + '</p>');
+  if (brok && brok.anker)
+    r.push('<p><b>Waarom deze landen bij elkaar staan.</b> ' + esc(brok.anker) + '.</p>');
+  if (c.buren && c.buren.length)
+    r.push('<p><b>Buurlanden.</b> ' + c.buren.map(esc).join(', ') + '.</p>');
+  else if (c.buren)
+    r.push('<p><b>Buurlanden.</b> Geen: dit land grenst nergens aan land.</p>');
+  if (d.taal)  r.push('<p><b>Taal.</b> ' + esc(d.taal) + '</p>');
+  if (d.feit)  r.push('<p>' + esc(d.feit) + '</p>');
+  if (d.bron)  r.push('<p class="bron">' + esc(d.bron) + '</p>');
+
+  const box = el('meer');
+  box.open = false;                       // elke vraag opnieuw dicht
+  if (!r.length) { box.classList.add('hidden'); return; }
+  box.querySelector('summary').textContent = 'Meer over ' + c.nl;
+  el('meerBody').innerHTML = r.join('');
+  box.classList.remove('hidden');
 }
 
 // Welk land ligt onder dit punt? Eerst echt raak, anders het dichtstbijzijnde
@@ -480,6 +512,8 @@ function clearMarks() {
   el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
     .forEach(p => p.classList.remove('target', 'wrong', 'ask', 'peek'));
   el('peekMsg').textContent = '';
+  el('meer').classList.add('hidden');
+  el('meer').open = false;
 }
 
 function endSession() {

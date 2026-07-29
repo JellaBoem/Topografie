@@ -85,11 +85,25 @@
   #opts button.bad{background:#f7d9d4; border-color:var(--bad); color:#8f2419;}
   #opts:not(.hidden) + #fb{border-top:0;}
   #fb{padding:12px 14px calc(12px + env(safe-area-inset-bottom)); background:var(--panel); border-top:1px solid #e3e9e9;
-     display:flex; align-items:center; gap:12px; min-height:64px;}
+     display:flex; align-items:center; gap:12px; min-height:64px; flex-wrap:wrap;}
   #fb .msg{flex:1; font-size:15px; line-height:1.3;}
   #fb .msg .ok{color:var(--good); font-weight:700;}
   #fb .msg .no{color:var(--bad); font-weight:700;}
   #fb .btn{padding:13px 22px;}
+  /* Uitklapbaar en dicht bij het begin: eerst zelf graven, dan pas lezen.
+     Uitleg vooraf haalt het graven weg en dat is juist het werk. */
+  #meer{width:100%; order:3; margin-top:2px;}
+  #meer summary{list-style:none; cursor:pointer; font-size:14px; font-weight:600;
+    color:var(--accent); padding:6px 0;}
+  #meer summary::-webkit-details-marker{display:none;}
+  #meer summary::before{content:'▸ '; display:inline-block; width:1em;}
+  #meer[open] summary::before{content:'▾ ';}
+  #meerBody{font-size:14px; line-height:1.45; max-height:34vh; overflow:auto;
+    padding:2px 0 4px; color:#3a4747;}
+  #meerBody p{margin:0 0 7px;}
+  #meerBody p:last-child{margin-bottom:0;}
+  #meerBody b{color:var(--ink);}
+  #meerBody .bron{font-size:12.5px; color:#6b7878;}
   .ctrls{position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:8px;}
   .ctrls button{width:44px; height:44px; border-radius:22px; border:1px solid #cdd6d6; background:rgba(255,255,255,.92); font-size:22px; font-weight:700; color:var(--ink); line-height:1;}
 
@@ -187,6 +201,7 @@
   <div id="fb">
     <div class="msg" id="fbMsg">Tik op de kaart waar dit land ligt.</div>
     <button class="btn hidden" id="nextBtn">Volgende</button>
+    <details id="meer" class="hidden"><summary></summary><div id="meerBody"></div></details>
   </div>
 </section>
 

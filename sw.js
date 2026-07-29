@@ -1,8 +1,8 @@
 /* Service worker: maakt de app offline-installeerbaar.
    Bij een nieuwe versie: verhoog CACHE (bijv. v2). */
-const CACHE = 'topo-v11';
+const CACHE = 'topo-v12';
 const ASSETS = [
-  '.', 'index.html', 'app.js', 'map-data.json', 'manifest.json',
+  '.', 'index.html', 'app.js', 'map-data.json', 'land-info.json', 'manifest.json',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon-180.png'
 ];
 

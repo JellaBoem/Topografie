@@ -1,0 +1,214 @@
+{
+  "_comment": "Tekst per land, los van de kaart zodat hij kan groeien zonder de kaart opnieuw te bouwen. Sleutel = Engelse naam uit map-data.json. Velden: naam (wat de landsnaam betekent), taal, feit (een opvallend of cultureel gegeven), bron (alleen waar iets omstreden of aan een uitspraak gebonden is). Alles mag ontbreken; de app laat weg wat er niet is.",
+
+  "Netherlands": {
+    "naam": "Letterlijk de lage landen. Ongeveer een kwart ligt onder zeeniveau.",
+    "taal": "Nederlands. In Friesland is het Fries de tweede rijkstaal.",
+    "feit": "Een groot deel van het land is op het water veroverd. Flevoland lag in 1930 nog onder de Zuiderzee."
+  },
+  "Belgium": {
+    "naam": "Naar de Belgae, het stammenverbond dat Caesar hier tegenkwam.",
+    "taal": "Drie officiële talen: Nederlands in het noorden, Frans in het zuiden, Duits in een klein gebied in het oosten.",
+    "feit": "De taalgrens loopt van west naar oost dwars door het land en bepaalt tot vandaag de politiek."
+  },
+  "Luxembourg": {
+    "naam": "Van Lucilinburhuc, klein burchtje: het kasteel waar de stad omheen groeide.",
+    "taal": "Luxemburgs, Frans en Duits zijn alle drie officieel.",
+    "feit": "Een van de laatste groothertogdommen ter wereld; het staatshoofd is een groothertog."
+  },
+  "Germany": {
+    "naam": "Van diutisc, van het volk: de taal van gewone mensen tegenover het Latijn van de geleerden.",
+    "taal": "Duits.",
+    "feit": "Pas in 1871 één land. Daarvoor tientallen vorstendommen, en daarom liggen de grote steden verspreid in plaats van rond één hoofdstad."
+  },
+  "France": {
+    "naam": "Naar de Franken, het Germaanse volk dat na de Romeinen de macht overnam.",
+    "taal": "Frans.",
+    "feit": "Grenst aan Brazilië en Suriname. Frans-Guyana in Zuid-Amerika is geen kolonie maar volwaardig Frans grondgebied, met de euro en Europese verkiezingen."
+  },
+
+  "United Kingdom": {
+    "naam": "Verenigd slaat op de samenvoeging van Engeland, Schotland, Wales en Noord-Ierland.",
+    "taal": "Engels. Daarnaast Welsh in Wales en Schots-Gaelisch in delen van Schotland.",
+    "feit": "Grenst over land maar aan één land: Ierland."
+  },
+  "Ireland": {
+    "naam": "Naar Ériu, een godin uit de Ierse mythologie.",
+    "taal": "Iers en Engels zijn beide officieel; in het dagelijks leven overheerst het Engels.",
+    "feit": "Het eiland is verdeeld: de republiek beslaat vijf zesde deel, Noord-Ierland hoort bij het Verenigd Koninkrijk."
+  },
+  "Denmark": {
+    "naam": "Mark van de Denen, waarbij mark grensgebied betekent.",
+    "taal": "Deens.",
+    "feit": "Eén schiereiland plus ruim vierhonderd eilanden. Groenland en de Faeröer horen er ook bij, met eigen bestuur."
+  },
+  "Norway": {
+    "naam": "Noordweg: de vaarroute die de Vikingen langs de kust naar het noorden namen.",
+    "taal": "Noors, in twee officiële schrijfvormen (bokmål en nynorsk). In het noorden ook Samisch.",
+    "feit": "Met alle fjorden en eilanden meegerekend is de kustlijn ruim honderdduizend kilometer: meer dan twee keer de omtrek van de aarde."
+  },
+
+  "Sweden": {
+    "naam": "Naar de Svear, de stam rond het Mälarenmeer.",
+    "taal": "Zweeds. Fins en Samisch zijn erkende minderheidstalen.",
+    "feit": "Voert sinds 1814 geen oorlog meer: de langste ononderbroken vrede van Europa."
+  },
+  "Finland": {
+    "naam": "In het Fins heet het land Suomi; waar dat woord vandaan komt is onzeker.",
+    "taal": "Fins en Zweeds zijn beide officieel. Fins is geen Indo-Europese taal: het lijkt niet op zijn buren, maar is verwant aan het Ests en in de verte aan het Hongaars.",
+    "feit": "Bijna 188.000 meren, meer dan enig ander land."
+  },
+  "Estonia": {
+    "naam": "Van Aesti, een volk aan de Oostzee dat de Romein Tacitus al beschreef.",
+    "taal": "Ests, nauw verwant aan het Fins en niet aan het Lets of Russisch.",
+    "feit": "Zong zich in 1988 los: bij de Zingende Revolutie kwamen honderdduizenden mensen samen om verboden nationale liederen te zingen."
+  },
+  "Latvia": {
+    "naam": "Naar de Letten, de Baltische stam die hier woonde.",
+    "taal": "Lets. Samen met het Litouws zijn dit de laatste twee levende Baltische talen.",
+    "feit": "Bijna de helft van het land is bos."
+  },
+  "Lithuania": {
+    "naam": "Herkomst onzeker; waarschijnlijk van een riviernaam, Lietava.",
+    "taal": "Litouws, dat als de meest ouderwetse levende Indo-Europese taal geldt: het bewaarde vormen die het Latijn en Grieks al verloren.",
+    "feit": "Vormde met Polen in de vijftiende eeuw het grootste land van Europa, van de Oostzee tot de Zwarte Zee."
+  },
+
+  "Switzerland": {
+    "naam": "Naar het kanton Schwyz, een van de drie kantons die in 1291 het verbond sloten.",
+    "taal": "Vier officiële talen: Duits, Frans, Italiaans en Reto-Romaans.",
+    "feit": "Heeft geen president maar een raad van zeven die het staatshoofdschap jaarlijks doorgeeft."
+  },
+  "Austria": {
+    "naam": "Österreich, het oostelijke rijk: de oostgrens van het Frankische rijk.",
+    "taal": "Duits.",
+    "feit": "Was tot 1918 het centrum van een rijk dat half Midden-Europa besloeg; wat overbleef is een land ter grootte van Ierland."
+  },
+  "Slovenia": {
+    "naam": "Land van de Slaven, dezelfde stam als in Slowakije.",
+    "taal": "Sloveens, dat nog een tweevoud kent: een aparte vorm voor precies twee dingen.",
+    "feit": "Ruim de helft van het land is bos, en het heeft maar 47 kilometer kust."
+  },
+  "Italy": {
+    "naam": "Mogelijk van vitulus, kalf: land van de runderen.",
+    "taal": "Italiaans.",
+    "feit": "Pas in 1861 één land. De streekkeukens en dialecten verschillen daarom sterker dan je bij zo'n smal land zou verwachten."
+  },
+
+  "Spain": {
+    "naam": "Van het Fenicische i-shpanim, mogelijk kust van de klipdassen: de Feniciërs hielden de konijnen hier voor klipdassen.",
+    "taal": "Spaans (Castiliaans). Catalaans, Galicisch en Baskisch zijn regionaal officieel. Baskisch is met geen enkele andere taal ter wereld verwant.",
+    "feit": "Was bijna achthonderd jaar deels islamitisch; het Alhambra en duizenden Spaanse woorden met al- komen daaruit voort."
+  },
+  "Portugal": {
+    "naam": "Van Portus Cale, de Romeinse haven bij het huidige Porto.",
+    "taal": "Portugees, wereldwijd door ruim tweehonderdvijftig miljoen mensen gesproken, vooral in Brazilië.",
+    "feit": "De grens met Spanje ligt sinds 1297 vrijwel onveranderd en is daarmee een van de oudste ter wereld."
+  },
+  "Iceland": {
+    "naam": "IJsland, naar verluidt zo genoemd door een teleurgestelde Noorse kolonist die zijn vee had verloren.",
+    "taal": "IJslands, zo weinig veranderd dat IJslanders middeleeuwse teksten nog kunnen lezen.",
+    "feit": "Ligt op de naad tussen de Noord-Amerikaanse en de Euraziatische plaat. Het eiland wordt elk jaar een paar centimeter breder."
+  },
+  "Cyprus": {
+    "naam": "Waarschijnlijk van het Griekse woord voor koper; het eiland was in de oudheid de koperbron van de Middellandse Zee.",
+    "taal": "Grieks en Turks zijn beide officieel.",
+    "feit": "Sinds 1974 is het eiland feitelijk in tweeën gedeeld. Het noorden staat onder Turks bestuur, dat alleen door Turkije als staat wordt erkend. Er loopt een VN-bufferzone dwars door de hoofdstad Nicosia.",
+    "bron": "VN-Veiligheidsraad, resolutie 541 (1983)."
+  },
+
+  "Poland": {
+    "naam": "Van pole, veld: het volk van de vlakte.",
+    "taal": "Pools.",
+    "feit": "Verdween tussen 1795 en 1918 volledig van de kaart, verdeeld tussen Rusland, Pruisen en Oostenrijk."
+  },
+  "Czechia": {
+    "naam": "Naar de Tsjechen; de landsdelen heten Bohemen, Moravië en Silezië.",
+    "taal": "Tsjechisch.",
+    "feit": "Ging in 1993 vreedzaam uiteen met Slowakije, de fluwelen scheiding: geen schot gelost."
+  },
+  "Slovakia": {
+    "naam": "Land van de Slaven, dezelfde stam als in Slovenië.",
+    "taal": "Slowaaks, zo dicht bij het Tsjechisch dat sprekers elkaar zonder moeite verstaan.",
+    "feit": "Het land telt meer dan honderd bewaarde kastelen en burchtruïnes, de hoogste dichtheid ter wereld."
+  },
+  "Hungary": {
+    "naam": "In het Hongaars Magyarország, land van de Magyaren.",
+    "taal": "Hongaars. Net als Fins en Ests geen Indo-Europese taal: het is omringd door talen waaraan het niet verwant is.",
+    "feit": "De Magyaren kwamen rond het jaar 895 als ruitervolk uit het oosten en bleven op de Hongaarse laagvlakte hangen."
+  },
+
+  "Croatia": {
+    "naam": "Hrvatska, naar de Kroaten.",
+    "taal": "Kroatisch.",
+    "feit": "Ruim duizend eilanden voor de kust. Het land heeft de vorm van een hoefijzer dat om Bosnië heen buigt."
+  },
+  "Bosnia and Herz.": {
+    "naam": "Bosnië naar de rivier de Bosna; Herzegovina van het Duitse Herzog, hertog.",
+    "taal": "Bosnisch, Kroatisch en Servisch zijn alle drie officieel en onderling goed verstaanbaar.",
+    "feit": "Heeft drie presidenten tegelijk, één per bevolkingsgroep, die het voorzitterschap om de acht maanden doorgeven."
+  },
+  "Serbia": {
+    "naam": "Naar de Serviërs.",
+    "taal": "Servisch, geschreven in zowel het cyrillische als het Latijnse alfabet.",
+    "feit": "Verloor bij het uiteenvallen van Joegoslavië zijn kust en is nu het grootste land van de Balkan zonder zee."
+  },
+  "Montenegro": {
+    "naam": "Venetiaans voor zwarte berg. In het eigen Crna Gora betekent het precies hetzelfde.",
+    "taal": "Montenegrijns.",
+    "feit": "Werd pas in 2006 zelfstandig, als laatste land dat uit Joegoslavië voortkwam."
+  },
+
+  "Albania": {
+    "naam": "In het eigen Shqipëri, vaak uitgelegd als land van de adelaars; vandaar de tweekoppige adelaar in de vlag.",
+    "taal": "Albanees, een eigen tak in de Indo-Europese stamboom zonder nauwe verwanten.",
+    "feit": "Was onder Enver Hoxha decennialang het meest afgesloten land van Europa, met honderdduizenden bunkers tegen een invasie die nooit kwam."
+  },
+  "Macedonia": {
+    "naam": "Noord- werd in 2019 toegevoegd na een akkoord met Griekenland, dat bezwaar maakte omdat een Griekse regio ook Macedonië heet.",
+    "taal": "Macedonisch, nauw verwant aan het Bulgaars.",
+    "feit": "Het Ohridmeer aan de zuidwestgrens is met ruim een miljoen jaar een van de oudste meren ter wereld."
+  },
+  "Kosovo": {
+    "naam": "Van het Servische kos, merel: het Merelveld, naar de vlakte waar in 1389 de slag tegen de Ottomanen werd geleverd.",
+    "taal": "Albanees en Servisch zijn beide officieel.",
+    "feit": "Riep in 2008 de onafhankelijkheid uit. Ongeveer 110 van de 193 VN-lidstaten erkennen Kosovo als staat; Servië, Rusland en China niet, en binnen de EU ook Spanje, Griekenland, Roemenië, Slowakije en Cyprus niet.",
+    "bron": "Het Internationaal Gerechtshof oordeelde in 2010 dat de onafhankelijkheidsverklaring niet in strijd was met het internationaal recht."
+  },
+  "Greece": {
+    "naam": "In het eigen Elláda. Grieks komt van Graeci, de naam die de Romeinen aan één stam gaven en op iedereen toepasten.",
+    "taal": "Grieks, met ruim drieduizend jaar aan geschreven bronnen de langst gedocumenteerde levende taal van Europa.",
+    "feit": "Ongeveer zesduizend eilanden, waarvan er nog geen tweehonderd bewoond zijn."
+  },
+  "Bulgaria": {
+    "naam": "Naar de Bulgaren, oorspronkelijk een Turks ruitervolk dat opging in de Slavische bevolking.",
+    "taal": "Bulgaars.",
+    "feit": "Het cyrillische alfabet is hier in de negende eeuw ontstaan en van hieruit naar Servië en Rusland verspreid."
+  },
+
+  "Belarus": {
+    "naam": "Wit-Roethenië. Wat het wit betekende is onzeker: mogelijk een windrichting, want in oude Slavische stelsels stond een kleur voor een streek.",
+    "taal": "Belarussisch en Russisch zijn beide officieel; in de praktijk overheerst het Russisch.",
+    "feit": "Meer dan een derde van het land is bos, waaronder het laatste stuk oerbos van Europa."
+  },
+  "Ukraine": {
+    "naam": "Meestal uitgelegd als grensland of gebied, van kraj, rand.",
+    "taal": "Oekraïens.",
+    "feit": "Het grootste land dat volledig binnen Europa ligt. De zwarte aarde in het midden is zo vruchtbaar dat het land een van de grootste graanexporteurs ter wereld is."
+  },
+  "Moldova": {
+    "naam": "Naar de rivier de Moldova, in het huidige Roemenië.",
+    "taal": "Roemeens.",
+    "feit": "Een van de kleinste en dichtstbevolkte landen van Europa, en een van de weinige zonder bergen én zonder zee."
+  },
+  "Romania": {
+    "naam": "Land van de Romeinen: de Romeinse provincie Dacia liet hier een Latijnse taal achter.",
+    "taal": "Roemeens, de enige Romaanse taal in Oost-Europa, omringd door Slavische en Hongaarse buren.",
+    "feit": "De Donaudelta aan de Zwarte Zee is het grootste rietmoeras ter wereld en het best bewaarde delta van Europa."
+  },
+  "Russia": {
+    "naam": "Naar de Roes, waarschijnlijk Zweedse handelaren en krijgers die vanaf de negende eeuw langs de rivieren zuidwaarts trokken.",
+    "taal": "Russisch.",
+    "feit": "Het grootste land ter wereld, met elf tijdzones. Het Aziatische deel is veruit het grootst, maar ongeveer drie kwart van de bevolking woont in het Europese westen."
+  }
+}
