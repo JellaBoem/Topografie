@@ -51,6 +51,15 @@
   .rowbtns{display:flex; gap:10px;}
   .rowbtns .btn{flex:1;}
   .tiny{font-size:12px; color:var(--muted); line-height:1.5;}
+  /* Wat zit er in de brok die je aantikt, en waarom hoort dat bij elkaar.
+     De kapstok hoort vóór het oefenen te hangen, niet erna. */
+  #brokUitleg{margin-bottom:12px;}
+  #brokUitleg:empty{display:none;}
+  #brokUitleg .bu{margin-top:12px; padding-top:11px; border-top:1px solid #e6ecec;}
+  #brokUitleg .bu:first-child{margin-top:0;}
+  #brokUitleg .bu b{font-size:14px;}
+  #brokUitleg .landen{font-size:13px; line-height:1.5; margin-top:2px;}
+  #brokUitleg .waarom{font-size:13px; line-height:1.45; color:var(--muted); margin-top:3px;}
   .num{font-variant-numeric:tabular-nums;}
 
   /* ---------- QUIZ ---------- */
@@ -194,6 +203,7 @@
          dus daaronder zou je ze pas na veel scrollen zien. -->
     <p class="tiny" id="scopeInfo" style="margin:0 0 10px;"></p>
     <button class="btn sec hidden" id="mixBtn" style="margin:0 0 12px; width:100%; font-size:15px; padding:12px;"></button>
+    <div id="brokUitleg"></div>
     <div id="scopeList" class="chips"></div>
   </div>
 

@@ -654,7 +654,27 @@ function buildScopeUI() {
     }
   }
   scopeHint();
+  brokUitleg();
   updateProgress();
+}
+
+// De ankerzin hoort bij de brok, niet bij één land. Hier kies je je brok, dus
+// hier hoort hij ook: eerst zien wat een groepje is en waarom het bij elkaar
+// hoort, en dan pas oefenen. Zonder dit koos je een nummer met een naam en
+// kreeg je de uitleg pas ná je eerste antwoord, verstopt bij één land.
+function brokUitleg() {
+  const box = el('brokUitleg'), sc = state.settings.scope;
+  if (sc.type !== 'brok') { box.innerHTML = ''; return; }
+  const gekozen = MAP.brokken.filter(b => sc.values.includes(b.n));
+  if (!gekozen.length) {
+    box.innerHTML = '<p class="tiny" style="margin:0;">Tik een brok aan: ' +
+      'je ziet dan welke landen erin zitten en waarom ze bij elkaar horen.</p>';
+    return;
+  }
+  box.innerHTML = gekozen.map(b =>
+    '<div class="bu"><b>' + b.n + '. ' + esc(b.naam) + '</b>' +
+    '<div class="landen">' + b.landen.map(esc).join(', ') + '</div>' +
+    '<div class="waarom">' + esc(b.anker) + '.</div></div>').join('');
 }
 
 // Welke brokken heb je in deze stand al aangeraakt? Alleen die kun je zinvol
