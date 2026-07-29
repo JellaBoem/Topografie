@@ -477,8 +477,52 @@ function buildScopeUI() {
       MAP.brokken.forEach(b => box.appendChild(chip(b.n + '. ' + b.naam, sc.values.includes(b.n), () => toggleScope(b.n))));
     }
   }
+  scopeHint();
   updateProgress();
 }
+
+// Welke brokken heb je in deze stand al aangeraakt? Alleen die kun je zinvol
+// door elkaar oefenen; een brok die je nog nooit zag valt er niets aan te halen.
+function startedBroks() {
+  const F = fields();
+  const s = new Set();
+  for (const c of MAP.countries)
+    if (c.quiz && state.items[c.name] && state.items[c.name][F.seen]) s.add(c.brok);
+  return [...s].sort((a, b) => a - b);
+}
+
+// Eén brok tegelijk oefenen voelt fijn: het gaat vlot en je hebt het snel goed.
+// Maar dat vlotte gevoel komt doordat je binnen die brok niet hoeft te kiezen.
+// Door elkaar oefenen voelt trager en rommeliger, en blijft juist beter hangen.
+// De app kon dat al (meerdere brokken aantikken), maar zei het nergens.
+function scopeHint() {
+  const sc = state.settings.scope;
+  const info = el('scopeInfo'), mix = el('mixBtn');
+  mix.classList.add('hidden');
+  if (sc.type === 'all') {
+    info.textContent = 'Alle ' + MAP.countries.filter(c => c.quiz).length +
+      ' landen door elkaar. Je krijgt vanzelf eerst terug wat aan herhaling toe is.';
+    return;
+  }
+  if (sc.type === 'continent') {
+    info.textContent = 'Tik een of meer werelddelen aan. Dit is de indeling van je leerplan, ' +
+      'dus Amerika en Oceanië staan samen.';
+    return;
+  }
+  info.textContent = 'Je kunt meerdere brokken tegelijk aantikken. Dat voelt trager en ' +
+    'rommeliger dan brok voor brok, en dat is precies waarom het beter blijft hangen: ' +
+    'je moet elke keer opnieuw kiezen uit alles wat je kent.';
+  const gestart = startedBroks();
+  if (gestart.length >= 2 && gestart.some(n => !sc.values.includes(n))) {
+    mix.textContent = 'Alle ' + gestart.length + ' brokken erbij die je al begon';
+    mix.classList.remove('hidden');
+    mix.onclick = () => {
+      state.settings.scope.values = [...new Set(sc.values.concat(gestart))].sort((a, b) => a - b);
+      save(); buildScopeUI();
+    };
+  }
+}
+
 function chip(label, on, fn) {
   const b = document.createElement('button');
   b.className = 'chip' + (on ? ' on' : ''); b.textContent = label;
