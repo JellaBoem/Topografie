@@ -1,6 +1,5 @@
 {
   "_comment": "Tekst per land, los van de kaart zodat hij kan groeien zonder de kaart opnieuw te bouwen. Sleutel = Engelse naam uit map-data.json. Velden: naam (wat de landsnaam betekent), taal, feit (een opvallend of cultureel gegeven), bron (alleen waar iets omstreden of aan een uitspraak gebonden is). Alles mag ontbreken; de app laat weg wat er niet is.",
-
   "Netherlands": {
     "naam": "Letterlijk de lage landen. Ongeveer een kwart ligt onder zeeniveau.",
     "taal": "Nederlands. In Friesland is het Fries de tweede rijkstaal.",
@@ -26,7 +25,6 @@
     "taal": "Frans.",
     "feit": "Grenst aan Brazilië en Suriname. Frans-Guyana in Zuid-Amerika is geen kolonie maar volwaardig Frans grondgebied, met de euro en Europese verkiezingen."
   },
-
   "United Kingdom": {
     "naam": "Verenigd slaat op de samenvoeging van Engeland, Schotland, Wales en Noord-Ierland.",
     "taal": "Engels. Daarnaast Welsh in Wales en Schots-Gaelisch in delen van Schotland.",
@@ -47,7 +45,6 @@
     "taal": "Noors, in twee officiële schrijfvormen (bokmål en nynorsk). In het noorden ook Samisch.",
     "feit": "Met alle fjorden en eilanden meegerekend is de kustlijn ruim honderdduizend kilometer: meer dan twee keer de omtrek van de aarde."
   },
-
   "Sweden": {
     "naam": "Naar de Svear, de stam rond het Mälarenmeer.",
     "taal": "Zweeds. Fins en Samisch zijn erkende minderheidstalen.",
@@ -73,7 +70,6 @@
     "taal": "Litouws, dat als de meest ouderwetse levende Indo-Europese taal geldt: het bewaarde vormen die het Latijn en Grieks al verloren.",
     "feit": "Vormde met Polen in de vijftiende eeuw het grootste land van Europa, van de Oostzee tot de Zwarte Zee."
   },
-
   "Switzerland": {
     "naam": "Naar het kanton Schwyz, een van de drie kantons die in 1291 het verbond sloten.",
     "taal": "Vier officiële talen: Duits, Frans, Italiaans en Reto-Romaans.",
@@ -94,7 +90,6 @@
     "taal": "Italiaans.",
     "feit": "Pas in 1861 één land. De streekkeukens en dialecten verschillen daarom sterker dan je bij zo'n smal land zou verwachten."
   },
-
   "Spain": {
     "naam": "Van het Fenicische i-shpanim, mogelijk kust van de klipdassen: de Feniciërs hielden de konijnen hier voor klipdassen.",
     "taal": "Spaans (Castiliaans). Catalaans, Galicisch en Baskisch zijn regionaal officieel. Baskisch is met geen enkele andere taal ter wereld verwant.",
@@ -116,7 +111,6 @@
     "feit": "Sinds 1974 is het eiland feitelijk in tweeën gedeeld. Het noorden staat onder Turks bestuur, dat alleen door Turkije als staat wordt erkend. Er loopt een VN-bufferzone dwars door de hoofdstad Nicosia.",
     "bron": "VN-Veiligheidsraad, resolutie 541 (1983)."
   },
-
   "Poland": {
     "naam": "Van pole, veld: het volk van de vlakte.",
     "taal": "Pools.",
@@ -137,7 +131,6 @@
     "taal": "Hongaars. Net als Fins en Ests geen Indo-Europese taal: het is omringd door talen waaraan het niet verwant is.",
     "feit": "De Magyaren kwamen rond het jaar 895 als ruitervolk uit het oosten en bleven op de Hongaarse laagvlakte hangen."
   },
-
   "Croatia": {
     "naam": "Hrvatska, naar de Kroaten.",
     "taal": "Kroatisch.",
@@ -158,7 +151,6 @@
     "taal": "Montenegrijns.",
     "feit": "Werd pas in 2006 zelfstandig, als laatste land dat uit Joegoslavië voortkwam."
   },
-
   "Albania": {
     "naam": "In het eigen Shqipëri, vaak uitgelegd als land van de adelaars; vandaar de tweekoppige adelaar in de vlag.",
     "taal": "Albanees, een eigen tak in de Indo-Europese stamboom zonder nauwe verwanten.",
@@ -185,7 +177,6 @@
     "taal": "Bulgaars.",
     "feit": "Het cyrillische alfabet is hier in de negende eeuw ontstaan en van hieruit naar Servië en Rusland verspreid."
   },
-
   "Belarus": {
     "naam": "Wit-Roethenië. Wat het wit betekende is onzeker: mogelijk een windrichting, want in oude Slavische stelsels stond een kleur voor een streek.",
     "taal": "Belarussisch en Russisch zijn beide officieel; in de praktijk overheerst het Russisch.",
@@ -210,5 +201,232 @@
     "naam": "Naar de Roes, waarschijnlijk Zweedse handelaren en krijgers die vanaf de negende eeuw langs de rivieren zuidwaarts trokken.",
     "taal": "Russisch.",
     "feit": "Het grootste land ter wereld, met elf tijdzones. Het Aziatische deel is veruit het grootst, maar ongeveer drie kwart van de bevolking woont in het Europese westen."
+  },
+  "Turkey": {
+    "naam": "Land van de Turken, een volk dat vanuit Centraal-Azië westwaarts trok en zich vanaf de elfde eeuw in Anatolië vestigde.",
+    "taal": "Turks. Koerdisch is de grootste minderheidstaal.",
+    "feit": "Istanbul ligt op twee werelddelen tegelijk: de zeestraat de Bosporus scheidt het Europese van het Aziatische deel van de stad."
+  },
+  "Syria": {
+    "naam": "Waarschijnlijk een Griekse verkorting van Assyrië, het oude rijk verder naar het oosten.",
+    "taal": "Arabisch. In het noordoosten wordt ook Koerdisch gesproken.",
+    "feit": "Damascus geldt als een van de langst onafgebroken bewoonde steden ter wereld."
+  },
+  "Lebanon": {
+    "naam": "Van een Semitisch woord voor wit, naar de sneeuw op het Libanongebergte.",
+    "taal": "Arabisch. Frans en Engels zijn wijdverbreid als tweede taal.",
+    "feit": "De hoogste ambten zijn per geloofsgemeenschap verdeeld: de president is maronitisch christen, de premier soennitisch moslim, de parlementsvoorzitter sjiitisch."
+  },
+  "Israel": {
+    "naam": "Naar de bijbelse naam Israël, gekozen bij de stichting van de staat in 1948.",
+    "taal": "Hebreeuws. Arabisch was tot 2018 ook officieel en heeft sindsdien een bijzondere status.",
+    "feit": "Het Hebreeuws was eeuwenlang alleen nog een schrijf- en gebedstaal. Het is vanaf de negentiende eeuw bewust weer tot spreektaal gemaakt, het enige geslaagde voorbeeld ter wereld."
+  },
+  "Palestine": {
+    "naam": "Van Philistia, het kustgebied van de Filistijnen. De Romeinen maakten er Syria Palaestina van.",
+    "taal": "Arabisch.",
+    "feit": "Palestina bestaat uit twee losse delen met Israëlisch gebied ertussen: de Westelijke Jordaanoever en de Gazastrook.",
+    "bron": "157 van de 193 VN-lidstaten erkennen Palestina als staat (stand september 2025). Het Internationaal Gerechtshof oordeelde op 19 juli 2024 dat de Israëlische aanwezigheid in de bezette Palestijnse gebieden onrechtmatig is en zo snel mogelijk moet eindigen."
+  },
+  "Jordan": {
+    "naam": "Naar de rivier de Jordaan, die de westgrens vormt. De naam gaat terug op een woord voor afdalen: de rivier zakt naar het laagste punt op aarde.",
+    "taal": "Arabisch.",
+    "feit": "Petra is door de Nabateeërs uitgehakt in rotswanden en lag eeuwen buiten beeld tot een Zwitserse reiziger het in 1812 beschreef."
+  },
+  "Saudi Arabia": {
+    "naam": "Arabië van de familie Saoed, die het land in 1932 verenigde. Een van de weinige landen ter wereld die naar een familie heet.",
+    "taal": "Arabisch.",
+    "feit": "Mekka en Medina liggen hier. Miljoenen moslims komen er jaarlijks op bedevaart."
+  },
+  "Yemen": {
+    "naam": "Van het Arabische woord voor rechts, wat ook zuid betekent: kijk je naar de opkomende zon, dan ligt het zuiden rechts.",
+    "taal": "Arabisch.",
+    "feit": "De oude stad Sanaa bestaat uit lemen torenhuizen van soms zes verdiepingen, gebouwd eeuwen voordat Europa flats kende."
+  },
+  "Oman": {
+    "naam": "Onzeker. Mogelijk naar een stichter, mogelijk naar een oude plaats in Jemen.",
+    "taal": "Arabisch.",
+    "feit": "In het binnenland leiden falaj-kanalen bergwater kilometers ver naar de oases. Sommige zijn al tweeduizend jaar in gebruik."
+  },
+  "United Arab Emirates": {
+    "naam": "Een federatie van zeven emiraten, gebieden onder een emir. Abu Dhabi is het grootste, Dubai het bekendste.",
+    "taal": "Arabisch. Door de vele arbeidsmigranten is Engels op straat en op het werk de dagelijkse omgangstaal.",
+    "feit": "Ongeveer negen van de tien inwoners hebben niet de Emiraatse nationaliteit. Nergens ter wereld ligt dat aandeel hoger."
+  },
+  "Qatar": {
+    "naam": "Gaat terug op Catara, een naam die de Griekse geograaf Ptolemaeus in de tweede eeuw op deze kust noteerde.",
+    "taal": "Arabisch.",
+    "feit": "Een schiereiland van ongeveer een kwart van Nederland, met precies één landgrens: die met Saoedi-Arabië."
+  },
+  "Kuwait": {
+    "naam": "Verkleinwoord van het Arabische kut, fort aan het water.",
+    "taal": "Arabisch.",
+    "feit": "Het land ligt op enorme olievelden. Vóór de olie leefde het van parelduiken."
+  },
+  "Georgia": {
+    "naam": "In het Westen naar Sint-Joris genoemd. De Georgiërs zelf zeggen Sakartvelo.",
+    "taal": "Georgisch, met een eigen rond alfabet en geen verwantschap met de talen eromheen.",
+    "feit": "Hier zijn de oudste sporen van wijnbouw gevonden, ongeveer achtduizend jaar oud."
+  },
+  "Armenia": {
+    "naam": "Een naam van buitenaf, al te vinden in oude Perzische inscripties. Armeniërs noemen hun land zelf Hayastan.",
+    "taal": "Armeens, met een eigen alfabet dat rond het jaar 405 is ontworpen.",
+    "feit": "Armenië nam in 301 als eerste land ter wereld het christendom aan als staatsgodsdienst."
+  },
+  "Azerbaijan": {
+    "naam": "Gaat terug op Atropates, een Perzische stadhouder. Later is de naam uitgelegd als land van het vuur, naar aardgas dat hier vanzelf brandt.",
+    "taal": "Azerbeidzjaans, nauw verwant aan het Turks.",
+    "feit": "Een deel van het land, Nachitsjevan, ligt los: het wordt door Armeens gebied van de rest gescheiden."
+  },
+  "Iraq": {
+    "naam": "Waarschijnlijk van Uruk, een van de oudste steden van Mesopotamië.",
+    "taal": "Arabisch en Koerdisch zijn allebei officieel.",
+    "feit": "Tussen Eufraat en Tigris ontstond het spijkerschrift, het oudste schrift dat we kennen."
+  },
+  "Iran": {
+    "naam": "Land van de Ariërs, de naam die de bevolking zichzelf al in de oudheid gaf. In het Westen heette het tot 1935 Perzië.",
+    "taal": "Perzisch of Farsi. Dat is een Indo-Europese taal en dus verwant aan het Nederlands, niet aan het Arabisch.",
+    "feit": "Het grootste deel van het land is hooggelegen woestijn, omringd door bergketens."
+  },
+  "Kazakhstan": {
+    "naam": "Land van de Kazachen. De uitgang -stan is Perzisch voor plaats of land en zie je bij alle vijf de buren.",
+    "taal": "Kazachs is staatstaal, Russisch is daarnaast officieel in het bestuur.",
+    "feit": "Het grootste land ter wereld zonder zeekust. Vanaf Bajkonoer worden nog altijd raketten gelanceerd."
+  },
+  "Uzbekistan": {
+    "naam": "Land van de Oezbeken.",
+    "taal": "Oezbeeks.",
+    "feit": "Samarkand en Boechara waren knooppunten op de zijderoute. Oezbekistan is een van de twee landen ter wereld waar je door twee landen moet om zee te bereiken."
+  },
+  "Turkmenistan": {
+    "naam": "Land van de Turkmenen.",
+    "taal": "Turkmeens.",
+    "feit": "Bijna het hele land is Karakoemwoestijn. Bij Darvaza brandt al tientallen jaren een ingestorte gasput, de Poort naar de hel."
+  },
+  "Tajikistan": {
+    "naam": "Land van de Tadzjieken, een volk dat Perzisch spreekt.",
+    "taal": "Tadzjieks, een vorm van het Perzisch, geschreven in cyrillisch schrift.",
+    "feit": "De Pamir heet het dak van de wereld. Ruim de helft van het land ligt boven de drieduizend meter."
+  },
+  "Kyrgyzstan": {
+    "naam": "Land van de Kirgiezen.",
+    "taal": "Kirgizisch, met Russisch daarnaast als officiële taal.",
+    "feit": "Meer dan negen tiende van het land is bergland. Het Yssykkulmeer ligt op zestienhonderd meter hoogte en bevriest nooit."
+  },
+  "Afghanistan": {
+    "naam": "Land van de Afghanen, de oude naam voor de Pathanen, de grootste bevolkingsgroep.",
+    "taal": "Twee officiële talen: Pasjto en Dari, de Afghaanse vorm van het Perzisch.",
+    "feit": "Door de bergpassen van de Hindoekoesj liepen eeuwenlang de routes tussen Perzië, India en Centraal-Azië."
+  },
+  "Pakistan": {
+    "naam": "In 1933 bedacht als letterwoord van de gebieden Punjab, Afghania, Kashmir, Sindh en Baloechistan. In het Perzisch betekent het ook land van de zuiveren.",
+    "taal": "Oerdoe is de nationale taal, Engels de bestuurstaal. Thuis spreken de meeste mensen Punjabi.",
+    "feit": "Langs de Indus lag de Indusbeschaving, met steden als Mohenjo-daro die vijfduizend jaar geleden al riolering hadden."
+  },
+  "India": {
+    "naam": "Naar de rivier de Indus. In het land zelf ook Bharat, uit oude Sanskrietteksten.",
+    "taal": "Hindi en Engels zijn de talen van de rijksoverheid. Daarnaast erkent de grondwet er tweeëntwintig.",
+    "feit": "Het land met de meeste inwoners ter wereld, sinds het in 2023 China voorbijging."
+  },
+  "Nepal": {
+    "naam": "Herkomst onzeker. Mogelijk uit het Sanskriet, met een betekenis als aan de voet van de bergen.",
+    "taal": "Nepalees.",
+    "feit": "Acht van de tien hoogste bergen ter wereld liggen geheel of gedeeltelijk in Nepal, waaronder de Mount Everest."
+  },
+  "Bhutan": {
+    "naam": "Waarschijnlijk uit het Sanskriet: einde van Tibet. De Bhutanezen zeggen Druk Yul, land van de donderdraak.",
+    "taal": "Dzongkha.",
+    "feit": "Bhutan meet zijn vooruitgang niet alleen in geld maar ook in bruto nationaal geluk, een eigen bestuurlijk uitgangspunt."
+  },
+  "Bangladesh": {
+    "naam": "Land van Bengalen. Het ontstond in 1971 door afscheiding van Pakistan.",
+    "taal": "Bengaals.",
+    "feit": "Het grootste deel van het land is de delta van Ganges en Brahmaputra: vlak, vruchtbaar en kwetsbaar voor overstroming."
+  },
+  "Sri Lanka": {
+    "naam": "Uit het Sanskriet: eerbiedwaardig eiland. Tot 1972 heette het Ceylon.",
+    "taal": "Singalees en Tamil zijn allebei officieel.",
+    "feit": "Een van de grootste theeleveranciers ter wereld. De struiken staan in het koelere bergland in het midden van het eiland."
+  },
+  "Mongolia": {
+    "naam": "Land van de Mongolen.",
+    "taal": "Mongools.",
+    "feit": "Het dunstbevolkte zelfstandige land ter wereld. Ongeveer de helft van de bevolking woont in de hoofdstad Ulaanbaatar."
+  },
+  "China": {
+    "naam": "In het Westen waarschijnlijk naar de Qin-dynastie. De Chinese naam Zhongguo betekent middenrijk.",
+    "taal": "Mandarijn is de standaardtaal. Daarnaast bestaan grote talen als Kantonees; het schrift is voor alle hetzelfde.",
+    "feit": "Het land beslaat vijf tijdzones, maar hanteert er officieel één: die van Peking."
+  },
+  "North Korea": {
+    "naam": "Korea gaat terug op het rijk Koryo. Noord en Zuid ontstonden in 1945, toen het schiereiland langs de achtendertigste breedtegraad werd verdeeld.",
+    "taal": "Koreaans, geschreven in het hangul-alfabet.",
+    "feit": "De grens met Zuid-Korea is een vier kilometer brede gedemilitariseerde zone. Formeel is de oorlog van 1950-1953 nooit met een vredesverdrag beëindigd."
+  },
+  "South Korea": {
+    "naam": "Dezelfde naam als Noord-Korea; sinds 1948 zijn het twee staten.",
+    "taal": "Koreaans.",
+    "feit": "Het hangul-schrift is in de vijftiende eeuw bewust ontworpen om makkelijk te leren: de tekens beelden de stand van mond en tong uit."
+  },
+  "Japan": {
+    "naam": "Van Nippon, oorsprong van de zon. Vanuit China gezien ligt Japan in het oosten.",
+    "taal": "Japans, geschreven met drie schriftsoorten door elkaar.",
+    "feit": "Het land ligt op de rand van meerdere aardschollen. Aardbevingen zijn dagelijkse kost en gebouwen worden erop ontworpen."
+  },
+  "Taiwan": {
+    "naam": "Waarschijnlijk uit een inheemse taal, naar de baai bij de vroegste nederzetting. De officiële naam is Republiek China.",
+    "taal": "Mandarijn. Daarnaast spreken veel mensen Taiwanees, een vorm van het Hokkien.",
+    "feit": "Een bergachtig eiland waar een groot deel van de meest geavanceerde computerchips ter wereld wordt gemaakt.",
+    "bron": "De VN gaf de Chinese zetel in 1971 met resolutie 2758 aan de Volksrepubliek China; sindsdien is Taiwan geen VN-lid. Een klein aantal landen en het Vaticaan erkennen Taiwan formeel. De meeste landen, waaronder Nederland, onderhouden wel handels- en cultuurbetrekkingen zonder formele erkenning."
+  },
+  "Myanmar": {
+    "naam": "Myanmar en Birma zijn twee vormen van dezelfde naam, de ene formeel, de andere spreektaal. Het bewind maakte Myanmar in 1989 de officiële naam.",
+    "taal": "Birmaans.",
+    "feit": "De met bladgoud bedekte Shwedagon-pagode in Yangon geldt als het belangrijkste boeddhistische heiligdom van het land."
+  },
+  "Thailand": {
+    "naam": "Land van de Thai. Het woord betekent ook vrij. Tot 1939 heette het Siam.",
+    "taal": "Thai, een toontaal met een eigen schrift.",
+    "feit": "Het enige land van Zuidoost-Azië dat nooit door een Europese mogendheid is gekoloniseerd."
+  },
+  "Laos": {
+    "naam": "Naar het rijk Lan Xang, miljoen olifanten.",
+    "taal": "Laotiaans.",
+    "feit": "Het enige land van Zuidoost-Azië zonder zeekust. De Mekong vormt een groot deel van de westgrens en is de belangrijkste verkeersader."
+  },
+  "Cambodia": {
+    "naam": "Van Kambuja, de naam van het oude rijk in Sanskrietteksten.",
+    "taal": "Khmer, met een eigen schrift.",
+    "feit": "Angkor was rond het jaar 1200 waarschijnlijk de grootste stad ter wereld. De tempel Angkor Wat staat op de vlag."
+  },
+  "Vietnam": {
+    "naam": "Viet is de naam van het volk, nam betekent zuid: de Viet in het zuiden.",
+    "taal": "Vietnamees, sinds de koloniale tijd geschreven in Latijns schrift met veel accenttekens.",
+    "feit": "Een lang, smal land tussen twee rivierdelta's: de Rode Rivier in het noorden en de Mekong in het zuiden."
+  },
+  "Malaysia": {
+    "naam": "Land van de Maleiers.",
+    "taal": "Maleis. Daarnaast worden Engels, Chinees en Tamil veel gesproken.",
+    "feit": "Het land bestaat uit twee stukken met de Zuid-Chinese Zee ertussen: het schiereiland en het noorden van Borneo."
+  },
+  "Brunei": {
+    "naam": "Voluit Brunei Darussalam: Brunei, woonplaats van de vrede.",
+    "taal": "Maleis. Engels is wijdverbreid.",
+    "feit": "Een klein sultanaat op Borneo, door Maleisisch gebied in tweeën gedeeld, dat rijk is geworden van olie en gas."
+  },
+  "Philippines": {
+    "naam": "Genoemd naar koning Filips II van Spanje, die in de zestiende eeuw regeerde.",
+    "taal": "Filipijns, gebaseerd op het Tagalog, en Engels zijn officieel. In het land worden meer dan honderd talen gesproken.",
+    "feit": "Meer dan zevenduizend eilanden. Het land ligt in de Vuurgordel en krijgt jaarlijks een reeks tyfoons over zich heen."
+  },
+  "Indonesia": {
+    "naam": "In de negentiende eeuw gevormd uit het Griekse Indos en nesos: eilanden bij India.",
+    "taal": "Bahasa Indonesia, gebaseerd op het Maleis van de handel en bewust gekozen als eenheidstaal. Daarnaast honderden streektalen.",
+    "feit": "Het grootste eilandenrijk ter wereld en het land met de meeste moslims. Nederland bestuurde het als Nederlands-Indië tot de onafhankelijkheid die in 1945 werd uitgeroepen."
+  },
+  "Timor-Leste": {
+    "naam": "Timor betekent oost in het Maleis, leste oost in het Portugees. De naam zegt dus tweemaal oost.",
+    "taal": "Tetum en Portugees zijn allebei officieel.",
+    "feit": "Na eeuwen Portugees bestuur en een Indonesische bezetting werd het land in 2002 zelfstandig, het jongste van Zuidoost-Azië."
   }
 }
