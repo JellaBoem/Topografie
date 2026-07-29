@@ -428,5 +428,421 @@
     "naam": "Timor betekent oost in het Maleis, leste oost in het Portugees. De naam zegt dus tweemaal oost.",
     "taal": "Tetum en Portugees zijn allebei officieel.",
     "feit": "Na eeuwen Portugees bestuur en een Indonesische bezetting werd het land in 2002 zelfstandig, het jongste van Zuidoost-Azië."
+  },
+  "Morocco": {
+    "naam": "Van Marrakesh, dat uit het Berbers komt. In het Arabisch heet het land al-Maghrib, het westen.",
+    "taal": "Arabisch en Tamazight (Berbers) zijn allebei officieel. Frans wordt veel gebruikt in onderwijs en zaken.",
+    "feit": "Het Atlasgebergte houdt de regen tegen: aan de noordkant groeit van alles, aan de zuidkant begint meteen de Sahara.",
+    "bron": "Marokko bestuurt de Westelijke Sahara sinds 1975. Het Internationaal Gerechtshof oordeelde op 16 oktober 1975 dat er geen band van soevereiniteit met Marokko bestond die het recht op zelfbeschikking van de bevolking opzij zet. De VN rekent het gebied nog altijd tot de niet-zelfbesturende gebieden; de toegezegde volksstemming is nooit gehouden."
+  },
+  "Algeria": {
+    "naam": "Naar de hoofdstad Algiers, van het Arabische al-Jazair, de eilanden: rotseilandjes voor de kust.",
+    "taal": "Arabisch en Tamazight (Berbers) zijn officieel. Frans is veelgebruikt.",
+    "feit": "Het grootste land van Afrika. Ruim vier vijfde is Sahara; vrijwel iedereen woont in de smalle strook langs de kust."
+  },
+  "Tunisia": {
+    "naam": "Naar de hoofdstad Tunis, een naam die al in de oudheid gebruikt werd.",
+    "taal": "Arabisch. Frans wordt veel gebruikt.",
+    "feit": "Vlak bij Tunis lag Carthago, de stad die eeuwenlang de tegenstander van Rome was."
+  },
+  "Libya": {
+    "naam": "De Grieken noemden zo het hele gebied ten westen van Egypte, naar de Libu, een volk uit de streek.",
+    "taal": "Arabisch.",
+    "feit": "Bijna het hele land is woestijn. Fossiel grondwater van onder de Sahara wordt door reuzenleidingen naar de kuststeden gepompt."
+  },
+  "Egypt": {
+    "naam": "Via het Grieks van een oude naam voor de stad Memphis. De Egyptenaren zelf zeggen Misr.",
+    "taal": "Arabisch.",
+    "feit": "Vrijwel de hele bevolking woont langs de Nijl en in de delta, op een paar procent van het grondgebied."
+  },
+  "Sudan": {
+    "naam": "Van het Arabische bilad as-sudan, land van de zwarten: de oude naam voor de hele strook onder de Sahara.",
+    "taal": "Arabisch en Engels zijn allebei officieel.",
+    "feit": "Bij Khartoem komen de Blauwe en de Witte Nijl samen. Het kleurverschil tussen beide is op die plek te zien."
+  },
+  "S. Sudan": {
+    "naam": "In 2011 afgesplitst van Soedan. De naam zegt waar het ligt.",
+    "taal": "Engels is de officiële taal; daarnaast worden tientallen inheemse talen gesproken.",
+    "feit": "Het jongste land ter wereld. De Sudd, een enorm moeras in de Nijl, maakt grote delen maandenlang onbereikbaar."
+  },
+  "Eritrea": {
+    "naam": "Van het Griekse Erythra Thalassa, Rode Zee: het land aan de Rode Zee.",
+    "taal": "Geen officiële taal; in bestuur en onderwijs worden Tigrinya, Arabisch en Engels gebruikt.",
+    "feit": "Na dertig jaar oorlog werd het in 1993 onafhankelijk van Ethiopië. Daardoor raakte Ethiopië zijn zeekust kwijt."
+  },
+  "Ethiopia": {
+    "naam": "Grieks voor land van de verbrande gezichten. In het Westen vroeger ook Abessinië genoemd.",
+    "taal": "Amhaars is de federale werktaal en heeft een eigen schrift. Oromo heeft de meeste sprekers.",
+    "feit": "Het enige land van Afrika dat nooit blijvend gekoloniseerd is. Het heeft een eigen kalender met dertien maanden."
+  },
+  "Djibouti": {
+    "naam": "Naar de gelijknamige hoofdstad; de herkomst is onzeker.",
+    "taal": "Frans en Arabisch zijn officieel; thuis spreken mensen Somali of Afar.",
+    "feit": "Een klein land op een sleutelplek: alle scheepvaart tussen Rode Zee en Indische Oceaan gaat langs deze kust."
+  },
+  "Somalia": {
+    "naam": "Land van de Somali.",
+    "taal": "Somali en Arabisch.",
+    "feit": "Het heeft de langste kustlijn van het vasteland van Afrika, langs zowel de Golf van Aden als de Indische Oceaan."
+  },
+  "Kenya": {
+    "naam": "Naar de berg Kenia, na de Kilimanjaro de hoogste van Afrika.",
+    "taal": "Swahili en Engels zijn allebei officieel.",
+    "feit": "De evenaar loopt dwars door het land. In de Grote Slenk zijn enkele van de oudste menselijke fossielen gevonden."
+  },
+  "Uganda": {
+    "naam": "Naar Buganda, het koninkrijk rond het Victoriameer.",
+    "taal": "Engels en Swahili zijn officieel; Luganda is de grootste streektaal.",
+    "feit": "Bij Jinja verlaat de Witte Nijl het Victoriameer. Die plek geldt als een van de bronnen van de Nijl."
+  },
+  "Rwanda": {
+    "naam": "Uit het Kinyarwanda, uitgelegd als het gebied dat zich uitstrekt.",
+    "taal": "Kinyarwanda, met Engels, Frans en Swahili daarnaast als officiële talen.",
+    "feit": "Het land van duizend heuvels: dichtbevolkt bergland waar bijna elke helling bebouwd is. In 1994 werden hier in honderd dagen naar schatting achthonderdduizend mensen vermoord, vooral Tutsi's."
+  },
+  "Burundi": {
+    "naam": "Dezelfde woordvorming als Rwanda: het land van de Rundi.",
+    "taal": "Kirundi, Frans en Engels.",
+    "feit": "Klein en dichtbevolkt bergland aan het Tanganyikameer, een van de diepste meren ter wereld."
+  },
+  "Tanzania": {
+    "naam": "Samentrekking van Tanganyika en Zanzibar, die in 1964 samengingen.",
+    "taal": "Swahili is de nationale taal; Engels wordt in bestuur en onderwijs gebruikt.",
+    "feit": "De Kilimanjaro is met bijna zesduizend meter de hoogste berg van Afrika en staat vlak bij de evenaar."
+  },
+  "Mauritania": {
+    "naam": "Naar de Mauri, de oude naam voor de Berberbevolking van Noordwest-Afrika.",
+    "taal": "Arabisch is officieel; daarnaast worden Pulaar, Soninke en Wolof erkend.",
+    "feit": "Hier rijdt een van de langste treinen ter wereld: kilometerslange ertstreinen van de ijzermijnen in de woestijn naar de kust."
+  },
+  "Mali": {
+    "naam": "Naar het middeleeuwse rijk Mali, dat hier lag.",
+    "taal": "Frans was lang de officiële taal. Sinds de grondwet van 2023 hebben de landstalen, waaronder Bambara, die status en is Frans nog werktaal.",
+    "feit": "Timboektoe was een centrum van handel en geleerdheid, met bibliotheken vol handschriften."
+  },
+  "Burkina Faso": {
+    "naam": "In 1984 gekozen als vervanging van Opper-Volta. Het betekent land van de oprechte mensen en is uit twee landstalen samengesteld.",
+    "taal": "Frans was de officiële taal. Sinds de grondwetswijziging van eind 2023 hebben de landstalen, waaronder Mooré, die status.",
+    "feit": "Het land ligt geheel in het binnenland: het noorden loopt over in de Sahel, het zuiden is groenere savanne."
+  },
+  "Niger": {
+    "naam": "Naar de rivier de Niger, die door het zuidwesten stroomt.",
+    "taal": "Hausa is de meest gesproken taal; Frans is lang de bestuurstaal geweest.",
+    "feit": "Ruim twee derde van het land is woestijn. Het heeft een van de jongste bevolkingen ter wereld."
+  },
+  "Chad": {
+    "naam": "Naar het Tsjaadmeer, van een woord voor groot water.",
+    "taal": "Frans en Arabisch zijn officieel.",
+    "feit": "Het Tsjaadmeer is in vijftig jaar sterk gekrompen door droogte en wateronttrekking."
+  },
+  "Senegal": {
+    "naam": "Naar de rivier de Senegal, die de noordgrens vormt.",
+    "taal": "Frans is officieel; Wolof is de taal die de meeste mensen dagelijks spreken.",
+    "feit": "Bij Dakar ligt het meest westelijke punt van het vasteland van Afrika."
+  },
+  "Gambia": {
+    "naam": "Naar de rivier de Gambia.",
+    "taal": "Engels is officieel; Mandinka en Wolof worden veel gesproken.",
+    "feit": "Een lint van land aan weerszijden van de rivier, aan drie kanten omsloten door Senegal. Het kleinste land van het vasteland van Afrika."
+  },
+  "Guinea-Bissau": {
+    "naam": "Guinee met de hoofdstad erachter, om het te onderscheiden van de buurlanden met dezelfde naam.",
+    "taal": "Portugees is officieel; op straat spreekt men vooral Guinee-Bissau-Creools.",
+    "feit": "Voor de kust liggen de Bijagós-eilanden, tientallen eilanden vol mangrove."
+  },
+  "Guinea": {
+    "naam": "Een oude Europese naam voor de kust van West-Afrika; de herkomst is onzeker.",
+    "taal": "Frans is officieel; Fulfulde, Malinke en Susu zijn de grootste landstalen.",
+    "feit": "In het bergland ontspringen de Niger, de Senegal en de Gambia: drie grote rivieren met één brongebied."
+  },
+  "Sierra Leone": {
+    "naam": "Portugees voor leeuwenbergen, de naam die een zeevaarder in de vijftiende eeuw aan de bergen bij de kust gaf.",
+    "taal": "Engels is officieel; Krio is de omgangstaal die bijna iedereen spreekt.",
+    "feit": "De hoofdstad Freetown is in de achttiende eeuw gesticht als vestigingsplaats voor bevrijde tot slaaf gemaakten."
+  },
+  "Liberia": {
+    "naam": "Van het Latijnse liber, vrij. Het land werd in de negentiende eeuw gesticht als vestigingsplaats voor vrijgelaten tot slaaf gemaakten uit de Verenigde Staten.",
+    "taal": "Engels.",
+    "feit": "De vlag lijkt op die van de Verenigde Staten, maar met één ster in plaats van vijftig."
+  },
+  "Côte d'Ivoire": {
+    "naam": "Ivoorkust, naar de handel in olifantenivoor. Het land vraagt de Franse naam ook in andere talen te gebruiken.",
+    "taal": "Frans is officieel; daarnaast worden tientallen landstalen gesproken.",
+    "feit": "De grootste cacaoproducent ter wereld. Een flink deel van de chocolade in de winkel begint hier."
+  },
+  "Ghana": {
+    "naam": "In 1957 gekozen naar het oude rijk Ghana, dat overigens verder naar het noordwesten lag.",
+    "taal": "Engels is officieel; Twi is de meest gesproken landstaal.",
+    "feit": "Het eerste land ten zuiden van de Sahara dat onafhankelijk werd, in 1957. Langs de kust staan nog tientallen forten uit de slavenhandel."
+  },
+  "Togo": {
+    "naam": "Naar het dorp Togo aan een lagune, waar een verdrag werd gesloten.",
+    "taal": "Frans is officieel; Ewe en Kabiyé zijn de grootste landstalen.",
+    "feit": "Een smalle strook van de kust tot ver het binnenland in, nergens meer dan ongeveer honderdvijftig kilometer breed."
+  },
+  "Benin": {
+    "naam": "Naar de Bocht van Benin. Tot 1975 heette het Dahomey, naar het koninkrijk dat hier lag.",
+    "taal": "Frans is officieel; Fon en Yoruba worden veel gesproken.",
+    "feit": "Vodun, in het Westen bekend als voodoo, is hier een erkende godsdienst met een eigen feestdag."
+  },
+  "Nigeria": {
+    "naam": "Naar de rivier de Niger.",
+    "taal": "Engels is officieel; Hausa, Yoruba en Igbo zijn de drie grootste van ruim vijfhonderd landstalen.",
+    "feit": "Het land met de meeste inwoners van Afrika: ongeveer één op de zeven Afrikanen is Nigeriaan."
+  },
+  "Cameroon": {
+    "naam": "Van het Portugese Rio dos Camarões, rivier van de garnalen.",
+    "taal": "Frans en Engels zijn allebei officieel, een erfenis van twee koloniale bestuurders.",
+    "feit": "Het wordt Afrika in het klein genoemd: woestijn in het noorden, regenwoud in het zuiden, bergen en kust ertussen."
+  },
+  "Central African Rep.": {
+    "naam": "De naam beschrijft de ligging: midden in het werelddeel.",
+    "taal": "Sango en Frans zijn allebei officieel.",
+    "feit": "Het land ligt vrijwel precies in het midden van Afrika en heeft geen zeekust."
+  },
+  "Eq. Guinea": {
+    "naam": "Guinee bij de evenaar, al ligt het vasteland er net ten noorden van.",
+    "taal": "Spaans, Frans en Portugees zijn officieel; Spaans is de omgangstaal.",
+    "feit": "Het enige land van Afrika waar Spaans de voertaal is. De hoofdstad Malabo ligt niet op het vasteland maar op een eiland."
+  },
+  "Gabon": {
+    "naam": "Van het Portugese gabão, een mantel met kap: naar de vorm van de riviermonding.",
+    "taal": "Frans.",
+    "feit": "Ruim tachtig procent van het land is regenwoud en een groot deel daarvan is beschermd natuurgebied."
+  },
+  "Congo": {
+    "naam": "Vaak Congo-Brazzaville genoemd, naar de hoofdstad, om het van de grote buur te onderscheiden. Congo komt van het koninkrijk Kongo.",
+    "taal": "Frans is officieel; Lingala en Kituba worden veel gesproken.",
+    "feit": "Brazzaville en Kinshasa liggen tegenover elkaar aan de Congo: na Rome en Vaticaanstad de dichtst bij elkaar liggende hoofdsteden ter wereld."
+  },
+  "Dem. Rep. Congo": {
+    "naam": "Naar de rivier de Congo. Tussen 1971 en 1997 heette het Zaïre.",
+    "taal": "Frans is officieel; Lingala, Swahili, Kikongo en Tshiluba zijn nationale talen.",
+    "feit": "Het grootste land van Afrika ten zuiden van de Sahara. Het levert het merendeel van het kobalt ter wereld, nodig voor accu's."
+  },
+  "Zambia": {
+    "naam": "Naar de rivier de Zambezi.",
+    "taal": "Engels is officieel; Bemba en Nyanja worden veel gesproken.",
+    "feit": "Op de grens met Zimbabwe stort de Zambezi meer dan honderd meter naar beneden: de Victoriawatervallen."
+  },
+  "Zimbabwe": {
+    "naam": "Naar Great Zimbabwe, de stenen stad die hier tussen de elfde en de vijftiende eeuw stond. De naam betekent huizen van steen.",
+    "taal": "De grondwet erkent zestien talen; Shona, Ndebele en Engels worden het meest gebruikt.",
+    "feit": "De ruïnes van Great Zimbabwe vormen het grootste bouwwerk van steen ten zuiden van de Sahara van vóór de koloniale tijd."
+  },
+  "Malawi": {
+    "naam": "Naar het rijk Maravi. Tot 1964 heette het Nyasaland.",
+    "taal": "Chichewa en Engels.",
+    "feit": "Het Malawimeer beslaat ongeveer een vijfde van het land en herbergt meer vissoorten dan enig ander meer ter wereld."
+  },
+  "Mozambique": {
+    "naam": "Naar Mussa bin Bique, een handelaar wiens naam de Portugezen aan een eiland voor de kust gaven.",
+    "taal": "Portugees is officieel; thuis spreekt men vooral Bantoetalen zoals Makhuwa.",
+    "feit": "Een lange kust langs het Kanaal van Mozambique, met halverwege de monding van de Zambezi."
+  },
+  "Madagascar": {
+    "naam": "Waarschijnlijk een verbastering die Marco Polo optekende en die per vergissing aan dit eiland is blijven hangen.",
+    "taal": "Malagassisch en Frans.",
+    "feit": "Het eiland raakte tientallen miljoenen jaren geleden los van het vasteland. Ongeveer negen van de tien planten en dieren komen nergens anders voor."
+  },
+  "Angola": {
+    "naam": "Van ngola, de titel van de heerser van het koninkrijk Ndongo.",
+    "taal": "Portugees is officieel; Umbundu en Kimbundu worden veel gesproken.",
+    "feit": "Het gebied Cabinda ligt los van de rest van het land, gescheiden door een strook Congolees gebied."
+  },
+  "Namibia": {
+    "naam": "Naar de Namibwoestijn; de naam betekent zoiets als uitgestrekte vlakte.",
+    "taal": "Engels is officieel; Oshiwambo, Afrikaans en Duits worden veel gesproken.",
+    "feit": "De Namib geldt als de oudste woestijn ter wereld. Het land heeft ook een smalle uitloper naar het oosten, de Caprivistrook."
+  },
+  "Botswana": {
+    "naam": "Land van de Tswana.",
+    "taal": "Setswana en Engels.",
+    "feit": "De Okavango stroomt niet naar zee maar loopt dood in de Kalahari en vormt daar een enorme binnendelta vol dieren."
+  },
+  "South Africa": {
+    "naam": "De naam zegt waar het ligt: het zuiden van het werelddeel.",
+    "taal": "Twaalf officiële talen, waaronder Zoeloe, Xhosa, Afrikaans en Engels; sinds 2023 hoort ook gebarentaal erbij.",
+    "feit": "Het land heeft drie hoofdsteden: Pretoria voor het bestuur, Kaapstad voor het parlement en Bloemfontein voor de rechtspraak."
+  },
+  "Lesotho": {
+    "naam": "Land van de Sotho.",
+    "taal": "Sesotho en Engels.",
+    "feit": "Volledig omsloten door Zuid-Afrika en het enige land ter wereld dat helemaal boven de duizend meter ligt."
+  },
+  "eSwatini": {
+    "naam": "Land van de Swazi. Tot 2018 in het Westen Swaziland genoemd.",
+    "taal": "Siswati en Engels.",
+    "feit": "Een van de laatste absolute monarchieën ter wereld, ingeklemd tussen Zuid-Afrika en Mozambique."
+  },
+  "Canada": {
+    "naam": "Van kanata, dorp of nederzetting in een Iroquoistaal. Franse reizigers gingen het woord voor het hele gebied gebruiken.",
+    "taal": "Engels en Frans zijn allebei officieel. In Quebec is Frans de dagelijkse taal.",
+    "feit": "Het op één na grootste land ter wereld, maar bijna de hele bevolking woont binnen driehonderd kilometer van de grens met de Verenigde Staten."
+  },
+  "United States of America": {
+    "naam": "Amerika is genoemd naar Amerigo Vespucci, de zeevaarder die als eerste beschreef dat dit een apart werelddeel was.",
+    "taal": "Engels is de omgangstaal; Spaans is veruit de grootste tweede taal.",
+    "feit": "Vijftig staten met elk eigen wetten. De vijftig sterren op de vlag staan voor de staten, de dertien strepen voor de eerste dertien kolonies."
+  },
+  "Mexico": {
+    "naam": "Van Mexica, de eigen naam van de Azteken. Voluit heet het land Verenigde Mexicaanse Staten.",
+    "taal": "Spaans is de omgangstaal; daarnaast erkent de staat achtenzestig inheemse talen, waaronder Nahuatl en Maya.",
+    "feit": "Mexico-Stad staat op de bodem van een drooggelegd meer en zakt daardoor elk jaar een stukje verder weg."
+  },
+  "Belize": {
+    "naam": "Waarschijnlijk naar de rivier de Belize; de herkomst is onzeker. Tot 1973 heette het Brits-Honduras.",
+    "taal": "Engels is officieel, als enige land van Midden-Amerika. Spaans en Kriol worden veel gesproken.",
+    "feit": "Voor de kust ligt het op één na grootste koraalrif ter wereld."
+  },
+  "Guatemala": {
+    "naam": "Van een Nahuatl-woord dat plaats van veel bomen betekent.",
+    "taal": "Spaans is officieel; daarnaast worden ruim twintig Mayatalen gesproken.",
+    "feit": "Het land met de meeste inwoners van Midden-Amerika, met een keten van vulkanen langs de Stille Oceaan."
+  },
+  "El Salvador": {
+    "naam": "Spaans voor de Verlosser.",
+    "taal": "Spaans.",
+    "feit": "Het kleinste land van het vasteland van Amerika en het enige van Midden-Amerika zonder kust aan de Caribische Zee."
+  },
+  "Honduras": {
+    "naam": "Spaans voor diepten, naar het diepe water voor de kust.",
+    "taal": "Spaans.",
+    "feit": "Bij Copán staan Mayaruïnes met de langste bekende hiëroglyfentrap, met meer dan tweeduizend tekens."
+  },
+  "Nicaragua": {
+    "naam": "Waarschijnlijk de naam van een inheemse leider, gecombineerd met het Spaanse agua, water.",
+    "taal": "Spaans; aan de Caribische kust ook Engels-creools en Miskito.",
+    "feit": "Het Nicaraguameer is het grootste meer van Midden-Amerika en heeft haaien die vanuit zee de rivier zijn opgetrokken."
+  },
+  "Costa Rica": {
+    "naam": "Spaans voor rijke kust.",
+    "taal": "Spaans.",
+    "feit": "Het land schafte zijn leger in 1949 af en geeft dat geld sindsdien uit aan onderwijs en zorg."
+  },
+  "Panama": {
+    "naam": "Uit een inheemse taal, meestal uitgelegd als overvloed aan vissen.",
+    "taal": "Spaans.",
+    "feit": "Het Panamakanaal verbindt sinds 1914 de Atlantische met de Stille Oceaan en scheelt schepen de reis om heel Zuid-Amerika."
+  },
+  "Cuba": {
+    "naam": "Uit de Taínotaal van de oorspronkelijke bewoners; de betekenis is onzeker.",
+    "taal": "Spaans.",
+    "feit": "Het grootste eiland van de Cariben. Sinds de revolutie van 1959 is het een eenpartijstaat."
+  },
+  "Bahamas": {
+    "naam": "Waarschijnlijk van het Spaanse baja mar, ondiepe zee.",
+    "taal": "Engels.",
+    "feit": "Honderden eilanden en riffen op een uitgestrekte ondiepte. Columbus kwam in 1492 hier voor het eerst in Amerika aan land."
+  },
+  "Haiti": {
+    "naam": "Uit de Taínotaal: bergachtig land.",
+    "taal": "Frans en Haïtiaans Creools zijn allebei officieel; vrijwel iedereen spreekt Creools.",
+    "feit": "Na een opstand van tot slaaf gemaakten werd Haïti in 1804 onafhankelijk: de eerste zwarte republiek ter wereld."
+  },
+  "Dominican Rep.": {
+    "naam": "Naar de hoofdstad Santo Domingo, die naar de heilige Dominicus is genoemd.",
+    "taal": "Spaans.",
+    "feit": "Deelt het eiland Hispaniola met Haïti. De bergen in het midden houden de regen tegen, waardoor beide helften er heel anders uitzien."
+  },
+  "Jamaica": {
+    "naam": "Uit de Taínotaal: land van hout en water.",
+    "taal": "Engels is officieel; in het dagelijks leven spreekt men Jamaicaans Patois.",
+    "feit": "Hier ontstonden ska en reggae, muziek die de hele wereld over ging."
+  },
+  "Trinidad and Tobago": {
+    "naam": "Columbus noemde het grootste eiland Trinidad naar de Drie-eenheid; Tobago komt waarschijnlijk van tabak.",
+    "taal": "Engels.",
+    "feit": "Het zuidelijkste land van de Cariben, vlak voor de kust van Venezuela. Hier is de steeldrum uitgevonden, gemaakt van olievaten."
+  },
+  "Colombia": {
+    "naam": "Naar Christoffel Columbus.",
+    "taal": "Spaans.",
+    "feit": "Het enige land van Zuid-Amerika met kust aan zowel de Caribische Zee als de Stille Oceaan."
+  },
+  "Venezuela": {
+    "naam": "Klein Venetië: Spaanse zeevaarders zagen paalwoningen in het water bij het Maracaibomeer.",
+    "taal": "Spaans.",
+    "feit": "De Salto Ángel is met bijna duizend meter de hoogste waterval ter wereld; het water verstuift onderweg naar beneden."
+  },
+  "Guyana": {
+    "naam": "Uit een inheemse taal, meestal uitgelegd als land van veel water.",
+    "taal": "Engels is officieel, als enige land van Zuid-Amerika.",
+    "feit": "Vrijwel de hele bevolking woont op de smalle kuststrook; het binnenland is regenwoud."
+  },
+  "Suriname": {
+    "naam": "Waarschijnlijk naar de Surinen, een inheems volk dat hier woonde.",
+    "taal": "Nederlands is de officiële taal; het enige land buiten Europa waar dat zo is. Sranantongo is de gemeenschappelijke omgangstaal.",
+    "feit": "Het kleinste land van Zuid-Amerika en een van de bosrijkste ter wereld: ruim negentig procent is bos. Tot 1975 hoorde het bij Nederland."
+  },
+  "Ecuador": {
+    "naam": "Spaans voor evenaar. Die loopt vlak bij de hoofdstad Quito.",
+    "taal": "Spaans is officieel; Quichua en Shuar zijn erkend in de streken waar ze gesproken worden.",
+    "feit": "De Galápagoseilanden horen bij Ecuador. Wat Darwin daar zag, bracht hem op het spoor van de evolutietheorie."
+  },
+  "Peru": {
+    "naam": "Onzeker; mogelijk de naam van een lokale heerser die Spanjaarden verkeerd verstonden.",
+    "taal": "Spaans, Quechua en Aymara zijn alle drie officieel.",
+    "feit": "Cusco was de hoofdstad van het Incarijk. Machu Picchu ligt hoog in de bergen en bleef eeuwenlang buiten beeld van de buitenwereld."
+  },
+  "Brazil": {
+    "naam": "Naar het brazielhout, een rode verfhoutsoort die de eerste handelswaar van de kolonie was.",
+    "taal": "Portugees; het enige land van Zuid-Amerika waar dat de taal is.",
+    "feit": "Het grootste land van Zuid-Amerika, met ongeveer zestig procent van het Amazoneregenwoud binnen de grenzen."
+  },
+  "Bolivia": {
+    "naam": "Naar Simón Bolívar, de leider van de onafhankelijkheidsstrijd tegen Spanje.",
+    "taal": "Spaans en zesendertig inheemse talen zijn officieel, waaronder Quechua en Aymara.",
+    "feit": "Twee hoofdsteden: Sucre voor de rechtspraak, La Paz voor het bestuur. De Salar de Uyuni is de grootste zoutvlakte ter wereld."
+  },
+  "Paraguay": {
+    "naam": "Uit het Guaraní, naar de rivier de Paraguay; meestal uitgelegd als water dat naar het water gaat.",
+    "taal": "Spaans en Guaraní zijn allebei officieel en de meeste mensen spreken ze allebei.",
+    "feit": "Een van de twee landen van Zuid-Amerika zonder zeekust; de rivier de Paraguay is de weg naar zee."
+  },
+  "Uruguay": {
+    "naam": "Uit het Guaraní, naar de rivier de Uruguay; over de betekenis wordt gestreden.",
+    "taal": "Spaans.",
+    "feit": "Een van de kleinste landen van Zuid-Amerika, vrijwel vlak, met meer runderen dan mensen."
+  },
+  "Argentina": {
+    "naam": "Van het Latijnse argentum, zilver: de Spanjaarden hoopten hier zilver te vinden.",
+    "taal": "Spaans.",
+    "feit": "Het land loopt door van de subtropen tot vlak bij Antarctica. De Aconcagua is met bijna zevenduizend meter de hoogste berg buiten Azië."
+  },
+  "Chile": {
+    "naam": "Onzeker; waarschijnlijk uit een inheemse taal, met een betekenis als het einde van de wereld.",
+    "taal": "Spaans.",
+    "feit": "Ruim vierduizend kilometer lang en gemiddeld nog geen tweehonderd breed. De Atacama is de droogste woestijn ter wereld."
+  },
+  "Australia": {
+    "naam": "Van het Latijnse terra australis, zuidelijk land: een gebied waarvan Europeanen het bestaan vermoedden voordat ze het gezien hadden.",
+    "taal": "Engels. Van de honderden Aboriginaltalen zijn er nog enkele tientallen in gebruik.",
+    "feit": "Tegelijk het kleinste werelddeel en een van de grootste landen. Het Groot Barrièrerif voor de oostkust is vanuit de ruimte te zien."
+  },
+  "Papua New Guinea": {
+    "naam": "Papoea komt uit het Maleis. Nieuw-Guinea werd door een Spanjaard zo genoemd omdat het hem aan de kust van Guinee deed denken.",
+    "taal": "Tok Pisin, Engels en Hiri Motu zijn officieel. Er worden meer dan achthonderd talen gesproken, meer dan in enig ander land.",
+    "feit": "Het deelt het eiland Nieuw-Guinea met Indonesië. Bergketens en dichte jungle hielden dalen eeuwenlang van elkaar gescheiden."
+  },
+  "Solomon Is.": {
+    "naam": "Een Spaanse zeevaarder noemde ze naar koning Salomo, in de veronderstelling diens legendarische goud gevonden te hebben.",
+    "taal": "Engels is officieel; Pijin is de omgangstaal tussen de vele taalgroepen.",
+    "feit": "Honderden eilanden op de Vuurgordel, met vulkanen en regelmatig aardbevingen."
+  },
+  "Vanuatu": {
+    "naam": "Uit een lokale taal: ons land staat overeind. Gekozen bij de onafhankelijkheid in 1980.",
+    "taal": "Bislama, Engels en Frans zijn alle drie officieel.",
+    "feit": "Een van de weinige plekken ter wereld waar je van dichtbij in de krater van een actieve vulkaan kunt kijken."
+  },
+  "Fiji": {
+    "naam": "Een verbastering van Viti, de naam van het grootste eiland, zoals buren die uitspraken.",
+    "taal": "Fijisch, Engels en Fiji-Hindi zijn alle drie officieel.",
+    "feit": "Ruim driehonderd eilanden, waarvan er ongeveer honderd bewoond zijn. De datumgrens loopt er vlak langs."
+  },
+  "New Zealand": {
+    "naam": "Door Nederlandse kaartenmakers Nieuw-Zeeland genoemd, naar de provincie Zeeland. In het Maori heet het Aotearoa, land van de lange witte wolk.",
+    "taal": "Maori en Nieuw-Zeelandse gebarentaal zijn bij wet officieel. Engels is de taal die vrijwel iedereen spreekt.",
+    "feit": "Twee grote eilanden, ver van elk ander land. Doordat er lang geen landzoogdieren waren, ontstonden er vogels die niet kunnen vliegen, zoals de kiwi."
   }
 }
