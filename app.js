@@ -317,8 +317,8 @@ function answerReverse(chosen, key, btn) {
   });
   if (!correct) btn.classList.add('bad');
   el('fbMsg').innerHTML = correct
-    ? '<span class="ok">Goed.</span> ' + target.nl + ' — ' + target.continent + ', brok ' + target.brok + ' (' + target.broknaam + ').'
-    : '<span class="no">Mis.</span> Dit is ' + target.nl + ', niet ' + byName.get(chosen).nl + '.';
+    ? '<span class="ok">Goed.</span> ' + target.nl + ' — ' + plek(target) + '.'
+    : '<span class="no">Mis.</span> Niet ' + byName.get(chosen).nl + ' maar ' + target.nl + ' — ' + plek(target) + '.';
   el('nextBtn').classList.remove('hidden');
 }
 
@@ -352,7 +352,7 @@ function peek(pt) {
   if (!k) { el('peekMsg').textContent = ''; return; }
   const c = byName.get(k);
   const p = pathEl(k); if (p) p.classList.add('peek');
-  el('peekMsg').textContent = c.nl + ' · ' + c.continent + ', brok ' + c.brok + ' (' + c.broknaam + ')';
+  el('peekMsg').textContent = c.nl + ' · ' + plek(c);
 }
 
 function handleTap(clientX, clientY) {
@@ -375,7 +375,7 @@ function handleTap(clientX, clientY) {
   const dot = el('tapdot'); dot.setAttribute('cx', pt[0]); dot.setAttribute('cy', pt[1]);
   dot.setAttribute('r', 9 / screenScale()); dot.classList.remove('hidden');
   if (correct) {
-    el('fbMsg').innerHTML = '<span class="ok">Goed.</span> ' + target.nl + ' — ' + target.continent + ', brok ' + target.brok + ' (' + target.broknaam + ').';
+    el('fbMsg').innerHTML = '<span class="ok">Goed.</span> ' + target.nl + ' — ' + plek(target) + '.';
   } else {
     let hit = '';
     // wat tikte ze aan?
@@ -383,7 +383,7 @@ function handleTap(clientX, clientY) {
     for (const k of quizPolys.keys()) if (inCountry(pt, quizPolys.get(k))) { hitKey = k; break; }
     if (!hitKey && near.d <= effR) hitKey = near.key;
     if (hitKey && hitKey !== key) hit = ' Je wees ' + byName.get(hitKey).nl + ' aan.';
-    el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (groen omlijnd).' + hit;
+    el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (groen omlijnd): ' + plek(target) + '.' + hit;
     // zoom licht naar het juiste land toe zodat ze het ziet
     focusOn(target, pt);
   }
@@ -439,6 +439,42 @@ function focusAsk(c) {
     if (view.w === w) break;   // zoomgrens bereikt
   }
 }
+
+// Het leerplan gooit Amerika en Oceanie op een hoop. Voor een zin als "in het
+// westen van ..." is dat onbruikbaar: die hoop beslaat 788 van de 1000
+// kaarteenheden, bijna de hele wereld. Alleen voor de omschrijving splitsen we
+// hem daarom naar de regio's zoals ze werkelijk liggen. De brokindeling van het
+// leerplan blijft ongemoeid.
+const REGIO = { 27: 'Noord- en Midden-Amerika', 28: 'Noord- en Midden-Amerika',
+                29: 'Noord- en Midden-Amerika', 30: 'Zuid-Amerika',
+                31: 'Zuid-Amerika', 32: 'Oceanië' };
+const regioVan = c => REGIO[c.brok] || c.continent;
+
+// Waar ligt dit land binnen zijn regio? Gemeten aan een kader om de regio, maar
+// de buitenste vijf procent valt buiten dat kader. Zonder die trim rekt een
+// uitschieter als Rusland het kader in zijn eentje op en schuift alles wat er
+// binnen ligt naar het westen; Rusland zelf valt er nu buiten en krijgt gewoon
+// 'oost', wat klopt. Tellen hoeveel landen er westelijker liggen werkt niet:
+// Afrika heeft veel landen in het westen opeengepakt, waardoor Tanzania dan in
+// 'de zuidoosthoek' belandt in plaats van in het oosten.
+function ligging(c) {
+  const regio = regioVan(c);
+  const groep = MAP.countries.filter(x => x.quiz && regioVan(x) === regio);
+  if (groep.length < 6) return regio;            // te klein om richtingen zinvol te maken
+  const deel = f => {
+    const v = groep.map(f).sort((a, b) => a - b), i = Math.floor(v.length * 0.05);
+    const a = v[i], b = v[v.length - 1 - i];
+    return Math.min(1, Math.max(0, (f(c) - a) / (b - a)));
+  };
+  const nz = deel(x => x.cy), wo = deel(x => x.cx);
+  const ns = nz < 0.25 ? 'noord' : nz > 0.75 ? 'zuid' : '';
+  const we = wo < 0.25 ? 'west' : wo > 0.75 ? 'oost' : '';
+  if (ns && we) return 'de ' + ns + we + 'hoek van ' + regio;
+  if (ns) return 'het ' + ns + 'en van ' + regio;
+  if (we) return 'het ' + we + 'en van ' + regio;
+  return 'het midden van ' + regio;
+}
+function plek(c) { return ligging(c) + ', brok ' + c.brok + ' (' + c.broknaam + ')'; }
 
 function clearMarks() {
   el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
