@@ -4,7 +4,7 @@ Oefen-app voor de blinde wereldkaart. Je krijgt een land als vraag
 ("Waar ligt Ecuador?") en tikt op de kaart waar het ligt. Foute landen komen
 later opnieuw terug — over sessies heen, niet op de klok.
 
-**Live:** https://jellaboem.github.io/topografie/
+**Live:** https://jellaboem.github.io/Topografie/
 
 ## Wat het doet
 
