@@ -154,15 +154,22 @@ function onMove(e) {
     view.x -= dx / s; view.y -= dy / s; clampView(); applyView();
   } else if (pointers.size === 2) {
     const pts = [...pointers.values()];
-    if (!gesture.d0) { gesture.d0 = dist2(pts); gesture.w0 = view.w; return; }
-    const d = dist2(pts);
-    const r = el('map').getBoundingClientRect();
+    const r = mapRect();
     const mx = (pts[0].x + pts[1].x) / 2, my = (pts[0].y + pts[1].y) / 2;
-    const [wx, wy] = toWorld(mx, my);
-    view.w = gesture.w0 * (gesture.d0 / Math.max(1, d));
-    view.h = view.w * (base.h / base.w);
-    view.x = wx - (mx - r.left) / r.width * view.w;
-    view.y = wy - (my - r.top) / r.height * view.h;
+    if (!gesture.d0) {
+      // Anker eenmalig vastleggen: het wereldpunt onder het midden van de twee
+      // vingers blijft het hele gebaar onder dat midden. Daardoor zoomt en
+      // verschuift de kaart mee met de vingers in plaats van weg te drijven.
+      gesture.d0 = Math.max(1, dist2(pts));
+      gesture.w0 = view.w;
+      const [wx, wy] = toWorld(mx, my);
+      gesture.wx = wx; gesture.wy = wy;
+      return;
+    }
+    view.w = gesture.w0 * (gesture.d0 / Math.max(1, dist2(pts)));
+    view.h = view.w * aspect();
+    view.x = gesture.wx - (mx - r.left) / r.width * view.w;
+    view.y = gesture.wy - (my - r.top) / r.height * view.h;
     clampView(); applyView();
   }
 }
@@ -170,7 +177,12 @@ function onUp(e) {
   const wasTap = pointers.size === 1 && gesture && !gesture.pinch && gesture.moved === 0 && (Date.now() - gesture.t) < 500;
   const cx = e.clientX, cy = e.clientY;
   pointers.delete(e.pointerId);
-  if (pointers.size < 2 && gesture) gesture.d0 = null;
+  if (pointers.size === 1 && gesture && gesture.pinch) {
+    // Van twee vingers terug naar een: gewoon verder schuiven, zonder eerst
+    // helemaal los te laten. moved:1 zodat dit nooit als tik op een land telt.
+    const p = [...pointers.values()][0];
+    gesture = { moved: 1, sx: p.x, sy: p.y, t: Date.now() };
+  } else if (pointers.size < 2 && gesture) gesture.d0 = null;
   if (pointers.size === 0) { const g = gesture; gesture = null; if (wasTap && session && !session.answered) handleTap(cx, cy); }
 }
 function dist2(pts) { return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y); }
