@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1f6f6f">
+<title>Topografie</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<link rel="icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Topografie">
+<style>
+  :root{
+    --sea:#cfe0e8; --land:#e7e1d3; --border:#9a9488; --ink:#243133;
+    --teal:#1f6f6f; --teal-d:#175656; --good:#1a8a3c; --bad:#c0392b;
+    --panel:#ffffff; --muted:#5d6a6c;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; height:100%; overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--sea);}
+  body{display:flex; flex-direction:column;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);}
+  button{font:inherit; cursor:pointer;}
+  .btn{background:var(--teal); color:#fff; border:0; border-radius:12px; padding:14px 18px;
+    font-size:17px; font-weight:600;}
+  .btn:active{background:var(--teal-d);}
+  .btn.sec{background:#eef2f2; color:var(--ink); border:1px solid #d5dcdc;}
+  .hidden{display:none !important;}
+
+  /* ---------- MENU ---------- */
+  #menu{flex:1; overflow-y:auto; padding:22px 18px 30px; background:#f4f7f7;}
+  #menu h1{font-size:26px; margin:6px 0 2px;}
+  #menu .sub{color:var(--muted); margin:0 0 20px; font-size:14px;}
+  .card{background:var(--panel); border:1px solid #e3e9e9; border-radius:14px; padding:16px; margin-bottom:16px;}
+  .card h2{font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:0 0 12px;}
+  .seg{display:flex; gap:8px; margin-bottom:12px;}
+  .seg button{flex:1; padding:10px; border-radius:10px; border:1px solid #d5dcdc; background:#f0f4f4; font-size:14px; font-weight:600; color:var(--ink);}
+  .seg button.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{padding:8px 12px; border-radius:999px; border:1px solid #d5dcdc; background:#f6f9f9; font-size:14px;}
+  .chip.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .startrow{display:flex; gap:10px; align-items:center;}
+  .startrow .btn{flex:1; font-size:19px; padding:16px;}
+  .prog{display:flex; gap:6px; height:14px; border-radius:7px; overflow:hidden; background:#eef2f2; margin:4px 0 10px;}
+  .prog span{display:block;}
+  .legend{display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted);}
+  .legend i{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px;}
+  .rowbtns{display:flex; gap:10px;}
+  .rowbtns .btn{flex:1;}
+  .tiny{font-size:12px; color:var(--muted); line-height:1.5;}
+  .num{font-variant-numeric:tabular-nums;}
+
+  /* ---------- QUIZ ---------- */
+  #quiz{flex:1; display:flex; flex-direction:column; min-height:0;}
+  #bar{display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--teal); color:#fff;}
+  #bar .q{flex:1; font-size:18px; line-height:1.25;}
+  #bar .q b{font-size:21px;}
+  #bar .count{font-variant-numeric:tabular-nums; font-size:14px; opacity:.9; white-space:nowrap;}
+  #bar .x{background:rgba(255,255,255,.18); border:0; color:#fff; border-radius:9px; padding:8px 11px; font-size:14px; font-weight:600;}
+  #mapwrap{flex:1; position:relative; min-height:0; background:var(--sea); touch-action:none;}
+  #map{width:100%; height:100%; display:block; touch-action:none;}
+  #map path.c{fill:var(--land); stroke:var(--border); stroke-width:.5; vector-effect:non-scaling-stroke;}
+  #map path.target{fill:#bfe6c8; stroke:var(--good); stroke-width:2; vector-effect:non-scaling-stroke;}
+  #map path.wrong{fill:#f0c4bd; stroke:var(--bad); stroke-width:2; vector-effect:non-scaling-stroke;}
+  #tapdot{fill:none; stroke:var(--bad); stroke-width:2.5; vector-effect:non-scaling-stroke;}
+  #zoomhint{position:absolute; left:50%; bottom:12px; transform:translateX(-50%);
+    background:rgba(0,0,0,.55); color:#fff; padding:7px 12px; border-radius:999px; font-size:12px; pointer-events:none; opacity:0; transition:opacity .3s;}
+  #fb{padding:12px 14px calc(12px + env(safe-area-inset-bottom)); background:var(--panel); border-top:1px solid #e3e9e9;
+     display:flex; align-items:center; gap:12px; min-height:64px;}
+  #fb .msg{flex:1; font-size:15px; line-height:1.3;}
+  #fb .msg .ok{color:var(--good); font-weight:700;}
+  #fb .msg .no{color:var(--bad); font-weight:700;}
+  #fb .btn{padding:13px 22px;}
+  .ctrls{position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:8px;}
+  .ctrls button{width:44px; height:44px; border-radius:22px; border:1px solid #cdd6d6; background:rgba(255,255,255,.92); font-size:22px; font-weight:700; color:var(--ink); line-height:1;}
+
+  /* ---------- END ---------- */
+  #end{flex:1; overflow-y:auto; padding:26px 20px; background:#f4f7f7;}
+  #end h1{font-size:23px; margin:0 0 4px;}
+  #end .big{font-size:44px; font-weight:800; color:var(--teal); font-variant-numeric:tabular-nums;}
+  #endlist{margin-top:14px;}
+  .er{display:flex; justify-content:space-between; padding:9px 2px; border-bottom:1px solid #e6ecec; font-size:15px;}
+</style>
+</head>
+<body>
+
+<!-- ===== MENU ===== -->
+<section id="menu">
+  <h1>Topografie</h1>
+  <p class="sub">Blinde wereldkaart · aanwijzen · herhaling over dagen heen</p>
+
+  <div class="card">
+    <div class="startrow">
+      <button class="btn" id="startBtn">Start sessie</button>
+    </div>
+    <p class="tiny" id="startInfo" style="margin:12px 0 0;"></p>
+  </div>
+
+  <div class="card">
+    <h2>Wat oefen ik?</h2>
+    <div class="seg" id="scopeSeg">
+      <button data-t="all" class="on">Alles</button>
+      <button data-t="continent">Werelddeel</button>
+      <button data-t="brok">Brok</button>
+    </div>
+    <div id="scopeList" class="chips"></div>
+  </div>
+
+  <div class="card">
+    <h2>Voortgang <span class="tiny" id="scopeName"></span></h2>
+    <div class="prog" id="progBar"></div>
+    <div class="legend">
+      <span><i style="background:#c9cf99"></i>nieuw</span>
+      <span><i style="background:#f0b46b"></i>aan het leren</span>
+      <span><i style="background:#7bc98a"></i>zit vast</span>
+      <span><i style="background:#eef2f2"></i>nog niet in beeld</span>
+    </div>
+    <p class="tiny" id="progText" style="margin:12px 0 0;"></p>
+  </div>
+
+  <div class="card">
+    <h2>Voortgang bewaren</h2>
+    <div class="rowbtns">
+      <button class="btn sec" id="exportBtn">Exporteren</button>
+      <button class="btn sec" id="importBtn">Importeren</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" class="hidden">
+    <p class="tiny" style="margin:12px 0 0;">Je voortgang staat op dit toestel. Exporteer af en toe een bestand als reservekopie of om naar een ander toestel te verhuizen.</p>
+  </div>
+
+  <p class="tiny">Kaart: Natural Earth (publiek domein), Robinson-projectie. Werkt offline. Geen account, geen tracking, geen internet nodig tijdens gebruik.</p>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz" class="hidden">
+  <div id="bar">
+    <div class="q">Waar ligt <b id="qName">…</b>?</div>
+    <div class="count" id="qCount"></div>
+    <button class="x" id="stopBtn">Stop</button>
+  </div>
+  <div id="mapwrap">
+    <svg id="map" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g id="viewport"></g>
+      <circle id="tapdot" r="7" class="hidden"></circle>
+    </svg>
+    <div class="ctrls">
+      <button id="zoomIn" aria-label="Inzoomen">+</button>
+      <button id="zoomOut" aria-label="Uitzoomen">−</button>
+      <button id="zoomReset" aria-label="Hele kaart" style="font-size:16px;">◱</button>
+    </div>
+    <div id="zoomhint">Sleep om te schuiven · knijp om te zoomen</div>
+  </div>
+  <div id="fb">
+    <div class="msg" id="fbMsg">Tik op de kaart waar dit land ligt.</div>
+    <button class="btn hidden" id="nextBtn">Volgende</button>
+  </div>
+</section>
+
+<!-- ===== END ===== -->
+<section id="end" class="hidden">
+  <h1>Sessie klaar</h1>
+  <div><span class="big" id="endScore">0/0</span> <span class="tiny">goed aangewezen</span></div>
+  <div id="endlist"></div>
+  <div class="rowbtns" style="margin-top:22px;">
+    <button class="btn" id="againBtn">Nog een sessie</button>
+    <button class="btn sec" id="menuBtn">Naar menu</button>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
