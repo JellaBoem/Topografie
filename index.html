@@ -90,22 +90,40 @@
   #fb .msg .ok{color:var(--good); font-weight:700;}
   #fb .msg .no{color:var(--bad); font-weight:700;}
   #fb .btn{padding:13px 22px;}
-  /* Uitklapbaar en dicht bij het begin: eerst zelf graven, dan pas lezen.
-     Uitleg vooraf haalt het graven weg en dat is juist het werk. */
-  #meer{width:100%; order:3; margin-top:2px;}
-  #meer summary{list-style:none; cursor:pointer; font-size:14px; font-weight:600;
-    color:var(--accent); padding:6px 0;}
-  #meer summary::-webkit-details-marker{display:none;}
-  #meer summary::before{content:'▸ '; display:inline-block; width:1em;}
-  #meer[open] summary::before{content:'▾ ';}
-  #meerBody{font-size:14px; line-height:1.45; max-height:34vh; overflow:auto;
-    padding:2px 0 4px; color:#3a4747;}
-  #meerBody p{margin:0 0 7px;}
-  #meerBody p:last-child{margin-bottom:0;}
-  #meerBody b{color:var(--ink);}
-  #meerBody .bron{font-size:12.5px; color:#6b7878;}
+  /* De aanzet, niet de tekst zelf: die staat pas na één tik. Eerst zelf graven,
+     dan pas lezen. Uitleg vooraf haalt het graven weg en dat is juist het werk. */
+  #meerBtn{width:100%; order:3; text-align:left; border:0; background:none;
+    padding:7px 0 1px; font-size:14px; font-weight:600; color:var(--teal);}
+  #meerBtn::before{content:'▸ '; display:inline-block; width:1em;}
   .ctrls{position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:8px;}
+  /* Staat het paneel open, dan zitten de zoomknoppen eronder. Naar boven, zodat
+     je kunt blijven in- en uitzoomen terwijl je leest. */
+  body.paneel .ctrls{bottom:auto; top:10px;}
   .ctrls button{width:44px; height:44px; border-radius:22px; border:1px solid #cdd6d6; background:rgba(255,255,255,.92); font-size:22px; font-weight:700; color:var(--ink); line-height:1;}
+
+  /* ---------- ONDERPANEEL ---------- */
+  /* Schuift van onderen op tot ruim de helft van het scherm. De kaart blijft
+     erboven staan, want "Buurlanden: Belarus, Duitsland, Litouwen" is pas iets
+     waard als je ze ziet liggen. Daarom ook geen donkere laag over de kaart:
+     die zou precies wegnemen waarvoor het paneel er is. */
+  #sheet{position:fixed; left:0; right:0; bottom:0; z-index:40;
+    max-height:58vh; display:flex; flex-direction:column;
+    background:var(--panel); border-radius:18px 18px 0 0;
+    box-shadow:0 -6px 26px rgba(0,0,0,.20);
+    padding-bottom:env(safe-area-inset-bottom);}
+  #sheetTop{display:flex; align-items:center; gap:10px; padding:14px 16px 8px;}
+  #sheetTop span{flex:1; font-size:17px; font-weight:700; line-height:1.25;}
+  #sheetClose{border:0; background:#eef2f2; color:var(--ink); width:36px; height:36px;
+    flex:none; border-radius:18px; font-size:21px; line-height:1;}
+  #sheetBody{overflow:auto; -webkit-overflow-scrolling:touch;
+    padding:0 16px 16px; font-size:15px; line-height:1.5; color:#3a4747;}
+  #sheetBody p{margin:0 0 10px;}
+  #sheetBody p:last-child{margin-bottom:0;}
+  #sheetBody b{color:var(--ink);}
+  #sheetBody .bron{font-size:13px; color:#6b7878;}
+  #zoek{width:100%; padding:12px 14px; border-radius:10px; border:1px solid #d5dcdc;
+    background:#f6f9f9; font-size:16px; color:var(--ink); margin-bottom:12px;}
+  #zoekLijst{max-height:212px; overflow:auto;}
 
   /* ---------- END ---------- */
   #end{flex:1; overflow-y:auto; padding:26px 20px; background:#f4f7f7;}
@@ -165,6 +183,13 @@
   </div>
 
   <div class="card">
+    <h2>Land opzoeken</h2>
+    <input id="zoek" type="search" placeholder="Typ een land…" autocomplete="off" enterkeyhint="done">
+    <div id="zoekLijst" class="chips"></div>
+    <p class="tiny" style="margin:12px 0 0;">Hier kun je vrij rondkijken en lezen, zonder overhoord te worden. Tijdens een oefening staat dezelfde tekst er pas ná je antwoord: eerst zelf graven levert meer op dan vooraf lezen.</p>
+  </div>
+
+  <div class="card">
     <h2>Voortgang bewaren</h2>
     <div class="rowbtns">
       <button class="btn sec" id="exportBtn">Exporteren</button>
@@ -201,9 +226,18 @@
   <div id="fb">
     <div class="msg" id="fbMsg">Tik op de kaart waar dit land ligt.</div>
     <button class="btn hidden" id="nextBtn">Volgende</button>
-    <details id="meer" class="hidden"><summary></summary><div id="meerBody"></div></details>
+    <button id="meerBtn" class="hidden"></button>
   </div>
 </section>
+
+<!-- ===== ONDERPANEEL ===== -->
+<div id="sheet" class="hidden" role="dialog" aria-label="Meer over dit land">
+  <div id="sheetTop">
+    <span id="sheetTitel"></span>
+    <button id="sheetClose" aria-label="Sluiten">×</button>
+  </div>
+  <div id="sheetBody"></div>
+</div>
 
 <!-- ===== END ===== -->
 <section id="end" class="hidden">

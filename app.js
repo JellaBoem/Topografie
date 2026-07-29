@@ -18,6 +18,7 @@ let byName = new Map();       // naam -> country object
 let quizPolys = new Map();    // naam -> [ring[[x,y]...]...] voor klikdetectie
 let state = null;             // opgeslagen voortgang
 let session = null;           // huidige sessie (runtime)
+let kijk = null;              // land dat je los opzoekt, buiten een sessie om
 let view = null;              // {x,y,w,h} viewBox in wereldcoördinaten
 let base = null;              // volledige kaart-viewBox
 
@@ -62,6 +63,7 @@ async function boot() {
   MAP.countries.filter(c => c.quiz).forEach(c => quizPolys.set(c.name, parsePath(c.d)));
   drawMap();
   buildScopeUI();
+  buildZoek();
   showMenu();
   bindEvents();
 }
@@ -203,7 +205,7 @@ function onUp(e) {
     gesture = { moved: 1, sx: p.x, sy: p.y, t: Date.now() };
   } else if (pointers.size < 2 && gesture) gesture.d0 = null;
   // Ook ná het antwoord blijft tikken zinvol: dan is het rondkijken.
-  if (pointers.size === 0) { gesture = null; if (wasTap && session) handleTap(cx, cy); }
+  if (pointers.size === 0) { gesture = null; if (wasTap && (session || kijk)) handleTap(cx, cy); }
 }
 function dist2(pts) { return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y); }
 
@@ -253,6 +255,8 @@ function startSession() {
     state.sessionCounter--; return;
   }
   queue = shuffle(queue);
+  kijk = null;
+  el('stopBtn').textContent = 'Stop';
   session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: state.settings.mode };
   save();
   showQuiz();
@@ -336,15 +340,14 @@ function recordResult(key, correct) {
   } else { it[F.no]++; it[F.box] = 1; it[F.due] = session.now + 1; }
   session.results.push({ key, correct });
   el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
-  toonMeer(byName.get(key));
+  zetMeerKnop(byName.get(key));
   save();
 }
 
 const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
 
-// Het uitklapblok onder de melding. Staat dicht: eerst zelf graven, dan pas
-// lezen. Wat er niet is, laten we weg in plaats van een leeg kopje te tonen.
-function toonMeer(c) {
+// Wat er niet is, laten we weg in plaats van een leeg kopje te tonen.
+function meerRegels(c) {
   const d = INFO[c.name] || {};
   const brok = MAP.brokken.find(b => b.n === c.brok);
   const r = [];
@@ -358,13 +361,85 @@ function toonMeer(c) {
   if (d.taal)  r.push('<p><b>Taal.</b> ' + esc(d.taal) + '</p>');
   if (d.feit)  r.push('<p>' + esc(d.feit) + '</p>');
   if (d.bron)  r.push('<p class="bron">' + esc(d.bron) + '</p>');
+  return r;
+}
 
-  const box = el('meer');
-  box.open = false;                       // elke vraag opnieuw dicht
-  if (!r.length) { box.classList.add('hidden'); return; }
-  box.querySelector('summary').textContent = 'Meer over ' + c.nl;
-  el('meerBody').innerHTML = r.join('');
-  box.classList.remove('hidden');
+// Titel en tekst horen bij hetzelfde land en worden altijd samen gezet, zodat
+// er nooit een kop boven de tekst van een ander land kan blijven staan.
+function vulSheet(c) {
+  el('sheetTitel').textContent = 'Meer over ' + c.nl;
+  el('sheetBody').innerHTML = meerRegels(c).join('');
+  el('sheetBody').scrollTop = 0;
+}
+function openSheet(c) {
+  vulSheet(c);
+  el('sheet').classList.remove('hidden');
+  document.body.classList.add('paneel');
+  schuifOnderPaneel(c);
+}
+function sluitSheet() {
+  el('sheet').classList.add('hidden');
+  document.body.classList.remove('paneel');
+}
+function sheetOpen() { return !el('sheet').classList.contains('hidden'); }
+
+// Het paneel dekt de onderkant af. Schuif de kaart zo dat het land in de strook
+// komt die vrij blijft: anders lees je over buurlanden die achter het paneel
+// liggen.
+function vrijeHoogte() {
+  const r = mapRect(), sh = el('sheet').getBoundingClientRect();
+  return Math.max(0, Math.min(r.bottom, sh.top) - r.top);
+}
+function schuifOnderPaneel(c) {
+  const r = mapRect(), vrij = vrijeHoogte();
+  if (vrij < 60) return;
+  const nu = r.top + (c.cy - view.y) / view.h * r.height;
+  view.y += (nu - (r.top + vrij / 2)) / r.height * view.h;
+  clampView(); applyView();
+}
+
+// De aanzet onder de melding: één regel, geen tekst. Pas na een tik lees je.
+function zetMeerKnop(c) {
+  const b = el('meerBtn');
+  if (!meerRegels(c).length) { b.classList.add('hidden'); return; }
+  b.textContent = 'Meer over ' + c.nl;
+  b.onclick = () => openSheet(c);
+  b.classList.remove('hidden');
+}
+
+// Buiten de oefening om: een land opzoeken en lezen zonder overhoord te worden.
+function toonLand(key) {
+  const c = byName.get(key);
+  kijk = key; session = null;
+  showQuiz();
+  el('opts').classList.add('hidden');
+  el('nextBtn').classList.add('hidden');
+  el('meerBtn').classList.add('hidden');
+  el('tapdot').classList.add('hidden');
+  el('qCount').textContent = '';
+  el('qText').innerHTML = 'Opzoeken: <b>' + esc(c.nl) + '</b>';
+  el('stopBtn').textContent = 'Terug';
+  el('fbMsg').innerHTML = c.nl + ' ligt in ' + plek(c) + '.';
+  clearMarks();
+  requestAnimationFrame(() => {
+    focusAsk(c);
+    const p = pathEl(key); if (p) p.classList.add('peek');
+    el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
+    openSheet(c);
+    // Bij opzoeken valt er niets te raden, dus het land mag ruimer in beeld dan
+    // in de oefening. Maat: ruim een kwart van de strook die het paneel vrijlaat.
+    focusAsk(c, Math.min(mapRect().width, vrijeHoogte()) * 0.3);
+    schuifOnderPaneel(c);
+  });
+}
+
+function buildZoek() {
+  const t = el('zoek').value.trim().toLowerCase();
+  const box = el('zoekLijst');
+  box.innerHTML = '';
+  MAP.countries.filter(c => c.quiz && c.nl.toLowerCase().includes(t))
+    .sort((a, b) => a.nl.localeCompare(b.nl, 'nl'))
+    .forEach(c => box.appendChild(chip(c.nl, false, () => toonLand(c.name))));
 }
 
 // Welk land ligt onder dit punt? Eerst echt raak, anders het dichtstbijzijnde
@@ -385,9 +460,13 @@ function peek(pt) {
   const c = byName.get(k);
   const p = pathEl(k); if (p) p.classList.add('peek');
   el('peekMsg').textContent = c.nl + ' · ' + plek(c);
+  // Staat het paneel open, dan gaat het mee met wat je aantikt. Zo hoort de kop
+  // altijd bij de tekst en kun je van buurland naar buurland doorlezen.
+  if (sheetOpen()) vulSheet(c);
 }
 
 function handleTap(clientX, clientY) {
+  if (kijk) { peek(toWorld(clientX, clientY)); return; }
   if (session.answered) { peek(toWorld(clientX, clientY)); return; }
   if (session.mode !== 'point') return;   // bij 'Omgekeerd' antwoord je met de knoppen
   const key = session.queue[session.idx];
@@ -461,11 +540,12 @@ function focusOn(c, tap) {
 // haalt Luxemburg zo'n twaalf pixels: dat is een stipje, geen vraag. Daarom
 // zoomen we door tot het herkenbaar groot staat. Verder inzoomen dan de app
 // toestaat kan niet, dus voor de allerkleinste landen blijft het krap.
-function focusAsk(c) {
+function focusAsk(c, minPx) {
   focusOn(c);
   const b = boundsOf(c.name);
   const mid = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
-  for (let i = 0; i < 12 && showPx(b) < ASK_MIN_PX; i++) {
+  const doel = minPx || ASK_MIN_PX;
+  for (let i = 0; i < 12 && showPx(b) < doel; i++) {
     const w = view.w;
     zoomAt(mid[0], mid[1], 0.8);
     if (view.w === w) break;   // zoomgrens bereikt
@@ -512,11 +592,12 @@ function clearMarks() {
   el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
     .forEach(p => p.classList.remove('target', 'wrong', 'ask', 'peek'));
   el('peekMsg').textContent = '';
-  el('meer').classList.add('hidden');
-  el('meer').open = false;
+  el('meerBtn').classList.add('hidden');
+  sluitSheet();
 }
 
 function endSession() {
+  sluitSheet();
   showEnd();
   el('endScore').textContent = session.correct + '/' + session.queue.length;
   el('endWhat').textContent = session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
@@ -632,11 +713,14 @@ function updateProgress() {
 }
 
 // ---------------------------------------------------------------- schermen
-function showMenu() { updateProgress(); toggle('menu'); }
+function showMenu() { kijk = null; sluitSheet(); updateProgress(); toggle('menu'); }
 function showQuiz() { toggle('quiz'); }
 function showEnd() { toggle('end'); }
 function toggle(id) { ['menu', 'quiz', 'end'].forEach(s => el(s).classList.toggle('hidden', s !== id)); }
-function resetView() { if (session && session.home) { view = { ...session.home }; applyView(); } else fitScope(); }
+function resetView() {
+  if (kijk) { focusAsk(byName.get(kijk)); if (sheetOpen()) schuifOnderPaneel(byName.get(kijk)); return; }
+  if (session && session.home) { view = { ...session.home }; applyView(); } else fitScope();
+}
 
 // ---------------------------------------------------------------- export / import
 function doExport() {
@@ -674,8 +758,13 @@ function bindEvents() {
   el('startBtn').onclick = startSession;
   el('againBtn').onclick = startSession;
   el('menuBtn').onclick = showMenu;
-  el('stopBtn').onclick = () => { if (confirm('Sessie stoppen? Je antwoorden tot nu toe zijn al bewaard.')) { session = null; showMenu(); } };
+  el('stopBtn').onclick = () => {
+    if (kijk) { el('stopBtn').textContent = 'Stop'; showMenu(); return; }
+    if (confirm('Sessie stoppen? Je antwoorden tot nu toe zijn al bewaard.')) { session = null; showMenu(); }
+  };
   el('nextBtn').onclick = () => { session.idx++; nextQuestion(); };
+  el('sheetClose').onclick = sluitSheet;
+  el('zoek').oninput = buildZoek;
 
   el('zoomIn').onclick = () => zoomAt(view.x + view.w / 2, view.y + view.h / 2, 0.7);
   el('zoomOut').onclick = () => zoomAt(view.x + view.w / 2, view.y + view.h / 2, 1.43);
