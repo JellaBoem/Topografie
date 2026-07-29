@@ -346,14 +346,27 @@ function recordResult(key, correct) {
 
 const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
 
+// "A, B en C" leest als een zin; "A, B, C" leest als een lijstje. Voor de
+// brokleden willen we het eerste, want het staat middenin een zin.
+const opsomming = a => a.length < 2 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' en ' + a[a.length - 1];
+
 // Wat er niet is, laten we weg in plaats van een leeg kopje te tonen.
 function meerRegels(c) {
   const d = INFO[c.name] || {};
   const brok = MAP.brokken.find(b => b.n === c.brok);
   const r = [];
   if (d.naam)  r.push('<p><b>De naam.</b> ' + esc(d.naam) + '</p>');
-  if (brok && brok.anker)
-    r.push('<p><b>Waarom deze landen bij elkaar staan.</b> ' + esc(brok.anker) + '.</p>');
+  // De ankerzin gaat over de brok, niet over dit ene land. Noem de brok dus bij
+  // naam en som de andere leden op. Stond er alleen "waarom deze landen bij
+  // elkaar staan", dan wees "deze landen" nergens naar en las je het als de
+  // buurlanden eronder -- en dat is een andere verzameling. Bij Niger scheelt
+  // dat de helft.
+  if (brok && brok.anker) {
+    const anderen = brok.landen.filter(nl => nl !== c.nl).map(esc);
+    r.push('<p><b>Hoort bij brok ' + brok.n + ', ' + esc(brok.naam) + '.</b>' +
+      (anderen.length ? ' Samen met ' + opsomming(anderen) + '.' : '') +
+      ' ' + esc(brok.anker) + '.</p>');
+  }
   if (c.buren && c.buren.length)
     r.push('<p><b>Buurlanden.</b> ' + c.buren.map(esc).join(', ') + '.</p>');
   else if (c.buren)
