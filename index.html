@@ -131,6 +131,33 @@
   #end .big{font-size:44px; font-weight:800; color:var(--teal); font-variant-numeric:tabular-nums;}
   #endlist{margin-top:14px;}
   .er{display:flex; justify-content:space-between; padding:9px 2px; border-bottom:1px solid #e6ecec; font-size:15px;}
+
+  /* ---------- BREED SCHERM (iPad, telefoon in liggende stand) ---------- */
+  /* De kaart mag alle ruimte hebben: hoe groter, hoe beter te lezen. Tekst niet.
+     Een regel van rand tot rand is op een iPad zo'n 1100 pixels breed; je oog
+     raakt aan het eind van de regel kwijt waar de volgende begint. Daarom krijgt
+     alles wat je léést een vaste kolombreedte, gecentreerd, met wat grotere
+     letters. Onder de 700px verandert er niets, dus de telefoon blijft zoals hij was. */
+  @media (min-width:700px){
+    #menu > *{max-width:680px; margin-left:auto; margin-right:auto;}
+    #menu h1{font-size:30px; margin:6px auto 2px;}
+    #menu .sub{font-size:15px; margin:0 auto 20px;}
+    #zoekLijst{max-height:380px;}
+
+    /* Balk en knoppenrij houden hun volle achtergrond, maar de inhoud
+       schuift mee naar dezelfde kolom als de rest. */
+    #opts{padding-left:calc((100% - 680px)/2); padding-right:calc((100% - 680px)/2);}
+    #fb{padding-left:calc((100% - 680px)/2); padding-right:calc((100% - 680px)/2);}
+
+    #sheetTop, #sheetBody{width:100%; max-width:712px; margin-left:auto; margin-right:auto;}
+    #sheetTop span{font-size:20px;}
+    #sheetBody{font-size:17px;}
+    #sheetBody .bron{font-size:14px;}
+
+    #end > *{max-width:680px; margin-left:auto; margin-right:auto;}
+    #end h1{margin:0 auto 4px;}
+    #endlist{margin-top:14px; margin-left:auto; margin-right:auto;}
+  }
 </style>
 </head>
 <body>
