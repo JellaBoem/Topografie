@@ -291,15 +291,15 @@ function handleTap(clientX, clientY) {
 }
 
 function focusOn(c) {
-  // zoom naar het juiste land toe met de buren eromheen, zodat ze ziet waar het ligt
+  // Na een fout antwoord moet het juiste land ALTIJD in beeld komen, met de buren
+  // eromheen. Ook als ze ver ingezoomd op een heel ander werelddeel zat; dan is
+  // uitzoomen nodig. Het kader volgt de echte vorm van het land, zodat een lang
+  // en smal land als Chili niet in een veel te ruim vierkant verdwijnt.
   const rings = quizPolys.get(c.name);
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
   for (const r of rings) for (const p of r) { if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0]; if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1]; }
-  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
-  const half = Math.max((x1 - x0), (y1 - y0)) * 2 + base.w * 0.05;
-  const target = { x0: cx - half, y0: cy - half, x1: cx + half, y1: cy + half };
-  const targetW = (target.x1 - target.x0) * 1.24;
-  if (targetW < view.w) fitBounds(target, 0.12); // alleen als het inzoomen is
+  const m = Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;   // omgeving eromheen
+  fitBounds({ x0: x0 - m, y0: y0 - m, x1: x1 + m, y1: y1 + m }, 0.12);
 }
 
 function clearMarks() { el('viewport').querySelectorAll('.target,.wrong').forEach(p => p.classList.remove('target', 'wrong')); }
