@@ -9,6 +9,7 @@ const MAX_BOX = 5;
 const MIN_TAP_PX = 22;        // kleinste tikcirkel op het scherm (voor mini-landen)
 const MOVE_TOL = 10;          // pixels: meer beweging = schuiven i.p.v. tikken
 const MIN_SHOW_PX = 28;       // zo groot moet het juiste land minstens in beeld staan
+const ASK_MIN_PX = 46;        // zo groot moet het opgelichte land staan bij 'Omgekeerd'
 
 // ---------------------------------------------------------------- state
 let MAP = null;               // map-data.json
@@ -25,7 +26,16 @@ const el = id => document.getElementById(id);
 // ---------------------------------------------------------------- opslag
 function defaultState() {
   return { v: 1, sessionCounter: 0, items: {},
-    settings: { scope: { type: 'all', values: [] }, newPerSession: 7, sessionLen: 20 } };
+    settings: { scope: { type: 'all', values: [] }, mode: 'point', newPerSession: 7, sessionLen: 20 } };
+}
+// Aanwijzen en omgekeerd zijn twee verschillende vaardigheden: je kunt Chili
+// feilloos aanwijzen en toch niet herkennen als het oplicht. Daarom houdt elke
+// stand zijn eigen bakjes bij. Anders zou de voortgangsbalk iets beweren wat
+// niet waar is.
+function fields(m) {
+  return (m || state.settings.mode) === 'reverse'
+    ? { box: 'rbox', due: 'rdue', seen: 'rseen', ok: 'rcorrect', no: 'rwrong' }
+    : { box: 'box', due: 'due', seen: 'seen', ok: 'correct', no: 'wrong' };
 }
 function load() {
   try { const raw = localStorage.getItem(STORE_KEY); state = raw ? JSON.parse(raw) : defaultState(); }
@@ -33,7 +43,11 @@ function load() {
   if (!state.items) state = defaultState();
 }
 function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
-function ensureItem(k) { if (!state.items[k]) state.items[k] = { box: 0, due: 0, seen: false, correct: 0, wrong: 0 }; }
+function ensureItem(k) {
+  const it = state.items[k] || (state.items[k] = {});
+  if (it.box == null) { it.box = 0; it.due = 0; it.seen = false; it.correct = 0; it.wrong = 0; }
+  if (it.rbox == null) { it.rbox = 0; it.rdue = 0; it.rseen = false; it.rcorrect = 0; it.rwrong = 0; }
+}
 
 // ---------------------------------------------------------------- data laden
 async function boot() {
@@ -184,7 +198,8 @@ function onUp(e) {
     const p = [...pointers.values()][0];
     gesture = { moved: 1, sx: p.x, sy: p.y, t: Date.now() };
   } else if (pointers.size < 2 && gesture) gesture.d0 = null;
-  if (pointers.size === 0) { const g = gesture; gesture = null; if (wasTap && session && !session.answered) handleTap(cx, cy); }
+  // Ook ná het antwoord blijft tikken zinvol: dan is het rondkijken.
+  if (pointers.size === 0) { gesture = null; if (wasTap && session) handleTap(cx, cy); }
 }
 function dist2(pts) { return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y); }
 
@@ -219,11 +234,12 @@ function startSession() {
   const pool = scopeKeys();
   if (!pool.length) { alert('Kies eerst een werelddeel of brok met landen erin.'); return; }
   pool.forEach(ensureItem);
+  const F = fields();
   state.sessionCounter++;
   const now = state.sessionCounter;
-  const due = pool.filter(k => state.items[k].seen && state.items[k].due <= now)
-    .sort((a, b) => (state.items[a].due - state.items[b].due) || (state.items[a].box - state.items[b].box));
-  const unseen = pool.filter(k => !state.items[k].seen);
+  const due = pool.filter(k => state.items[k][F.seen] && state.items[k][F.due] <= now)
+    .sort((a, b) => (state.items[a][F.due] - state.items[b][F.due]) || (state.items[a][F.box] - state.items[b][F.box]));
+  const unseen = pool.filter(k => !state.items[k][F.seen]);
   const newItems = shuffle(unseen).slice(0, Math.min(state.settings.newPerSession, unseen.length));
   let queue = shuffle(due).concat(newItems);
   if (queue.length > state.settings.sessionLen) queue = queue.slice(0, state.settings.sessionLen);
@@ -233,7 +249,7 @@ function startSession() {
     state.sessionCounter--; return;
   }
   queue = shuffle(queue);
-  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null };
+  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: state.settings.mode };
   save();
   showQuiz();
   requestAnimationFrame(() => { fitScope(); session.home = { ...view }; nextQuestion(); });
@@ -243,17 +259,105 @@ function nextQuestion() {
   session.answered = false;
   el('tapdot').classList.add('hidden');
   el('nextBtn').classList.add('hidden');
+  el('opts').classList.add('hidden');
   clearMarks();
   if (session.home) { view = { ...session.home }; applyView(); } // elke vraag vanaf hetzelfde beeld
   if (session.idx >= session.queue.length) { endSession(); return; }
   const key = session.queue[session.idx];
   const c = byName.get(key);
-  el('qName').textContent = c.nl;
   el('qCount').textContent = (session.idx + 1) + ' / ' + session.queue.length;
-  el('fbMsg').innerHTML = 'Tik op de kaart waar dit land ligt.';
+  if (session.mode === 'reverse') {
+    el('qText').innerHTML = 'Welk land is <b>oranje</b>?';
+    const p = pathEl(key); if (p) p.classList.add('ask');
+    focusAsk(c);                      // land groot genoeg, met omgeving, in beeld
+    buildOptions(key);
+    el('fbMsg').innerHTML = 'Kies de juiste naam.';
+  } else {
+    el('qText').innerHTML = 'Waar ligt <b id="qName"></b>?';
+    el('qName').textContent = c.nl;
+    el('fbMsg').innerHTML = 'Tik op de kaart waar dit land ligt.';
+  }
+}
+
+// De foute keuzes moeten geloofwaardig zijn. Little & Bjork lieten zien dat
+// meerkeuze pas net zoveel oplevert als zelf het antwoord produceren wanneer de
+// andere opties serieuze kanshebbers zijn: je haalt dan ook op waarom die niet
+// kloppen. "Chili of Noorwegen" kun je raden zonder te kijken; "Chili of
+// Argentinie of Peru" dwingt je de kaart te lezen.
+function distractors(key, n) {
+  const c = byName.get(key);
+  const pool = MAP.countries.filter(x => x.quiz && x.name !== key);
+  const sameBrok = shuffle(pool.filter(x => x.brok === c.brok));
+  const nearest = pool.filter(x => x.brok !== c.brok)
+    .sort((a, b) => Math.hypot(a.cx - c.cx, a.cy - c.cy) - Math.hypot(b.cx - c.cx, b.cy - c.cy));
+  return sameBrok.concat(nearest).slice(0, n).map(x => x.name);
+}
+
+function buildOptions(key) {
+  const box = el('opts');
+  box.innerHTML = '';
+  for (const name of shuffle([key].concat(distractors(key, 3)))) {
+    const b = document.createElement('button');
+    b.textContent = byName.get(name).nl;
+    b.onclick = () => answerReverse(name, key, b);
+    box.appendChild(b);
+  }
+  box.classList.remove('hidden');
+}
+
+function answerReverse(chosen, key, btn) {
+  if (session.answered) return;
+  session.answered = true;
+  const correct = chosen === key;
+  recordResult(key, correct);
+  const target = byName.get(key);
+  el('opts').querySelectorAll('button').forEach(b => {
+    b.disabled = true;
+    if (b.textContent === target.nl) b.classList.add('good');
+  });
+  if (!correct) btn.classList.add('bad');
+  el('fbMsg').innerHTML = correct
+    ? '<span class="ok">Goed.</span> ' + target.nl + ' — ' + target.continent + ', brok ' + target.brok + ' (' + target.broknaam + ').'
+    : '<span class="no">Mis.</span> Dit is ' + target.nl + ', niet ' + byName.get(chosen).nl + '.';
+  el('nextBtn').classList.remove('hidden');
+}
+
+function recordResult(key, correct) {
+  const F = fields(session.mode);
+  const it = state.items[key];
+  it[F.seen] = true;
+  if (correct) {
+    it[F.ok]++; it[F.box] = Math.min((it[F.box] || 0) + 1, MAX_BOX);
+    it[F.due] = session.now + INTERVALS[it[F.box]]; session.correct++;
+  } else { it[F.no]++; it[F.box] = 1; it[F.due] = session.now + 1; }
+  session.results.push({ key, correct });
+  el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
+  save();
+}
+
+// Welk land ligt onder dit punt? Eerst echt raak, anders het dichtstbijzijnde
+// land binnen tikafstand (kleine landen zijn met een vinger niet te raken).
+function countryAt(pt) {
+  for (const k of quizPolys.keys()) if (inCountry(pt, quizPolys.get(k))) return k;
+  const near = nearestQuiz(pt, [...quizPolys.keys()]);
+  return near && near.d <= MIN_TAP_PX / screenScale() ? near.key : null;
+}
+
+// Na het antwoord mag je rondkijken: tik een buurland aan en je ziet hoe het
+// heet. Een naam die je ophaalt naast een land dat je net leerde, hangt aan
+// iets vast; een los rijtje hangt nergens aan.
+function peek(pt) {
+  const k = countryAt(pt);
+  el('viewport').querySelectorAll('.peek').forEach(p => p.classList.remove('peek'));
+  if (!k) { el('peekMsg').textContent = ''; return; }
+  const c = byName.get(k);
+  const p = pathEl(k); if (p) p.classList.add('peek');
+  el('peekMsg').textContent = c.nl + ' · ' + c.continent + ', brok ' + c.brok + ' (' + c.broknaam + ')';
 }
 
 function handleTap(clientX, clientY) {
+  if (session.answered) { peek(toWorld(clientX, clientY)); return; }
+  if (session.mode !== 'point') return;   // bij 'Omgekeerd' antwoord je met de knoppen
   const key = session.queue[session.idx];
   const target = byName.get(key);
   const pt = toWorld(clientX, clientY);
@@ -264,12 +368,7 @@ function handleTap(clientX, clientY) {
     (Math.hypot(pt[0] - target.cx, pt[1] - target.cy) <= effR && near.key === key);
 
   session.answered = true;
-  const it = state.items[key];
-  it.seen = true;
-  if (correct) { it.correct++; it.box = Math.min((it.box || 0) + 1, MAX_BOX); it.due = session.now + INTERVALS[it.box]; session.correct++; }
-  else { it.wrong++; it.box = 1; it.due = session.now + 1; }
-  session.results.push({ key, correct });
-  save();
+  recordResult(key, correct);
 
   // markeren
   const tp = pathEl(key); if (tp) tp.classList.add('target');
@@ -291,14 +390,25 @@ function handleTap(clientX, clientY) {
   el('nextBtn').classList.remove('hidden');
 }
 
+function boundsOf(name) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const r of quizPolys.get(name)) for (const p of r) {
+    if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0];
+    if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1];
+  }
+  return { x0, y0, x1, y1 };
+}
+function showPx(b) { // hoe groot staat dit land nu op het scherm, in pixels
+  const r = mapRect();
+  return Math.max((b.x1 - b.x0) / view.w * r.width, (b.y1 - b.y0) / view.h * r.height);
+}
+
 function focusOn(c, tap) {
   // Na een fout antwoord moet het juiste land ALTIJD in beeld komen, met de buren
   // eromheen. Ook als ze ver ingezoomd op een heel ander werelddeel zat; dan is
   // uitzoomen nodig. Het kader volgt de echte vorm van het land, zodat een lang
   // en smal land als Chili niet in een veel te ruim vierkant verdwijnt.
-  const rings = quizPolys.get(c.name);
-  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-  for (const r of rings) for (const p of r) { if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0]; if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1]; }
+  const { x0, y0, x1, y1 } = boundsOf(c.name);
   // Marge op basis van het land zelf, zodat de omgeving even ruim blijft
   // ongeacht hoe ver ze ernaast zat.
   const m = Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;
@@ -310,17 +420,36 @@ function focusOn(c, tap) {
     const p = base.w * 0.02;
     fitBounds({ x0: Math.min(box.x0, tap[0] - p), y0: Math.min(box.y0, tap[1] - p),
                 x1: Math.max(box.x1, tap[0] + p), y1: Math.max(box.y1, tap[1] + p) }, 0.12);
-    const r = mapRect();
-    if (Math.max((x1 - x0) / view.w * r.width, (y1 - y0) / view.h * r.height) >= MIN_SHOW_PX) return;
+    if (showPx({ x0, y0, x1, y1 }) >= MIN_SHOW_PX) return;
   }
   fitBounds(box, 0.12);
 }
 
-function clearMarks() { el('viewport').querySelectorAll('.target,.wrong').forEach(p => p.classList.remove('target', 'wrong')); }
+// Bij 'Omgekeerd' moet je kunnen ZIEN welk land oplicht. Met de gewone marge
+// haalt Luxemburg zo'n twaalf pixels: dat is een stipje, geen vraag. Daarom
+// zoomen we door tot het herkenbaar groot staat. Verder inzoomen dan de app
+// toestaat kan niet, dus voor de allerkleinste landen blijft het krap.
+function focusAsk(c) {
+  focusOn(c);
+  const b = boundsOf(c.name);
+  const mid = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
+  for (let i = 0; i < 12 && showPx(b) < ASK_MIN_PX; i++) {
+    const w = view.w;
+    zoomAt(mid[0], mid[1], 0.8);
+    if (view.w === w) break;   // zoomgrens bereikt
+  }
+}
+
+function clearMarks() {
+  el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
+    .forEach(p => p.classList.remove('target', 'wrong', 'ask', 'peek'));
+  el('peekMsg').textContent = '';
+}
 
 function endSession() {
   showEnd();
   el('endScore').textContent = session.correct + '/' + session.queue.length;
+  el('endWhat').textContent = session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
   const rows = session.results.map(r => {
     const c = byName.get(r.key);
     return `<div class="er"><span>${c.nl}</span><span>${r.correct ? '✓' : '✗'}</span></div>`;
@@ -332,6 +461,11 @@ function endSession() {
 // ---------------------------------------------------------------- menu / scope UI
 function buildScopeUI() {
   const sc = state.settings.scope;
+  const m = state.settings.mode;
+  el('modeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
+  el('modeInfo').textContent = m === 'reverse'
+    ? 'De kaart licht een land op, jij kiest de naam uit vier. De foute keuzes zijn buren of landen uit dezelfde brok, dus goed kijken loont. Elke stand houdt zijn eigen voortgang bij.'
+    : 'Je krijgt een naam en wijst de plek aan op de kaart.';
   el('scopeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.t === sc.type));
   const box = el('scopeList'); box.innerHTML = '';
   if (sc.type === 'all') { box.classList.add('hidden'); }
@@ -362,12 +496,13 @@ function setScopeType(t) {
 
 function updateProgress() {
   const keys = scopeKeys();
+  const F = fields();
   let nieuw = 0, leren = 0, vast = 0, onzichtbaar = 0;
   for (const k of keys) {
     const it = state.items[k];
-    if (!it || !it.seen) onzichtbaar++;
-    else if (it.box >= 4) vast++;
-    else if (it.box >= 1) leren++;
+    if (!it || !it[F.seen]) onzichtbaar++;
+    else if (it[F.box] >= 4) vast++;
+    else if (it[F.box] >= 1) leren++;
     else nieuw++;
   }
   const total = keys.length || 1;
@@ -375,9 +510,10 @@ function updateProgress() {
   el('progBar').innerHTML = seg(vast, '#7bc98a') + seg(leren, '#f0b46b') + seg(nieuw, '#c9cf99') + seg(onzichtbaar, '#eef2f2');
   el('progText').innerHTML = `<b class="num">${vast}</b> zitten vast · <b class="num">${leren}</b> aan het leren · <b class="num">${keys.length - vast - leren}</b> nog te doen · <span class="num">${keys.length}</span> landen in selectie.`;
   const sc = state.settings.scope;
-  el('scopeName').textContent = sc.type === 'all' ? '(alle landen)' : sc.type === 'continent' ? '(' + (sc.values.join(', ') || 'kies werelddeel') + ')' : '(brok ' + (sc.values.join(', ') || '—') + ')';
-  const due = keys.filter(k => state.items[k] && state.items[k].seen && state.items[k].due <= state.sessionCounter + 1).length;
-  const unseen = keys.filter(k => !state.items[k] || !state.items[k].seen).length;
+  const waar = sc.type === 'all' ? 'alle landen' : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel') : ('brok ' + (sc.values.join(', ') || '—'));
+  el('scopeName').textContent = '(' + (state.settings.mode === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
+  const due = keys.filter(k => state.items[k] && state.items[k][F.seen] && state.items[k][F.due] <= state.sessionCounter + 1).length;
+  const unseen = keys.filter(k => !state.items[k] || !state.items[k][F.seen]).length;
   el('startInfo').innerHTML = `Volgende sessie: tot <b>${Math.min(state.settings.newPerSession, unseen)}</b> nieuwe landen en <b>${due}</b> herhalingen (max ${state.settings.sessionLen} per keer).`;
 }
 
@@ -432,6 +568,7 @@ function bindEvents() {
   el('zoomReset').onclick = resetView;
 
   el('scopeSeg').querySelectorAll('button').forEach(b => b.onclick = () => setScopeType(b.dataset.t));
+  el('modeSeg').querySelectorAll('button').forEach(b => b.onclick = () => { state.settings.mode = b.dataset.m; save(); buildScopeUI(); });
   el('exportBtn').onclick = doExport;
   el('importBtn').onclick = () => el('importFile').click();
   el('importFile').onchange = e => { if (e.target.files[0]) doImport(e.target.files[0]); e.target.value = ''; };
