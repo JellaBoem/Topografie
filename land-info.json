@@ -2,6 +2,7 @@
   "_comment": "Tekst per land, los van de kaart zodat hij kan groeien zonder de kaart opnieuw te bouwen. Sleutel = Engelse naam uit map-data.json. Velden: naam (wat de landsnaam betekent), taal, feit (een opvallend of cultureel gegeven), bron (alleen waar iets omstreden of aan een uitspraak gebonden is). Alles mag ontbreken; de app laat weg wat er niet is.",
   "Netherlands": {
     "naam": "Letterlijk de lage landen. Ongeveer een kwart ligt onder zeeniveau.",
+    "overzee": "De stipjes in de Caraïben zijn Bonaire, Saba en Sint-Eustatius: samen Caribisch Nederland, en sinds 2010 bijzondere gemeenten van Nederland. Alleen Bonaire is groot genoeg om te tekenen. Aruba, Curaçao en Sint-Maarten liggen ernaast, maar dat zijn zelfstandige landen binnen het Koninkrijk.",
     "taal": "Nederlands. In Friesland is het Fries de tweede rijkstaal.",
     "feit": "Een groot deel van het land is op het water veroverd. Flevoland lag in 1930 nog onder de Zuiderzee."
   },
@@ -22,8 +23,9 @@
   },
   "France": {
     "naam": "Naar de Franken, het Germaanse volk dat na de Romeinen de macht overnam.",
+    "overzee": "Vijf gebieden ver buiten Europa zijn volwaardige Franse departementen, precies zoals de departementen in Frankrijk zelf: Guadeloupe en Martinique in de Caraïben, Frans-Guyana aan de noordkust van Zuid-Amerika, en Réunion en Mayotte in de Indische Oceaan.",
     "taal": "Frans.",
-    "feit": "Grenst aan Brazilië en Suriname. Frans-Guyana in Zuid-Amerika is geen kolonie maar volwaardig Frans grondgebied, met de euro en Europese verkiezingen."
+    "feit": "Grenst daardoor aan Brazilië en Suriname: aan de rand van Frans-Guyana ligt gewoon een grens van Frankrijk, met de euro en Europese verkiezingen."
   },
   "United Kingdom": {
     "naam": "Verenigd slaat op de samenvoeging van Engeland, Schotland, Wales en Noord-Ierland.",
@@ -42,6 +44,7 @@
   },
   "Norway": {
     "naam": "Noordweg: de vaarroute die de Vikingen langs de kust naar het noorden namen.",
+    "overzee": "Het losse eilandje ten noordwesten van het vasteland is Jan Mayen: een vulkaan in de Noordelijke IJszee, zonder vaste bewoners. De eilandengroep helemaal bovenin is Spitsbergen (Svalbard). Beide horen bij Noorwegen.",
     "taal": "Noors, in twee officiële schrijfvormen (bokmål en nynorsk). In het noorden ook Samisch.",
     "feit": "Met alle fjorden en eilanden meegerekend is de kustlijn ruim honderdduizend kilometer: meer dan twee keer de omtrek van de aarde."
   },
@@ -92,11 +95,13 @@
   },
   "Spain": {
     "naam": "Van het Fenicische i-shpanim, mogelijk kust van de klipdassen: de Feniciërs hielden de konijnen hier voor klipdassen.",
+    "overzee": "De eilandengroep ten zuidwesten van het vasteland, voor de kust van Noordwest-Afrika, zijn de Canarische Eilanden: een autonome regio van Spanje. De Balearen in de Middellandse Zee horen er ook bij.",
     "taal": "Spaans (Castiliaans). Catalaans, Galicisch en Baskisch zijn regionaal officieel. Baskisch is met geen enkele andere taal ter wereld verwant.",
     "feit": "Was bijna achthonderd jaar deels islamitisch; het Alhambra en duizenden Spaanse woorden met al- komen daaruit voort."
   },
   "Portugal": {
     "naam": "Van Portus Cale, de Romeinse haven bij het huidige Porto.",
+    "overzee": "Twee eilandengroepen in de Atlantische Oceaan zijn autonome regio's van Portugal: de Azoren, ruim vijftienhonderd kilometer westelijk, en Madeira, dat zuidelijker ligt, ter hoogte van Marokko.",
     "taal": "Portugees, wereldwijd door ruim tweehonderdvijftig miljoen mensen gesproken, vooral in Brazilië.",
     "feit": "De grens met Spanje ligt sinds 1297 vrijwel onveranderd en is daarmee een van de oudste ter wereld."
   },
@@ -777,8 +782,9 @@
   },
   "Ecuador": {
     "naam": "Spaans voor evenaar. Die loopt vlak bij de hoofdstad Quito.",
+    "overzee": "De eilanden ver in de Stille Oceaan zijn de Galápagoseilanden: een gewone provincie van Ecuador, ruim negenhonderd kilometer uit de kust.",
     "taal": "Spaans is officieel; Quichua en Shuar zijn erkend in de streken waar ze gesproken worden.",
-    "feit": "De Galápagoseilanden horen bij Ecuador. Wat Darwin daar zag, bracht hem op het spoor van de evolutietheorie."
+    "feit": "Wat Charles Darwin op de Galápagos zag, bracht hem op het spoor van de evolutietheorie."
   },
   "Peru": {
     "naam": "Onzeker; mogelijk de naam van een lokale heerser die Spanjaarden verkeerd verstonden.",
@@ -842,6 +848,7 @@
   },
   "New Zealand": {
     "naam": "Door Nederlandse kaartenmakers Nieuw-Zeeland genoemd, naar de provincie Zeeland. In het Maori heet het Aotearoa, land van de lange witte wolk.",
+    "overzee": "Het losse stipje ten oosten van het Zuidereiland zijn de Chathameilanden, ruim achthonderd kilometer verderop. Ze horen bij Nieuw-Zeeland en hebben een eigen tijdzone, drie kwartier voor op de rest van het land.",
     "taal": "Maori en Nieuw-Zeelandse gebarentaal zijn bij wet officieel. Engels is de taal die vrijwel iedereen spreekt.",
     "feit": "Twee grote eilanden, ver van elk ander land. Doordat er lang geen landzoogdieren waren, ontstonden er vogels die niet kunnen vliegen, zoals de kiwi."
   }

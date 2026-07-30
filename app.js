@@ -371,6 +371,7 @@ function meerRegels(c) {
     r.push('<p><b>Buurlanden.</b> ' + c.buren.map(esc).join(', ') + '.</p>');
   else if (c.buren)
     r.push('<p><b>Buurlanden.</b> Geen: dit land grenst nergens aan land.</p>');
+  if (d.overzee) r.push('<p><b>Hoort er ook bij.</b> ' + esc(d.overzee) + '</p>');
   if (d.taal)  r.push('<p><b>Taal.</b> ' + esc(d.taal) + '</p>');
   if (d.feit)  r.push('<p>' + esc(d.feit) + '</p>');
   if (d.bron)  r.push('<p class="bron">' + esc(d.bron) + '</p>');
@@ -526,12 +527,12 @@ function handleTap(clientX, clientY) {
   el('nextBtn').classList.remove('hidden');
 }
 
+// Het kader waar de app naartoe zoomt is het KERN-kader uit de kaartbouwer: het
+// hoofdland met alles wat eraan vastligt, zonder de overzeese gebieden. Zouden
+// we alle stukken meetellen, dan werd Nederland een gebied van Groningen tot
+// Bonaire en zoomde de app uit naar de halve wereld.
 function boundsOf(name) {
-  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-  for (const r of quizPolys.get(name)) for (const p of r) {
-    if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0];
-    if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1];
-  }
+  const [x0, y0, x1, y1] = byName.get(name).bb;
   return { x0, y0, x1, y1 };
 }
 function showPx(b) { // hoe groot staat dit land nu op het scherm, in pixels
