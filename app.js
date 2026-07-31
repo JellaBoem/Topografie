@@ -247,14 +247,20 @@ function startSession() {
     .sort((a, b) => (state.items[a][F.due] - state.items[b][F.due]) || (state.items[a][F.box] - state.items[b][F.box]));
   const unseen = pool.filter(k => !state.items[k][F.seen]);
   const newItems = shuffle(unseen).slice(0, Math.min(state.settings.newPerSession, unseen.length));
-  let queue = shuffle(due).concat(newItems);
-  if (queue.length > state.settings.sessionLen) queue = queue.slice(0, state.settings.sessionLen);
+  // Herhalingen en nieuwe landen vechten om dezelfde plekken in de sessie. Zet je
+  // de nieuwe landen achteraan en knip je de rij af, dan sneuvelen ze allemaal
+  // zodra er sessionLen herhalingen klaarstaan - en blijf je hangen in wat je al
+  // kent. Dus eerst plek vrijhouden voor de nieuwe landen; de herhalingen vullen
+  // de rest. Er gaat niets verloren: due staat op volgorde van urgentie, dus wat
+  // nu niet meepast staat de volgende sessie vooraan.
+  const nieuwe = newItems.slice(0, state.settings.sessionLen);
+  const herhaal = due.slice(0, Math.max(0, state.settings.sessionLen - nieuwe.length));
+  const queue = shuffle(herhaal.concat(nieuwe));
   if (!queue.length) {
-    // niets te herhalen en niets nieuws (alles zit vast en nog niet toe aan herhaling)
-    alert('Niets te herhalen op dit moment — alles wat je koos zit goed vast. Kies meer landen, of kom later terug.');
+    // niets te herhalen en niets nieuws (alles ken je al en nog niet toe aan herhaling)
+    alert('Niets te herhalen op dit moment — alles wat je koos ken je al goed. Kies meer landen, of kom later terug.');
     state.sessionCounter--; return;
   }
-  queue = shuffle(queue);
   kijk = null;
   el('stopBtn').textContent = 'Stop';
   session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: state.settings.mode };
@@ -738,24 +744,34 @@ function setScopeType(t) {
 function updateProgress() {
   const keys = scopeKeys();
   const F = fields();
-  let nieuw = 0, leren = 0, vast = 0, onzichtbaar = 0;
+  // Drie categorieen, meer bestaan er niet: na een antwoord staat een land altijd
+  // in bakje 1 t/m MAX_BOX, dus "wel gezien maar nog in bakje 0" kan niet voorkomen.
+  let leren = 0, kent = 0, nietGehad = 0;
   for (const k of keys) {
     const it = state.items[k];
-    if (!it || !it[F.seen]) onzichtbaar++;
-    else if (it[F.box] >= 4) vast++;
-    else if (it[F.box] >= 1) leren++;
-    else nieuw++;
+    if (!it || !it[F.seen]) nietGehad++;
+    else if (it[F.box] >= 4) kent++;
+    else leren++;
   }
   const total = keys.length || 1;
   const seg = (n, col) => n ? `<span style="width:${(n / total * 100).toFixed(1)}%;background:${col}"></span>` : '';
-  el('progBar').innerHTML = seg(vast, '#7bc98a') + seg(leren, '#f0b46b') + seg(nieuw, '#c9cf99') + seg(onzichtbaar, '#eef2f2');
-  el('progText').innerHTML = `<b class="num">${vast}</b> zitten vast · <b class="num">${leren}</b> aan het leren · <b class="num">${keys.length - vast - leren}</b> nog te doen · <span class="num">${keys.length}</span> landen in selectie.`;
+  el('progBar').innerHTML = seg(kent, '#7bc98a') + seg(leren, '#f0b46b') + seg(nietGehad, '#eef2f2');
+  el('progText').innerHTML = `<b class="num">${kent}</b> ken je · <b class="num">${leren}</b> aan het leren · <b class="num">${nietGehad}</b> nog niet gehad · <span class="num">${keys.length}</span> landen in deze selectie.`;
   const sc = state.settings.scope;
   const waar = sc.type === 'all' ? 'alle landen' : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel') : ('brok ' + (sc.values.join(', ') || '—'));
   el('scopeName').textContent = '(' + (state.settings.mode === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
   const due = keys.filter(k => state.items[k] && state.items[k][F.seen] && state.items[k][F.due] <= state.sessionCounter + 1).length;
   const unseen = keys.filter(k => !state.items[k] || !state.items[k][F.seen]).length;
-  el('startInfo').innerHTML = `Volgende sessie: tot <b>${Math.min(state.settings.newPerSession, unseen)}</b> nieuwe landen en <b>${due}</b> herhalingen (max ${state.settings.sessionLen} per keer).`;
+  // Precies dezelfde verdeling als startSession maakt, anders belooft dit scherm
+  // iets wat je niet krijgt.
+  const nieuwN = Math.min(state.settings.newPerSession, unseen, state.settings.sessionLen);
+  const herhaalN = Math.min(due, Math.max(0, state.settings.sessionLen - nieuwN));
+  const wacht = due - herhaalN;
+  const nw = `<b>${nieuwN}</b> ` + (nieuwN === 1 ? 'nieuw land' : 'nieuwe landen');
+  const hh = `<b>${herhaalN}</b> ` + (herhaalN === 1 ? 'herhaling' : 'herhalingen');
+  el('startInfo').innerHTML = `Volgende sessie: ${nw} en ${hh}.` +
+    (wacht ? ` Nog <b>${wacht}</b> ` + (wacht === 1 ? 'herhaling wacht' : 'herhalingen wachten') +
+      ' op een volgende keer.' : '');
 }
 
 // ---------------------------------------------------------------- schermen
