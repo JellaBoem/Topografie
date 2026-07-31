@@ -71,6 +71,13 @@ function fields(m) {
     ? { box: 'rbox', due: 'rdue', seen: 'rseen', ok: 'rcorrect', no: 'rwrong' }
     : { box: 'box', due: 'due', seen: 'seen', ok: 'correct', no: 'wrong' };
 }
+// Welke oefenstand er nu echt geldt. Bij hoofdsteden is dat altijd de
+// omgekeerde. Aanwijzen kan daar niet eerlijk: Kinshasa en Brazzaville liggen
+// op een telefoonscherm 1 pixel uit elkaar en Jeruzalem en Ramallah 2, en geen
+// enkele zoomstand haalt die uit elkaar. Dat is munten opgooien, geen oefening.
+// Bovendien is wat je bij een hoofdstad leert wélke stad bij welk land hoort,
+// niet waar precies in dat land hij ligt.
+function modeNu() { return soortNu() === 'stad' ? 'reverse' : state.settings.mode; }
 function load() {
   try { const raw = localStorage.getItem(STORE_KEY); state = raw ? JSON.parse(raw) : defaultState(); }
   catch (e) { state = defaultState(); }
@@ -103,6 +110,10 @@ async function boot() {
   }
   MAP.countries.forEach(c => { if (!c.soort) c.soort = 'land'; });
   MAP.brokken.forEach(b => { if (!b.soort) b.soort = 'land'; });
+  // Een hoofdstad heet "stad:Germany" en daar zit de sleutel van het land al in.
+  // De vraag laat het land oplichten, dus die verwijzing is nodig; hem hier
+  // afleiden scheelt dat hetzelfde nog eens in het databestand staat.
+  MAP.countries.forEach(c => { if (c.soort === 'stad') c.land = c.name.slice(5); });
   MAP.countries.forEach(c => byName.set(c.name, c));
   MAP.countries.filter(c => c.quiz).forEach(c => quizPolys.set(c.name, parsePath(c.d)));
   drawMap();
@@ -368,7 +379,7 @@ function startSession() {
   }
   verfLagen();
   pool.forEach(ensureItem);
-  const F = fields();
+  const F = fields(modeNu());
   state.sessionCounter++;
   const now = state.sessionCounter;
   const due = pool.filter(k => state.items[k][F.seen] && state.items[k][F.due] <= now)
@@ -391,7 +402,7 @@ function startSession() {
   }
   kijk = null;
   el('stopBtn').textContent = 'Stop';
-  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: state.settings.mode };
+  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: modeNu() };
   save();
   showQuiz();
   requestAnimationFrame(() => { fitScope(); session.home = { ...view }; nextQuestion(); });
@@ -413,7 +424,27 @@ function nextQuestion() {
   // Het tweede getal zegt of het "het" of "de" is, want "Welk stad" leest fout.
   const [wat, hetWoord] = { land: ['land', 1], zee: ['water', 1], berg: ['gebergte', 1],
     stad: ['stad', 0], haven: ['haven', 0] }[c.soort] || ['ding', 1];
-  if (session.mode === 'reverse') {
+  if (c.soort === 'stad') {
+    // Niet de stip licht op maar het land eromheen. Een stip van zeven pixels
+    // oranje maken tussen vijf andere stippen leest slecht, en bij twee steden
+    // die tegen elkaar aan liggen is niet te zien wélke oranje is. Het land is
+    // altijd groot genoeg om aan te wijzen, en zo zie je meteen wáár het ligt.
+    const land = byName.get(c.land);
+    el('qText').innerHTML = 'Wat is de hoofdstad van dit <b>oranje</b> land?';
+    // De stippen gaan uit zolang de vraag loopt. Er staat geen naam bij, dus ze
+    // helpen je niet - vijf blauwe puntjes die niets doen leiden alleen af. Na
+    // het antwoord komt de juiste stip groen terug; dan zie je alsnog waar hij
+    // ligt, zonder dat het getoetst wordt.
+    el('viewport').querySelectorAll('path.stadaan')
+      .forEach(q => { q.classList.remove('stadaan'); q.classList.add('stad'); });
+    const p = pathEl(c.land); if (p) p.classList.add('ask');
+    // Ruimer inzoomen dan bij landen. Daar is 46 pixels genoeg omdat je de vorm
+    // alleen hoeft te herkennen; hier is het land het aanknopingspunt voor een
+    // stad, dus mag het groter staan dan een oranje vlekje in een leeg werelddeel.
+    focusAsk(land, 110);
+    buildOptions(key);
+    el('fbMsg').innerHTML = 'Kies de juiste stad.';
+  } else if (session.mode === 'reverse') {
     el('qText').innerHTML = 'Welk' + (hetWoord ? '' : 'e') + ' ' + wat + ' is <b>oranje</b>?';
     const p = pathEl(key); if (p) p.classList.add('ask');
     focusAsk(c);                      // land groot genoeg, met omgeving, in beeld
@@ -465,6 +496,13 @@ function answerReverse(chosen, key, btn) {
     if (b.textContent === target.nl) b.classList.add('good');
   });
   if (!correct) btn.classList.add('bad');
+  // De vraag ging over het land, maar waar de stad ligt is ook het kijken
+  // waard. Hij wordt daarom pas ná het antwoord groen: wél te zien, niet
+  // getoetst.
+  if (target.soort === 'stad') {
+    const p = pathEl(key);
+    if (p) { p.classList.remove('stad'); p.classList.add('stadaan', 'target'); }
+  }
   el('fbMsg').innerHTML = correct
     ? '<span class="ok">Goed.</span> ' + target.nl + ' — ' + plek(target) + '.'
     : '<span class="no">Mis.</span> Niet ' + byName.get(chosen).nl + ' maar ' + target.nl + ' — ' + plek(target) + '.';
@@ -630,11 +668,15 @@ function countryAt(pt) {
   // Gaat het over hoofdsteden, dan wint een stip vlakbij van het land eronder:
   // daar gaat de vraag over, en anders zou rondkijken na het antwoord altijd
   // "Nederland" zeggen waar ze "Amsterdam" wil lezen.
-  // Alleen de stippen die ook echt te zien zijn, anders krijgt ze de naam van
-  // een hoofdstad uit een heel andere brok waar niets staat.
+  // Alleen de stippen die op dat moment ook echt gekleurd op de kaart staan.
+  // Anders tik je op een leeg stuk kaart en leest er de naam van een hoofdstad
+  // die daar helemaal niet te zien is.
   const s = soortNu();
   if (s === 'stad') {
-    const stip = nearestQuiz(pt, scopeKeys());
+    const zichtbaar = scopeKeys().filter(k => {
+      const p = pathEl(k); return p && p.classList.contains('stadaan');
+    });
+    const stip = nearestQuiz(pt, zichtbaar);
     if (stip.key && stip.d <= MIN_TAP_PX / screenScale()) return stip.key;
   }
   // Landen staan vóór de zeeën en gebergtes in de lijst, dus bij overlap wint
@@ -829,7 +871,8 @@ function endSession() {
   sluitSheet();
   showEnd();
   el('endScore').textContent = session.correct + '/' + session.queue.length;
-  el('endWhat').textContent = session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
+  el('endWhat').textContent = soortNu() === 'stad' ? 'goed benoemd'
+    : session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
   const rows = session.results.map(r => {
     const c = byName.get(r.key);
     return `<div class="er"><span>${c.nl}</span><span>${r.correct ? '✓' : '✗'}</span></div>`;
@@ -852,6 +895,10 @@ function buildScopeUI() {
   el('scopeCard').classList.toggle('hidden', s !== 'land' && s !== 'stad');
   el('scopeSeg').classList.toggle('hidden', s === 'stad');
   verfLagen();
+  // Bij hoofdsteden valt er geen oefening te kiezen: er is er maar één die
+  // eerlijk is. Die kaart gaat dus weg in plaats van een keuze voor te spiegelen
+  // die niets doet. De uitleg staat bij "Wat oefen je?".
+  el('modeCard').classList.toggle('hidden', s === 'stad');
   el('modeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
   el('modeInfo').textContent = m === 'reverse'
     ? 'De kaart licht een land op, jij kiest de naam uit vier. De foute keuzes zijn buren of landen uit dezelfde brok, dus goed kijken loont. Elke stand houdt zijn eigen voortgang bij.'
@@ -888,10 +935,13 @@ function soortUitleg(s) {
   if (s === 'stad') {
     const gekozen = scopeVan('stad').values.length;
     return n + ' hoofdsteden, één per land, in de brok van hun eigen land. ' +
-      'Ze staan als stip op de kaart en gaan altijd per brok: alle 168 tegelijk ' +
-      'op de wereldkaart zou betekenen dat de stippen op elkaar liggen. ' +
-      (gekozen ? '' : 'Kies hieronder een brok om te beginnen. ') +
-      'Daarom doen hoofdsteden ook niet mee in "Door elkaar".';
+      'Er licht steeds een land op en jij kiest de stad die erbij hoort; ' +
+      'na je antwoord zie je als groene stip waar hij ligt. ' +
+      'Aanwijzen op de kaart zit er niet bij: sommige hoofdsteden liggen zo ' +
+      'dicht bij een buurland (Kinshasa en Brazzaville, Jeruzalem en Ramallah) ' +
+      'dat het gokken zou worden. ' +
+      'Het gaat per brok, en om dezelfde reden doen hoofdsteden niet mee in "Door elkaar". ' +
+      (gekozen ? '' : 'Kies hieronder een brok om te beginnen.');
   }
   const b = MAP.brokken.find(x => x.soort === s);
   return n + ' ' + noem(s, true) + '.' + (b && b.anker ? ' ' + b.anker + '.' : '');
@@ -919,7 +969,7 @@ function brokUitleg() {
 // Welke brokken heb je in deze stand al aangeraakt? Alleen die kun je zinvol
 // door elkaar oefenen; een brok die je nog nooit zag valt er niets aan te halen.
 function startedBroks() {
-  const F = fields();
+  const F = fields(modeNu());
   const s = new Set();
   for (const c of alleVan(soortNu()))
     if (state.items[c.name] && state.items[c.name][F.seen]) s.add(c.brok);
@@ -979,7 +1029,7 @@ function setScopeType(t) {
 
 function updateProgress() {
   const keys = scopeKeys();
-  const F = fields();
+  const F = fields(modeNu());
   // Drie categorieen, meer bestaan er niet: na een antwoord staat een land altijd
   // in bakje 1 t/m MAX_BOX, dus "wel gezien maar nog in bakje 0" kan niet voorkomen.
   let leren = 0, kent = 0, nietGehad = 0;
@@ -1009,7 +1059,8 @@ function updateProgress() {
     : sc.type === 'all' ? 'alle landen'
     : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel')
     : ('brok ' + (sc.values.join(', ') || '—'));
-  el('scopeName').textContent = '(' + (state.settings.mode === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
+  el('scopeName').textContent = '(' + (s === 'stad' ? 'naam kiezen'
+    : modeNu() === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
   const due = keys.filter(k => state.items[k] && state.items[k][F.seen] && state.items[k][F.due] <= state.sessionCounter + 1).length;
   const unseen = keys.filter(k => !state.items[k] || !state.items[k][F.seen]).length;
   // Precies dezelfde verdeling als startSession maakt, anders belooft dit scherm
