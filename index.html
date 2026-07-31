@@ -44,7 +44,9 @@
   .chip.on{background:var(--teal); color:#fff; border-color:var(--teal);}
   .startrow{display:flex; gap:10px; align-items:center;}
   .startrow .btn{flex:1; font-size:19px; padding:16px;}
-  .prog{display:flex; gap:6px; height:14px; border-radius:7px; overflow:hidden; background:#eef2f2; margin:4px 0 10px;}
+  /* De baan onder de blokjes moet lichter zijn dan het lichtste blokje, anders
+     valt "nog niet gehad" weg tegen de achtergrond en lijkt de balk half leeg. */
+  .prog{display:flex; gap:6px; height:14px; border-radius:7px; overflow:hidden; background:#f6f9f9; margin:4px 0 10px;}
   .prog span{display:block;}
   .legend{display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted);}
   .legend i{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px;}
@@ -213,7 +215,7 @@
     <div class="legend">
       <span><i style="background:#7bc98a"></i>ken je</span>
       <span><i style="background:#f0b46b"></i>aan het leren</span>
-      <span><i style="background:#eef2f2"></i>nog niet gehad</span>
+      <span><i style="background:#d5dcdc"></i>nog niet gehad</span>
     </div>
     <p class="tiny" id="progText" style="margin:12px 0 0;"></p>
     <p class="tiny" style="margin:6px 0 0;">Groen betekent: minstens vier keer achter elkaar goed, met steeds langere

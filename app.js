@@ -755,7 +755,10 @@ function updateProgress() {
   }
   const total = keys.length || 1;
   const seg = (n, col) => n ? `<span style="width:${(n / total * 100).toFixed(1)}%;background:${col}"></span>` : '';
-  el('progBar').innerHTML = seg(kent, '#7bc98a') + seg(leren, '#f0b46b') + seg(nietGehad, '#eef2f2');
+  // #d5dcdc moet donkerder zijn dan de baan waar de balk in ligt (#f6f9f9 in
+  // index.html), anders valt "nog niet gehad" weg tegen de achtergrond en lijkt
+  // de balk leeg terwijl hij bijna vol staat.
+  el('progBar').innerHTML = seg(kent, '#7bc98a') + seg(leren, '#f0b46b') + seg(nietGehad, '#d5dcdc');
   el('progText').innerHTML = `<b class="num">${kent}</b> ken je · <b class="num">${leren}</b> aan het leren · <b class="num">${nietGehad}</b> nog niet gehad · <span class="num">${keys.length}</span> landen in deze selectie.`;
   const sc = state.settings.scope;
   const waar = sc.type === 'all' ? 'alle landen' : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel') : ('brok ' + (sc.values.join(', ') || '—'));
