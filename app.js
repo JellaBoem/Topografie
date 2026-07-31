@@ -28,7 +28,29 @@ const el = id => document.getElementById(id);
 // ---------------------------------------------------------------- opslag
 function defaultState() {
   return { v: 1, sessionCounter: 0, items: {},
-    settings: { scope: { type: 'all', values: [] }, mode: 'point', newPerSession: 7, sessionLen: 20 } };
+    settings: { soort: 'land', scope: { type: 'all', values: [] }, mode: 'point', newPerSession: 7, sessionLen: 20 } };
+}
+// Wat oefen je: landen, zeeën, gebergtes, of door elkaar. Opslag van vóór dit
+// onderwerp mist het veld; die opent gewoon op landen, precies zoals ze het
+// achterliet.
+function soortNu() { return (state.settings && state.settings.soort) || 'land'; }
+// Enkelvoud, meervoud en het/de per onderwerp, zodat de app "3 zeeën" zegt en
+// niet "3 landen", en "1 nieuwe zee" naast "1 nieuw land". Zonder dat lidwoord
+// wordt het "1 nieuwe land" - en dat leest als een fout, ook al klopt het getal.
+const SOORTNAAM = {
+  land:  { ev: 'land',      mv: 'landen',      het: true },
+  zee:   { ev: 'zee',       mv: 'zeeën',       het: false },
+  berg:  { ev: 'gebergte',  mv: 'gebergtes',   het: true },
+  stad:  { ev: 'hoofdstad', mv: 'hoofdsteden', het: false },
+  haven: { ev: 'haven',     mv: 'havens',      het: false },
+  mix:   { ev: 'onderdeel', mv: 'onderdelen',  het: true }
+};
+const soortWoord = s => SOORTNAAM[s] || SOORTNAAM.land;
+function noem(s, meervoud) { const w = soortWoord(s); return meervoud ? w.mv : w.ev; }
+// "1 nieuw land" / "3 nieuwe landen" / "1 nieuwe zee"
+function noemN(s, n) {
+  const w = soortWoord(s);
+  return `<b>${n}</b> ` + (n === 1 ? (w.het ? 'nieuw ' : 'nieuwe ') + w.ev : 'nieuwe ' + w.mv);
 }
 // Aanwijzen en omgekeerd zijn twee verschillende vaardigheden: je kunt Chili
 // feilloos aanwijzen en toch niet herkennen als het oplicht. Daarom houdt elke
@@ -59,6 +81,18 @@ async function boot() {
   // Landinformatie staat apart van de kaart: die tekst groeit en wordt bijgesteld,
   // de kaart niet. Ontbreekt hij, dan werkt de app gewoon zonder.
   INFO = await fetch('land-info.json').then(r => r.json()).catch(() => ({}));
+  // Zeeën en gebergtes komen uit een tweede bestand, gebouwd met exact dezelfde
+  // projectie (map-data.json meta.proj). Ze krijgen dezelfde velden als een land
+  // en worden hier gewoon achteraan geplakt: daarna weet de rest van de app niet
+  // eens dat er verschil is. Ontbreekt het bestand, dan draait de app als
+  // voorheen - net als land-info.json hierboven.
+  const EX = await fetch('extra-data.json').then(r => r.json()).catch(() => null);
+  if (EX && EX.items) {
+    MAP.countries = MAP.countries.concat(EX.items);
+    MAP.brokken = MAP.brokken.concat(EX.brokken || []);
+  }
+  MAP.countries.forEach(c => { if (!c.soort) c.soort = 'land'; });
+  MAP.brokken.forEach(b => { if (!b.soort) b.soort = 'land'; });
   MAP.countries.forEach(c => byName.set(c.name, c));
   MAP.countries.filter(c => c.quiz).forEach(c => quizPolys.set(c.name, parsePath(c.d)));
   drawMap();
@@ -88,9 +122,31 @@ function drawMap() {
   const [, , W, H] = MAP.meta.viewBox.split(' ').map(Number);
   base = { x: 0, y: 0, w: W, h: H };
   view = { ...base };
+  // Volgorde in de SVG is stapelvolgorde. Zeeën onderop (anders dekken ze de
+  // kust af), dan het land, dan de gebergtes eroverheen - want een gebergte
+  // ligt nu eenmaal óp een land.
+  const laag = s => MAP.countries.filter(c => c.soort === s);
   let html = '';
-  for (const c of MAP.countries) html += `<path class="c" d="${c.d}" data-k="${enc(c.name)}"></path>`;
+  for (const c of laag('zee'))  html += `<path class="zee" data-soort="zee" d="${c.d}" data-k="${enc(c.name)}"></path>`;
+  for (const c of laag('land')) html += `<path class="c" data-soort="land" d="${c.d}" data-k="${enc(c.name)}"></path>`;
+  for (const c of laag('berg')) html += `<path class="berg" data-soort="berg" d="${c.d}" data-k="${enc(c.name)}"></path>`;
   vp.innerHTML = html;
+  verfLagen();
+}
+
+// Een oceaan als groot gekleurd vlak is prachtig als je zeeën oefent, en pure
+// afleiding als je landen oefent. Dus: de vormen staan er altijd (aantikken kan
+// dan meteen), maar ze krijgen alleen kleur als het onderwerp erom vraagt.
+// Twee losse klassen in plaats van een dubbele, zodat .target en .peek er in de
+// stylesheet gewoon overheen kunnen - dat scheelt een specificiteitsgevecht.
+function verfLagen() {
+  const s = soortNu();
+  const aan = { zee: s === 'zee' || s === 'mix', berg: s === 'berg' || s === 'mix' };
+  for (const k of ['zee', 'berg'])
+    el('viewport').querySelectorAll(`path[data-soort="${k}"]`).forEach(p => {
+      p.classList.toggle(k + 'aan', aan[k]);
+      p.classList.toggle(k, !aan[k]);
+    });
 }
 function enc(s) { return s.replace(/"/g, '&quot;'); }
 function pathEl(name) { return el('viewport').querySelector(`path[data-k="${CSS.escape(name)}"]`); }
@@ -134,7 +190,9 @@ function fitBounds(b, pad) {
 function scopeBounds() {
   const full = { x0: base.x, y0: base.y, x1: base.x + base.w, y1: base.y + base.h };
   const keys = scopeKeys();
-  if (!keys.length || state.settings.scope.type === 'all') return full;
+  // Bij zeeën en gebergtes altijd de hele wereld: negen gebergtes zijn zo
+  // verspreid dat een kader om "de kern" de Andes buiten beeld zou duwen.
+  if (!keys.length || state.settings.scope.type === 'all' || soortNu() !== 'land') return full;
   // fit op de KERN: 5e-95e percentiel van de trefpunten, zodat uitschieters als
   // Rusland (tot in Siberie) of IJsland het beeld niet leegtrekken.
   const xs = keys.map(k => byName.get(k).cx).sort((a, b) => a - b);
@@ -226,8 +284,27 @@ function nearestQuiz(pt, pool) {
 }
 
 // ---------------------------------------------------------------- sessie
-function scopeKeys() {
+// Alles wat bij dit onderwerp hoort. "Door elkaar" is bewust geen "alles wat er
+// is": dan zou ze zeeën voor haar kiezen krijgen terwijl ze aan landen bezig
+// was. Het is "alles wat ze al begon", dus zij bepaalt wat er in de mengbak zit
+// door een onderwerp een keer te openen.
+function alleVan(s) {
   const all = MAP.countries.filter(c => c.quiz);
+  if (s !== 'mix') return all.filter(c => c.soort === s);
+  const begonnen = new Set(all.filter(c => {
+    const it = state.items[c.name];
+    return it && (it.seen || it.rseen);
+  }).map(c => c.soort));
+  if (!begonnen.size) begonnen.add('land');   // eerste keer ooit: begin bij landen
+  return all.filter(c => begonnen.has(c.soort));
+}
+function scopeKeys() {
+  const s = soortNu();
+  const all = alleVan(s);
+  // Werelddeel en brok gelden alleen bij landen. Bij tien zeeën of negen
+  // gebergtes valt er niets te selecteren, en bij "door elkaar" zou een
+  // werelddeel de helft van de mengbak stiekem weggooien.
+  if (s !== 'land') return all.map(c => c.name);
   const sc = state.settings.scope;
   let f = all;
   if (sc.type === 'continent' && sc.values.length) f = all.filter(c => sc.values.includes(c.continent));
@@ -239,6 +316,7 @@ function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { co
 function startSession() {
   const pool = scopeKeys();
   if (!pool.length) { alert('Kies eerst een werelddeel of brok met landen erin.'); return; }
+  verfLagen();
   pool.forEach(ensureItem);
   const F = fields();
   state.sessionCounter++;
@@ -258,7 +336,7 @@ function startSession() {
   const queue = shuffle(herhaal.concat(nieuwe));
   if (!queue.length) {
     // niets te herhalen en niets nieuws (alles ken je al en nog niet toe aan herhaling)
-    alert('Niets te herhalen op dit moment — alles wat je koos ken je al goed. Kies meer landen, of kom later terug.');
+    alert('Niets te herhalen op dit moment — alles wat je koos ken je al goed. Kies meer ' + noem(soortNu(), true) + ', of kom later terug.');
     state.sessionCounter--; return;
   }
   kijk = null;
@@ -280,8 +358,9 @@ function nextQuestion() {
   const key = session.queue[session.idx];
   const c = byName.get(key);
   el('qCount').textContent = (session.idx + 1) + ' / ' + session.queue.length;
+  const wat = c.soort === 'land' ? 'land' : c.soort === 'zee' ? 'water' : 'gebergte';
   if (session.mode === 'reverse') {
-    el('qText').innerHTML = 'Welk land is <b>oranje</b>?';
+    el('qText').innerHTML = 'Welk ' + wat + ' is <b>oranje</b>?';
     const p = pathEl(key); if (p) p.classList.add('ask');
     focusAsk(c);                      // land groot genoeg, met omgeving, in beeld
     buildOptions(key);
@@ -289,7 +368,7 @@ function nextQuestion() {
   } else {
     el('qText').innerHTML = 'Waar ligt <b id="qName"></b>?';
     el('qName').textContent = c.nl;
-    el('fbMsg').innerHTML = 'Tik op de kaart waar dit land ligt.';
+    el('fbMsg').innerHTML = 'Tik op de kaart waar dit ' + wat + ' ligt.';
   }
 }
 
@@ -300,7 +379,9 @@ function nextQuestion() {
 // Argentinie of Peru" dwingt je de kaart te lezen.
 function distractors(key, n) {
   const c = byName.get(key);
-  const pool = MAP.countries.filter(x => x.quiz && x.name !== key);
+  // Alleen dezelfde soort. Bij "Welke zee is oranje?" horen er geen landen
+  // tussen de keuzes: dan is het geen keuze meer maar een weggevertje.
+  const pool = MAP.countries.filter(x => x.quiz && x.name !== key && x.soort === c.soort);
   const sameBrok = shuffle(pool.filter(x => x.brok === c.brok));
   const nearest = pool.filter(x => x.brok !== c.brok)
     .sort((a, b) => Math.hypot(a.cx - c.cx, a.cy - c.cy) - Math.hypot(b.cx - c.cx, b.cy - c.cy));
@@ -361,6 +442,9 @@ function meerRegels(c) {
   const d = INFO[c.name] || {};
   const brok = MAP.brokken.find(b => b.n === c.brok);
   const r = [];
+  // Bij een zee of gebergte is "waar het ligt" het halve leerdoel, dus dat staat
+  // bovenaan. Bij een land wordt het verderop uitgerekend uit de kaart zelf.
+  if (c.waar) r.push('<p><b>Waar.</b> ' + esc(c.waar[0].toUpperCase() + c.waar.slice(1)) + '.</p>');
   if (d.naam)  r.push('<p><b>De naam.</b> ' + esc(d.naam) + '</p>');
   // De ankerzin gaat over de brok, niet over dit ene land. Noem de brok dus bij
   // naam en som de andere leden op. Stond er alleen "waarom deze landen bij
@@ -451,7 +535,7 @@ function toonLand(key) {
   el('qCount').textContent = '';
   el('qText').innerHTML = 'Opzoeken: <b>' + esc(c.nl) + '</b>';
   el('stopBtn').textContent = 'Terug';
-  el('fbMsg').innerHTML = c.nl + ' ligt in ' + plek(c) + '.';
+  el('fbMsg').innerHTML = c.nl + ligtIn(c) + '.';
   clearMarks();
   requestAnimationFrame(() => {
     focusAsk(c);
@@ -477,9 +561,15 @@ function buildZoek() {
 // Welk land ligt onder dit punt? Eerst echt raak, anders het dichtstbijzijnde
 // land binnen tikafstand (kleine landen zijn met een vinger niet te raken).
 function countryAt(pt) {
+  // Landen staan vóór de zeeën en gebergtes in de lijst, dus bij overlap wint
+  // het land - precies wat je wilt als je op Italië tikt en de Middellandse Zee
+  // er met zijn rand overheen ligt.
   for (const k of quizPolys.keys()) if (inCountry(pt, quizPolys.get(k))) return k;
-  const near = nearestQuiz(pt, [...quizPolys.keys()]);
-  return near && near.d <= MIN_TAP_PX / screenScale() ? near.key : null;
+  // Het vangnet voor mini-landjes kijkt alleen naar landen. Zou een oceaan
+  // meedoen, dan zou een misser vlak naast Malta "Middellandse Zee" opleveren,
+  // want het middelpunt van een zee ligt altijd wel ergens in de buurt.
+  const near = nearestQuiz(pt, [...quizPolys.keys()].filter(k => byName.get(k).soort === 'land'));
+  return near.key && near.d <= MIN_TAP_PX / screenScale() ? near.key : null;
 }
 
 // Na het antwoord mag je rondkijken: tik een buurland aan en je ziet hoe het
@@ -603,7 +693,7 @@ const regioVan = c => REGIO[c.brok] || c.continent;
 // 'de zuidoosthoek' belandt in plaats van in het oosten.
 function ligging(c) {
   const regio = regioVan(c);
-  const groep = MAP.countries.filter(x => x.quiz && regioVan(x) === regio);
+  const groep = MAP.countries.filter(x => x.quiz && x.soort === 'land' && regioVan(x) === regio);
   if (groep.length < 6) return regio;            // te klein om richtingen zinvol te maken
   const deel = f => {
     const v = groep.map(f).sort((a, b) => a - b), i = Math.floor(v.length * 0.05);
@@ -618,7 +708,17 @@ function ligging(c) {
   if (we) return 'het ' + we + 'en van ' + regio;
   return 'het midden van ' + regio;
 }
-function plek(c) { return ligging(c) + ', brok ' + c.brok + ' (' + c.broknaam + ')'; }
+// Bij een land rekenen we de ligging uit ("het westen van Europa"). Bij een zee
+// of een gebergte staat er een handgeschreven zin in de data ("tussen Nederland,
+// België en Engeland") - bruikbaarder dan een uitgerekende windrichting, want
+// een oceaan ligt niet in een werelddeel.
+function plek(c) {
+  if (c.waar) return c.waar;
+  return ligging(c) + ', brok ' + c.brok + ' (' + c.broknaam + ')';
+}
+// Voor zinnen die met "ligt" beginnen. Een land ligt ÍN iets, een zee ligt
+// TUSSEN iets - dat voorzetsel zit al in de handgeschreven zin.
+function ligtIn(c) { return c.waar ? ' ligt ' + c.waar : ' ligt in ' + plek(c); }
 
 function clearMarks() {
   el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
@@ -645,6 +745,13 @@ function endSession() {
 function buildScopeUI() {
   const sc = state.settings.scope;
   const m = state.settings.mode;
+  const s = soortNu();
+  el('soortSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.s === s));
+  el('soortInfo').textContent = soortUitleg(s);
+  // Tien zeeën of negen gebergtes: daar valt geen werelddeel in te kiezen, dus
+  // die kaart gaat weg in plaats van er nutteloos te staan.
+  el('scopeCard').classList.toggle('hidden', s !== 'land');
+  verfLagen();
   el('modeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
   el('modeInfo').textContent = m === 'reverse'
     ? 'De kaart licht een land op, jij kiest de naam uit vier. De foute keuzes zijn buren of landen uit dezelfde brok, dus goed kijken loont. Elke stand houdt zijn eigen voortgang bij.'
@@ -657,12 +764,29 @@ function buildScopeUI() {
     if (sc.type === 'continent') {
       MAP.continenten.forEach(name => box.appendChild(chip(name, sc.values.includes(name), () => toggleScope(name))));
     } else {
-      MAP.brokken.forEach(b => box.appendChild(chip(b.n + '. ' + b.naam, sc.values.includes(b.n), () => toggleScope(b.n))));
+      MAP.brokken.filter(b => b.soort === 'land')
+        .forEach(b => box.appendChild(chip(b.n + '. ' + b.naam, sc.values.includes(b.n), () => toggleScope(b.n))));
     }
   }
   scopeHint();
   brokUitleg();
   updateProgress();
+}
+
+// Bij zeeën en gebergtes is de "Welke landen?"-kaart weg, en daarmee ook de
+// plek waar de ankerzin van de brok stond. Die zin is juist het aangrijppunt
+// waarom die dingen bij elkaar horen, dus hij verhuist hierheen.
+function soortUitleg(s) {
+  const n = alleVan(s).length;
+  if (s === 'land') return 'De ' + n + ' landen van je leerplan, verdeeld over 32 brokken.';
+  if (s === 'mix') {
+    const soorten = [...new Set(alleVan('mix').map(c => c.soort))].map(x => noem(x, true));
+    return n + ' door elkaar: ' + opsomming(soorten) + '. Alleen wat je al eens ' +
+      'begon telt mee — open een onderwerp één keer en het schuift vanzelf aan. ' +
+      'Een werelddeel kiezen kan hier niet: dat zou de helft van de mengbak weggooien.';
+  }
+  const b = MAP.brokken.find(x => x.soort === s);
+  return n + ' ' + noem(s, true) + '.' + (b && b.anker ? ' ' + b.anker + '.' : '');
 }
 
 // De ankerzin hoort bij de brok, niet bij één land. Hier kies je je brok, dus
@@ -689,8 +813,8 @@ function brokUitleg() {
 function startedBroks() {
   const F = fields();
   const s = new Set();
-  for (const c of MAP.countries)
-    if (c.quiz && state.items[c.name] && state.items[c.name][F.seen]) s.add(c.brok);
+  for (const c of alleVan(soortNu()))
+    if (state.items[c.name] && state.items[c.name][F.seen]) s.add(c.brok);
   return [...s].sort((a, b) => a - b);
 }
 
@@ -703,7 +827,7 @@ function scopeHint() {
   const info = el('scopeInfo'), mix = el('mixBtn');
   mix.classList.add('hidden');
   if (sc.type === 'all') {
-    info.textContent = 'Alle ' + MAP.countries.filter(c => c.quiz).length +
+    info.textContent = 'Alle ' + alleVan('land').length +
       ' landen door elkaar. Je krijgt vanzelf eerst terug wat aan herhaling toe is.';
     return;
   }
@@ -759,9 +883,17 @@ function updateProgress() {
   // index.html), anders valt "nog niet gehad" weg tegen de achtergrond en lijkt
   // de balk leeg terwijl hij bijna vol staat.
   el('progBar').innerHTML = seg(kent, '#7bc98a') + seg(leren, '#f0b46b') + seg(nietGehad, '#d5dcdc');
-  el('progText').innerHTML = `<b class="num">${kent}</b> ken je · <b class="num">${leren}</b> aan het leren · <b class="num">${nietGehad}</b> nog niet gehad · <span class="num">${keys.length}</span> landen in deze selectie.`;
+  const s = soortNu();
+  // Bij "door elkaar" telt de balk verschillende dingen bij elkaar op. Dat mag
+  // niet verstopt worden: dan lees je "20 van de 30" en denk je dat het over
+  // landen gaat. Dus staat er letterlijk waaruit de optelsom bestaat.
+  const wat = s === 'mix'
+    ? opsomming([...new Set(keys.map(k => byName.get(k).soort))].map(x => noem(x, true))) + ' bij elkaar'
+    : noem(s, true) + ' in deze selectie';
+  el('progText').innerHTML = `<b class="num">${kent}</b> ken je · <b class="num">${leren}</b> aan het leren · <b class="num">${nietGehad}</b> nog niet gehad · <span class="num">${keys.length}</span> ${wat}.`;
   const sc = state.settings.scope;
-  const waar = sc.type === 'all' ? 'alle landen' : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel') : ('brok ' + (sc.values.join(', ') || '—'));
+  const waar = s !== 'land' ? (s === 'mix' ? 'door elkaar' : 'alle ' + noem(s, true))
+    : sc.type === 'all' ? 'alle landen' : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel') : ('brok ' + (sc.values.join(', ') || '—'));
   el('scopeName').textContent = '(' + (state.settings.mode === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
   const due = keys.filter(k => state.items[k] && state.items[k][F.seen] && state.items[k][F.due] <= state.sessionCounter + 1).length;
   const unseen = keys.filter(k => !state.items[k] || !state.items[k][F.seen]).length;
@@ -770,7 +902,7 @@ function updateProgress() {
   const nieuwN = Math.min(state.settings.newPerSession, unseen, state.settings.sessionLen);
   const herhaalN = Math.min(due, Math.max(0, state.settings.sessionLen - nieuwN));
   const wacht = due - herhaalN;
-  const nw = `<b>${nieuwN}</b> ` + (nieuwN === 1 ? 'nieuw land' : 'nieuwe landen');
+  const nw = noemN(s, nieuwN);
   const hh = `<b>${herhaalN}</b> ` + (herhaalN === 1 ? 'herhaling' : 'herhalingen');
   el('startInfo').innerHTML = `Volgende sessie: ${nw} en ${hh}.` +
     (wacht ? ` Nog <b>${wacht}</b> ` + (wacht === 1 ? 'herhaling wacht' : 'herhalingen wachten') +
@@ -835,6 +967,9 @@ function bindEvents() {
   el('zoomOut').onclick = () => zoomAt(view.x + view.w / 2, view.y + view.h / 2, 1.43);
   el('zoomReset').onclick = resetView;
 
+  el('soortSeg').querySelectorAll('button').forEach(b => b.onclick = () => {
+    state.settings.soort = b.dataset.s; save(); buildScopeUI(); buildZoek();
+  });
   el('scopeSeg').querySelectorAll('button').forEach(b => b.onclick = () => setScopeType(b.dataset.t));
   el('modeSeg').querySelectorAll('button').forEach(b => b.onclick = () => { state.settings.mode = b.dataset.m; save(); buildScopeUI(); });
   el('exportBtn').onclick = doExport;

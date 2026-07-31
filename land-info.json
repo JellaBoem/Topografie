@@ -851,5 +851,79 @@
     "overzee": "Het losse stipje ten oosten van het Zuidereiland zijn de Chathameilanden, ruim achthonderd kilometer verderop. Ze horen bij Nieuw-Zeeland en hebben een eigen tijdzone, drie kwartier voor op de rest van het land.",
     "taal": "Maori en Nieuw-Zeelandse gebarentaal zijn bij wet officieel. Engels is de taal die vrijwel iedereen spreekt.",
     "feit": "Twee grote eilanden, ver van elk ander land. Doordat er lang geen landzoogdieren waren, ontstonden er vogels die niet kunnen vliegen, zoals de kiwi."
+  },
+
+  "zee:Atlantic Ocean": {
+    "naam": "Genoemd naar Atlas uit de Griekse verhalen: de titaan die aan de westrand van de bekende wereld de hemel torste.",
+    "feit": "Over de bodem loopt van noord naar zuid de Mid-Atlantische Rug, een bergketen onder water. Daar schuiven Amerika en Europa elk jaar een paar centimeter uit elkaar. IJsland ligt er bovenop."
+  },
+  "zee:Pacific Ocean": {
+    "naam": "Magellaan noemde hem in 1520 mar pacifico, de vreedzame zee, omdat hij hem rustig aantrof na de stormen bij Zuid-Amerika.",
+    "feit": "Hij is groter dan al het land op aarde bij elkaar. In het diepste punt, de Marianentrog, zou de Mount Everest verdwijnen met nog ruim twee kilometer water erboven.",
+    "bron": "In het Nederlands heet hij zowel Grote Oceaan als Stille Oceaan. Stille Oceaan is de vertaling van de naam die Magellaan gaf."
+  },
+  "zee:Indian Ocean": {
+    "naam": "Genoemd naar India, waar de zeevaart vanuit Europa naar het oosten op gericht was.",
+    "feit": "De enige oceaan waar de wind twee keer per jaar omdraait: de moesson. Zeilschepen konden daardoor met de wind mee heen en met de wind mee terug. Handel tussen Oost-Afrika, Arabie en India is er duizenden jaren oud, lang voordat de Europeanen kwamen."
+  },
+  "zee:Arctic Ocean": {
+    "naam": "Arctisch komt van het Griekse arktos, beer: de sterrenbeelden Grote en Kleine Beer staan boven de noordpool.",
+    "feit": "Het grootste deel ligt onder drijvend zee-ijs. Dat ijs drijft al in het water, dus als het smelt stijgt de zeespiegel er niet van. Bij het landijs van Groenland is dat wel zo."
+  },
+  "zee:Mediterranean Sea": {
+    "naam": "De zee midden in het land: hij ligt ingesloten tussen drie werelddelen.",
+    "feit": "De enige open verbinding met de oceaan is de Straat van Gibraltar, op het smalste punt veertien kilometer breed. Er verdampt meer water dan de rivieren aanvoeren; het verschil stroomt bij Gibraltar naar binnen."
+  },
+  "zee:Black Sea": {
+    "naam": "Waarschijnlijk uit een oud gebruik om windrichtingen een kleur te geven, met zwart voor het noorden.",
+    "feit": "Dieper dan ongeveer honderdvijftig meter zit er geen zuurstof in het water. Daar leeft niets dat hout aantast, en daardoor liggen er scheepswrakken van tweeduizend jaar oud vrijwel gaaf op de bodem."
+  },
+  "zee:Red Sea": {
+    "naam": "Onzeker. Mogelijk naar een bacterie die het water soms roodbruin kleurt, mogelijk ook hier een windrichting: rood voor het zuiden.",
+    "feit": "Sinds 1869 loopt het Suezkanaal van hier naar de Middellandse Zee. Daardoor hoeft een schip van Europa naar Azie niet meer om heel Afrika heen. Het is nog altijd een van de drukste vaarroutes ter wereld."
+  },
+  "zee:Caribbean Sea": {
+    "naam": "Naar de Cariben, de volken die er woonden toen de Spanjaarden kwamen.",
+    "feit": "Sinds 1914 verbindt het Panamakanaal deze zee met de Grote Oceaan, dwars door Midden-Amerika. In de nazomer trekken er orkanen overheen, die hun kracht halen uit het warme oppervlaktewater."
+  },
+  "zee:North Sea": {
+    "naam": "Gezien vanuit Nederland en Vlaanderen ligt hij in het noorden. De Denen noemen hem juist Vesterhavet, de Westzee.",
+    "feit": "Ondiep: gemiddeld nog geen honderd meter. Tijdens de laatste ijstijd lag hier land, Doggersland, waar mensen woonden en jaagden. Vissers halen er nog botten en stenen werktuigen op."
+  },
+  "zee:Baltic Sea": {
+    "naam": "Gezien vanuit Nederland en Duitsland ligt hij in het oosten. In veel andere talen heet hij naar de Baltische kust.",
+    "feit": "Veel rivieren en nauwelijks verbinding met de oceaan: het water is bijna zoet. De paalworm, die elders scheepshout opeet, kan daar niet tegen. Daardoor kon het Zweedse oorlogsschip Vasa, in 1628 gezonken, in 1961 vrijwel compleet worden geborgen."
+  },
+
+  "berg:Alps": {
+    "naam": "Vermoedelijk van een heel oud woord voor hoge berg, of voor wit.",
+    "feit": "Ontstaan doordat Afrika tegen Europa aan duwt, en dat gaat nog steeds door. Op de toppen liggen gesteenten die ooit zeebodem waren, met de schelpen er nog in."
+  },
+  "berg:Pyrenees": {
+    "feit": "Ruim vierhonderd kilometer lang, en daarmee bijna de hele grens tussen Frankrijk en Spanje. Middenin ligt Andorra, een landje dat zijn zelfstandigheid vooral aan die afzondering te danken heeft."
+  },
+  "berg:Carpathians": {
+    "feit": "In een boog van Slowakije tot Roemenie. Hier staat het grootste aaneengesloten oerbos van Europa buiten Rusland, en leven de meeste bruine beren en wolven van het werelddeel."
+  },
+  "berg:Caucasus": {
+    "feit": "Hier staat de Elbroes, 5642 meter hoog. Het is ook een gebied vol kleine talen die nergens anders voorkomen: de bergen hielden groepen eeuwenlang gescheiden.",
+    "bron": "Of de Elbroes de hoogste berg van Europa is, hangt af van waar je de grens tussen Europa en Azie legt. Daar bestaat geen afspraak over."
+  },
+  "berg:Urals": {
+    "feit": "Geldt sinds de achttiende eeuw als de grens tussen Europa en Azie. Een oud, afgesleten gebergte: de hoogste top haalt maar 1895 meter. Rijk aan erts en edelstenen, en daardoor vol mijnsteden."
+  },
+  "berg:Atlas": {
+    "naam": "Naar Atlas uit de Griekse verhalen, dezelfde als in Atlantische Oceaan.",
+    "feit": "Houdt de vochtige lucht van de Middellandse Zee tegen. Aan de noordkant groene akkers en olijfgaarden, aan de zuidkant vrijwel meteen de Sahara."
+  },
+  "berg:Himalayas": {
+    "naam": "Sanskriet voor verblijfplaats van de sneeuw.",
+    "feit": "Ontstaan doordat India tegen Azie aan schuift, en de bergen worden nog steeds hoger. De Mount Everest is met 8849 meter de hoogste berg ter wereld. Ook hier liggen zeeschelpen op de toppen."
+  },
+  "berg:Andes": {
+    "feit": "Met ruim zevenduizend kilometer de langste bergketen op land. Hier is de aardappel ontstaan; er groeien er nog altijd duizenden soorten. De hoogste steden ter wereld liggen in deze bergen."
+  },
+  "berg:Rocky Mountains": {
+    "feit": "Over de kam loopt de waterscheiding van Noord-Amerika: regen die aan de ene kant valt stroomt uiteindelijk naar de Grote Oceaan, aan de andere kant naar de Atlantische."
   }
 }

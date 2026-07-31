@@ -39,6 +39,9 @@
   .seg{display:flex; gap:8px; margin-bottom:12px;}
   .seg button{flex:1; padding:10px; border-radius:10px; border:1px solid #d5dcdc; background:#f0f4f4; font-size:14px; font-weight:600; color:var(--ink);}
   .seg button.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  /* Vier knoppen naast elkaar wordt op een telefoon "Geberg…". Dus twee bij
+     twee. Alleen hier: de andere balken hebben er twee of drie en passen wel. */
+  #soortSeg{display:grid; grid-template-columns:1fr 1fr;}
   .chips{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{padding:8px 12px; border-radius:999px; border:1px solid #d5dcdc; background:#f6f9f9; font-size:14px;}
   .chip.on{background:var(--teal); color:#fff; border-color:var(--teal);}
@@ -74,6 +77,13 @@
   #mapwrap{flex:1; position:relative; min-height:0; background:var(--sea); touch-action:none;}
   #map{width:100%; height:100%; display:block; touch-action:none;}
   #map path.c{fill:var(--land); stroke:var(--border); stroke-width:.5; vector-effect:non-scaling-stroke;}
+  /* Zeeën en gebergtes staan altijd in de kaart, maar krijgen alleen kleur als
+     je ze oefent - anders leidt een grote blauwe Atlantische Oceaan af terwijl
+     je landen aanwijst. Twee losse klassen (zee / zeeaan) in plaats van een
+     dubbele, zodat .target en .peek hieronder er gewoon overheen gaan. */
+  #map path.zee,#map path.berg{fill:none; stroke:none;}
+  #map path.zeeaan{fill:#bcd8e8; stroke:#7ba7c0; stroke-width:.5; vector-effect:non-scaling-stroke;}
+  #map path.bergaan{fill:#c9b79c; stroke:#8d7a5e; stroke-width:.5; vector-effect:non-scaling-stroke;}
   #map path.target{fill:#bfe6c8; stroke:var(--good); stroke-width:2; vector-effect:non-scaling-stroke;}
   #map path.wrong{fill:#f0c4bd; stroke:var(--bad); stroke-width:2; vector-effect:non-scaling-stroke;}
   /* Het gevraagde land bij 'Omgekeerd'. Bewust oranje: groen zou lezen als
@@ -186,6 +196,17 @@
   </div>
 
   <div class="card">
+    <h2>Wat oefen je?</h2>
+    <div class="seg" id="soortSeg">
+      <button data-s="land" class="on">Landen</button>
+      <button data-s="zee">Zeeën</button>
+      <button data-s="berg">Gebergtes</button>
+      <button data-s="mix">Door elkaar</button>
+    </div>
+    <p class="tiny" id="soortInfo" style="margin:10px 0 0;"></p>
+  </div>
+
+  <div class="card">
     <h2>Welke oefening?</h2>
     <div class="seg" id="modeSeg">
       <button data-m="point" class="on">Aanwijzen</button>
@@ -194,7 +215,7 @@
     <p class="tiny" id="modeInfo" style="margin:10px 0 0;"></p>
   </div>
 
-  <div class="card">
+  <div class="card" id="scopeCard">
     <h2>Welke landen?</h2>
     <div class="seg" id="scopeSeg">
       <button data-t="all" class="on">Alles</button>
@@ -223,8 +244,8 @@
   </div>
 
   <div class="card">
-    <h2>Land opzoeken</h2>
-    <input id="zoek" type="search" placeholder="Typ een land…" autocomplete="off" enterkeyhint="done">
+    <h2>Opzoeken</h2>
+    <input id="zoek" type="search" placeholder="Typ een land, zee of gebergte…" autocomplete="off" enterkeyhint="done">
     <div id="zoekLijst" class="chips"></div>
     <p class="tiny" style="margin:12px 0 0;">Hier kun je vrij rondkijken en lezen, zonder overhoord te worden. Tijdens een oefening staat dezelfde tekst er pas ná je antwoord: eerst zelf graven levert meer op dan vooraf lezen.</p>
   </div>
