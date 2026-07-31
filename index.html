@@ -75,7 +75,11 @@
   #quiz{flex:1; display:flex; flex-direction:column; min-height:0;}
   #bar{display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--teal); color:#fff;}
   #bar .q{flex:1; font-size:18px; line-height:1.25;}
-  #bar .q b{font-size:21px;}
+  /* Alleen de NAAM in de vraag wordt groter ("Waar ligt Nederland?"). De andere
+     vetgedrukte woorden zijn aanwijzingen waar je moet kijken ("oranje",
+     "blauwe stip"); die op 21 zetten maakte van een vraag van drie regels een
+     bonte lap die harder schreeuwde dan de kaart eronder. */
+  #bar .q #qName{font-size:21px;}
   #bar .count{font-variant-numeric:tabular-nums; font-size:14px; opacity:.9; white-space:nowrap;}
   #bar .x{background:rgba(255,255,255,.18); border:0; color:#fff; border-radius:9px; padding:8px 11px; font-size:14px; font-weight:600;}
   #mapwrap{flex:1; position:relative; min-height:0; background:var(--sea); touch-action:none;}
@@ -105,15 +109,24 @@
      lopen is precies hoe schermen na verloop van tijd niet meer op elkaar lijken. */
   #map path.stip,#map path.stipaan{fill:none; stroke-linecap:round; vector-effect:non-scaling-stroke;}
   #map path.stip{stroke-width:0;}
-  #map path.stipaan{stroke:#2b6ca3; stroke-width:7;}
+  /* Vijf en geen zeven. De stip is op het scherm altijd even groot, maar het
+     LAND eronder niet: bij een havenvraag zoomt de kaart door tot het land
+     herkenbaar is, en dan haalt België zo'n tachtig pixels. Een stip van zeven
+     bedekt daar zoveel van dat niet meer te zien is aan welke kant van de
+     Nederlandse grens hij ligt - precies wat je bij Rotterdam en Antwerpen moet
+     kunnen zien. Op vijf blijft hij op China even goed zichtbaar (nagemeten). */
+  #map path.stipaan{stroke:#2b6ca3; stroke-width:5;}
   /* Bij peek staan de andere stippen er ook, dus die mag iets opvallen. De
      groene antwoordstip staat er in zijn eentje op een verder lege kaart: die
-     hoeft niet groter, groen is al genoeg verschil. */
-  #map path.stip.peek,#map path.stipaan.peek{stroke:#2b6ca3; stroke-width:9;}
-  #map path.stip.target,#map path.stipaan.target{stroke:var(--good); stroke-width:7;}
+     hoeft niet groter, groen is al genoeg verschil. Hij moet wel even groot
+     zijn als de blauwe vraagstip, anders groeit de stip zodra je antwoordt. */
+  #map path.stip.peek,#map path.stipaan.peek{stroke:#2b6ca3; stroke-width:7;}
+  #map path.stip.target,#map path.stipaan.target{stroke:var(--good); stroke-width:5;}
   /* "de blauwe stip" in de vraag krijgt de kleur van de stip zelf, zodat je hem
-     niet hoeft te zoeken. Dezelfde waarde als path.stipaan hierboven. */
-  .q b.blauw{color:#2b6ca3;}
+     niet hoeft te zoeken. Dezelfde waarde als path.stipaan hierboven. Nowrap,
+     want afgebroken over twee regels ("blauwe" / "stip") las het als twee losse
+     woorden in plaats van als de naam van het ding op de kaart. */
+  .q b.blauw{color:#2b6ca3; white-space:nowrap;}
   #peekMsg{position:absolute; left:10px; top:10px; max-width:calc(100% - 76px);
     background:rgba(31,111,111,.92); color:#fff; padding:7px 12px; border-radius:999px;
     font-size:13px; font-weight:600; line-height:1.3; pointer-events:none;}

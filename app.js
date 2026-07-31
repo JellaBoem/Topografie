@@ -381,7 +381,7 @@ function scopeKeys() {
   // werelddeel de helft van de mengbak stiekem weggooien.
   if (s !== 'land' && s !== 'stad') return all.map(c => c.name);
   const sc = scopeVan(s);
-  // Hoofdsteden zijn stippen van negen pixels. Zet je ze alle 168 op de
+  // Hoofdsteden zijn stippen van een pixel of vijf. Zet je ze alle 168 op de
   // wereldkaart, dan liggen er 139 boven op de stip van een buurland en is de
   // vraag niet eerlijk te beantwoorden. Daarom altijd per brok - en zonder
   // gekozen brok geen sessie, in plaats van er stiekem alles van te maken.
@@ -449,7 +449,7 @@ function nextQuestion() {
   const [wat, hetWoord] = { land: ['land', 1], zee: ['water', 1], berg: ['gebergte', 1],
     stad: ['stad', 0], haven: ['haven', 0] }[c.soort] || ['ding', 1];
   if (STIPSOORT.has(c.soort)) {
-    // Niet de stip licht op maar het land eromheen. Een stip van zeven pixels
+    // Niet de stip licht op maar het land eromheen. Een stip van vijf pixels
     // oranje maken tussen andere stippen leest slecht, en bij twee plaatsen die
     // tegen elkaar aan liggen is niet te zien wélke oranje is. Het land is
     // altijd groot genoeg om aan te wijzen, en zo zie je meteen wáár het ligt.
@@ -480,9 +480,12 @@ function nextQuestion() {
       // zoeken naar iets wat er niet is. Welke havens dat zijn bepaalt de
       // bouwer, niet de app: die meet het kern-kader van het land na en weigert
       // te bouwen als het niet klopt met wat er in havens-bron.json staat.
+      // "Welke haven IS de blauwe stip" stond er eerst, en dat klopt niet: een
+      // haven is geen stip, de stip wijst hem aan. Op een kaart lígt een plaats
+      // op een stip, dus dat is het werkwoord.
       el('qText').innerHTML = c.geenland
-        ? 'Welke haven is deze <b class="blauw">blauwe stip</b>?'
-        : 'Welke haven is de <b class="blauw">blauwe stip</b> in dit <b>oranje</b> land?';
+        ? 'Welke haven ligt op de <b class="blauw">blauwe stip</b>?'
+        : 'Welke haven ligt op de <b class="blauw">blauwe stip</b> in dit <b>oranje</b> land?';
       el('fbMsg').innerHTML = 'Kies de juiste haven.';
       focusHaven(c);
     }
