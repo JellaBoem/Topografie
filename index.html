@@ -95,20 +95,25 @@
   #map path.ask{fill:#ffd9a0; stroke:#c8791f; stroke-width:2.5; vector-effect:non-scaling-stroke;}
   /* Rondkijken na het antwoord. Blauw, want dit zegt niets over goed of fout. */
   #map path.peek{fill:#cfe3f5; stroke:#2b6ca3; stroke-width:2; vector-effect:non-scaling-stroke;}
-  /* Hoofdsteden zijn stippen: een pad zonder lengte met een ronde streepdop. Met
-     non-scaling-stroke blijft de stip op het scherm altijd even groot, hoe ver je
-     ook inzoomt, zonder dat er per beeldje iets uitgerekend hoeft te worden.
-     De regels hierboven zetten een FILL en doen hier dus niets - een stip heeft
-     geen vulling. Vandaar deze eigen set voor oplichten, en die staat onderaan
-     zodat hij wint van path.stad hierboven. */
-  #map path.stad,#map path.stadaan{fill:none; stroke-linecap:round; vector-effect:non-scaling-stroke;}
-  #map path.stad{stroke-width:0;}
-  #map path.stadaan{stroke:#2b6ca3; stroke-width:7;}
+  /* Hoofdsteden en havens zijn stippen: een pad zonder lengte met een ronde
+     streepdop. Met non-scaling-stroke blijft de stip op het scherm altijd even
+     groot, hoe ver je ook inzoomt, zonder dat er per beeldje iets uitgerekend
+     hoeft te worden. De regels hierboven zetten een FILL en doen hier dus niets -
+     een stip heeft geen vulling. Vandaar deze eigen set voor oplichten, en die
+     staat onderaan zodat hij wint van path.stip hierboven. Eén set voor beide
+     soorten: een stip is een stip, en twee gelijke sets die uit elkaar kunnen
+     lopen is precies hoe schermen na verloop van tijd niet meer op elkaar lijken. */
+  #map path.stip,#map path.stipaan{fill:none; stroke-linecap:round; vector-effect:non-scaling-stroke;}
+  #map path.stip{stroke-width:0;}
+  #map path.stipaan{stroke:#2b6ca3; stroke-width:7;}
   /* Bij peek staan de andere stippen er ook, dus die mag iets opvallen. De
      groene antwoordstip staat er in zijn eentje op een verder lege kaart: die
      hoeft niet groter, groen is al genoeg verschil. */
-  #map path.stad.peek,#map path.stadaan.peek{stroke:#2b6ca3; stroke-width:9;}
-  #map path.stad.target,#map path.stadaan.target{stroke:var(--good); stroke-width:7;}
+  #map path.stip.peek,#map path.stipaan.peek{stroke:#2b6ca3; stroke-width:9;}
+  #map path.stip.target,#map path.stipaan.target{stroke:var(--good); stroke-width:7;}
+  /* "de blauwe stip" in de vraag krijgt de kleur van de stip zelf, zodat je hem
+     niet hoeft te zoeken. Dezelfde waarde als path.stipaan hierboven. */
+  .q b.blauw{color:#2b6ca3;}
   #peekMsg{position:absolute; left:10px; top:10px; max-width:calc(100% - 76px);
     background:rgba(31,111,111,.92); color:#fff; padding:7px 12px; border-radius:999px;
     font-size:13px; font-weight:600; line-height:1.3; pointer-events:none;}
@@ -220,6 +225,7 @@
       <button data-s="zee">Zeeën</button>
       <button data-s="berg">Gebergtes</button>
       <button data-s="stad">Hoofdsteden</button>
+      <button data-s="haven">Havens</button>
       <button data-s="mix">Door elkaar</button>
     </div>
     <p class="tiny" id="soortInfo" style="margin:10px 0 0;"></p>

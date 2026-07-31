@@ -57,6 +57,16 @@ const SOORTNAAM = {
 };
 const soortWoord = s => SOORTNAAM[s] || SOORTNAAM.land;
 function noem(s, meervoud) { const w = soortWoord(s); return meervoud ? w.mv : w.ev; }
+// De regel onder de kaart die zegt wat tikken oplevert. Bij landen is dat altijd
+// een land en mag de zin dat ook zeggen. Bij de andere onderwerpen niet: een tik
+// levert daar eerst een stip of een vlak van dát onderwerp op en pas anders het
+// land eronder. "Tik een land aan" zou dan beloven wat er niet gebeurt zodra je
+// naast een haven tikt en "Rotterdam" leest.
+function tikHint() {
+  return soortNu() === 'land'
+    ? 'Tik een land aan om te zien hoe het heet.'
+    : 'Tik de kaart aan om te zien hoe iets heet.';
+}
 // "1 nieuw land" / "3 nieuwe landen" / "1 nieuwe zee"
 function noemN(s, n) {
   const w = soortWoord(s);
@@ -71,13 +81,20 @@ function fields(m) {
     ? { box: 'rbox', due: 'rdue', seen: 'rseen', ok: 'rcorrect', no: 'rwrong' }
     : { box: 'box', due: 'due', seen: 'seen', ok: 'correct', no: 'wrong' };
 }
-// Welke oefenstand er nu echt geldt. Bij hoofdsteden is dat altijd de
-// omgekeerde. Aanwijzen kan daar niet eerlijk: Kinshasa en Brazzaville liggen
-// op een telefoonscherm 1 pixel uit elkaar en Jeruzalem en Ramallah 2, en geen
-// enkele zoomstand haalt die uit elkaar. Dat is munten opgooien, geen oefening.
-// Bovendien is wat je bij een hoofdstad leert wélke stad bij welk land hoort,
-// niet waar precies in dat land hij ligt.
-function modeNu() { return soortNu() === 'stad' ? 'reverse' : state.settings.mode; }
+// De twee onderwerpen die stippen zijn in plaats van vlakken: hoofdsteden en
+// havens. Ze delen alles wat een stip anders maakt dan een vlak, dus staan ze
+// hier bij elkaar in plaats van dat er overal in de app twee vergelijkingen
+// naast elkaar staan waarvan er telkens eentje vergeten wordt.
+const STIPSOORT = new Set(['stad', 'haven']);
+// Welke oefenstand er nu echt geldt. Bij een stip is dat altijd de omgekeerde.
+// Aanwijzen kan daar niet eerlijk: Kinshasa en Brazzaville liggen op een
+// telefoonscherm 1 pixel uit elkaar en Jeruzalem en Ramallah 2, en geen enkele
+// zoomstand haalt die uit elkaar. Dat is munten opgooien, geen oefening. Bij de
+// havens speelt hetzelfde op wereldschaal: die staan in één brok over de hele
+// wereld, dus de kaart zou helemaal uitgezoomd staan en dan is Rotterdam een
+// halve pixel van Antwerpen. Bovendien is wat je hier leert wélke plaats bij
+// welk land hoort, niet waar precies in dat land hij ligt.
+function modeNu() { return STIPSOORT.has(soortNu()) ? 'reverse' : state.settings.mode; }
 function load() {
   try { const raw = localStorage.getItem(STORE_KEY); state = raw ? JSON.parse(raw) : defaultState(); }
   catch (e) { state = defaultState(); }
@@ -114,6 +131,8 @@ async function boot() {
   // De vraag laat het land oplichten, dus die verwijzing is nodig; hem hier
   // afleiden scheelt dat hetzelfde nog eens in het databestand staat.
   MAP.countries.forEach(c => { if (c.soort === 'stad') c.land = c.name.slice(5); });
+  // Havens hebben hun eigen naam ("haven:Rotterdam"), dus daar zit het land niet
+  // in; dat staat bij die stippen wél gewoon in de data.
   MAP.countries.forEach(c => byName.set(c.name, c));
   MAP.countries.filter(c => c.quiz).forEach(c => quizPolys.set(c.name, parsePath(c.d)));
   drawMap();
@@ -151,12 +170,14 @@ function drawMap() {
   for (const c of laag('zee'))  html += `<path class="zee" data-soort="zee" d="${c.d}" data-k="${enc(c.name)}"></path>`;
   for (const c of laag('land')) html += `<path class="c" data-soort="land" d="${c.d}" data-k="${enc(c.name)}"></path>`;
   for (const c of laag('berg')) html += `<path class="berg" data-soort="berg" d="${c.d}" data-k="${enc(c.name)}"></path>`;
-  // Een hoofdstad is een punt. Een pad zonder lengte met een ronde streepdop
-  // tekent precies een rondje, en met vector-effect blijft dat rondje op het
-  // scherm altijd even groot - ook als je inzoomt. Dat scheelt 168 sommetjes per
-  // beeldje tijdens het slepen, en het blijft een <path> met data-k, dus alles
-  // wat de app al kan (oplichten, opzoeken, focussen) werkt ongewijzigd.
-  for (const c of laag('stad')) html += `<path class="stad" data-soort="stad" d="${c.d}" data-k="${enc(c.name)}"></path>`;
+  // Een hoofdstad en een haven zijn punten. Een pad zonder lengte met een ronde
+  // streepdop tekent precies een rondje, en met vector-effect blijft dat rondje
+  // op het scherm altijd even groot - ook als je inzoomt. Dat scheelt 199
+  // sommetjes per beeldje tijdens het slepen, en het blijft een <path> met
+  // data-k, dus alles wat de app al kan (oplichten, opzoeken, focussen) werkt
+  // ongewijzigd.
+  for (const s of STIPSOORT)
+    for (const c of laag(s)) html += `<path class="stip" data-soort="${s}" d="${c.d}" data-k="${enc(c.name)}"></path>`;
   vp.innerHTML = html;
   verfLagen();
 }
@@ -168,24 +189,25 @@ function drawMap() {
 // stylesheet gewoon overheen kunnen - dat scheelt een specificiteitsgevecht.
 function verfLagen() {
   const s = soortNu();
-  const aan = { zee: s === 'zee' || s === 'mix', berg: s === 'berg' || s === 'mix', stad: s === 'stad' };
+  const aan = { zee: s === 'zee' || s === 'mix', berg: s === 'berg' || s === 'mix' };
   // Zeeën en gebergtes zijn vlakken: aan of uit voor de hele laag.
   for (const k of ['zee', 'berg'])
     el('viewport').querySelectorAll(`path[data-soort="${k}"]`).forEach(p => {
       p.classList.toggle(k + 'aan', aan[k]);
       p.classList.toggle(k, !aan[k]);
     });
-  // Hoofdsteden liggen dicht op elkaar, dus hier gaat het per stip: alleen de
-  // hoofdsteden uit de gekozen brok krijgen kleur. Zoomde je in op de Benelux
-  // met alle 168 stippen aan, dan stonden Bern, Londen, Praag en Kopenhagen
+  // Stippen liggen dicht op elkaar, dus daar gaat het per stip: alleen de
+  // stippen uit de gekozen selectie krijgen kleur. Zoomde je in op de Benelux
+  // met alle 168 hoofdsteden aan, dan stonden Bern, Londen, Praag en Kopenhagen
   // mee in beeld en werd het een puntenwolk. De andere paden blijven wel
-  // staan, zodat opzoeken en inzoomen op een stad buiten de brok blijft werken.
-  const inBrok = aan.stad ? new Set(scopeKeys()) : null;
-  el('viewport').querySelectorAll('path[data-soort="stad"]').forEach(p => {
-    const mee = !!inBrok && inBrok.has(p.dataset.k);
-    p.classList.toggle('stadaan', mee);
-    p.classList.toggle('stad', !mee);
-  });
+  // staan, zodat opzoeken en inzoomen op een stip buiten de selectie werkt.
+  const inSel = STIPSOORT.has(s) ? new Set(scopeKeys()) : null;
+  for (const k of STIPSOORT)
+    el('viewport').querySelectorAll(`path[data-soort="${k}"]`).forEach(p => {
+      const mee = k === s && !!inSel && inSel.has(p.dataset.k);
+      p.classList.toggle('stipaan', mee);
+      p.classList.toggle('stip', !mee);
+    });
 }
 function enc(s) { return s.replace(/"/g, '&quot;'); }
 function pathEl(name) { return el('viewport').querySelector(`path[data-k="${CSS.escape(name)}"]`); }
@@ -342,11 +364,13 @@ function alleVan(s) {
     return it && (it.seen || it.rseen);
   }).map(c => c.soort));
   if (!begonnen.size) begonnen.add('land');   // eerste keer ooit: begin bij landen
-  // Hoofdsteden doen bewust NIET mee in de mengbak. Een gemengde sessie staat
-  // uitgezoomd op de hele wereld, en daar liggen de stippen van de hoofdsteden
-  // op elkaar - dan is de vraag niet eerlijk te beantwoorden. Ze horen per brok,
-  // ingezoomd, en dat kan alleen als je ze apart oefent.
+  // Hoofdsteden en havens doen bewust NIET mee in de mengbak. Die twee kennen
+  // maar één eerlijke oefenstand (het land licht op, jij kiest de naam), terwijl
+  // de mengbak de stand aanhoudt die je bij de landen koos. Zat "Aanwijzen"
+  // aan, dan zou je stippen moeten aantikken op een uitgezoomde wereldkaart -
+  // en daar liggen ze op elkaar. Apart oefenen kan gewoon.
   begonnen.delete('stad');
+  begonnen.delete('haven');
   return all.filter(c => begonnen.has(c.soort));
 }
 function scopeKeys() {
@@ -424,26 +448,45 @@ function nextQuestion() {
   // Het tweede getal zegt of het "het" of "de" is, want "Welk stad" leest fout.
   const [wat, hetWoord] = { land: ['land', 1], zee: ['water', 1], berg: ['gebergte', 1],
     stad: ['stad', 0], haven: ['haven', 0] }[c.soort] || ['ding', 1];
-  if (c.soort === 'stad') {
+  if (STIPSOORT.has(c.soort)) {
     // Niet de stip licht op maar het land eromheen. Een stip van zeven pixels
-    // oranje maken tussen vijf andere stippen leest slecht, en bij twee steden
-    // die tegen elkaar aan liggen is niet te zien wélke oranje is. Het land is
+    // oranje maken tussen andere stippen leest slecht, en bij twee plaatsen die
+    // tegen elkaar aan liggen is niet te zien wélke oranje is. Het land is
     // altijd groot genoeg om aan te wijzen, en zo zie je meteen wáár het ligt.
-    const land = byName.get(c.land);
-    el('qText').innerHTML = 'Wat is de hoofdstad van dit <b>oranje</b> land?';
-    // De stippen gaan uit zolang de vraag loopt. Er staat geen naam bij, dus ze
-    // helpen je niet - vijf blauwe puntjes die niets doen leiden alleen af. Na
-    // het antwoord komt de juiste stip groen terug; dan zie je alsnog waar hij
-    // ligt, zonder dat het getoetst wordt.
-    el('viewport').querySelectorAll('path.stadaan')
-      .forEach(q => { q.classList.remove('stadaan'); q.classList.add('stad'); });
+    // Bij de havens doet dat bovendien het werk dat de kaart alleen niet aankan:
+    // Rotterdam en Antwerpen liggen 76 kilometer uit elkaar, maar het ene ligt
+    // in een oranje Nederland en het andere in een oranje België.
+    // De andere stippen gaan uit zolang de vraag loopt. Er staat geen naam bij,
+    // dus ze helpen je niet - een handvol blauwe puntjes die niets doen leidt
+    // alleen af. Na het antwoord komt de juiste stip groen terug.
+    el('viewport').querySelectorAll('path.stipaan')
+      .forEach(q => { q.classList.remove('stipaan'); q.classList.add('stip'); });
     const p = pathEl(c.land); if (p) p.classList.add('ask');
-    // Ruimer inzoomen dan bij landen. Daar is 46 pixels genoeg omdat je de vorm
-    // alleen hoeft te herkennen; hier is het land het aanknopingspunt voor een
-    // stad, dus mag het groter staan dan een oranje vlekje in een leeg werelddeel.
-    focusAsk(land, 110);
+    if (c.soort === 'stad') {
+      el('qText').innerHTML = 'Wat is de hoofdstad van dit <b>oranje</b> land?';
+      el('fbMsg').innerHTML = 'Kies de juiste stad.';
+      // Ruimer inzoomen dan bij landen. Daar is 46 pixels genoeg omdat je de vorm
+      // alleen hoeft te herkennen; hier is het land het aanknopingspunt voor een
+      // stad, dus mag het groter staan dan een oranje vlekje in een leeg werelddeel.
+      focusAsk(byName.get(c.land), 110);
+    } else {
+      // Bij een haven blijft de stip zélf wél staan, anders dan bij een
+      // hoofdstad. Een hoofdstad kun je uit het land afleiden - er is er maar
+      // één - maar Sjanghai en Hongkong liggen allebei in China. En bij een
+      // haven is de plek aan de kust de helft van wat je leert.
+      const q = pathEl(key); if (q) { q.classList.remove('stip'); q.classList.add('stipaan'); }
+      // Bij één haven belooft de vraag geen oranje land: Singapore is een
+      // stadstaat die in dit beeld drie schermpixels haalt, dus daar zou je
+      // zoeken naar iets wat er niet is. Welke havens dat zijn bepaalt de
+      // bouwer, niet de app: die meet het kern-kader van het land na en weigert
+      // te bouwen als het niet klopt met wat er in havens-bron.json staat.
+      el('qText').innerHTML = c.geenland
+        ? 'Welke haven is deze <b class="blauw">blauwe stip</b>?'
+        : 'Welke haven is de <b class="blauw">blauwe stip</b> in dit <b>oranje</b> land?';
+      el('fbMsg').innerHTML = 'Kies de juiste haven.';
+      focusHaven(c);
+    }
     buildOptions(key);
-    el('fbMsg').innerHTML = 'Kies de juiste stad.';
   } else if (session.mode === 'reverse') {
     el('qText').innerHTML = 'Welk' + (hetWoord ? '' : 'e') + ' ' + wat + ' is <b>oranje</b>?';
     const p = pathEl(key); if (p) p.classList.add('ask');
@@ -467,9 +510,15 @@ function distractors(key, n) {
   // Alleen dezelfde soort. Bij "Welke zee is oranje?" horen er geen landen
   // tussen de keuzes: dan is het geen keuze meer maar een weggevertje.
   const pool = MAP.countries.filter(x => x.quiz && x.name !== key && x.soort === c.soort);
-  const sameBrok = shuffle(pool.filter(x => x.brok === c.brok));
-  const nearest = pool.filter(x => x.brok !== c.brok)
-    .sort((a, b) => Math.hypot(a.cx - c.cx, a.cy - c.cy) - Math.hypot(b.cx - c.cx, b.cy - c.cy));
+  const afst = x => Math.hypot(x.cx - c.cx, x.cy - c.cy);
+  // Binnen de brok eerst de dichtstbijzijnde acht, en daaruit dan geschud. Een
+  // landbrok heeft er hooguit zeven, dus daar verandert er niets. Het gaat om de
+  // havens: die zitten met z'n eenendertigen in één brok over de hele wereld, en
+  // zonder deze grens kreeg je "Rotterdam of Sydney of Durban" - dan hoef je de
+  // kaart niet te lezen, alleen het werelddeel te herkennen. Schudden blijft
+  // nodig, anders krijg je bij elke herhaling exact dezelfde drie foute keuzes.
+  const sameBrok = shuffle(pool.filter(x => x.brok === c.brok).sort((a, b) => afst(a) - afst(b)).slice(0, 8));
+  const nearest = pool.filter(x => x.brok !== c.brok).sort((a, b) => afst(a) - afst(b));
   return sameBrok.concat(nearest).slice(0, n).map(x => x.name);
 }
 
@@ -498,10 +547,10 @@ function answerReverse(chosen, key, btn) {
   if (!correct) btn.classList.add('bad');
   // De vraag ging over het land, maar waar de stad ligt is ook het kijken
   // waard. Hij wordt daarom pas ná het antwoord groen: wél te zien, niet
-  // getoetst.
-  if (target.soort === 'stad') {
+  // getoetst. Bij een haven stond de stip er al; die wordt nu alleen groen.
+  if (STIPSOORT.has(target.soort)) {
     const p = pathEl(key);
-    if (p) { p.classList.remove('stad'); p.classList.add('stadaan', 'target'); }
+    if (p) { p.classList.remove('stip'); p.classList.add('stipaan', 'target'); }
   }
   el('fbMsg').innerHTML = correct
     ? '<span class="ok">Goed.</span> ' + target.nl + ' — ' + plek(target) + '.'
@@ -518,7 +567,7 @@ function recordResult(key, correct) {
     it[F.due] = session.now + INTERVALS[it[F.box]]; session.correct++;
   } else { it[F.no]++; it[F.box] = 1; it[F.due] = session.now + 1; }
   session.results.push({ key, correct });
-  el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
+  el('peekMsg').textContent = tikHint();
   zetMeerKnop(byName.get(key));
   save();
 }
@@ -537,6 +586,14 @@ function meerRegels(c) {
   // Bij een zee of gebergte is "waar het ligt" het halve leerdoel, dus dat staat
   // bovenaan. Bij een land wordt het verderop uitgerekend uit de kaart zelf.
   if (c.waar) r.push('<p><b>Waar.</b> ' + esc(c.waar[0].toUpperCase() + c.waar.slice(1)) + '.</p>');
+  // Bij een haven is dit het tweede leerdoel naast de plek, dus het staat er
+  // altijd - ook als het antwoord "nee" is. Alleen de veerhavens noemen zou
+  // betekenen dat je bij het ontbreken van de regel moet raden of hij vergeten
+  // is of niet van toepassing.
+  if (c.soort === 'haven')
+    r.push('<p><b>Veerhaven.</b> ' + (c.veer
+      ? 'Ja, hier vertrekken geregelde veerboten met passagiers ' + esc(c.veerwaar) + '.'
+      : 'Nee, hier gaan goederen over en geen geregelde veerboten met passagiers.') + '</p>');
   if (d.naam)  r.push('<p><b>De naam.</b> ' + esc(d.naam) + '</p>');
   // De ankerzin gaat over de brok, niet over dit ene land. Noem de brok dus bij
   // naam en som de andere leden op. Stond er alleen "waarom deze landen bij
@@ -545,8 +602,15 @@ function meerRegels(c) {
   // dat de helft.
   if (brok && brok.anker) {
     const anderen = brok.landen.filter(nl => nl !== c.nl).map(esc);
+    // Bij een brok van zeven is de opsomming precies waar hij voor bedoeld is:
+    // je ziet in één blik met wie dit land een groepje vormt. Bij de havens zijn
+    // het er dertig, en dan is het een muur namen waar je overheen leest.
+    // Twaalf is de grens; alle brokken uit het leerplan zitten er ruim onder
+    // (de grootste heeft er tien), dus dit verandert daar niets.
+    const kort = anderen.length && anderen.length <= 12;
     r.push('<p><b>Hoort bij brok ' + brok.n + ', ' + esc(brok.naam) + '.</b>' +
-      (anderen.length ? ' Samen met ' + opsomming(anderen) + '.' : '') +
+      (kort ? ' Samen met ' + opsomming(anderen) + '.'
+            : anderen.length ? ' Een van de ' + brok.landen.length + ' in dat groepje.' : '') +
       ' ' + esc(brok.anker) + '.</p>');
   }
   if (c.buren && c.buren.length)
@@ -636,7 +700,7 @@ function toonLand(key) {
   requestAnimationFrame(() => {
     focusAsk(c);
     const p = pathEl(key); if (p) p.classList.add('peek');
-    el('peekMsg').textContent = 'Tik een land aan om te zien hoe het heet.';
+    el('peekMsg').textContent = tikHint();
     openSheet(c);
     // Bij opzoeken valt er niets te raden, dus het land mag ruimer in beeld dan
     // in de oefening. Maat: ruim een kwart van de strook die het paneel vrijlaat.
@@ -672,9 +736,9 @@ function countryAt(pt) {
   // Anders tik je op een leeg stuk kaart en leest er de naam van een hoofdstad
   // die daar helemaal niet te zien is.
   const s = soortNu();
-  if (s === 'stad') {
+  if (STIPSOORT.has(s)) {
     const zichtbaar = scopeKeys().filter(k => {
-      const p = pathEl(k); return p && p.classList.contains('stadaan');
+      const p = pathEl(k); return p && p.classList.contains('stipaan');
     });
     const stip = nearestQuiz(pt, zichtbaar);
     if (stip.key && stip.d <= MIN_TAP_PX / screenScale()) return stip.key;
@@ -738,7 +802,7 @@ function handleTap(clientX, clientY) {
     for (const k of quizPolys.keys()) if (inCountry(pt, quizPolys.get(k))) { hitKey = k; break; }
     if (!hitKey && near.d <= effR) hitKey = near.key;
     if (hitKey && hitKey !== key) hit = ' Je wees ' + byName.get(hitKey).nl + ' aan.';
-    const merk = target.soort === 'stad' ? 'de groene stip' : 'groen omlijnd';
+    const merk = STIPSOORT.has(target.soort) ? 'de groene stip' : 'groen omlijnd';
     el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (' + merk + '): ' + plek(target) + '.' + hit;
     // zoom licht naar het juiste land toe zodat ze het ziet
     focusOn(target, pt);
@@ -766,12 +830,12 @@ function focusOn(c, tap) {
   // en smal land als Chili niet in een veel te ruim vierkant verdwijnt.
   const { x0, y0, x1, y1 } = boundsOf(c.name);
   // Marge op basis van het land zelf, zodat de omgeving even ruim blijft
-  // ongeacht hoe ver ze ernaast zat. Maar een hoofdstad is een punt, en dan
-  // klopt die formule niet meer: hij telt een vaste ruimte OP bij de eigen
+  // ongeacht hoe ver ze ernaast zat. Maar een hoofdstad of een haven is een punt,
+  // en dan klopt die formule niet meer: hij telt een vaste ruimte OP bij de eigen
   // omvang, dus bij omvang nul blijft er een kader over van bijna heel Europa.
   // Voor stippen daarom een vast kader, even groot als het overzicht van een
   // brok, zodat de stippen bij elke vraag even ver uit elkaar staan.
-  const stip = c.soort === 'stad';
+  const stip = STIPSOORT.has(c.soort);
   const m = stip ? base.w * 0.025
                  : Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;
   const box = stip
@@ -798,13 +862,35 @@ function focusAsk(c, minPx) {
   // Een stip is op het scherm altijd even groot, hoe ver je ook inzoomt.
   // Doorzoomen tot hij "groot genoeg" staat lukt dus nooit en eindigt altijd
   // tegen de zoomgrens. Het vaste kader hierboven is al wat we willen.
-  if (c.soort === 'stad') return;
+  if (STIPSOORT.has(c.soort)) return;
   const b = boundsOf(c.name);
   const mid = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
   const doel = minPx || ASK_MIN_PX;
   for (let i = 0; i < 12 && showPx(b) < doel; i++) {
     const w = view.w;
     zoomAt(mid[0], mid[1], 0.8);
+    if (view.w === w) break;   // zoomgrens bereikt
+  }
+}
+
+// Een havenvraag heeft twee dingen nodig die elkaar tegenwerken. De stip moet in
+// het midden staan met genoeg kust eromheen om te zien wáár aan het land hij
+// ligt - daarvoor is het vaste stipkader gemaakt. Maar het land moet ook groot
+// genoeg zijn om te herkennen, want de vraag zegt "dit oranje land". In dat
+// vaste kader haalt Zuid-Afrika dat ruim, maar Nederland en België blijven een
+// postzegel van een pixel of veertig, en dan zijn Rotterdam en Antwerpen niet
+// uit elkaar te houden - precies de vraag die dit onderwerp moeilijk maakt.
+// Daarom zoomen we vanaf het stipkader door tot het land te herkennen is, met de
+// HAVEN als middelpunt (niet het land, anders schuift de stip uit beeld bij een
+// groot land). Landen die het al halen blijven staan waar ze staan.
+function focusHaven(c) {
+  focusOn(c);
+  const L = byName.get(c.land);
+  if (!L || !L.bb) return;   // Singapore heeft geen kern-kader; daar valt niets te tonen
+  const b = boundsOf(c.land);
+  for (let i = 0; i < 12 && showPx(b) < 120; i++) {
+    const w = view.w;
+    zoomAt(c.cx, c.cy, 0.8);
     if (view.w === w) break;   // zoomgrens bereikt
   }
 }
@@ -871,7 +957,7 @@ function endSession() {
   sluitSheet();
   showEnd();
   el('endScore').textContent = session.correct + '/' + session.queue.length;
-  el('endWhat').textContent = soortNu() === 'stad' ? 'goed benoemd'
+  el('endWhat').textContent = STIPSOORT.has(soortNu()) ? 'goed benoemd'
     : session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
   const rows = session.results.map(r => {
     const c = byName.get(r.key);
@@ -895,10 +981,10 @@ function buildScopeUI() {
   el('scopeCard').classList.toggle('hidden', s !== 'land' && s !== 'stad');
   el('scopeSeg').classList.toggle('hidden', s === 'stad');
   verfLagen();
-  // Bij hoofdsteden valt er geen oefening te kiezen: er is er maar één die
-  // eerlijk is. Die kaart gaat dus weg in plaats van een keuze voor te spiegelen
-  // die niets doet. De uitleg staat bij "Wat oefen je?".
-  el('modeCard').classList.toggle('hidden', s === 'stad');
+  // Bij hoofdsteden en havens valt er geen oefening te kiezen: er is er maar één
+  // die eerlijk is. Die kaart gaat dus weg in plaats van een keuze voor te
+  // spiegelen die niets doet. De uitleg staat bij "Wat oefen je?".
+  el('modeCard').classList.toggle('hidden', STIPSOORT.has(s));
   el('modeSeg').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.m === m));
   el('modeInfo').textContent = m === 'reverse'
     ? 'De kaart licht een land op, jij kiest de naam uit vier. De foute keuzes zijn buren of landen uit dezelfde brok, dus goed kijken loont. Elke stand houdt zijn eigen voortgang bij.'
@@ -942,6 +1028,14 @@ function soortUitleg(s) {
       'dat het gokken zou worden. ' +
       'Het gaat per brok, en om dezelfde reden doen hoofdsteden niet mee in "Door elkaar". ' +
       (gekozen ? '' : 'Kies hieronder een brok om te beginnen.');
+  }
+  if (s === 'haven') {
+    const veer = alleVan('haven').filter(c => c.veer).length;
+    return n + ' havens over de hele wereld, waarvan er ' + veer + ' ook veerhaven zijn. ' +
+      'Er licht steeds een land op met één blauwe stip erin, en jij kiest welke haven dat is. ' +
+      'Aanwijzen op de kaart zit er niet bij: de havens liggen over de hele wereld, ' +
+      'dus de kaart zou helemaal uitgezoomd staan en dan liggen Rotterdam en Antwerpen ' +
+      'op een halve pixel van elkaar. Havens staan niet in je leerplan; ze vormen een eigen groepje.';
   }
   const b = MAP.brokken.find(x => x.soort === s);
   return n + ' ' + noem(s, true) + '.' + (b && b.anker ? ' ' + b.anker + '.' : '');
@@ -1055,11 +1149,11 @@ function updateProgress() {
   el('progText').innerHTML = `<b class="num">${kent}</b> ken je · <b class="num">${leren}</b> aan het leren · <b class="num">${nietGehad}</b> nog niet gehad · <span class="num">${keys.length}</span> ${wat}.`;
   const sc = scopeVan();
   const waar = s === 'mix' ? 'door elkaar'
-    : (s === 'zee' || s === 'berg') ? 'alle ' + noem(s, true)
+    : (s === 'zee' || s === 'berg' || s === 'haven') ? 'alle ' + noem(s, true)
     : sc.type === 'all' ? 'alle landen'
     : sc.type === 'continent' ? (sc.values.join(', ') || 'kies werelddeel')
     : ('brok ' + (sc.values.join(', ') || '—'));
-  el('scopeName').textContent = '(' + (s === 'stad' ? 'naam kiezen'
+  el('scopeName').textContent = '(' + (STIPSOORT.has(s) ? 'naam kiezen'
     : modeNu() === 'reverse' ? 'omgekeerd' : 'aanwijzen') + ' · ' + waar + ')';
   const due = keys.filter(k => state.items[k] && state.items[k][F.seen] && state.items[k][F.due] <= state.sessionCounter + 1).length;
   const unseen = keys.filter(k => !state.items[k] || !state.items[k][F.seen]).length;
