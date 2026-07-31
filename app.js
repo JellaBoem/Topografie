@@ -157,14 +157,24 @@ function drawMap() {
 // stylesheet gewoon overheen kunnen - dat scheelt een specificiteitsgevecht.
 function verfLagen() {
   const s = soortNu();
-  // Stippen alleen aanzetten als het over hoofdsteden gaat: 168 blauwe puntjes
-  // over een landenkaart maken het alleen maar onrustig.
   const aan = { zee: s === 'zee' || s === 'mix', berg: s === 'berg' || s === 'mix', stad: s === 'stad' };
-  for (const k of ['zee', 'berg', 'stad'])
+  // Zeeën en gebergtes zijn vlakken: aan of uit voor de hele laag.
+  for (const k of ['zee', 'berg'])
     el('viewport').querySelectorAll(`path[data-soort="${k}"]`).forEach(p => {
       p.classList.toggle(k + 'aan', aan[k]);
       p.classList.toggle(k, !aan[k]);
     });
+  // Hoofdsteden liggen dicht op elkaar, dus hier gaat het per stip: alleen de
+  // hoofdsteden uit de gekozen brok krijgen kleur. Zoomde je in op de Benelux
+  // met alle 168 stippen aan, dan stonden Bern, Londen, Praag en Kopenhagen
+  // mee in beeld en werd het een puntenwolk. De andere paden blijven wel
+  // staan, zodat opzoeken en inzoomen op een stad buiten de brok blijft werken.
+  const inBrok = aan.stad ? new Set(scopeKeys()) : null;
+  el('viewport').querySelectorAll('path[data-soort="stad"]').forEach(p => {
+    const mee = !!inBrok && inBrok.has(p.dataset.k);
+    p.classList.toggle('stadaan', mee);
+    p.classList.toggle('stad', !mee);
+  });
 }
 function enc(s) { return s.replace(/"/g, '&quot;'); }
 function pathEl(name) { return el('viewport').querySelector(`path[data-k="${CSS.escape(name)}"]`); }
@@ -220,9 +230,13 @@ function scopeBounds() {
   const ys = keys.map(k => byName.get(k).cy).sort((a, b) => a - b);
   const q = (arr, p) => arr[Math.min(arr.length - 1, Math.max(0, Math.round((arr.length - 1) * p)))];
   let x0 = q(xs, 0.05), x1 = q(xs, 0.95), y0 = q(ys, 0.05), y1 = q(ys, 0.95);
-  // minimale omvang zodat een selectie van weinig landen niet te ver inzoomt
+  // Minimale omvang, zodat een selectie van weinig landen niet absurd ver
+  // inzoomt. Bij hoofdsteden moet die ondergrens veel kleiner: de vijf steden
+  // van brok 1 liggen 26 eenheden uit elkaar, dus een kader van 100 propte ze
+  // in een derde van het scherm en lagen de stippen tegen elkaar aan.
   const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
-  const minW = base.w * 0.10, minH = base.h * 0.12;
+  const krap = s === 'stad';
+  const minW = base.w * (krap ? 0.05 : 0.10), minH = base.h * (krap ? 0.06 : 0.12);
   if (x1 - x0 < minW) { x0 = cx - minW / 2; x1 = cx + minW / 2; }
   if (y1 - y0 < minH) { y0 = cy - minH / 2; y1 = cy + minH / 2; }
   return { x0, y0, x1, y1 };
@@ -616,9 +630,11 @@ function countryAt(pt) {
   // Gaat het over hoofdsteden, dan wint een stip vlakbij van het land eronder:
   // daar gaat de vraag over, en anders zou rondkijken na het antwoord altijd
   // "Nederland" zeggen waar ze "Amsterdam" wil lezen.
+  // Alleen de stippen die ook echt te zien zijn, anders krijgt ze de naam van
+  // een hoofdstad uit een heel andere brok waar niets staat.
   const s = soortNu();
   if (s === 'stad') {
-    const stip = nearestQuiz(pt, alleVan('stad').map(c => c.name));
+    const stip = nearestQuiz(pt, scopeKeys());
     if (stip.key && stip.d <= MIN_TAP_PX / screenScale()) return stip.key;
   }
   // Landen staan vóór de zeeën en gebergtes in de lijst, dus bij overlap wint
@@ -680,7 +696,8 @@ function handleTap(clientX, clientY) {
     for (const k of quizPolys.keys()) if (inCountry(pt, quizPolys.get(k))) { hitKey = k; break; }
     if (!hitKey && near.d <= effR) hitKey = near.key;
     if (hitKey && hitKey !== key) hit = ' Je wees ' + byName.get(hitKey).nl + ' aan.';
-    el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (groen omlijnd): ' + plek(target) + '.' + hit;
+    const merk = target.soort === 'stad' ? 'de groene stip' : 'groen omlijnd';
+    el('fbMsg').innerHTML = '<span class="no">Mis.</span> ' + target.nl + ' ligt hier (' + merk + '): ' + plek(target) + '.' + hit;
     // zoom licht naar het juiste land toe zodat ze het ziet
     focusOn(target, pt);
   }
@@ -707,9 +724,17 @@ function focusOn(c, tap) {
   // en smal land als Chili niet in een veel te ruim vierkant verdwijnt.
   const { x0, y0, x1, y1 } = boundsOf(c.name);
   // Marge op basis van het land zelf, zodat de omgeving even ruim blijft
-  // ongeacht hoe ver ze ernaast zat.
-  const m = Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;
-  const box = { x0: x0 - m, y0: y0 - m, x1: x1 + m, y1: y1 + m };
+  // ongeacht hoe ver ze ernaast zat. Maar een hoofdstad is een punt, en dan
+  // klopt die formule niet meer: hij telt een vaste ruimte OP bij de eigen
+  // omvang, dus bij omvang nul blijft er een kader over van bijna heel Europa.
+  // Voor stippen daarom een vast kader, even groot als het overzicht van een
+  // brok, zodat de stippen bij elke vraag even ver uit elkaar staan.
+  const stip = c.soort === 'stad';
+  const m = stip ? base.w * 0.025
+                 : Math.max(x1 - x0, y1 - y0) * 0.8 + base.w * 0.03;
+  const box = stip
+    ? { x0: c.cx - m, y0: c.cy - m, x1: c.cx + m, y1: c.cy + m }
+    : { x0: x0 - m, y0: y0 - m, x1: x1 + m, y1: y1 + m };
   if (tap) {
     // Ook het aangewezen punt in beeld, zodat ze in een oogopslag ziet hoe ver
     // ernaast het zat. Maar niet ten koste van alles: als het juiste land
@@ -728,6 +753,10 @@ function focusOn(c, tap) {
 // toestaat kan niet, dus voor de allerkleinste landen blijft het krap.
 function focusAsk(c, minPx) {
   focusOn(c);
+  // Een stip is op het scherm altijd even groot, hoe ver je ook inzoomt.
+  // Doorzoomen tot hij "groot genoeg" staat lukt dus nooit en eindigt altijd
+  // tegen de zoomgrens. Het vaste kader hierboven is al wat we willen.
+  if (c.soort === 'stad') return;
   const b = boundsOf(c.name);
   const mid = [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
   const doel = minPx || ASK_MIN_PX;
@@ -781,8 +810,12 @@ function plek(c) {
   return ligging(c) + ', brok ' + c.brok + ' (' + c.broknaam + ')';
 }
 // Voor zinnen die met "ligt" beginnen. Een land ligt ÍN iets, een zee ligt
-// TUSSEN iets - dat voorzetsel zit al in de handgeschreven zin.
-function ligtIn(c) { return c.waar ? ' ligt ' + c.waar : ' ligt in ' + plek(c); }
+// TUSSEN iets - dat voorzetsel zit al in de handgeschreven zin. Een stad ligt
+// nergens in: die IS de hoofdstad van een land.
+function ligtIn(c) {
+  if (c.soort === 'stad') return ' is ' + c.waar;
+  return c.waar ? ' ligt ' + c.waar : ' ligt in ' + plek(c);
+}
 
 function clearMarks() {
   el('viewport').querySelectorAll('.target,.wrong,.ask,.peek')
@@ -1028,6 +1061,26 @@ function doImport(file) {
 // ---------------------------------------------------------------- events
 function bindEvents() {
   const map = el('map');
+  // Het kaartvak verandert van vorm zodra de antwoordknoppen verschijnen, en
+  // ook als je de telefoon draait. De view onthoudt dan nog de oude verhouding
+  // en de kaart wordt in een brievenbus geperst: je ziet meer dan de bedoeling
+  // was en een tik landt naast waar je hem zet. Daarom hier opnieuw meten.
+  if (window.ResizeObserver) {
+    let vorige = 0;
+    new ResizeObserver(() => {
+      const r = map.getBoundingClientRect();
+      if (!r.width || !r.height || !view.w) return;
+      const nu = r.height / r.width;
+      if (Math.abs(nu - vorige) < 0.002) return;
+      vorige = nu;
+      // Om het midden van het beeld heen herrekenen, anders schuift alles
+      // omhoog zodra het vak lager wordt.
+      const mid = view.y + view.h / 2;
+      clampView();
+      view.y = mid - view.h / 2;
+      clampView(); applyView();
+    }).observe(map);
+  }
   map.addEventListener('pointerdown', onDown);
   map.addEventListener('pointermove', onMove);
   map.addEventListener('pointerup', onUp);
