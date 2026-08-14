@@ -3,7 +3,12 @@
    Alles lokaal: kaart uit map-data.json, voortgang in localStorage. */
 
 // ---------------------------------------------------------------- constanten
+// Voortgang staat per profiel onder een eigen sleutel: topo_v1_<id>. STORE_KEY
+// is de sleutel van vóór de profielen; die bestaat alleen nog om de voortgang
+// die er al stond over te nemen. Hij wordt niet gewist: zolang hij blijft staan
+// is het een gratis reservekopie van alles wat er vóór deze versie was.
 const STORE_KEY = 'topo_v1';
+const PROF_KEY = 'topo_profielen';
 const INTERVALS = { 1: 1, 2: 3, 3: 10, 4: 30, 5: 90 }; // Leitner: bakje -> aantal sessies tot herhaling
 const MAX_BOX = 5;
 const MIN_TAP_PX = 22;        // kleinste tikcirkel op het scherm (voor mini-landen)
@@ -16,7 +21,8 @@ let MAP = null;               // map-data.json
 let INFO = {};                // land-info.json: tekst per land, mag leeg zijn
 let byName = new Map();       // naam -> country object
 let quizPolys = new Map();    // naam -> [ring[[x,y]...]...] voor klikdetectie
-let state = null;             // opgeslagen voortgang
+let state = null;             // opgeslagen voortgang van het profiel dat nu oefent
+let profielen = null;         // {v, actief, lijst:[{id,naam}]} - wie er op dit toestel oefenen
 let session = null;           // huidige sessie (runtime)
 let kijk = null;              // land dat je los opzoekt, buiten een sessie om
 let view = null;              // {x,y,w,h} viewBox in wereldcoördinaten
@@ -95,12 +101,93 @@ const STIPSOORT = new Set(['stad', 'haven']);
 // halve pixel van Antwerpen. Bovendien is wat je hier leert wélke plaats bij
 // welk land hoort, niet waar precies in dat land hij ligt.
 function modeNu() { return STIPSOORT.has(soortNu()) ? 'reverse' : state.settings.mode; }
+// ---------------------------------------------------------------- profielen
+// Iedereen in het gezin oefent op zijn eigen toestel, maar de app moet wel weten
+// van wie de voortgang is - en op een toestel dat wél gedeeld wordt (een iPad
+// op tafel) mogen er meerdere naast elkaar staan. Vandaar profielen op het
+// toestel zelf: geen account, geen wachtwoord, geen server. Er gaat dus ook
+// niets over iemands oefenen naar buiten, en de app blijft offline werken.
+// Dat is bewust: leergegevens van familieleden online zetten zou een berg
+// plichten en risico's opleveren voor iets wat hier niets oplost.
+function profielKey(id) { return STORE_KEY + '_' + id; }
+function nieuwProfielId() { return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function saveProfielen() { try { localStorage.setItem(PROF_KEY, JSON.stringify(profielen)); } catch (e) {} }
+function actiefProfiel() { return profielen.lijst.find(p => p.id === profielen.actief) || null; }
+
+function loadProfielen() {
+  try { profielen = JSON.parse(localStorage.getItem(PROF_KEY)); } catch (e) { profielen = null; }
+  if (profielen && Array.isArray(profielen.lijst) && profielen.lijst.length) {
+    // Staat het actieve profiel er niet meer (verwijderd op een ander tabblad),
+    // dan pakken we gewoon de eerste in plaats van met een lege state te draaien.
+    if (!actiefProfiel()) profielen.actief = profielen.lijst[0].id;
+    return;
+  }
+  profielen = { v: 1, actief: null, lijst: [] };
+  // Er stond al voortgang op dit toestel van vóór de profielen. Die wordt het
+  // eerste profiel: die mag niet zoekraken doordat er een schermpje bij komt.
+  // De naam is nog niet bekend, dus hij heet "Ik" tot hij hernoemd wordt.
+  // Deze omzetting kan maar één keer gebeuren: zodra er een profielenlijst
+  // staat, komen we hier niet meer langs.
+  const oud = localStorage.getItem(STORE_KEY);
+  if (oud) {
+    const id = nieuwProfielId();
+    try { localStorage.setItem(profielKey(id), oud); } catch (e) {}
+    profielen.lijst.push({ id, naam: 'Ik' });
+    profielen.actief = id;
+  }
+  saveProfielen();
+}
+
+function maakProfiel(naam) {
+  const id = nieuwProfielId();
+  profielen.lijst.push({ id, naam });
+  profielen.actief = id;
+  saveProfielen();
+  state = defaultState();
+  save();
+}
+function kiesProfiel(id) {
+  if (!profielen.lijst.some(p => p.id === id)) return;
+  profielen.actief = id;
+  saveProfielen();
+  load();
+}
+function verwijderProfiel(id) {
+  profielen.lijst = profielen.lijst.filter(p => p.id !== id);
+  try { localStorage.removeItem(profielKey(id)); } catch (e) {}
+  if (profielen.actief === id) profielen.actief = profielen.lijst.length ? profielen.lijst[0].id : null;
+  saveProfielen();
+  if (profielen.actief) load();
+}
+// Hoeveel heeft dit profiel al gedaan? Uit de opslag van dat profiel zelf, want
+// alleen het actieve profiel zit in state. Eén regel per profiel, zodat je op
+// het keuzescherm ziet welke van jou is zonder te moeten gokken op de naam.
+function profielSamenvatting(id) {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(profielKey(id))); } catch (e) {}
+  if (!s || !s.items) return 'nog niet begonnen';
+  const items = Object.values(s.items);
+  const gehad = items.filter(it => it.seen || it.rseen).length;
+  if (!gehad) return 'nog niet begonnen';
+  const kent = items.filter(it => (it.box || 0) >= 4 || (it.rbox || 0) >= 4).length;
+  return gehad + ' geoefend' + (kent ? ' · ' + kent + ' goed in het hoofd' : '') +
+         ' · ' + (s.sessionCounter || 0) + ' sessies';
+}
+
 function load() {
-  try { const raw = localStorage.getItem(STORE_KEY); state = raw ? JSON.parse(raw) : defaultState(); }
+  loadProfielen();
+  const id = profielen.actief;
+  try { const raw = id ? localStorage.getItem(profielKey(id)) : null; state = raw ? JSON.parse(raw) : defaultState(); }
   catch (e) { state = defaultState(); }
   if (!state.items) state = defaultState();
 }
-function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+// Zonder actief profiel is er niets om in op te slaan. Dat gebeurt alleen op het
+// keuzescherm vóór de eerste naam; wegschrijven onder een lege sleutel zou de
+// voortgang van niemand worden.
+function save() {
+  if (!profielen || !profielen.actief) return;
+  try { localStorage.setItem(profielKey(profielen.actief), JSON.stringify(state)); } catch (e) {}
+}
 function ensureItem(k) {
   const it = state.items[k] || (state.items[k] = {});
   if (it.box == null) { it.box = 0; it.due = 0; it.seen = false; it.correct = 0; it.wrong = 0; }
@@ -138,7 +225,10 @@ async function boot() {
   drawMap();
   buildScopeUI();
   buildZoek();
-  showMenu();
+  // Is er nog niemand, dan begint de app bij de naam. Daarna nooit meer: het
+  // toestel onthoudt wie er het laatst oefende, dus op je eigen telefoon val je
+  // gewoon meteen in het menu.
+  if (profielen.actief) showMenu(); else showProfiel();
   bindEvents();
 }
 
@@ -622,6 +712,13 @@ function meerRegels(c) {
     r.push('<p><b>Buurlanden.</b> Geen: dit land grenst nergens aan land.</p>');
   if (d.overzee) r.push('<p><b>Hoort er ook bij.</b> ' + esc(d.overzee) + '</p>');
   if (d.taal)  r.push('<p><b>Taal.</b> ' + esc(d.taal) + '</p>');
+  // Geschiedenis en cultuur staan ná de taal en vóór het losse feit. Reden: de
+  // regels erboven zeggen wáár iets ligt en hoe het heet - dat is waar de vraag
+  // over ging. Deze twee zijn het verhaal eromheen, en dat lees je pas als je
+  // het antwoord al hebt. Een naam die aan een verhaal hangt blijft hangen; een
+  // naam op een rijtje niet.
+  if (d.geschiedenis) r.push('<p><b>Geschiedenis.</b> ' + esc(d.geschiedenis) + '</p>');
+  if (d.cultuur)      r.push('<p><b>Cultuur.</b> ' + esc(d.cultuur) + '</p>');
   if (d.feit)  r.push('<p>' + esc(d.feit) + '</p>');
   // De noot bij een hoofdstad staat in de kaartdata zelf (Sucre of La Paz,
   // Amsterdam of Den Haag), niet in land-info.json - die is met de hand
@@ -1172,11 +1269,72 @@ function updateProgress() {
       ' op een volgende keer.' : '');
 }
 
+// ---------------------------------------------------------------- profielscherm
+function buildProfielUI() {
+  const box = el('profLijst');
+  box.innerHTML = '';
+  for (const p of profielen.lijst) {
+    const rij = document.createElement('div');
+    rij.className = 'prij' + (p.id === profielen.actief ? ' on' : '');
+    const kies = document.createElement('button');
+    kies.className = 'pkies';
+    kies.innerHTML = '<b>' + esc(p.naam) + '</b><span>' + esc(profielSamenvatting(p.id)) + '</span>';
+    kies.onclick = () => {
+      kiesProfiel(p.id);
+      buildScopeUI(); buildZoek(); showMenu();
+    };
+    const naam = document.createElement('button');
+    naam.className = 'pklein'; naam.textContent = 'Naam'; naam.setAttribute('aria-label', 'Naam wijzigen van ' + p.naam);
+    naam.onclick = () => {
+      const nieuw = (prompt('Nieuwe naam voor dit profiel:', p.naam) || '').trim();
+      if (!nieuw) return;
+      p.naam = nieuw.slice(0, 20);
+      saveProfielen(); buildProfielUI(); updateProfielRegel();
+    };
+    const weg = document.createElement('button');
+    weg.className = 'pklein weg'; weg.textContent = 'Wis'; weg.setAttribute('aria-label', 'Profiel ' + p.naam + ' verwijderen');
+    weg.onclick = () => {
+      // Voortgang weggooien kan niet teruggedraaid worden, dus de waarschuwing
+      // noemt wat er precies verdwijnt én de uitweg: eerst exporteren.
+      if (!confirm('Profiel "' + p.naam + '" verwijderen?\n\n' +
+                   'Alle voortgang van dit profiel op dit toestel gaat weg en is niet terug te halen. ' +
+                   'Wil je hem bewaren, kies dan eerst dit profiel en gebruik "Exporteren".')) return;
+      verwijderProfiel(p.id);
+      if (profielen.actief) { buildScopeUI(); buildZoek(); }
+      buildProfielUI(); updateProfielRegel();
+    };
+    rij.appendChild(kies); rij.appendChild(naam); rij.appendChild(weg);
+    box.appendChild(rij);
+  }
+  el('profLeeg').classList.toggle('hidden', profielen.lijst.length > 0);
+  // Terug kan pas als er iemand ís om naar terug te gaan.
+  el('profTerug').classList.toggle('hidden', !profielen.actief);
+}
+function voegProfielToe() {
+  const inp = el('profNaam');
+  const naam = inp.value.trim().slice(0, 20);
+  if (!naam) { inp.focus(); return; }
+  if (profielen.lijst.some(p => p.naam.toLowerCase() === naam.toLowerCase()) &&
+      !confirm('Er is al een profiel dat "' + naam + '" heet. Toch nog een tweede maken?')) return;
+  maakProfiel(naam);
+  inp.value = '';
+  inp.blur();
+  buildScopeUI(); buildZoek(); showMenu();
+}
+// De naam van wie er oefent staat boven het menu. Niet omdat je het vergeet op
+// je eigen telefoon, maar omdat je het op een gedeeld toestel moet kúnnen zien
+// vóór je begint - anders oefent je zus per ongeluk onder jouw voortgang.
+function updateProfielRegel() {
+  const p = actiefProfiel();
+  el('profNaamNu').textContent = p ? p.naam : '—';
+}
+
 // ---------------------------------------------------------------- schermen
-function showMenu() { kijk = null; sluitSheet(); updateProgress(); toggle('menu'); }
+function showMenu() { kijk = null; sluitSheet(); updateProfielRegel(); updateProgress(); toggle('menu'); }
 function showQuiz() { toggle('quiz'); }
 function showEnd() { toggle('end'); }
-function toggle(id) { ['menu', 'quiz', 'end'].forEach(s => el(s).classList.toggle('hidden', s !== id)); }
+function showProfiel() { kijk = null; session = null; sluitSheet(); buildProfielUI(); toggle('prof'); }
+function toggle(id) { ['menu', 'quiz', 'end', 'prof'].forEach(s => el(s).classList.toggle('hidden', s !== id)); }
 function resetView() {
   if (kijk) { focusAsk(byName.get(kijk)); if (sheetOpen()) schuifOnderPaneel(byName.get(kijk)); return; }
   if (session && session.home) { view = { ...session.home }; applyView(); } else fitScope();
@@ -1184,11 +1342,17 @@ function resetView() {
 
 // ---------------------------------------------------------------- export / import
 function doExport() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const p = actiefProfiel();
+  // De naam gaat mee in het bestand én in de bestandsnaam. Met vier profielen op
+  // één toestel liggen er anders vier bestanden die alleen op datum verschillen,
+  // en dan weet je bij het terugzetten niet meer welke van wie is.
+  const blob = new Blob([JSON.stringify(Object.assign({ profiel: p ? p.naam : '' }, state), null, 2)],
+                        { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   const d = new Date().toISOString().slice(0, 10);
-  a.href = url; a.download = 'topografie-voortgang-' + d + '.json';
+  const veilig = (p ? p.naam : '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  a.href = url; a.download = 'topografie-voortgang-' + (veilig ? veilig + '-' : '') + d + '.json';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
@@ -1198,9 +1362,15 @@ function doImport(file) {
     try {
       const obj = JSON.parse(rd.result);
       if (!obj || typeof obj !== 'object' || !obj.items) throw 0;
-      if (!confirm('Voortgang uit dit bestand overnemen? Je huidige voortgang op dit toestel wordt vervangen.')) return;
-      state = obj; if (!state.settings) state.settings = defaultState().settings;
-      save(); buildScopeUI(); alert('Voortgang geïmporteerd.');
+      const p = actiefProfiel();
+      // Zeg in welk profiel het terechtkomt en van wie het bestand was. Op een
+      // toestel met meerdere profielen is "je huidige voortgang" niet genoeg:
+      // dan overschrijf je zo die van iemand anders.
+      if (!confirm('Voortgang uit dit bestand overnemen' + (obj.profiel ? ' (van "' + obj.profiel + '")' : '') + '?\n\n' +
+                   'Alles wat profiel "' + (p ? p.naam : '?') + '" nu op dit toestel heeft staan, wordt vervangen.')) return;
+      state = obj; delete state.profiel;
+      if (!state.settings) state.settings = defaultState().settings;
+      save(); buildScopeUI(); buildZoek(); alert('Voortgang geïmporteerd in profiel "' + (p ? p.naam : '') + '".');
     } catch (e) { alert('Dat bestand kon ik niet lezen. Kies een eerder geëxporteerd voortgang-bestand.'); }
   };
   rd.readAsText(file);
@@ -1255,6 +1425,10 @@ function bindEvents() {
   });
   el('scopeSeg').querySelectorAll('button').forEach(b => b.onclick = () => setScopeType(b.dataset.t));
   el('modeSeg').querySelectorAll('button').forEach(b => b.onclick = () => { state.settings.mode = b.dataset.m; save(); buildScopeUI(); });
+  el('profBtn').onclick = showProfiel;
+  el('profTerug').onclick = showMenu;
+  el('profAdd').onclick = voegProfielToe;
+  el('profNaam').onkeydown = e => { if (e.key === 'Enter') voegProfielToe(); };
   el('exportBtn').onclick = doExport;
   el('importBtn').onclick = () => el('importFile').click();
   el('importFile').onchange = e => { if (e.target.files[0]) doImport(e.target.files[0]); e.target.value = ''; };

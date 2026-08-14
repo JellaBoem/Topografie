@@ -71,6 +71,32 @@
   #brokUitleg .waarom{font-size:13px; line-height:1.45; color:var(--muted); margin-top:3px;}
   .num{font-variant-numeric:tabular-nums;}
 
+  /* ---------- PROFIELEN ---------- */
+  /* De regel bovenaan het menu: wie oefent er nu, met een knop om te wisselen.
+     Op een eigen telefoon lees je hem nooit; op een gedeelde iPad is het het
+     eerste wat je moet zien, vóór je begint onder de voortgang van je zus. */
+  #profRegel{display:flex; align-items:center; gap:10px; margin:0 0 16px;
+    background:#e8f0f0; border:1px solid #d5e2e2; border-radius:12px; padding:10px 12px;}
+  #profRegel .wie{flex:1; font-size:14px; color:var(--muted); line-height:1.3;}
+  #profRegel .wie b{color:var(--ink); font-size:15px;}
+  #profRegel button{border:1px solid #cdd6d6; background:#fff; color:var(--teal);
+    border-radius:9px; padding:8px 12px; font-size:14px; font-weight:600;}
+  #prof{flex:1; overflow-y:auto; padding:22px 18px 30px; background:#f4f7f7;}
+  #prof h1{font-size:26px; margin:6px 0 2px;}
+  #prof .sub{color:var(--muted); margin:0 0 20px; font-size:14px; line-height:1.5;}
+  /* Kiezen is de grote knop, hernoemen en wissen zijn de kleintjes ernaast:
+     dat wat je elke dag doet moet het makkelijkst te raken zijn. */
+  .prij{display:flex; gap:8px; align-items:stretch; margin-bottom:10px;}
+  .prij .pkies{flex:1; text-align:left; background:#f0f4f4; border:1px solid #d5dcdc;
+    border-radius:12px; padding:12px 14px; color:var(--ink); display:flex; flex-direction:column; gap:3px;}
+  .prij.on .pkies{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .prij .pkies b{font-size:17px;}
+  .prij .pkies span{font-size:12px; color:var(--muted);}
+  .prij.on .pkies span{color:rgba(255,255,255,.85);}
+  .prij .pklein{border:1px solid #d5dcdc; background:#f6f9f9; color:var(--muted);
+    border-radius:12px; padding:0 12px; font-size:13px; font-weight:600;}
+  .prij .pklein.weg{color:var(--bad); border-color:#e6cfcb;}
+
   /* ---------- QUIZ ---------- */
   #quiz{flex:1; display:flex; flex-direction:column; min-height:0;}
   #bar{display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--teal); color:#fff;}
@@ -211,6 +237,10 @@
     #sheetBody{font-size:17px;}
     #sheetBody .bron{font-size:14px;}
 
+    #prof > *{max-width:680px; margin-left:auto; margin-right:auto;}
+    #prof h1{font-size:30px; margin:6px auto 2px;}
+    #prof .sub{font-size:15px; margin:0 auto 20px;}
+
     #end > *{max-width:680px; margin-left:auto; margin-right:auto;}
     #end h1{margin:0 auto 4px;}
     #endlist{margin-top:14px; margin-left:auto; margin-right:auto;}
@@ -223,6 +253,11 @@
 <section id="menu">
   <h1>Topografie</h1>
   <p class="sub">Blinde wereldkaart · aanwijzen en herkennen · herhaling over dagen heen</p>
+
+  <div id="profRegel">
+    <div class="wie">Je oefent als <b id="profNaamNu">—</b></div>
+    <button id="profBtn">Wissel</button>
+  </div>
 
   <div class="card">
     <div class="startrow">
@@ -295,10 +330,34 @@
       <button class="btn sec" id="importBtn">Importeren</button>
     </div>
     <input type="file" id="importFile" accept="application/json,.json" class="hidden">
-    <p class="tiny" style="margin:12px 0 0;">Je voortgang staat op dit toestel. Exporteer af en toe een bestand als reservekopie of om naar een ander toestel te verhuizen.</p>
+    <p class="tiny" style="margin:12px 0 0;">Dit gaat over het profiel dat nu oefent. Je voortgang staat op dit toestel; exporteer af en toe een bestand als reservekopie of om naar een ander toestel te verhuizen. Bij importeren wordt de voortgang van dít profiel vervangen.</p>
   </div>
 
   <p class="tiny">Kaart: Natural Earth (publiek domein), Robinson-projectie. Werkt offline. Geen account, geen tracking, geen internet nodig tijdens gebruik.</p>
+</section>
+
+<!-- ===== PROFIELEN ===== -->
+<section id="prof" class="hidden">
+  <h1>Wie oefent er?</h1>
+  <p class="sub">Iedereen houdt zijn eigen voortgang bij. Alles blijft op dit toestel staan:
+    geen account, geen wachtwoord, en er gaat niets over jouw oefenen naar buiten.</p>
+
+  <div class="card">
+    <h2>Profielen op dit toestel</h2>
+    <div id="profLijst"></div>
+    <p class="tiny hidden" id="profLeeg" style="margin:0;">Nog geen profiel. Typ hieronder een naam om te beginnen.</p>
+  </div>
+
+  <div class="card">
+    <h2>Nieuw profiel</h2>
+    <input id="profNaam" type="text" maxlength="20" placeholder="Naam" autocomplete="off" enterkeyhint="done"
+      style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid #d5dcdc; background:#f6f9f9; font-size:16px; color:#243133; margin-bottom:12px;">
+    <button class="btn" id="profAdd" style="width:100%;">Profiel toevoegen</button>
+    <p class="tiny" style="margin:12px 0 0;">Een nieuw profiel begint met een schone lei: nul landen gehad,
+      eigen instellingen, eigen herhaalschema.</p>
+  </div>
+
+  <button class="btn sec hidden" id="profTerug" style="width:100%;">Terug naar het menu</button>
 </section>
 
 <!-- ===== QUIZ ===== -->

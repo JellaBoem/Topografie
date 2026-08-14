@@ -1,858 +1,1193 @@
 {
-  "_comment": "Tekst per land, los van de kaart zodat hij kan groeien zonder de kaart opnieuw te bouwen. Sleutel = Engelse naam uit map-data.json. Velden: naam (wat de landsnaam betekent), taal, feit (een opvallend of cultureel gegeven), bron (alleen waar iets omstreden of aan een uitspraak gebonden is). Alles mag ontbreken; de app laat weg wat er niet is.",
+  "_comment": "Tekst per land, los van de kaart zodat hij kan groeien zonder de kaart opnieuw te bouwen. Sleutel = Engelse naam uit map-data.json. Velden: naam (wat de landsnaam betekent), taal, geschiedenis (hoe het land ontstond plus een beslissend moment), cultuur (een opvallende gewoonte of eigenaardigheid), feit (een opvallend of cultureel gegeven), bron (alleen waar iets omstreden of aan een uitspraak gebonden is). Alles mag ontbreken; de app laat weg wat er niet is. Toevoegen gaat met build/merge-info.js, die per veld samenvoegt en dus niets overschrijft wat er al staat.",
   "Netherlands": {
     "naam": "Letterlijk de lage landen. Ongeveer een kwart ligt onder zeeniveau.",
     "overzee": "De stipjes in de Caraïben zijn Bonaire, Saba en Sint-Eustatius: samen Caribisch Nederland, en sinds 2010 bijzondere gemeenten van Nederland. Alleen Bonaire is groot genoeg om te tekenen. Aruba, Curaçao en Sint-Maarten liggen ernaast, maar dat zijn zelfstandige landen binnen het Koninkrijk.",
     "taal": "Nederlands. In Friesland is het Fries de tweede rijkstaal.",
-    "feit": "Een groot deel van het land is op het water veroverd. Flevoland lag in 1930 nog onder de Zuiderzee."
+    "feit": "Een groot deel van het land is op het water veroverd. Flevoland lag in 1930 nog onder de Zuiderzee.",
+    "geschiedenis": "Ontstond uit opstand: in 1581 zegden de noordelijke gewesten de Spaanse koning op en gingen verder als republiek van zeven zelfstandige gewesten. Pas in 1815, na de Franse tijd, werd het een koninkrijk met één regering.",
+    "cultuur": "De verjaardagskalender op de wc en de kring met koffie en één koekje verbazen bijna elke buitenlander. En 'gezellig' is niet te vertalen: het beschrijft geen ding maar de sfeer van het moment."
   },
   "Belgium": {
     "naam": "Naar de Belgae, het stammenverbond dat Caesar hier tegenkwam.",
     "taal": "Drie officiële talen: Nederlands in het noorden, Frans in het zuiden, Duits in een klein gebied in het oosten.",
-    "feit": "De taalgrens loopt van west naar oost dwars door het land en bepaalt tot vandaag de politiek."
+    "feit": "De taalgrens loopt van west naar oost dwars door het land en bepaalt tot vandaag de politiek.",
+    "geschiedenis": "Ontstond in 1830 uit een opstand tegen Nederland die begon na een operavoorstelling in Brussel. Het land werd bewust neutraal gehouden, wat het in 1914 niet spaarde: Duitsland trok er dwars doorheen.",
+    "cultuur": "Er zijn meer dan duizend biersoorten en de Belgische biercultuur staat op de UNESCO-lijst. De frietjes zijn Belgisch, niet Frans: 'French fries' zou een misverstand zijn van Amerikaanse soldaten die ze in Franstalig België aten."
   },
   "Luxembourg": {
     "naam": "Van Lucilinburhuc, klein burchtje: het kasteel waar de stad omheen groeide.",
     "taal": "Luxemburgs, Frans en Duits zijn alle drie officieel.",
-    "feit": "Een van de laatste groothertogdommen ter wereld; het staatshoofd is een groothertog."
+    "feit": "Een van de laatste groothertogdommen ter wereld; het staatshoofd is een groothertog.",
+    "geschiedenis": "Begon in 963 als burcht op een rots boven de Alzette. Eeuwenlang was het een van de sterkste vestingen van Europa, tot de grote mogendheden in 1867 afspraken dat de wallen gesloopt werden en het land voorgoed neutraal zou blijven.",
+    "cultuur": "Dagelijks rijden meer dan tweehonderdduizend mensen uit België, Frankrijk en Duitsland het land in om te werken — bijna de helft van alle banen. Sinds 2020 is al het openbaar vervoer gratis, als eerste land ter wereld."
   },
   "Germany": {
     "naam": "Van diutisc, van het volk: de taal van gewone mensen tegenover het Latijn van de geleerden.",
     "taal": "Duits.",
-    "feit": "Pas in 1871 één land. Daarvoor tientallen vorstendommen, en daarom liggen de grote steden verspreid in plaats van rond één hoofdstad."
+    "feit": "Pas in 1871 één land. Daarvoor tientallen vorstendommen, en daarom liggen de grote steden verspreid in plaats van rond één hoofdstad.",
+    "geschiedenis": "Eeuwenlang tientallen vorstendommen onder de naam Heilige Roomse Rijk; pas in 1871 smeedde Pruisen daar één keizerrijk van. Na 1945 viel het uiteen in Oost en West, en pas in 1990 werd het weer één land.",
+    "cultuur": "De zondag is er stil bij wet: winkels dicht, en luidruchtig klussen wordt niet gewaardeerd. Bij het proosten kijk je elkaar strak in de ogen — wie wegkijkt, brengt zichzelf volgens het bijgeloof zeven jaar ongeluk."
   },
   "France": {
     "naam": "Naar de Franken, het Germaanse volk dat na de Romeinen de macht overnam.",
     "overzee": "Vijf gebieden ver buiten Europa zijn volwaardige Franse departementen, precies zoals de departementen in Frankrijk zelf: Guadeloupe en Martinique in de Caraïben, Frans-Guyana aan de noordkust van Zuid-Amerika, en Réunion en Mayotte in de Indische Oceaan.",
     "taal": "Frans.",
-    "feit": "Grenst daardoor aan Brazilië en Suriname: aan de rand van Frans-Guyana ligt gewoon een grens van Frankrijk, met de euro en Europese verkiezingen."
+    "feit": "Grenst daardoor aan Brazilië en Suriname: aan de rand van Frans-Guyana ligt gewoon een grens van Frankrijk, met de euro en Europese verkiezingen.",
+    "geschiedenis": "In 1789 bestormde het volk de Bastille en een paar jaar later verloor de koning zijn hoofd. Sindsdien telt het land vijf republieken, twee keizerrijken en een korte terugkeer van het koningschap; de republiek van vandaag dateert pas van 1958.",
+    "cultuur": "Het stokbrood is bij wet beschermd: een echte baguette de tradition mag niets anders bevatten dan meel, water, gist en zout. Sinds 2022 staat het Franse stokbrood zelfs op de UNESCO-lijst van tradities."
   },
   "United Kingdom": {
     "naam": "Verenigd slaat op de samenvoeging van Engeland, Schotland, Wales en Noord-Ierland.",
     "taal": "Engels. Daarnaast Welsh in Wales en Schots-Gaelisch in delen van Schotland.",
-    "feit": "Grenst over land maar aan één land: Ierland."
+    "feit": "Grenst over land maar aan één land: Ierland.",
+    "geschiedenis": "Engeland en Schotland kregen in 1603 dezelfde koning en gingen in 1707 samen verder als één koninkrijk; Ierland kwam er in 1801 bij en scheidde zich in 1922 grotendeels weer af. Rond 1920 bestuurde het rijk ongeveer een kwart van de wereld.",
+    "cultuur": "Netjes in de rij staan geldt bijna als morele plicht, en over het weer beginnen is de veiligste manier om een gesprek te openen. In het Lagerhuis houden twee rode strepen regering en oppositie volgens de overlevering precies twee zwaardlengtes uit elkaar."
   },
   "Ireland": {
     "naam": "Naar Ériu, een godin uit de Ierse mythologie.",
     "taal": "Iers en Engels zijn beide officieel; in het dagelijks leven overheerst het Engels.",
-    "feit": "Het eiland is verdeeld: de republiek beslaat vijf zesde deel, Noord-Ierland hoort bij het Verenigd Koninkrijk."
+    "feit": "Het eiland is verdeeld: de republiek beslaat vijf zesde deel, Noord-Ierland hoort bij het Verenigd Koninkrijk.",
+    "geschiedenis": "Eeuwenlang onder Engels bestuur. De aardappelziekte van 1845-1852 kostte ongeveer een miljoen mensen het leven en dreef er nog een miljoen weg; het eiland werd nooit meer zo vol als daarvoor. Na de Paasopstand van 1916 werd het zuiden in 1922 zelfstandig.",
+    "cultuur": "In de pub draait het om het gesprek en om sessies waar iedereen met een instrument aanschuift. Het Iers staat op alle wegwijzers, ook al spreekt bijna niemand het thuis nog."
   },
   "Denmark": {
     "naam": "Mark van de Denen, waarbij mark grensgebied betekent.",
     "taal": "Deens.",
-    "feit": "Eén schiereiland plus ruim vierhonderd eilanden. Groenland en de Faeröer horen er ook bij, met eigen bestuur."
+    "feit": "Eén schiereiland plus ruim vierhonderd eilanden. Groenland en de Faeröer horen er ook bij, met eigen bestuur.",
+    "geschiedenis": "Het Deense koningshuis is een van de oudste van Europa en gaat terug op de Vikingkoningen; de Jelling-stenen uit de tiende eeuw heten wel het doopbewijs van Denemarken. Het land was ooit veel groter: Noorwegen ging in 1814 weg, Sleeswijk-Holstein in 1864.",
+    "cultuur": "Hygge is het woord dat het land exporteerde: kaarsen, dekens en samen niets hoeven. In Kopenhagen staan meer fietsen dan auto's, en fietsen doe je er ook in pak en met kinderen in een bakfiets."
   },
   "Norway": {
     "naam": "Noordweg: de vaarroute die de Vikingen langs de kust naar het noorden namen.",
     "overzee": "Het losse eilandje ten noordwesten van het vasteland is Jan Mayen: een vulkaan in de Noordelijke IJszee, zonder vaste bewoners. De eilandengroep helemaal bovenin is Spitsbergen (Svalbard). Beide horen bij Noorwegen.",
     "taal": "Noors, in twee officiële schrijfvormen (bokmål en nynorsk). In het noorden ook Samisch.",
-    "feit": "Met alle fjorden en eilanden meegerekend is de kustlijn ruim honderdduizend kilometer: meer dan twee keer de omtrek van de aarde."
+    "feit": "Met alle fjorden en eilanden meegerekend is de kustlijn ruim honderdduizend kilometer: meer dan twee keer de omtrek van de aarde.",
+    "geschiedenis": "Vanaf deze kust voeren de Vikingen. Daarna hoorde het land eeuwenlang bij Denemarken en vervolgens bij Zweden, tot het zich in 1905 vreedzaam losmaakte en een eigen koning koos. De olievondst in de Noordzee in 1969 maakte van een arm vissersland een van de rijkste landen ter wereld.",
+    "cultuur": "Friluftsliv, het buitenleven, is bijna een levensbeschouwing: bij het eerste zonnetje gaat iedereen naar buiten. Op 17 mei loopt het hele land in klederdracht door de straten, met kinderoptochten in plaats van militaire parades."
   },
   "Sweden": {
     "naam": "Naar de Svear, de stam rond het Mälarenmeer.",
     "taal": "Zweeds. Fins en Samisch zijn erkende minderheidstalen.",
-    "feit": "Voert sinds 1814 geen oorlog meer: de langste ononderbroken vrede van Europa."
+    "feit": "Voert sinds 1814 geen oorlog meer: de langste ononderbroken vrede van Europa.",
+    "geschiedenis": "In de zeventiende eeuw was Zweden een grootmacht die de hele Oostzee beheerste; die tijd eindigde toen tsaar Peter de Grote het in 1709 bij Poltava versloeg. Sinds 1814 voerde het geen oorlog meer en het bleef in beide wereldoorlogen neutraal, tot het in 2024 lid werd van de NAVO.",
+    "cultuur": "Fika is geen pauze maar een afspraak: koffie met iets zoets, samen, midden op de dag. Het allemansrätt geeft iedereen het recht om te wandelen, kamperen en bessen te plukken op andermans grond, zolang je niets kapotmaakt."
   },
   "Finland": {
     "naam": "In het Fins heet het land Suomi; waar dat woord vandaan komt is onzeker.",
     "taal": "Fins en Zweeds zijn beide officieel. Fins is geen Indo-Europese taal: het lijkt niet op zijn buren, maar is verwant aan het Ests en in de verte aan het Hongaars.",
-    "feit": "Bijna 188.000 meren, meer dan enig ander land."
+    "feit": "Bijna 188.000 meren, meer dan enig ander land.",
+    "geschiedenis": "Zes eeuwen Zweeds, daarna ruim honderd jaar Russisch, en sinds 1917 zelfstandig. In de Winteroorlog van 1939 hield het de veel grotere Sovjet-Unie op ski's tegen: het verloor gebied, maar behield zijn onafhankelijkheid.",
+    "cultuur": "Er zijn ongeveer drie miljoen sauna's op vijfenhalf miljoen inwoners — thuis, op kantoor en in het parlement. Het land houdt wereldkampioenschappen mobieltjeswerpen en vrouwdragen, en sisu, doorzetten zonder klagen, is het woord waar Finnen trots op zijn."
   },
   "Estonia": {
     "naam": "Van Aesti, een volk aan de Oostzee dat de Romein Tacitus al beschreef.",
     "taal": "Ests, nauw verwant aan het Fins en niet aan het Lets of Russisch.",
-    "feit": "Zong zich in 1988 los: bij de Zingende Revolutie kwamen honderdduizenden mensen samen om verboden nationale liederen te zingen."
+    "feit": "Zong zich in 1988 los: bij de Zingende Revolutie kwamen honderdduizenden mensen samen om verboden nationale liederen te zingen.",
+    "geschiedenis": "Eeuwenlang geregeerd door Denen, Duitsers, Zweden en Russen. Zelfstandig in 1918, ingelijfd door de Sovjet-Unie in 1940 en opnieuw vrij in 1991 — die tweede bevrijding verliep vrijwel zonder geweld, met zingende menigten als belangrijkste wapen.",
+    "cultuur": "Estland is het meest digitale land van Europa: stemmen, belastingaangifte en een bedrijf oprichten gaan online, en Skype is er bedacht. Tegelijk is meer dan de helft van het land bos, waar mensen in het najaar massaal paddenstoelen zoeken."
   },
   "Latvia": {
     "naam": "Naar de Letten, de Baltische stam die hier woonde.",
     "taal": "Lets. Samen met het Litouws zijn dit de laatste twee levende Baltische talen.",
-    "feit": "Bijna de helft van het land is bos."
+    "feit": "Bijna de helft van het land is bos.",
+    "geschiedenis": "Riga werd in 1201 gesticht door Duitse kruisridders en groeide uit tot rijke Hanzestad, terwijl het platteland eeuwenlang in handen van Duitse landheren bleef. Het land was tussen 1918 en 1940 kort onafhankelijk en werd het pas in 1991 weer.",
+    "cultuur": "Zingen is er politiek geweest: de omwenteling rond 1989 heet de Zingende Revolutie, en elke vijf jaar komen tienduizenden zangers samen op het grote liederenfeest. Riga heeft een van de grootste verzamelingen jugendstilgebouwen ter wereld."
   },
   "Lithuania": {
     "naam": "Herkomst onzeker; waarschijnlijk van een riviernaam, Lietava.",
     "taal": "Litouws, dat als de meest ouderwetse levende Indo-Europese taal geldt: het bewaarde vormen die het Latijn en Grieks al verloren.",
-    "feit": "Vormde met Polen in de vijftiende eeuw het grootste land van Europa, van de Oostzee tot de Zwarte Zee."
+    "feit": "Vormde met Polen in de vijftiende eeuw het grootste land van Europa, van de Oostzee tot de Zwarte Zee.",
+    "geschiedenis": "In de veertiende eeuw het grootste land van Europa: het grootvorstendom reikte van de Oostzee tot bijna aan de Zwarte Zee, en het was het laatste land van Europa dat christelijk werd. In 1990 was Litouwen de eerste sovjetrepubliek die zich onafhankelijk verklaarde.",
+    "cultuur": "Bij Šiauliai staat de Heuvel van Kruisen: honderdduizenden kruisen die mensen er neerzetten en die de Sovjets drie keer met bulldozers wegschoven, waarna ze er telkens weer stonden. In 1989 vormden twee miljoen Balten een menselijke keten van zeshonderd kilometer, van Vilnius tot Tallinn."
   },
   "Switzerland": {
     "naam": "Naar het kanton Schwyz, een van de drie kantons die in 1291 het verbond sloten.",
     "taal": "Vier officiële talen: Duits, Frans, Italiaans en Reto-Romaans.",
-    "feit": "Heeft geen president maar een raad van zeven die het staatshoofdschap jaarlijks doorgeeft."
+    "feit": "Heeft geen president maar een raad van zeven die het staatshoofdschap jaarlijks doorgeeft.",
+    "geschiedenis": "Ontstaan in 1291, toen drie kantons bij het Vierwoudstedenmeer elkaar hulp beloofden tegen vreemde heersers. Sinds 1815 is het land neutraal; het werd pas in 2002 lid van de Verenigde Naties.",
+    "cultuur": "Vier landstalen naast elkaar: Duits, Frans, Italiaans en Reto-Romaans. Het volk stemt een paar keer per jaar over van alles — er is zelfs een volksstemming geweest over de vraag of boeren geld moesten krijgen om koeien hun hoorns te laten houden."
   },
   "Austria": {
     "naam": "Österreich, het oostelijke rijk: de oostgrens van het Frankische rijk.",
     "taal": "Duits.",
-    "feit": "Was tot 1918 het centrum van een rijk dat half Midden-Europa besloeg; wat overbleef is een land ter grootte van Ierland."
+    "feit": "Was tot 1918 het centrum van een rijk dat half Midden-Europa besloeg; wat overbleef is een land ter grootte van Ierland.",
+    "geschiedenis": "Vanuit Wenen regeerden de Habsburgers eeuwenlang een veelvolkerenrijk dat half Midden-Europa besloeg. Dat rijk viel in 1918 uiteen en liet een klein land achter; na 1945 volgden tien jaar bezetting en in 1955 de belofte blijvend neutraal te zijn.",
+    "cultuur": "De Weense koffiehuiscultuur staat op de UNESCO-lijst: je mag er uren zitten met één kopje en een stapel kranten. In het carnavalsseizoen zijn er honderden bals, tot een eigen bal voor koffiezetters en een voor suikerbakkers aan toe."
   },
   "Slovenia": {
     "naam": "Land van de Slaven, dezelfde stam als in Slowakije.",
     "taal": "Sloveens, dat nog een tweevoud kent: een aparte vorm voor precies twee dingen.",
-    "feit": "Ruim de helft van het land is bos, en het heeft maar 47 kilometer kust."
+    "feit": "Ruim de helft van het land is bos, en het heeft maar 47 kilometer kust.",
+    "geschiedenis": "Hoorde eeuwenlang bij Oostenrijk en daarna bij Joegoslavië. Het maakte zich in 1991 los na een oorlog van tien dagen — de kortste van alle Joegoslavische oorlogen.",
+    "cultuur": "Imkeren is bijna nationale sport: bijenhuizen met beschilderde plankjes horen bij het landschap, en op Sloveens voorstel bestaat er sinds 2018 een Wereldbijendag. Meer dan de helft van het land is bos."
   },
   "Italy": {
     "naam": "Mogelijk van vitulus, kalf: land van de runderen.",
     "taal": "Italiaans.",
-    "feit": "Pas in 1861 één land. De streekkeukens en dialecten verschillen daarom sterker dan je bij zo'n smal land zou verwachten."
+    "feit": "Pas in 1861 één land. De streekkeukens en dialecten verschillen daarom sterker dan je bij zo'n smal land zou verwachten.",
+    "geschiedenis": "Tot 1861 een lappendeken van koninkrijken, hertogdommen en de Kerkelijke Staat; Garibaldi en zijn duizend roodhemden brachten het zuiden erbij. Rome werd pas in 1871 hoofdstad en de republiek kwam er in 1946, na een volksstemming.",
+    "cultuur": "Cappuccino na het avondeten geldt als vergissing: melk hoort bij het ontbijt. Elke streek heeft zijn eigen pastavorm, en nergens ter wereld staan meer plekken op de werelderfgoedlijst."
   },
   "Spain": {
     "naam": "Van het Fenicische i-shpanim, mogelijk kust van de klipdassen: de Feniciërs hielden de konijnen hier voor klipdassen.",
     "overzee": "De eilandengroep ten zuidwesten van het vasteland, voor de kust van Noordwest-Afrika, zijn de Canarische Eilanden: een autonome regio van Spanje. De Balearen in de Middellandse Zee horen er ook bij.",
     "taal": "Spaans (Castiliaans). Catalaans, Galicisch en Baskisch zijn regionaal officieel. Baskisch is met geen enkele andere taal ter wereld verwant.",
-    "feit": "Was bijna achthonderd jaar deels islamitisch; het Alhambra en duizenden Spaanse woorden met al- komen daaruit voort."
+    "feit": "Was bijna achthonderd jaar deels islamitisch; het Alhambra en duizenden Spaanse woorden met al- komen daaruit voort.",
+    "geschiedenis": "Bijna achthonderd jaar stond een deel van het schiereiland onder islamitisch bestuur; in 1492 viel Granada, hetzelfde jaar dat Columbus vertrok. Na de burgeroorlog volgde de dictatuur van Franco (1939-1975), en pas daarna keerde de democratie terug.",
+    "cultuur": "Het avondeten begint vaak pas om een uur of tien, want het land loopt op een 'verkeerde' klok: in 1940 werd de tijd gelijkgezet met Berlijn en dat is nooit teruggedraaid. In Buñol gooien duizenden mensen elk jaar een uur lang tomaten naar elkaar."
   },
   "Portugal": {
     "naam": "Van Portus Cale, de Romeinse haven bij het huidige Porto.",
     "overzee": "Twee eilandengroepen in de Atlantische Oceaan zijn autonome regio's van Portugal: de Azoren, ruim vijftienhonderd kilometer westelijk, en Madeira, dat zuidelijker ligt, ter hoogte van Marokko.",
     "taal": "Portugees, wereldwijd door ruim tweehonderdvijftig miljoen mensen gesproken, vooral in Brazilië.",
-    "feit": "De grens met Spanje ligt sinds 1297 vrijwel onveranderd en is daarmee een van de oudste ter wereld."
+    "feit": "De grens met Spanje ligt sinds 1297 vrijwel onveranderd en is daarmee een van de oudste ter wereld.",
+    "geschiedenis": "In de vijftiende eeuw stuurde het land als eerste schepen uit om de wereld te verkennen. De grens met Spanje ligt sinds 1297 vrijwel vast en is een van de oudste van Europa; de dictatuur eindigde in 1974 met de Anjerrevolutie, waarbij soldaten bloemen in hun geweerlopen kregen.",
+    "cultuur": "Fado is de muziek van het gemis, met een woord dat nergens goed te vertalen is: saudade. Ongeveer de helft van alle kurk ter wereld komt van Portugese kurkeiken, die maar eens in de negen jaar geschild mogen worden."
   },
   "Iceland": {
     "naam": "IJsland, naar verluidt zo genoemd door een teleurgestelde Noorse kolonist die zijn vee had verloren.",
     "taal": "IJslands, zo weinig veranderd dat IJslanders middeleeuwse teksten nog kunnen lezen.",
-    "feit": "Ligt op de naad tussen de Noord-Amerikaanse en de Euraziatische plaat. Het eiland wordt elk jaar een paar centimeter breder."
+    "feit": "Ligt op de naad tussen de Noord-Amerikaanse en de Euraziatische plaat. Het eiland wordt elk jaar een paar centimeter breder.",
+    "geschiedenis": "Rond 930 richtten de Vikingbewoners het Althing op, dat als het oudste nog bestaande parlement ter wereld geldt. Het land hoorde daarna eeuwenlang bij Noorwegen en Denemarken en werd in 1944 een republiek, midden in de oorlog.",
+    "cultuur": "IJslanders hebben geen achternaam maar heten zoon of dochter van hun vader: Jón Einarsson en zijn zus Anna Einarsdóttir. Op kerstavond krijgt iedereen een boek en gaat het hele land lezen — het jólabókaflóð, de kerstboekenvloed."
   },
   "Cyprus": {
     "naam": "Waarschijnlijk van het Griekse woord voor koper; het eiland was in de oudheid de koperbron van de Middellandse Zee.",
     "taal": "Grieks en Turks zijn beide officieel.",
     "feit": "Sinds 1974 is het eiland feitelijk in tweeën gedeeld. Het noorden staat onder Turks bestuur, dat alleen door Turkije als staat wordt erkend. Er loopt een VN-bufferzone dwars door de hoofdstad Nicosia.",
-    "bron": "VN-Veiligheidsraad, resolutie 541 (1983)."
+    "bron": "VN-Veiligheidsraad, resolutie 541 (1983).",
+    "geschiedenis": "Het eiland lag altijd op ieders route: Grieken, Feniciërs, Romeinen, Venetianen, Ottomanen en Britten volgden elkaar op. Sinds 1974 is het gedeeld en loopt er een bufferzone van de VN dwars door de hoofdstad Nicosia.",
+    "cultuur": "Meze betekent dat er geen hoofdgerecht komt maar twintig kleine schaaltjes achter elkaar. Volgens de Griekse mythologie is Aphrodite uit het zeeschuim voor deze kust geboren."
   },
   "Poland": {
     "naam": "Van pole, veld: het volk van de vlakte.",
     "taal": "Pools.",
-    "feit": "Verdween tussen 1795 en 1918 volledig van de kaart, verdeeld tussen Rusland, Pruisen en Oostenrijk."
+    "feit": "Verdween tussen 1795 en 1918 volledig van de kaart, verdeeld tussen Rusland, Pruisen en Oostenrijk.",
+    "geschiedenis": "Polen verdween in 1795 volledig van de kaart toen Rusland, Pruisen en Oostenrijk het onderling verdeelden; pas in 1918 kwam het terug. In 1980 begon op de scheepswerf van Gdańsk de vakbond Solidarność, die het communisme in Oost-Europa hielp afbrokkelen.",
+    "cultuur": "Kerstavond begint pas als de eerste ster te zien is, met twaalf gerechten en een extra bord voor een onverwachte gast. Toosten met water brengt volgens het bijgeloof ongeluk."
   },
   "Czechia": {
     "naam": "Naar de Tsjechen; de landsdelen heten Bohemen, Moravië en Silezië.",
     "taal": "Tsjechisch.",
-    "feit": "Ging in 1993 vreedzaam uiteen met Slowakije, de fluwelen scheiding: geen schot gelost."
+    "feit": "Ging in 1993 vreedzaam uiteen met Slowakije, de fluwelen scheiding: geen schot gelost.",
+    "geschiedenis": "Praag was in de veertiende eeuw de zetel van keizer Karel IV en daarmee het centrum van het Heilige Roomse Rijk. In 1989 verdreef de Fluwelen Revolutie het communisme met massale demonstraties en rinkelende sleutelbossen, zonder bloedvergieten.",
+    "cultuur": "Tsjechen drinken per hoofd het meeste bier ter wereld; de pilsner is in 1842 in Plzeň uitgevonden. Het woord robot komt uit een Tsjechisch toneelstuk uit 1920."
   },
   "Slovakia": {
     "naam": "Land van de Slaven, dezelfde stam als in Slovenië.",
     "taal": "Slowaaks, zo dicht bij het Tsjechisch dat sprekers elkaar zonder moeite verstaan.",
-    "feit": "Het land telt meer dan honderd bewaarde kastelen en burchtruïnes, de hoogste dichtheid ter wereld."
+    "feit": "Het land telt meer dan honderd bewaarde kastelen en burchtruïnes, de hoogste dichtheid ter wereld.",
+    "geschiedenis": "Duizend jaar hoorde dit gebied bij Hongarije; pas in 1918 kwam het samen met Tsjechië in één land. In 1993 gingen die twee vreedzaam uit elkaar, de Fluwelen Scheiding, zonder dat er één schot viel.",
+    "cultuur": "Op een land ter grootte van Nederland staan meer dan honderd kastelen en burchten. Met Pasen bestaat het gebruik dat jongens meisjes met water overgieten en met parfum besprenkelen, wat vroeger geluk en vruchtbaarheid moest brengen."
   },
   "Hungary": {
     "naam": "In het Hongaars Magyarország, land van de Magyaren.",
     "taal": "Hongaars. Net als Fins en Ests geen Indo-Europese taal: het is omringd door talen waaraan het niet verwant is.",
-    "feit": "De Magyaren kwamen rond het jaar 895 als ruitervolk uit het oosten en bleven op de Hongaarse laagvlakte hangen."
+    "feit": "De Magyaren kwamen rond het jaar 895 als ruitervolk uit het oosten en bleven op de Hongaarse laagvlakte hangen.",
+    "geschiedenis": "De Magyaren kwamen rond 895 uit het oosten en bleven. Na de Eerste Wereldoorlog raakte het land bij het Verdrag van Trianon (1920) tweederde van zijn grondgebied kwijt, en daarom wonen er tot vandaag grote Hongaarse minderheden in de buurlanden.",
+    "cultuur": "Boedapest zit vol thermale baden waar mensen in het warme water zitten te schaken. De Rubiks kubus is er bedacht, door een Hongaarse hoogleraar bouwkunde."
   },
   "Croatia": {
     "naam": "Hrvatska, naar de Kroaten.",
     "taal": "Kroatisch.",
-    "feit": "Ruim duizend eilanden voor de kust. Het land heeft de vorm van een hoefijzer dat om Bosnië heen buigt."
+    "feit": "Ruim duizend eilanden voor de kust. Het land heeft de vorm van een hoefijzer dat om Bosnië heen buigt.",
+    "geschiedenis": "Hoorde eeuwenlang bij Hongarije en daarna bij Oostenrijk, terwijl Dubrovnik intussen een zelfstandige handelsstad was die het tegen Venetië opnam. Het maakte zich in 1991 los van Joegoslavië, wat vier jaar oorlog kostte.",
+    "cultuur": "De stropdas komt hiervandaan: Kroatische ruiters in Franse dienst droegen een doek om de hals, en het Franse cravate is een verbastering van Croate. Voor de kust liggen meer dan duizend eilanden."
   },
   "Bosnia and Herz.": {
     "naam": "Bosnië naar de rivier de Bosna; Herzegovina van het Duitse Herzog, hertog.",
     "taal": "Bosnisch, Kroatisch en Servisch zijn alle drie officieel en onderling goed verstaanbaar.",
-    "feit": "Heeft drie presidenten tegelijk, één per bevolkingsgroep, die het voorzitterschap om de acht maanden doorgeven."
+    "feit": "Heeft drie presidenten tegelijk, één per bevolkingsgroep, die het voorzitterschap om de acht maanden doorgeven.",
+    "geschiedenis": "Vier eeuwen Ottomaans en daarna Oostenrijks bestuur maakten er een land van drie volken en drie godsdiensten van. Tussen 1992 en 1995 volgde een oorlog waarin Sarajevo bijna vier jaar belegerd werd.",
+    "cultuur": "In Mostar staat een brug uit 1566 die in 1993 werd opgeblazen en daarna steen voor steen is herbouwd; jonge mannen springen er nog altijd vierentwintig meter naar beneden. Koffie drink je er uren, uit een koperen kannetje."
   },
   "Serbia": {
     "naam": "Naar de Serviërs.",
     "taal": "Servisch, geschreven in zowel het cyrillische als het Latijnse alfabet.",
-    "feit": "Verloor bij het uiteenvallen van Joegoslavië zijn kust en is nu het grootste land van de Balkan zonder zee."
+    "feit": "Verloor bij het uiteenvallen van Joegoslavië zijn kust en is nu het grootste land van de Balkan zonder zee.",
+    "geschiedenis": "Het middeleeuwse Servische rijk verloor in 1389 de slag op het Merelveld tegen de Ottomanen, een nederlaag die tot vandaag bezongen wordt. In 1914 werd in Sarajevo de Oostenrijkse troonopvolger doodgeschoten, waarna Oostenrijk-Hongarije Servië de oorlog verklaarde en de Eerste Wereldoorlog begon.",
+    "cultuur": "Elke familie viert haar eigen slava, de dag van de beschermheilige die van vader op zoon overgaat, met een gewijd brood en een volle tafel. Op het trompetfestival in Guča wordt drie dagen aan één stuk gespeeld."
   },
   "Montenegro": {
     "naam": "Venetiaans voor zwarte berg. In het eigen Crna Gora betekent het precies hetzelfde.",
     "taal": "Montenegrijns.",
-    "feit": "Werd pas in 2006 zelfstandig, als laatste land dat uit Joegoslavië voortkwam."
+    "feit": "Werd pas in 2006 zelfstandig, als laatste land dat uit Joegoslavië voortkwam.",
+    "geschiedenis": "De naam betekent zwarte berg; vanuit die bergen hielden prins-bisschoppen het gebied eeuwenlang buiten Ottomaanse handen. In 2006 stemde het met een kleine meerderheid voor het uit elkaar gaan met Servië — de laatste scheiding van het oude Joegoslavië.",
+    "cultuur": "Montenegrijnen horen bij de langste mensen ter wereld. In de baai van Kotor ligt een eilandje dat vissers zelf hebben gemaakt: eeuwenlang gooiden ze er stenen en oude scheepsrompen neer tot er een kerk op kon staan."
   },
   "Albania": {
     "naam": "In het eigen Shqipëri, vaak uitgelegd als land van de adelaars; vandaar de tweekoppige adelaar in de vlag.",
     "taal": "Albanees, een eigen tak in de Indo-Europese stamboom zonder nauwe verwanten.",
-    "feit": "Was onder Enver Hoxha decennialang het meest afgesloten land van Europa, met honderdduizenden bunkers tegen een invasie die nooit kwam."
+    "feit": "Was onder Enver Hoxha decennialang het meest afgesloten land van Europa, met honderdduizenden bunkers tegen een invasie die nooit kwam.",
+    "geschiedenis": "Skanderbeg hield de Ottomanen in de vijftiende eeuw vijfentwintig jaar tegen en is nog altijd de nationale held. Onder Enver Hoxha (1944-1985) sloot het land zich volledig af van de buitenwereld en liet het honderdduizenden betonnen bunkers bouwen.",
+    "cultuur": "Knikken kan er nee betekenen en het hoofd schudden ja. De besa — je woord houden en een gast met je leven beschermen — ging zo ver dat Albanezen in de oorlog joodse vluchtelingen verborgen; het land telde daarna meer joden dan ervoor."
   },
   "Macedonia": {
     "naam": "Noord- werd in 2019 toegevoegd na een akkoord met Griekenland, dat bezwaar maakte omdat een Griekse regio ook Macedonië heet.",
     "taal": "Macedonisch, nauw verwant aan het Bulgaars.",
-    "feit": "Het Ohridmeer aan de zuidwestgrens is met ruim een miljoen jaar een van de oudste meren ter wereld."
+    "feit": "Het Ohridmeer aan de zuidwestgrens is met ruim een miljoen jaar een van de oudste meren ter wereld.",
+    "geschiedenis": "Alexander de Grote kwam uit het antieke Macedonië, dat grotendeels in het huidige Griekenland lag. Daarover liep een ruzie over de landsnaam die pas in 2019 werd bijgelegd: sindsdien heet het Noord-Macedonië.",
+    "cultuur": "Het Ohridmeer is een van de oudste meren ter wereld, met vissen die nergens anders voorkomen. Moeder Teresa werd geboren in Skopje."
   },
   "Kosovo": {
     "naam": "Van het Servische kos, merel: het Merelveld, naar de vlakte waar in 1389 de slag tegen de Ottomanen werd geleverd.",
     "taal": "Albanees en Servisch zijn beide officieel.",
     "feit": "Riep in 2008 de onafhankelijkheid uit. Ongeveer 110 van de 193 VN-lidstaten erkennen Kosovo als staat; Servië, Rusland en China niet, en binnen de EU ook Spanje, Griekenland, Roemenië, Slowakije en Cyprus niet.",
-    "bron": "Het Internationaal Gerechtshof oordeelde in 2010 dat de onafhankelijkheidsverklaring niet in strijd was met het internationaal recht."
+    "bron": "Het Internationaal Gerechtshof oordeelde in 2010 dat de onafhankelijkheidsverklaring niet in strijd was met het internationaal recht.",
+    "geschiedenis": "Het gebied is de bakermat van de Servisch-orthodoxe kerk en tegelijk al eeuwen overwegend Albanees bewoond. Na de oorlog van 1999 kwam het onder VN-bestuur en in 2008 riep het de onafhankelijkheid uit.",
+    "cultuur": "Het is in twee opzichten het jongste land van Europa: pas sinds 2008 zelfstandig, en met de laagste gemiddelde leeftijd van het werelddeel. Gastvrijheid valt er onder de besa, het erewoord dat een gast onschendbaar maakt."
   },
   "Greece": {
     "naam": "In het eigen Elláda. Grieks komt van Graeci, de naam die de Romeinen aan één stam gaven en op iedereen toepasten.",
     "taal": "Grieks, met ruim drieduizend jaar aan geschreven bronnen de langst gedocumenteerde levende taal van Europa.",
-    "feit": "Ongeveer zesduizend eilanden, waarvan er nog geen tweehonderd bewoond zijn."
+    "feit": "Ongeveer zesduizend eilanden, waarvan er nog geen tweehonderd bewoond zijn.",
+    "geschiedenis": "Hier ontstonden de democratie, het theater en de Olympische Spelen; daarna volgden Romeinen, Byzantijnen en vierhonderd jaar Ottomaans bestuur. De onafhankelijkheidsoorlog begon in 1821 en de laatste dictatuur eindigde pas in 1974.",
+    "cultuur": "Je naamdag — de dag van de heilige naar wie je heet — is vaak belangrijker dan je verjaardag. Op de berg Athos, een zelfbesturende monnikenrepubliek, mogen al duizend jaar geen vrouwen komen."
   },
   "Bulgaria": {
     "naam": "Naar de Bulgaren, oorspronkelijk een Turks ruitervolk dat opging in de Slavische bevolking.",
     "taal": "Bulgaars.",
-    "feit": "Het cyrillische alfabet is hier in de negende eeuw ontstaan en van hieruit naar Servië en Rusland verspreid."
+    "feit": "Het cyrillische alfabet is hier in de negende eeuw ontstaan en van hieruit naar Servië en Rusland verspreid.",
+    "geschiedenis": "Het eerste Bulgaarse rijk werd in 681 gesticht en was in de negende eeuw een grootmacht; hier ontstond ook het cyrillische schrift, dat later naar Rusland ging. Daarna volgden vijf eeuwen Ottomaans bestuur, tot 1878.",
+    "cultuur": "Knikken betekent nee en het hoofd schudden ja: de omgekeerde wereld voor bezoekers. Op 1 maart geven mensen elkaar martenitsa, rood-witte draadjes die je draagt tot je de eerste ooievaar ziet."
   },
   "Belarus": {
     "naam": "Wit-Roethenië. Wat het wit betekende is onzeker: mogelijk een windrichting, want in oude Slavische stelsels stond een kleur voor een streek.",
     "taal": "Belarussisch en Russisch zijn beide officieel; in de praktijk overheerst het Russisch.",
-    "feit": "Meer dan een derde van het land is bos, waaronder het laatste stuk oerbos van Europa."
+    "feit": "Meer dan een derde van het land is bos, waaronder het laatste stuk oerbos van Europa.",
+    "geschiedenis": "Het gebied vormde eeuwenlang de kern van het Litouws-Poolse rijk en kwam daarna bij Rusland. In de Tweede Wereldoorlog verloor het ongeveer een kwart van zijn inwoners, verhoudingsgewijs meer dan enig ander land.",
+    "cultuur": "In het oerbos van Białowieża, op de grens met Polen, leeft de laatste wilde wisent van Europa. De aardappel is nationale kost, met tientallen gerechten — draniki, de aardappelpannenkoek, voorop."
   },
   "Ukraine": {
     "naam": "Meestal uitgelegd als grensland of gebied, van kraj, rand.",
     "taal": "Oekraïens.",
-    "feit": "Het grootste land dat volledig binnen Europa ligt. De zwarte aarde in het midden is zo vruchtbaar dat het land een van de grootste graanexporteurs ter wereld is."
+    "feit": "Het grootste land dat volledig binnen Europa ligt. De zwarte aarde in het midden is zo vruchtbaar dat het land een van de grootste graanexporteurs ter wereld is.",
+    "geschiedenis": "Kyiv was in de tiende eeuw het centrum van de Kievse Rus, waar Oekraïne, Belarus en Rusland alle drie hun oorsprong zien. De twintigste eeuw bracht de Holodomor, de hongersnood van 1932-1933, en de kernramp bij Tsjernobyl in 1986; zelfstandig werd het land in 1991.",
+    "cultuur": "De vlag vertelt wat het land is: een blauwe hemel boven een geel graanveld, ooit de graanschuur van Europa. De borsjtsj, de soep van rode biet, staat op de UNESCO-lijst van tradities."
   },
   "Moldova": {
     "naam": "Naar de rivier de Moldova, in het huidige Roemenië.",
     "taal": "Roemeens.",
-    "feit": "Een van de kleinste en dichtstbevolkte landen van Europa, en een van de weinige zonder bergen én zonder zee."
+    "feit": "Een van de kleinste en dichtstbevolkte landen van Europa, en een van de weinige zonder bergen én zonder zee.",
+    "geschiedenis": "Het gebied wisselde onophoudelijk van eigenaar: Ottomaans, Russisch, Roemeens en Sovjet. Sinds 1992 heeft het de strook Transnistrië aan de oostkant niet meer in handen.",
+    "cultuur": "Onder Cricova ligt een wijnkelder met meer dan honderd kilometer aan gangen, waar je met de auto doorheen rijdt. Wijn is nationale trots, met een eigen wijnfeest in oktober."
   },
   "Romania": {
     "naam": "Land van de Romeinen: de Romeinse provincie Dacia liet hier een Latijnse taal achter.",
     "taal": "Roemeens, de enige Romaanse taal in Oost-Europa, omringd door Slavische en Hongaarse buren.",
-    "feit": "De Donaudelta aan de Zwarte Zee is het grootste rietmoeras ter wereld en het best bewaarde delta van Europa."
+    "feit": "De Donaudelta aan de Zwarte Zee is het grootste rietmoeras ter wereld en het best bewaarde delta van Europa.",
+    "geschiedenis": "De taal is Romaans, een erfenis van de Romeinse provincie Dacië, terwijl alle buren Slavisch of Hongaars spreken. Het land ontstond in 1859 uit twee vorstendommen en verdreef in 1989 als enige in Oost-Europa zijn dictator met geweld.",
+    "cultuur": "Dracula is bedacht door een Ier die er nooit geweest was, maar Vlad Ţepeş bestond echt. In Maramureş ligt de Vrolijke Begraafplaats, met kleurige grafkruisen en spotdichtjes over de overledene."
   },
   "Russia": {
     "naam": "Naar de Roes, waarschijnlijk Zweedse handelaren en krijgers die vanaf de negende eeuw langs de rivieren zuidwaarts trokken.",
     "taal": "Russisch.",
-    "feit": "Het grootste land ter wereld, met elf tijdzones. Het Aziatische deel is veruit het grootst, maar ongeveer drie kwart van de bevolking woont in het Europese westen."
+    "feit": "Het grootste land ter wereld, met elf tijdzones. Het Aziatische deel is veruit het grootst, maar ongeveer drie kwart van de bevolking woont in het Europese westen.",
+    "geschiedenis": "Vanuit Moskou groeide het rijk in een paar eeuwen uit tot het grootste land ter wereld, met Siberië erbij. De tsaren vielen in 1917, de Sovjet-Unie viel in 1991.",
+    "cultuur": "Het land telt elf tijdzones: als het in Kaliningrad ontbijttijd is, loopt de dag in Kamtsjatka al ten einde. De Trans-Siberische spoorlijn doet er een week over van Moskou naar Vladivostok."
   },
   "Turkey": {
     "naam": "Land van de Turken, een volk dat vanuit Centraal-Azië westwaarts trok en zich vanaf de elfde eeuw in Anatolië vestigde.",
     "taal": "Turks. Koerdisch is de grootste minderheidstaal.",
-    "feit": "Istanbul ligt op twee werelddelen tegelijk: de zeestraat de Bosporus scheidt het Europese van het Aziatische deel van de stad."
+    "feit": "Istanbul ligt op twee werelddelen tegelijk: de zeestraat de Bosporus scheidt het Europese van het Aziatische deel van de stad.",
+    "geschiedenis": "Istanbul was als Constantinopel duizend jaar de hoofdstad van het Byzantijnse rijk, tot de Ottomanen het in 1453 innamen; daarna beheersten die eeuwenlang drie werelddelen. Na de val van dat rijk stichtte Atatürk in 1923 de republiek en verving hij het Arabische schrift door het Latijnse.",
+    "cultuur": "Thee wordt de hele dag door gedronken uit kleine tulpvormige glaasjes; nergens ter wereld gaat er per persoon meer thee doorheen. Bij het olieworstelen, de nationale sport, smeren de worstelaars zich in met olijfolie — het toernooi bij Edirne wordt al sinds 1362 gehouden."
   },
   "Syria": {
     "naam": "Waarschijnlijk een Griekse verkorting van Assyrië, het oude rijk verder naar het oosten.",
     "taal": "Arabisch. In het noordoosten wordt ook Koerdisch gesproken.",
-    "feit": "Damascus geldt als een van de langst onafgebroken bewoonde steden ter wereld."
+    "feit": "Damascus geldt als een van de langst onafgebroken bewoonde steden ter wereld.",
+    "geschiedenis": "Damascus is een van de langst onafgebroken bewoonde steden ter wereld en was in de zevende eeuw de hoofdstad van het Omajjadische rijk. Frans mandaatgebied na de Eerste Wereldoorlog, onafhankelijk in 1946; de familie Assad regeerde van 1971 tot 2024.",
+    "cultuur": "Aleppo staat bekend om zijn zeep van olijfolie en laurier, volgens de overlevering het oudste zeeprecept ter wereld. De soek en de citadel van die stad zijn werelderfgoed en raakten in de oorlog zwaar beschadigd."
   },
   "Lebanon": {
     "naam": "Van een Semitisch woord voor wit, naar de sneeuw op het Libanongebergte.",
     "taal": "Arabisch. Frans en Engels zijn wijdverbreid als tweede taal.",
-    "feit": "De hoogste ambten zijn per geloofsgemeenschap verdeeld: de president is maronitisch christen, de premier soennitisch moslim, de parlementsvoorzitter sjiitisch."
+    "feit": "De hoogste ambten zijn per geloofsgemeenschap verdeeld: de president is maronitisch christen, de premier soennitisch moslim, de parlementsvoorzitter sjiitisch.",
+    "geschiedenis": "Vanaf deze kust voeren de Feniciërs de Middellandse Zee over; zij verspreidden het alfabet waaruit ons schrift is voortgekomen. Het moderne land werd in 1943 onafhankelijk van Frankrijk en kende van 1975 tot 1990 een burgeroorlog.",
+    "cultuur": "Het politieke stelsel verdeelt de topfuncties over de godsdiensten: de president is maroniet, de premier soenniet en de parlementsvoorzitter sjiiet. In de bergen staan de laatste ceders, de boom van de vlag, die al in de Bijbel wordt genoemd."
   },
   "Israel": {
     "naam": "Naar de bijbelse naam Israël, gekozen bij de stichting van de staat in 1948.",
     "taal": "Hebreeuws. Arabisch was tot 2018 ook officieel en heeft sindsdien een bijzondere status.",
-    "feit": "Het Hebreeuws was eeuwenlang alleen nog een schrijf- en gebedstaal. Het is vanaf de negentiende eeuw bewust weer tot spreektaal gemaakt, het enige geslaagde voorbeeld ter wereld."
+    "feit": "Het Hebreeuws was eeuwenlang alleen nog een schrijf- en gebedstaal. Het is vanaf de negentiende eeuw bewust weer tot spreektaal gemaakt, het enige geslaagde voorbeeld ter wereld.",
+    "geschiedenis": "De staat werd in 1948 uitgeroepen, kort na het einde van het Britse mandaat over Palestina en drie jaar na de Holocaust. De oorlogen van 1948 en 1967 bepaalden de grenzen en de bezetting die het conflict met de Palestijnen tot vandaag voeden.",
+    "cultuur": "De sabbat legt van vrijdagavond tot zaterdagavond het openbare leven stil: bussen rijden niet en veel winkels blijven dicht. De kibboets, de gemeenschap waarin alles gedeeld werd, bepaalde lang het beeld van het land; er bestaan er nog steeds, al werken de meeste inmiddels als gewoon bedrijf."
   },
   "Palestine": {
     "naam": "Van Philistia, het kustgebied van de Filistijnen. De Romeinen maakten er Syria Palaestina van.",
     "taal": "Arabisch.",
     "feit": "Palestina bestaat uit twee losse delen met Israëlisch gebied ertussen: de Westelijke Jordaanoever en de Gazastrook.",
-    "bron": "157 van de 193 VN-lidstaten erkennen Palestina als staat (stand september 2025). Het Internationaal Gerechtshof oordeelde op 19 juli 2024 dat de Israëlische aanwezigheid in de bezette Palestijnse gebieden onrechtmatig is en zo snel mogelijk moet eindigen."
+    "bron": "157 van de 193 VN-lidstaten erkennen Palestina als staat (stand september 2025). Het Internationaal Gerechtshof oordeelde op 19 juli 2024 dat de Israëlische aanwezigheid in de bezette Palestijnse gebieden onrechtmatig is en zo snel mogelijk moet eindigen.",
+    "geschiedenis": "Het gebied was Ottomaans en daarna Brits mandaatgebied; na de oorlogen van 1948 en 1967 kwamen de Westelijke Jordaanoever en de Gazastrook onder Israëlisch bestuur. De Oslo-akkoorden van de jaren negentig gaven de Palestijnse Autoriteit beperkt zelfbestuur, maar leidden niet tot een eigen staat.",
+    "cultuur": "De keffiyeh, de zwart-wit geblokte doek, groeide uit tot wereldwijd symbool van de Palestijnse zaak. Olijfbomen zijn er meer dan een gewas: sommige zijn honderden jaren oud, en de oogst in oktober is een familiegebeurtenis."
   },
   "Jordan": {
     "naam": "Naar de rivier de Jordaan, die de westgrens vormt. De naam gaat terug op een woord voor afdalen: de rivier zakt naar het laagste punt op aarde.",
     "taal": "Arabisch.",
-    "feit": "Petra is door de Nabateeërs uitgehakt in rotswanden en lag eeuwen buiten beeld tot een Zwitserse reiziger het in 1812 beschreef."
+    "feit": "Petra is door de Nabateeërs uitgehakt in rotswanden en lag eeuwen buiten beeld tot een Zwitserse reiziger het in 1812 beschreef.",
+    "geschiedenis": "Petra werd tweeduizend jaar geleden door de Nabateeërs uit de rotsen gehouwen, als handelsstad voor de wierookkaravanen. Het moderne land ontstond na de Eerste Wereldoorlog als Transjordanië onder Brits mandaat en werd in 1946 een koninkrijk.",
+    "cultuur": "Mansaf, lamsvlees met rijst in gefermenteerde yoghurt, wordt van één grote schaal gegeten en met de rechterhand. De Dode Zee ligt op het laagste punt van het aardoppervlak en is zo zout dat zinken niet lukt."
   },
   "Saudi Arabia": {
     "naam": "Arabië van de familie Saoed, die het land in 1932 verenigde. Een van de weinige landen ter wereld die naar een familie heet.",
     "taal": "Arabisch.",
-    "feit": "Mekka en Medina liggen hier. Miljoenen moslims komen er jaarlijks op bedevaart."
+    "feit": "Mekka en Medina liggen hier. Miljoenen moslims komen er jaarlijks op bedevaart.",
+    "geschiedenis": "Ibn Saoed veroverde in de jaren twintig het schiereiland en stichtte in 1932 het koninkrijk dat zijn familienaam draagt. Zes jaar later werd er olie gevonden, wat het land in één generatie veranderde.",
+    "cultuur": "Mekka en Medina zijn de heiligste plaatsen van de islam; elk jaar komen er miljoenen pelgrims voor de hadj. Koffie met kardemom en dadels is het vaste welkom, en er wordt net zo lang bijgeschonken tot je het kopje heen en weer schudt."
   },
   "Yemen": {
     "naam": "Van het Arabische woord voor rechts, wat ook zuid betekent: kijk je naar de opkomende zon, dan ligt het zuiden rechts.",
     "taal": "Arabisch.",
-    "feit": "De oude stad Sanaa bestaat uit lemen torenhuizen van soms zes verdiepingen, gebouwd eeuwen voordat Europa flats kende."
+    "feit": "De oude stad Sanaa bestaat uit lemen torenhuizen van soms zes verdiepingen, gebouwd eeuwen voordat Europa flats kende.",
+    "geschiedenis": "Dit was het rijke Arabia Felix van de klassieke schrijvers, bekend van het koninkrijk Saba en de handel in wierook. Noord en Zuid gingen in 1990 samen; sinds 2014 woedt er een oorlog die tot een van de zwaarste humanitaire crises ter wereld heeft geleid.",
+    "cultuur": "In Shibam staan lemen woontorens van acht verdiepingen uit de zestiende eeuw, de 'Manhattan van de woestijn'. Op het eiland Socotra groeit het drakenbloedboompje, dat nergens anders ter wereld voorkomt."
   },
   "Oman": {
     "naam": "Onzeker. Mogelijk naar een stichter, mogelijk naar een oude plaats in Jemen.",
     "taal": "Arabisch.",
-    "feit": "In het binnenland leiden falaj-kanalen bergwater kilometers ver naar de oases. Sommige zijn al tweeduizend jaar in gebruik."
+    "feit": "In het binnenland leiden falaj-kanalen bergwater kilometers ver naar de oases. Sommige zijn al tweeduizend jaar in gebruik.",
+    "geschiedenis": "Oman had in de negentiende eeuw een eigen zeerijk dat tot Zanzibar reikte; de sultan zetelde een tijdlang op dat eiland. Sultan Qaboos opende het afgesloten land na 1970 en bouwde het in hoog tempo op.",
+    "cultuur": "Wierook uit Dhofar was in de oudheid meer waard dan goud en wordt nog dagelijks gebrand. De aflaj, ondergrondse waterkanalen van tweeduizend jaar oud, verdelen het water nog altijd per minuut over de akkers."
   },
   "United Arab Emirates": {
     "naam": "Een federatie van zeven emiraten, gebieden onder een emir. Abu Dhabi is het grootste, Dubai het bekendste.",
     "taal": "Arabisch. Door de vele arbeidsmigranten is Engels op straat en op het werk de dagelijkse omgangstaal.",
-    "feit": "Ongeveer negen van de tien inwoners hebben niet de Emiraatse nationaliteit. Nergens ter wereld ligt dat aandeel hoger."
+    "feit": "Ongeveer negen van de tien inwoners hebben niet de Emiraatse nationaliteit. Nergens ter wereld ligt dat aandeel hoger.",
+    "geschiedenis": "Zeven sjeikdommen aan wat de Britten de Piratenkust noemden, sloten verdragen met Londen en gingen in 1971 samen in één federatie. De olie kwam in de jaren zestig; daarvoor leefde de kust van parelduiken.",
+    "cultuur": "Dubai bouwde de hoogste toren ter wereld, terwijl ongeveer negentig procent van de inwoners uit het buitenland komt. Valkerij is nationale sport: valken hebben een eigen paspoort en mogen mee in het vliegtuig."
   },
   "Qatar": {
     "naam": "Gaat terug op Catara, een naam die de Griekse geograaf Ptolemaeus in de tweede eeuw op deze kust noteerde.",
     "taal": "Arabisch.",
-    "feit": "Een schiereiland van ongeveer een kwart van Nederland, met precies één landgrens: die met Saoedi-Arabië."
+    "feit": "Een schiereiland van ongeveer een kwart van Nederland, met precies één landgrens: die met Saoedi-Arabië.",
+    "geschiedenis": "Ook Qatar leefde van parels, tot de Japanse kweekparel die markt in de jaren dertig deed instorten. Het werd in 1971 onafhankelijk van Groot-Brittannië en is sinds de gasvondsten in het noorden een van de rijkste landen ter wereld.",
+    "cultuur": "In 2022 was het het eerste Arabische land dat het WK voetbal organiseerde. De nieuwszender Al Jazeera, opgericht in 1996, veranderde het nieuws in de hele Arabische wereld."
   },
   "Kuwait": {
     "naam": "Verkleinwoord van het Arabische kut, fort aan het water.",
     "taal": "Arabisch.",
-    "feit": "Het land ligt op enorme olievelden. Vóór de olie leefde het van parelduiken."
+    "feit": "Het land ligt op enorme olievelden. Vóór de olie leefde het van parelduiken.",
+    "geschiedenis": "Een handelsstadje van parelvissers en scheepsbouwers, dat in 1961 onafhankelijk werd. In 1990 viel Irak binnen; een internationale coalitie verdreef dat leger in 1991, dat bij zijn vertrek honderden oliebronnen in brand stak.",
+    "cultuur": "De blauwgroene watertorens van Koeweit-Stad zijn het beeldmerk van het land. Het parlement is een van de oudste en mondigste van de Golfregio."
   },
   "Georgia": {
     "naam": "In het Westen naar Sint-Joris genoemd. De Georgiërs zelf zeggen Sakartvelo.",
     "taal": "Georgisch, met een eigen rond alfabet en geen verwantschap met de talen eromheen.",
-    "feit": "Hier zijn de oudste sporen van wijnbouw gevonden, ongeveer achtduizend jaar oud."
+    "feit": "Hier zijn de oudste sporen van wijnbouw gevonden, ongeveer achtduizend jaar oud.",
+    "geschiedenis": "Georgië werd al in de vierde eeuw christelijk, als een van de eerste landen ter wereld, en beleefde onder koningin Tamar rond 1200 een gouden eeuw. Russisch vanaf de negentiende eeuw en Sovjet tot 1991.",
+    "cultuur": "Hier wordt al achtduizend jaar wijn gemaakt, in aarden vaten die in de grond worden ingegraven — de oudste wijntraditie ter wereld. Aan tafel leidt een tamada de maaltijd met lange toosten, en het Georgische alfabet wordt nergens anders gebruikt."
   },
   "Armenia": {
     "naam": "Een naam van buitenaf, al te vinden in oude Perzische inscripties. Armeniërs noemen hun land zelf Hayastan.",
     "taal": "Armeens, met een eigen alfabet dat rond het jaar 405 is ontworpen.",
-    "feit": "Armenië nam in 301 als eerste land ter wereld het christendom aan als staatsgodsdienst."
+    "feit": "Armenië nam in 301 als eerste land ter wereld het christendom aan als staatsgodsdienst.",
+    "geschiedenis": "Armenië nam in 301 als eerste land ter wereld het christendom aan als staatsgodsdienst. In 1915 werden onder Ottomaans bestuur honderdduizenden Armeniërs vermoord en verdreven, wat door veel landen als genocide is erkend.",
+    "cultuur": "Het Armeense alfabet werd in het jaar 405 speciaal voor de taal bedacht en is nog altijd in gebruik. De berg Ararat is het nationale symbool, ook al ligt hij net over de grens in Turkije."
   },
   "Azerbaijan": {
     "naam": "Gaat terug op Atropates, een Perzische stadhouder. Later is de naam uitgelegd als land van het vuur, naar aardgas dat hier vanzelf brandt.",
     "taal": "Azerbeidzjaans, nauw verwant aan het Turks.",
-    "feit": "Een deel van het land, Nachitsjevan, ligt los: het wordt door Armeens gebied van de rest gescheiden."
+    "feit": "Een deel van het land, Nachitsjevan, ligt los: het wordt door Armeens gebied van de rest gescheiden.",
+    "geschiedenis": "Rond 1900 kwam ongeveer de helft van alle olie ter wereld uit Bakoe. Het land was in 1918 kort onafhankelijk — als eerste moslimland met stemrecht voor vrouwen — en werd daarna Sovjet, tot 1991.",
+    "cultuur": "Het heet het land van het vuur: op het schiereiland Absjeron branden gasbronnen al eeuwen vanzelf. De taal lijkt sterk op het Turks, en thee drink je door een suikerklontje tussen je tanden te houden."
   },
   "Iraq": {
     "naam": "Waarschijnlijk van Uruk, een van de oudste steden van Mesopotamië.",
     "taal": "Arabisch en Koerdisch zijn allebei officieel.",
-    "feit": "Tussen Eufraat en Tigris ontstond het spijkerschrift, het oudste schrift dat we kennen."
+    "feit": "Tussen Eufraat en Tigris ontstond het spijkerschrift, het oudste schrift dat we kennen.",
+    "geschiedenis": "Tussen Eufraat en Tigris lag Mesopotamië, met de oudste steden, het spijkerschrift en het wetboek van Hammurabi. Bagdad was rond het jaar 800 het geleerde middelpunt van de wereld; het moderne land werd in 1932 zelfstandig en kende sinds 1980 vrijwel onafgebroken oorlog.",
+    "cultuur": "Het schrift is hier bedacht, en het oudste bekende verhaal ter wereld — het Gilgamesj-epos — komt uit deze bodem. In het zuiden wonen de moerasarabieren in huizen van riet, in een gebied dat werd drooggelegd en later deels is hersteld."
   },
   "Iran": {
     "naam": "Land van de Ariërs, de naam die de bevolking zichzelf al in de oudheid gaf. In het Westen heette het tot 1935 Perzië.",
     "taal": "Perzisch of Farsi. Dat is een Indo-Europese taal en dus verwant aan het Nederlands, niet aan het Arabisch.",
-    "feit": "Het grootste deel van het land is hooggelegen woestijn, omringd door bergketens."
+    "feit": "Het grootste deel van het land is hooggelegen woestijn, omringd door bergketens.",
+    "geschiedenis": "Het Perzische rijk van Cyrus was 2500 jaar geleden het grootste ter wereld, met een bestuur dat volken hun eigen taal en godsdienst liet. In 1979 verdreef de revolutie de sjah en werd het land een islamitische republiek.",
+    "cultuur": "Perzisch is geen Arabisch maar een Indo-Europese taal, in de verte verwant aan het Nederlands; dichters als Hafez en Rumi worden nog dagelijks geciteerd. En dan is er taarof, de kunst van het beleefd weigeren: de taxichauffeur zegt eerst dat het niet hoeft, en jij dringt net zolang aan tot je toch betaalt."
   },
   "Kazakhstan": {
     "naam": "Land van de Kazachen. De uitgang -stan is Perzisch voor plaats of land en zie je bij alle vijf de buren.",
     "taal": "Kazachs is staatstaal, Russisch is daarnaast officieel in het bestuur.",
-    "feit": "Het grootste land ter wereld zonder zeekust. Vanaf Bajkonoer worden nog altijd raketten gelanceerd."
+    "feit": "Het grootste land ter wereld zonder zeekust. Vanaf Bajkonoer worden nog altijd raketten gelanceerd.",
+    "geschiedenis": "Het land van de Kazachse nomadenhordes werd in de negentiende eeuw Russisch; bij de gedwongen vestiging onder Stalin kwamen honderdduizenden om. Vanaf Bajkonoer ging in 1957 de eerste satelliet en in 1961 de eerste mens de ruimte in.",
+    "cultuur": "Het is het grootste land ter wereld zonder zeekust, ongeveer zeventig keer Nederland. De appel komt hiervandaan: de wilde voorouder groeit in de bergen bij Almaty, waarvan de naam zoiets als 'vol appels' betekent."
   },
   "Uzbekistan": {
     "naam": "Land van de Oezbeken.",
     "taal": "Oezbeeks.",
-    "feit": "Samarkand en Boechara waren knooppunten op de zijderoute. Oezbekistan is een van de twee landen ter wereld waar je door twee landen moet om zee te bereiken."
+    "feit": "Samarkand en Boechara waren knooppunten op de zijderoute. Oezbekistan is een van de twee landen ter wereld waar je door twee landen moet om zee te bereiken.",
+    "geschiedenis": "Samarkand en Boechara waren knooppunten van de Zijderoute en centra van wetenschap; Timoer maakte Samarkand in de veertiende eeuw tot hoofdstad van zijn rijk. Russisch vanaf de negentiende eeuw en Sovjet tot 1991.",
+    "cultuur": "Het is een van maar twee landen ter wereld waar je twee grenzen over moet om bij zee te komen. Plov — rijst met vlees en wortel — wordt in reusachtige pannen bereid, soms voor duizend gasten tegelijk."
   },
   "Turkmenistan": {
     "naam": "Land van de Turkmenen.",
     "taal": "Turkmeens.",
-    "feit": "Bijna het hele land is Karakoemwoestijn. Bij Darvaza brandt al tientallen jaren een ingestorte gasput, de Poort naar de hel."
+    "feit": "Bijna het hele land is Karakoemwoestijn. Bij Darvaza brandt al tientallen jaren een ingestorte gasput, de Poort naar de hel.",
+    "geschiedenis": "De Zijderoutestad Merv was rond 1150 misschien wel de grootste stad ter wereld, tot de Mongolen kwamen. Sovjet tot 1991, en daarna een gesloten land met uitgesproken verheerlijking van de president.",
+    "cultuur": "In de Karakumwoestijn brandt sinds de jaren zeventig een gaskrater die 'de poort naar de hel' wordt genoemd. De tapijtpatronen van de vijf oude stammen staan op de vlag."
   },
   "Tajikistan": {
     "naam": "Land van de Tadzjieken, een volk dat Perzisch spreekt.",
     "taal": "Tadzjieks, een vorm van het Perzisch, geschreven in cyrillisch schrift.",
-    "feit": "De Pamir heet het dak van de wereld. Ruim de helft van het land ligt boven de drieduizend meter."
+    "feit": "De Pamir heet het dak van de wereld. Ruim de helft van het land ligt boven de drieduizend meter.",
+    "geschiedenis": "De taal is een vorm van het Perzisch en het land ziet zich als erfgenaam van de Samaniden, die in de tiende eeuw vanuit Boechara regeerden. Sovjet tot 1991, gevolgd door een burgeroorlog die tot 1997 duurde.",
+    "cultuur": "Meer dan negentig procent van het land is bergland; de Pamir heet niet voor niets het dak van de wereld. Nieuwjaar wordt als Navruz met de lente gevierd, met een puree van gekiemde tarwe die een nacht lang wordt geroerd."
   },
   "Kyrgyzstan": {
     "naam": "Land van de Kirgiezen.",
     "taal": "Kirgizisch, met Russisch daarnaast als officiële taal.",
-    "feit": "Meer dan negen tiende van het land is bergland. Het Yssykkulmeer ligt op zestienhonderd meter hoogte en bevriest nooit."
+    "feit": "Meer dan negen tiende van het land is bergland. Het Yssykkulmeer ligt op zestienhonderd meter hoogte en bevriest nooit.",
+    "geschiedenis": "Kirgiezen trokken eeuwenlang als nomaden met hun kudden door de bergen, tot de Russen in de negentiende eeuw kwamen. Na 1991 verjoegen twee volksopstanden achtereenvolgende presidenten.",
+    "cultuur": "Het epos van Manas is een van de langste gedichten ter wereld en wordt door vertellers uit het hoofd voorgedragen. In de zomer trekken families nog met yurten naar de hoge weiden, en kok-boru — polo met een geitenkarkas — is nationale sport."
   },
   "Afghanistan": {
     "naam": "Land van de Afghanen, de oude naam voor de Pathanen, de grootste bevolkingsgroep.",
     "taal": "Twee officiële talen: Pasjto en Dari, de Afghaanse vorm van het Perzisch.",
-    "feit": "Door de bergpassen van de Hindoekoesj liepen eeuwenlang de routes tussen Perzië, India en Centraal-Azië."
+    "feit": "Door de bergpassen van de Hindoekoesj liepen eeuwenlang de routes tussen Perzië, India en Centraal-Azië.",
+    "geschiedenis": "Het gebied lag op de Zijderoute en zag Alexander de Grote, Mongolen en Britten komen en gaan. Na de Sovjetinval van 1979 volgden burgeroorlog, de Taliban, twintig jaar Amerikaanse aanwezigheid en in 2021 opnieuw de Taliban.",
+    "cultuur": "In de rotsen van Bamiyan stonden veertienhonderd jaar lang boeddhabeelden van tientallen meters hoog, tot ze in 2001 werden opgeblazen. Buzkashi, te paard vechten om een geitenkarkas, is de nationale sport."
   },
   "Pakistan": {
     "naam": "In 1933 bedacht als letterwoord van de gebieden Punjab, Afghania, Kashmir, Sindh en Baloechistan. In het Perzisch betekent het ook land van de zuiveren.",
     "taal": "Oerdoe is de nationale taal, Engels de bestuurstaal. Thuis spreken de meeste mensen Punjabi.",
-    "feit": "Langs de Indus lag de Indusbeschaving, met steden als Mohenjo-daro die vijfduizend jaar geleden al riolering hadden."
+    "feit": "Langs de Indus lag de Indusbeschaving, met steden als Mohenjo-daro die vijfduizend jaar geleden al riolering hadden.",
+    "geschiedenis": "In de Indusvallei lag vijfduizend jaar geleden een van de eerste stadsculturen ter wereld, met steden als Mohenjo-daro. Het land ontstond in 1947 bij de opdeling van Brits-Indië, waarbij miljoenen mensen op de vlucht sloegen.",
+    "cultuur": "De spanning met India krijgt elke avond een vriendelijke vorm bij de grenspost Wagah, waar soldaten met hoge trappen en veel vertoon de vlaggen strijken, voor volle tribunes. Qawwali, de soefimuziek van Nusrat Fateh Ali Khan, komt hiervandaan."
   },
   "India": {
     "naam": "Naar de rivier de Indus. In het land zelf ook Bharat, uit oude Sanskrietteksten.",
     "taal": "Hindi en Engels zijn de talen van de rijksoverheid. Daarnaast erkent de grondwet er tweeëntwintig.",
-    "feit": "Het land met de meeste inwoners ter wereld, sinds het in 2023 China voorbijging."
+    "feit": "Het land met de meeste inwoners ter wereld, sinds het in 2023 China voorbijging.",
+    "geschiedenis": "Van de Indusbeschaving via de Maurya's en de Mogols tot de Britse Raj; het geweldloze verzet van Gandhi leidde in 1947 tot onafhankelijkheid, en tegelijk tot de opdeling met Pakistan. Inmiddels is het het volkrijkste land ter wereld.",
+    "cultuur": "Er zijn 22 officieel erkende talen, en op de bankbiljetten staat het bedrag in zeventien daarvan. Het hoofdwiebelen — half knik, half schud — kan ja, oké of misschien betekenen, en het land maakt meer films dan waar ook."
   },
   "Nepal": {
     "naam": "Herkomst onzeker. Mogelijk uit het Sanskriet, met een betekenis als aan de voet van de bergen.",
     "taal": "Nepalees.",
-    "feit": "Acht van de tien hoogste bergen ter wereld liggen geheel of gedeeltelijk in Nepal, waaronder de Mount Everest."
+    "feit": "Acht van de tien hoogste bergen ter wereld liggen geheel of gedeeltelijk in Nepal, waaronder de Mount Everest.",
+    "geschiedenis": "Nepal werd in de achttiende eeuw verenigd door de koningen van Gorkha en is nooit gekoloniseerd. In 2008 werd de monarchie afgeschaft, na tien jaar maoïstische opstand.",
+    "cultuur": "De vlag is de enige ter wereld die niet rechthoekig is: twee driehoeken boven elkaar. In Kathmandu wordt een jong meisje als levende godin Kumari vereerd, en Boeddha werd geboren in Lumbini."
   },
   "Bhutan": {
     "naam": "Waarschijnlijk uit het Sanskriet: einde van Tibet. De Bhutanezen zeggen Druk Yul, land van de donderdraak.",
     "taal": "Dzongkha.",
-    "feit": "Bhutan meet zijn vooruitgang niet alleen in geld maar ook in bruto nationaal geluk, een eigen bestuurlijk uitgangspunt."
+    "feit": "Bhutan meet zijn vooruitgang niet alleen in geld maar ook in bruto nationaal geluk, een eigen bestuurlijk uitgangspunt.",
+    "geschiedenis": "Het land werd in de zeventiende eeuw verenigd door een boeddhistische monnik-heerser en bleef daarna eeuwenlang afgesloten. In 2008 gaf de koning uit eigen beweging een groot deel van zijn macht op en werd het een democratie.",
+    "cultuur": "Bhutan meet zijn succes in bruto nationaal geluk in plaats van in economische groei. Televisie en internet kwamen er pas in 1999, en het land neemt meer CO2 op dan het uitstoot."
   },
   "Bangladesh": {
     "naam": "Land van Bengalen. Het ontstond in 1971 door afscheiding van Pakistan.",
     "taal": "Bengaals.",
-    "feit": "Het grootste deel van het land is de delta van Ganges en Brahmaputra: vlak, vruchtbaar en kwetsbaar voor overstroming."
+    "feit": "Het grootste deel van het land is de delta van Ganges en Brahmaputra: vlak, vruchtbaar en kwetsbaar voor overstroming.",
+    "geschiedenis": "Het was Oost-Pakistan tot 1971, toen het na een bloedige oorlog onafhankelijk werd. Ook de taal speelde daarin een rol: in 1952 vielen er doden bij protesten voor het Bengaals, wat nu wereldwijd als Internationale Moedertaaldag wordt herdacht.",
+    "cultuur": "Het land ligt in de grootste rivierdelta ter wereld; in de Sundarbans-mangroven leeft de Bengaalse tijger. Muhammad Yunus kreeg de Nobelprijs voor de Vrede voor microkrediet: kleine leningen aan vooral vrouwen."
   },
   "Sri Lanka": {
     "naam": "Uit het Sanskriet: eerbiedwaardig eiland. Tot 1972 heette het Ceylon.",
     "taal": "Singalees en Tamil zijn allebei officieel.",
-    "feit": "Een van de grootste theeleveranciers ter wereld. De struiken staan in het koelere bergland in het midden van het eiland."
+    "feit": "Een van de grootste theeleveranciers ter wereld. De struiken staan in het koelere bergland in het midden van het eiland.",
+    "geschiedenis": "Het eiland heeft ruim tweeduizend jaar geschreven geschiedenis en was achtereenvolgens Portugees, Nederlands en Brits. Na de onafhankelijkheid in 1948 volgde een burgeroorlog tussen de regering en de Tamil Tijgers, die van 1983 tot 2009 duurde.",
+    "cultuur": "Ceylonthee groeit in de koele hooglanden en gaat de hele wereld over; tot 1972 heette het eiland zelf ook Ceylon. In Kandy wordt jaarlijks een tand van Boeddha in optocht op een olifant rondgedragen."
   },
   "Mongolia": {
     "naam": "Land van de Mongolen.",
     "taal": "Mongools.",
-    "feit": "Het dunstbevolkte zelfstandige land ter wereld. Ongeveer de helft van de bevolking woont in de hoofdstad Ulaanbaatar."
+    "feit": "Het dunstbevolkte zelfstandige land ter wereld. Ongeveer de helft van de bevolking woont in de hoofdstad Ulaanbaatar.",
+    "geschiedenis": "Dzjengis Khan bouwde in de dertiende eeuw het grootste aaneengesloten rijk uit de geschiedenis, van Korea tot Hongarije. Daarna volgden eeuwen Chinese overheersing en vanaf 1924 een sovjetgezinde republiek; sinds 1990 is het een democratie.",
+    "cultuur": "Het is het dunstbevolkte land ter wereld en een groot deel van de bevolking leeft nog nomadisch, in ronde vilten tenten. Op het Naadam-feest draait alles om worstelen, boogschieten en paardenrennen met kinderen als jockey."
   },
   "China": {
     "naam": "In het Westen waarschijnlijk naar de Qin-dynastie. De Chinese naam Zhongguo betekent middenrijk.",
     "taal": "Mandarijn is de standaardtaal. Daarnaast bestaan grote talen als Kantonees; het schrift is voor alle hetzelfde.",
-    "feit": "Het land beslaat vijf tijdzones, maar hanteert er officieel één: die van Peking."
+    "feit": "Het land beslaat vijf tijdzones, maar hanteert er officieel één: die van Peking.",
+    "geschiedenis": "Ruim tweeduizend jaar keizerrijk, begonnen bij Qin Shi Huang, die het land verenigde en het terracottaleger liet maken. In 1949 riep Mao de Volksrepubliek uit; vanaf 1978 volgden de hervormingen die het land tot fabriek van de wereld maakten.",
+    "cultuur": "Het schrift is duizenden jaren oud en verbindt sprekers van talen die elkaar niet verstaan. Papier, buskruit, het kompas en de boekdruk zijn hier bedacht, en met nieuwjaar reist bijna het hele land naar huis: de grootste jaarlijkse volksverhuizing ter wereld."
   },
   "North Korea": {
     "naam": "Korea gaat terug op het rijk Koryo. Noord en Zuid ontstonden in 1945, toen het schiereiland langs de achtendertigste breedtegraad werd verdeeld.",
     "taal": "Koreaans, geschreven in het hangul-alfabet.",
-    "feit": "De grens met Zuid-Korea is een vier kilometer brede gedemilitariseerde zone. Formeel is de oorlog van 1950-1953 nooit met een vredesverdrag beëindigd."
+    "feit": "De grens met Zuid-Korea is een vier kilometer brede gedemilitariseerde zone. Formeel is de oorlog van 1950-1953 nooit met een vredesverdrag beëindigd.",
+    "geschiedenis": "Na de deling van 1945 werd het noorden onder Kim Il-sung een communistische staat, en sinds de Koreaoorlog is het strikt afgesloten. De macht ging over op zijn zoon en daarna op zijn kleinzoon.",
+    "cultuur": "De tijdrekening begint bij het geboortejaar van Kim Il-sung: 1912 is er het jaar 1. De metro van Pyongyang is een van de diepste ter wereld en doet tegelijk dienst als schuilkelder."
   },
   "South Korea": {
     "naam": "Dezelfde naam als Noord-Korea; sinds 1948 zijn het twee staten.",
     "taal": "Koreaans.",
-    "feit": "Het hangul-schrift is in de vijftiende eeuw bewust ontworpen om makkelijk te leren: de tekens beelden de stand van mond en tong uit."
+    "feit": "Het hangul-schrift is in de vijftiende eeuw bewust ontworpen om makkelijk te leren: de tekens beelden de stand van mond en tong uit.",
+    "geschiedenis": "Vijfendertig jaar Japanse overheersing eindigden in 1945, waarna het schiereiland werd gedeeld en de Koreaoorlog volgde (1950-1953) — die eindigde in een wapenstilstand, niet in vrede. Uit een van de armste landen ter wereld groeide in één generatie een hoogtechnologische economie.",
+    "cultuur": "K-pop en Koreaanse series veroverden de wereld; dat heet er hallyu, de Koreaanse golf. Tot 2023 telde iedereen zijn leeftijd anders: je was bij je geboorte al één en werd er met nieuwjaar een jaar bij, ongeacht je verjaardag."
   },
   "Japan": {
     "naam": "Van Nippon, oorsprong van de zon. Vanuit China gezien ligt Japan in het oosten.",
     "taal": "Japans, geschreven met drie schriftsoorten door elkaar.",
-    "feit": "Het land ligt op de rand van meerdere aardschollen. Aardbevingen zijn dagelijkse kost en gebouwen worden erop ontworpen."
+    "feit": "Het land ligt op de rand van meerdere aardschollen. Aardbevingen zijn dagelijkse kost en gebouwen worden erop ontworpen.",
+    "geschiedenis": "Ruim tweehonderd jaar sloot Japan zich vrijwel volledig af van de buitenwereld, tot Amerikaanse oorlogsschepen het in 1853 dwongen open te gaan. Daarna moderniseerde het razendsnel; na de nederlaag in 1945 werd het opnieuw opgebouwd.",
+    "cultuur": "Er zijn spoorwegmaatschappijen die zich verontschuldigen als een trein twintig seconden te vroeg vertrekt. Kintsugi repareert gebroken aardewerk met goud, zodat de barst juist zichtbaar blijft: de breuk hoort bij het voorwerp."
   },
   "Taiwan": {
     "naam": "Waarschijnlijk uit een inheemse taal, naar de baai bij de vroegste nederzetting. De officiële naam is Republiek China.",
     "taal": "Mandarijn. Daarnaast spreken veel mensen Taiwanees, een vorm van het Hokkien.",
     "feit": "Een bergachtig eiland waar een groot deel van de meest geavanceerde computerchips ter wereld wordt gemaakt.",
-    "bron": "De VN gaf de Chinese zetel in 1971 met resolutie 2758 aan de Volksrepubliek China; sindsdien is Taiwan geen VN-lid. Een klein aantal landen en het Vaticaan erkennen Taiwan formeel. De meeste landen, waaronder Nederland, onderhouden wel handels- en cultuurbetrekkingen zonder formele erkenning."
+    "bron": "De VN gaf de Chinese zetel in 1971 met resolutie 2758 aan de Volksrepubliek China; sindsdien is Taiwan geen VN-lid. Een klein aantal landen en het Vaticaan erkennen Taiwan formeel. De meeste landen, waaronder Nederland, onderhouden wel handels- en cultuurbetrekkingen zonder formele erkenning.",
+    "geschiedenis": "Het eiland was Nederlands (1624-1662), daarna Chinees en van 1895 tot 1945 Japans. In 1949 weken de verliezers van de Chinese burgeroorlog hierheen uit; sinds de jaren negentig is het een democratie.",
+    "cultuur": "Nachtmarkten zijn het middelpunt van het uitgaansleven, met stinktofu als beruchtste geur. De bubble tea — thee met tapiocaballetjes — is hier bedacht en inmiddels overal ter wereld nagemaakt."
   },
   "Myanmar": {
     "naam": "Myanmar en Birma zijn twee vormen van dezelfde naam, de ene formeel, de andere spreektaal. Het bewind maakte Myanmar in 1989 de officiële naam.",
     "taal": "Birmaans.",
-    "feit": "De met bladgoud bedekte Shwedagon-pagode in Yangon geldt als het belangrijkste boeddhistische heiligdom van het land."
+    "feit": "De met bladgoud bedekte Shwedagon-pagode in Yangon geldt als het belangrijkste boeddhistische heiligdom van het land.",
+    "geschiedenis": "Het koninkrijk Bagan liet duizenden tempels na. Brits vanaf de negentiende eeuw, onafhankelijk in 1948, en daarna vrijwel onafgebroken door het leger geregeerd; de laatste staatsgreep was in 2021.",
+    "cultuur": "Veel mensen smeren thanaka op hun wangen, een gele pasta van boomschors, tegen de zon en als versiering. Op de vlakte van Bagan staan meer dan tweeduizend tempels bij elkaar."
   },
   "Thailand": {
     "naam": "Land van de Thai. Het woord betekent ook vrij. Tot 1939 heette het Siam.",
     "taal": "Thai, een toontaal met een eigen schrift.",
-    "feit": "Het enige land van Zuidoost-Azië dat nooit door een Europese mogendheid is gekoloniseerd."
+    "feit": "Het enige land van Zuidoost-Azië dat nooit door een Europese mogendheid is gekoloniseerd.",
+    "geschiedenis": "Als enige land van Zuidoost-Azië nooit gekoloniseerd: het schipperde handig tussen Britten en Fransen. In 1932 werd de absolute monarchie een constitutionele, waarna er tientallen staatsgrepen volgden.",
+    "cultuur": "Het heet het land van de glimlach, en begroeten doe je met de wai: handen samen, hoofd licht gebogen. Met Songkran, het nieuwjaar in april, verandert het hele land drie dagen lang in een watergevecht."
   },
   "Laos": {
     "naam": "Naar het rijk Lan Xang, miljoen olifanten.",
     "taal": "Laotiaans.",
-    "feit": "Het enige land van Zuidoost-Azië zonder zeekust. De Mekong vormt een groot deel van de westgrens en is de belangrijkste verkeersader."
+    "feit": "Het enige land van Zuidoost-Azië zonder zeekust. De Mekong vormt een groot deel van de westgrens en is de belangrijkste verkeersader.",
+    "geschiedenis": "Het koninkrijk van de miljoen olifanten kwam later onder Frans bestuur. Tussen 1964 en 1973 vielen er meer bommen op Laos dan er in de hele Tweede Wereldoorlog werden gebruikt; een deel ligt nog altijd in de grond.",
+    "cultuur": "Het is het enige land van Zuidoost-Azië zonder kust. Kleefrijst wordt met de hand uit een rieten mandje gegeten, en Laotianen eten er per persoon meer van dan wie ook ter wereld."
   },
   "Cambodia": {
     "naam": "Van Kambuja, de naam van het oude rijk in Sanskrietteksten.",
     "taal": "Khmer, met een eigen schrift.",
-    "feit": "Angkor was rond het jaar 1200 waarschijnlijk de grootste stad ter wereld. De tempel Angkor Wat staat op de vlag."
+    "feit": "Angkor was rond het jaar 1200 waarschijnlijk de grootste stad ter wereld. De tempel Angkor Wat staat op de vlag.",
+    "geschiedenis": "Het Khmer-rijk bouwde tussen de negende en de vijftiende eeuw Angkor, met Angkor Wat als grootste religieuze bouwwerk ter wereld. Onder de Rode Khmer (1975-1979) kwam ongeveer een kwart van de bevolking om.",
+    "cultuur": "Angkor Wat staat op de vlag: het is het enige gebouw dat op een nationale vlag is afgebeeld. De klassieke apsara-dans, bijna verdwenen onder de Rode Khmer, is met de laatste overlevende dansers weer opgebouwd."
   },
   "Vietnam": {
     "naam": "Viet is de naam van het volk, nam betekent zuid: de Viet in het zuiden.",
     "taal": "Vietnamees, sinds de koloniale tijd geschreven in Latijns schrift met veel accenttekens.",
-    "feit": "Een lang, smal land tussen twee rivierdelta's: de Rode Rivier in het noorden en de Mekong in het zuiden."
+    "feit": "Een lang, smal land tussen twee rivierdelta's: de Rode Rivier in het noorden en de Mekong in het zuiden.",
+    "geschiedenis": "Duizend jaar Chinese overheersing, daarna Frans bestuur, en na 1954 een deling; de oorlog met de Verenigde Staten eindigde in 1975 met de hereniging. Sinds de hervormingen van 1986 groeit de economie hard.",
+    "cultuur": "Het Vietnamees wordt met Latijnse letters geschreven, een erfenis van missionarissen. Koffie drink je er met gecondenseerde melk, en in Hanoi zelfs met een geklopt ei erop."
   },
   "Malaysia": {
     "naam": "Land van de Maleiers.",
     "taal": "Maleis. Daarnaast worden Engels, Chinees en Tamil veel gesproken.",
-    "feit": "Het land bestaat uit twee stukken met de Zuid-Chinese Zee ertussen: het schiereiland en het noorden van Borneo."
+    "feit": "Het land bestaat uit twee stukken met de Zuid-Chinese Zee ertussen: het schiereiland en het noorden van Borneo.",
+    "geschiedenis": "Malakka was een van de rijkste havens ter wereld en werd achtereenvolgens Portugees, Nederlands en Brits. Maleisië werd in 1957 onafhankelijk; Singapore stapte er in 1965 weer uit.",
+    "cultuur": "Maleiers, Chinezen en Indiërs wonen door elkaar, dus alle feesten worden meegevierd — met 'open huis', waarbij iedereen bij iedereen mag aanschuiven. De doerian mag om zijn geur niet mee in hotels en de metro."
   },
   "Brunei": {
     "naam": "Voluit Brunei Darussalam: Brunei, woonplaats van de vrede.",
     "taal": "Maleis. Engels is wijdverbreid.",
-    "feit": "Een klein sultanaat op Borneo, door Maleisisch gebied in tweeën gedeeld, dat rijk is geworden van olie en gas."
+    "feit": "Een klein sultanaat op Borneo, door Maleisisch gebied in tweeën gedeeld, dat rijk is geworden van olie en gas.",
+    "geschiedenis": "Het sultanaat beheerste in de zestiende eeuw grote delen van Borneo en de Filipijnen. Het werd Brits protectoraat en in 1984 onafhankelijk; de olie maakte het klein maar rijk.",
+    "cultuur": "De sultan regeert al sinds 1967 en is een van de langst zittende staatshoofden ter wereld. In Kampong Ayer wonen duizenden mensen in huizen op palen boven het water, al eeuwenlang."
   },
   "Philippines": {
     "naam": "Genoemd naar koning Filips II van Spanje, die in de zestiende eeuw regeerde.",
     "taal": "Filipijns, gebaseerd op het Tagalog, en Engels zijn officieel. In het land worden meer dan honderd talen gesproken.",
-    "feit": "Meer dan zevenduizend eilanden. Het land ligt in de Vuurgordel en krijgt jaarlijks een reeks tyfoons over zich heen."
+    "feit": "Meer dan zevenduizend eilanden. Het land ligt in de Vuurgordel en krijgt jaarlijks een reeks tyfoons over zich heen.",
+    "geschiedenis": "Ruim driehonderd jaar Spaans — vandaar de naam, naar koning Filips II — en daarna vijftig jaar Amerikaans. In 1986 verdreef de People Power-revolutie dictator Marcos, vrijwel zonder bloedvergieten.",
+    "cultuur": "Het land is overwegend katholiek en de kerstversiering hangt er al in september. Karaoke is bijna een nationale bezigheid, en de jeepney — een omgebouwde legerjeep vol verf — was decennialang hét openbaar vervoer."
   },
   "Indonesia": {
     "naam": "In de negentiende eeuw gevormd uit het Griekse Indos en nesos: eilanden bij India.",
     "taal": "Bahasa Indonesia, gebaseerd op het Maleis van de handel en bewust gekozen als eenheidstaal. Daarnaast honderden streektalen.",
-    "feit": "Het grootste eilandenrijk ter wereld en het land met de meeste moslims. Nederland bestuurde het als Nederlands-Indië tot de onafhankelijkheid die in 1945 werd uitgeroepen."
+    "feit": "Het grootste eilandenrijk ter wereld en het land met de meeste moslims. Nederland bestuurde het als Nederlands-Indië tot de onafhankelijkheid die in 1945 werd uitgeroepen.",
+    "geschiedenis": "De specerijeneilanden trokken vanaf 1600 de VOC, waarna Nederland er ruim drie eeuwen bestuurde. Soekarno riep op 17 augustus 1945 de onafhankelijkheid uit; Nederland erkende die pas na vier jaar strijd.",
+    "cultuur": "Ruim zeventienduizend eilanden en meer dan zevenhonderd talen, bijeengehouden door één afgesproken taal: het Bahasa Indonesia. Batik en de wajangpoppen staan op de UNESCO-lijst."
   },
   "Timor-Leste": {
     "naam": "Timor betekent oost in het Maleis, leste oost in het Portugees. De naam zegt dus tweemaal oost.",
     "taal": "Tetum en Portugees zijn allebei officieel.",
-    "feit": "Na eeuwen Portugees bestuur en een Indonesische bezetting werd het land in 2002 zelfstandig, het jongste van Zuidoost-Azië."
+    "feit": "Na eeuwen Portugees bestuur en een Indonesische bezetting werd het land in 2002 zelfstandig, het jongste van Zuidoost-Azië.",
+    "geschiedenis": "Portugees tot 1975, waarna Indonesië het gebied bezette. Na een volksstemming in 1999 en veel geweld werd het in 2002 het eerste nieuwe land van deze eeuw.",
+    "cultuur": "Portugees en Tetum zijn de officiële talen, wat het een buitenbeentje in de regio maakt. Het sandelhout waarvoor handelaren ooit kwamen, is nog altijd een symbool van het land."
   },
   "Morocco": {
     "naam": "Van Marrakesh, dat uit het Berbers komt. In het Arabisch heet het land al-Maghrib, het westen.",
     "taal": "Arabisch en Tamazight (Berbers) zijn allebei officieel. Frans wordt veel gebruikt in onderwijs en zaken.",
     "feit": "Het Atlasgebergte houdt de regen tegen: aan de noordkant groeit van alles, aan de zuidkant begint meteen de Sahara.",
-    "bron": "Marokko bestuurt de Westelijke Sahara sinds 1975. Het Internationaal Gerechtshof oordeelde op 16 oktober 1975 dat er geen band van soevereiniteit met Marokko bestond die het recht op zelfbeschikking van de bevolking opzij zet. De VN rekent het gebied nog altijd tot de niet-zelfbesturende gebieden; de toegezegde volksstemming is nooit gehouden."
+    "bron": "Marokko bestuurt de Westelijke Sahara sinds 1975. Het Internationaal Gerechtshof oordeelde op 16 oktober 1975 dat er geen band van soevereiniteit met Marokko bestond die het recht op zelfbeschikking van de bevolking opzij zet. De VN rekent het gebied nog altijd tot de niet-zelfbesturende gebieden; de toegezegde volksstemming is nooit gehouden.",
+    "geschiedenis": "Rond 789 ontstond hier het eerste islamitische rijk van het gebied; later regeerden de Almoraviden en Almohaden vanuit Marrakesh over half Spanje. Marokko werd in 1912 Frans protectoraat en in 1956 weer onafhankelijk; de huidige dynastie regeert al sinds de zeventiende eeuw.",
+    "cultuur": "De universiteit van al-Qarawiyyin in Fez, in 859 gesticht door een vrouw, geldt als de oudste nog werkende universiteit ter wereld. Muntthee wordt van grote hoogte ingeschonken zodat er schuim op komt — en weigeren doe je niet."
   },
   "Algeria": {
     "naam": "Naar de hoofdstad Algiers, van het Arabische al-Jazair, de eilanden: rotseilandjes voor de kust.",
     "taal": "Arabisch en Tamazight (Berbers) zijn officieel. Frans is veelgebruikt.",
-    "feit": "Het grootste land van Afrika. Ruim vier vijfde is Sahara; vrijwel iedereen woont in de smalle strook langs de kust."
+    "feit": "Het grootste land van Afrika. Ruim vier vijfde is Sahara; vrijwel iedereen woont in de smalle strook langs de kust.",
+    "geschiedenis": "Numidisch, Romeins, Ottomaans en vanaf 1830 Frans, waarbij Frankrijk het niet als kolonie maar als deel van Frankrijk zelf beschouwde. Juist daardoor werd de onafhankelijkheidsoorlog (1954-1962) zo bitter.",
+    "cultuur": "Het is met afstand het grootste land van Afrika, en ruim tachtig procent daarvan is Sahara. De raï-muziek uit Oran ging de hele wereld over."
   },
   "Tunisia": {
     "naam": "Naar de hoofdstad Tunis, een naam die al in de oudheid gebruikt werd.",
     "taal": "Arabisch. Frans wordt veel gebruikt.",
-    "feit": "Vlak bij Tunis lag Carthago, de stad die eeuwenlang de tegenstander van Rome was."
+    "feit": "Vlak bij Tunis lag Carthago, de stad die eeuwenlang de tegenstander van Rome was.",
+    "geschiedenis": "Hier lag Carthago, de stad die drie oorlogen tegen Rome voerde en in 146 v.Chr. met de grond gelijk werd gemaakt. In 2011 begon in Tunesië de Arabische Lente, en als enige land groeide daar een gekozen bestuur uit — al staat dat sinds 2021 onder druk.",
+    "cultuur": "De blauw-witte huizen van Sidi Bou Saïd zijn bij verordening zo geschilderd. En Tataouine bestaat echt: het woestijndorp leende zijn naam aan de planeet Tatooine uit Star Wars, waarvan de decors er nog staan."
   },
   "Libya": {
     "naam": "De Grieken noemden zo het hele gebied ten westen van Egypte, naar de Libu, een volk uit de streek.",
     "taal": "Arabisch.",
-    "feit": "Bijna het hele land is woestijn. Fossiel grondwater van onder de Sahara wordt door reuzenleidingen naar de kuststeden gepompt."
+    "feit": "Bijna het hele land is woestijn. Fossiel grondwater van onder de Sahara wordt door reuzenleidingen naar de kuststeden gepompt.",
+    "geschiedenis": "Tripolitanië en Cyrenaica waren eeuwenlang aparte gebieden, eerst Ottomaans en daarna Italiaans; pas in 1951 werden ze samen één koninkrijk. Muammar Kadhafi regeerde van 1969 tot 2011, waarna het land uiteenviel in strijdende kampen.",
+    "cultuur": "Negentig procent van het land is woestijn, dus bijna iedereen woont aan de kust. In Leptis Magna liggen Romeinse ruïnes die tot de best bewaarde ter wereld horen."
   },
   "Egypt": {
     "naam": "Via het Grieks van een oude naam voor de stad Memphis. De Egyptenaren zelf zeggen Misr.",
     "taal": "Arabisch.",
-    "feit": "Vrijwel de hele bevolking woont langs de Nijl en in de delta, op een paar procent van het grondgebied."
+    "feit": "Vrijwel de hele bevolking woont langs de Nijl en in de delta, op een paar procent van het grondgebied.",
+    "geschiedenis": "Ruim drieduizend jaar farao's, met de piramides van Gizeh als oudste van de zeven wereldwonderen — en als enige dat er nog staat. Daarna Grieks, Romeins, Arabisch en Ottomaans bestuur; in 1952 kwam er een einde aan het koningschap en in 1956 werd het Suezkanaal genationaliseerd.",
+    "cultuur": "Egyptenaren noemen hun land Umm al-Dunya, de moeder van de wereld. Het hiërogliefenschrift werd pas leesbaar door de Steen van Rosetta, waarop dezelfde tekst in drie schriften stond."
   },
   "Sudan": {
     "naam": "Van het Arabische bilad as-sudan, land van de zwarten: de oude naam voor de hele strook onder de Sahara.",
     "taal": "Arabisch en Engels zijn allebei officieel.",
-    "feit": "Bij Khartoem komen de Blauwe en de Witte Nijl samen. Het kleurverschil tussen beide is op die plek te zien."
+    "feit": "Bij Khartoem komen de Blauwe en de Witte Nijl samen. Het kleurverschil tussen beide is op die plek te zien.",
+    "geschiedenis": "Langs de Nijl lagen de Nubische koninkrijken, met bij Meroë zo'n tweehonderd piramides. Het land werd in 1956 onafhankelijk van Egypte en Groot-Brittannië en kende sindsdien meerdere burgeroorlogen.",
+    "cultuur": "Soedan heeft meer piramides dan enig ander land, alleen kleiner en steiler dan de Egyptische. Gastvrijheid is er bijna een plicht: wie langsloopt terwijl er gegeten wordt, wordt uitgenodigd aan te schuiven."
   },
   "S. Sudan": {
     "naam": "In 2011 afgesplitst van Soedan. De naam zegt waar het ligt.",
     "taal": "Engels is de officiële taal; daarnaast worden tientallen inheemse talen gesproken.",
-    "feit": "Het jongste land ter wereld. De Sudd, een enorm moeras in de Nijl, maakt grote delen maandenlang onbereikbaar."
+    "feit": "Het jongste land ter wereld. De Sudd, een enorm moeras in de Nijl, maakt grote delen maandenlang onbereikbaar.",
+    "geschiedenis": "Na twee lange burgeroorlogen tegen het noorden stemde het zuiden in 2011 met bijna 99 procent voor afscheiding en werd het jongste land ter wereld. Kort daarna brak er opnieuw oorlog uit, ditmaal tussen groepen binnen het land zelf.",
+    "cultuur": "Vee is er meer dan bezit: bij de Dinka en Nuer draaien huwelijk, liederen en zelfs namen om koeien. Het land telt meer dan zestig talen."
   },
   "Eritrea": {
     "naam": "Van het Griekse Erythra Thalassa, Rode Zee: het land aan de Rode Zee.",
     "taal": "Geen officiële taal; in bestuur en onderwijs worden Tigrinya, Arabisch en Engels gebruikt.",
-    "feit": "Na dertig jaar oorlog werd het in 1993 onafhankelijk van Ethiopië. Daardoor raakte Ethiopië zijn zeekust kwijt."
+    "feit": "Na dertig jaar oorlog werd het in 1993 onafhankelijk van Ethiopië. Daardoor raakte Ethiopië zijn zeekust kwijt.",
+    "geschiedenis": "Italië maakte er in 1890 zijn eerste kolonie van; daarna volgden Brits bestuur en in 1952 een federatie met Ethiopië, die Ethiopië tien jaar later opzij zette. Dertig jaar oorlog volgden, tot Eritrea in 1993 zelfstandig werd.",
+    "cultuur": "Asmara staat op de werelderfgoedlijst om zijn Italiaanse modernistische bouwwerken, inclusief een benzinestation in de vorm van een vliegtuig. Koffie wordt er in drie rondes geschonken, uit een aardewerken kan."
   },
   "Ethiopia": {
     "naam": "Grieks voor land van de verbrande gezichten. In het Westen vroeger ook Abessinië genoemd.",
     "taal": "Amhaars is de federale werktaal en heeft een eigen schrift. Oromo heeft de meeste sprekers.",
-    "feit": "Het enige land van Afrika dat nooit blijvend gekoloniseerd is. Het heeft een eigen kalender met dertien maanden."
+    "feit": "Het enige land van Afrika dat nooit blijvend gekoloniseerd is. Het heeft een eigen kalender met dertien maanden.",
+    "geschiedenis": "Het enige land van Afrika dat nooit blijvend gekoloniseerd is: bij Adwa versloeg het in 1896 een Italiaans leger. De keizerlijke lijn, die zich op koning Salomo beriep, eindigde in 1974 met de afzetting van Haile Selassie.",
+    "cultuur": "Het land heeft een eigen kalender met dertien maanden en loopt zo'n zeven jaar achter op de onze; nieuwjaar valt in september. De koffieplant komt hiervandaan en de koffieceremonie duurt gerust een uur."
   },
   "Djibouti": {
     "naam": "Naar de gelijknamige hoofdstad; de herkomst is onzeker.",
     "taal": "Frans en Arabisch zijn officieel; thuis spreken mensen Somali of Afar.",
-    "feit": "Een klein land op een sleutelplek: alle scheepvaart tussen Rode Zee en Indische Oceaan gaat langs deze kust."
+    "feit": "Een klein land op een sleutelplek: alle scheepvaart tussen Rode Zee en Indische Oceaan gaat langs deze kust.",
+    "geschiedenis": "Frankrijk vestigde zich hier om de zeestraat en de spoorlijn naar Addis Abeba, en het land werd pas in 1977 onafhankelijk — als laatste Franse gebied op het Afrikaanse vasteland. Door die ligging aan een van de drukste scheepvaartroutes staan er nu militaire bases van meerdere wereldmachten.",
+    "cultuur": "Het Assalmeer ligt 155 meter onder zeeniveau, het laagste punt van Afrika, en is zo zout dat je erop drijft. 's Middags ligt het werk stil voor de khat, verse blaadjes die dagelijks uit Ethiopië worden aangevoerd."
   },
   "Somalia": {
     "naam": "Land van de Somali.",
     "taal": "Somali en Arabisch.",
-    "feit": "Het heeft de langste kustlijn van het vasteland van Afrika, langs zowel de Golf van Aden als de Indische Oceaan."
+    "feit": "Het heeft de langste kustlijn van het vasteland van Afrika, langs zowel de Golf van Aden als de Indische Oceaan.",
+    "geschiedenis": "De kust was al in de oudheid bekend om wierook en mirre. Brits en Italiaans Somaliland gingen in 1960 samen; sinds 1991 viel het centrale gezag weg en bestuurt Somaliland zichzelf.",
+    "cultuur": "Somaliërs noemen zich een natie van dichters: gedichten worden uit het hoofd voorgedragen en kunnen ruzies beslechten. Rijkdom wordt in kamelen gemeten, en het land heeft er meer dan enig ander."
   },
   "Kenya": {
     "naam": "Naar de berg Kenia, na de Kilimanjaro de hoogste van Afrika.",
     "taal": "Swahili en Engels zijn allebei officieel.",
-    "feit": "De evenaar loopt dwars door het land. In de Grote Slenk zijn enkele van de oudste menselijke fossielen gevonden."
+    "feit": "De evenaar loopt dwars door het land. In de Grote Slenk zijn enkele van de oudste menselijke fossielen gevonden.",
+    "geschiedenis": "De Swahilikust dreef al duizend jaar handel met Arabië en India. De Britten legden een spoorlijn aan en gaven de hooglanden aan blanke boeren; na de Mau Mau-opstand werd het land in 1963 onafhankelijk.",
+    "cultuur": "Safari is gewoon het Swahili-woord voor reis. Lopers uit de Rift Valley, en dan vooral uit de Kalenjin-gemeenschap, winnen al decennia de grote marathons."
   },
   "Uganda": {
     "naam": "Naar Buganda, het koninkrijk rond het Victoriameer.",
     "taal": "Engels en Swahili zijn officieel; Luganda is de grootste streektaal.",
-    "feit": "Bij Jinja verlaat de Witte Nijl het Victoriameer. Die plek geldt als een van de bronnen van de Nijl."
+    "feit": "Bij Jinja verlaat de Witte Nijl het Victoriameer. Die plek geldt als een van de bronnen van de Nijl.",
+    "geschiedenis": "Rond het Victoriameer lagen koninkrijken als Buganda, die de Britten in stand lieten toen ze in 1894 een protectoraat vestigden. Na de onafhankelijkheid in 1962 volgde het schrikbewind van Idi Amin, die in 1972 de hele Aziatische gemeenschap het land uit zette.",
+    "cultuur": "Churchill noemde het de parel van Afrika. Er worden meer dan veertig talen gesproken en het land heeft een van de jongste bevolkingen ter wereld."
   },
   "Rwanda": {
     "naam": "Uit het Kinyarwanda, uitgelegd als het gebied dat zich uitstrekt.",
     "taal": "Kinyarwanda, met Engels, Frans en Swahili daarnaast als officiële talen.",
-    "feit": "Het land van duizend heuvels: dichtbevolkt bergland waar bijna elke helling bebouwd is. In 1994 werden hier in honderd dagen naar schatting achthonderdduizend mensen vermoord, vooral Tutsi's."
+    "feit": "Het land van duizend heuvels: dichtbevolkt bergland waar bijna elke helling bebouwd is. In 1994 werden hier in honderd dagen naar schatting achthonderdduizend mensen vermoord, vooral Tutsi's.",
+    "geschiedenis": "Een oud koninkrijk met een eigen hofcultuur, daarna Duits en Belgisch bestuur dat het onderscheid tussen Hutu en Tutsi op identiteitskaarten vastlegde. In 1994 werden in honderd dagen naar schatting achthonderdduizend mensen vermoord, vooral Tutsi.",
+    "cultuur": "Op de laatste zaterdag van elke maand doet iedereen mee aan umuganda, gemeenschapswerk waarvoor het verkeer stilligt. Plastic tasjes zijn verboden en Kigali geldt als een van de schoonste steden van Afrika."
   },
   "Burundi": {
     "naam": "Dezelfde woordvorming als Rwanda: het land van de Rundi.",
     "taal": "Kirundi, Frans en Engels.",
-    "feit": "Klein en dichtbevolkt bergland aan het Tanganyikameer, een van de diepste meren ter wereld."
+    "feit": "Klein en dichtbevolkt bergland aan het Tanganyikameer, een van de diepste meren ter wereld.",
+    "geschiedenis": "Net als buurland Rwanda een oud koninkrijk, daarna Duits en Belgisch bestuurd. Na de onafhankelijkheid in 1962 volgden decennia van geweld tussen Hutu en Tutsi en een burgeroorlog die tot 2005 duurde.",
+    "cultuur": "De koninklijke trommelaars van Gitega staan op de UNESCO-lijst: hun trommels klonken vroeger alleen bij de koning. Het Tanganyikameer aan de westgrens is het op een na diepste meer ter wereld."
   },
   "Tanzania": {
     "naam": "Samentrekking van Tanganyika en Zanzibar, die in 1964 samengingen.",
     "taal": "Swahili is de nationale taal; Engels wordt in bestuur en onderwijs gebruikt.",
-    "feit": "De Kilimanjaro is met bijna zesduizend meter de hoogste berg van Afrika en staat vlak bij de evenaar."
+    "feit": "De Kilimanjaro is met bijna zesduizend meter de hoogste berg van Afrika en staat vlak bij de evenaar.",
+    "geschiedenis": "Zanzibar was een sultanaat en een draaischijf in de handel in kruidnagel en slaven, terwijl het vasteland Duits en daarna Brits werd. In 1964 gingen Tanganyika en Zanzibar samen; de naam is een samentrekking van allebei.",
+    "cultuur": "Swahili verbindt meer dan honderd volken met elkaar — hakuna matata is er gewoon een gezegde. In de Olduvaikloof zijn enkele van de oudste resten van onze voorouders gevonden."
   },
   "Mauritania": {
     "naam": "Naar de Mauri, de oude naam voor de Berberbevolking van Noordwest-Afrika.",
     "taal": "Arabisch is officieel; daarnaast worden Pulaar, Soninke en Wolof erkend.",
-    "feit": "Hier rijdt een van de langste treinen ter wereld: kilometerslange ertstreinen van de ijzermijnen in de woestijn naar de kust."
+    "feit": "Hier rijdt een van de langste treinen ter wereld: kilometerslange ertstreinen van de ijzermijnen in de woestijn naar de kust.",
+    "geschiedenis": "Nomadische Berber- en Arabische stammen trokken hier eeuwenlang door de woestijn; Chinguetti was een pleisterplaats voor pelgrims naar Mekka en bewaart nog altijd eeuwenoude bibliotheken. Frans bestuur eindigde in 1960.",
+    "cultuur": "Er rijdt een van de langste treinen ter wereld: ruim twee kilometer ijzererts dwars door de woestijn, waar reizigers gratis bovenop meerijden. Slavernij werd hier als laatste land ter wereld afgeschaft, in 1981, en pas in 2007 strafbaar gesteld."
   },
   "Mali": {
     "naam": "Naar het middeleeuwse rijk Mali, dat hier lag.",
     "taal": "Frans was lang de officiële taal. Sinds de grondwet van 2023 hebben de landstalen, waaronder Bambara, die status en is Frans nog werktaal.",
-    "feit": "Timboektoe was een centrum van handel en geleerdheid, met bibliotheken vol handschriften."
+    "feit": "Timboektoe was een centrum van handel en geleerdheid, met bibliotheken vol handschriften.",
+    "geschiedenis": "Het rijk van Mali was in de veertiende eeuw schatrijk van goud; koning Mansa Musa gaf op zijn bedevaart naar Mekka zoveel goud weg dat de prijs in Egypte jarenlang laag bleef. Timboektoe was toen een centrum van geleerdheid met honderdduizenden handschriften.",
+    "cultuur": "De moskee van Djenné is het grootste bouwwerk van leem ter wereld en wordt elk jaar door de hele stad opnieuw gepleisterd. De muziek van Mali — de kora, en de blues uit de woestijn — reisde de wereld over."
   },
   "Burkina Faso": {
     "naam": "In 1984 gekozen als vervanging van Opper-Volta. Het betekent land van de oprechte mensen en is uit twee landstalen samengesteld.",
     "taal": "Frans was de officiële taal. Sinds de grondwetswijziging van eind 2023 hebben de landstalen, waaronder Mooré, die status.",
-    "feit": "Het land ligt geheel in het binnenland: het noorden loopt over in de Sahel, het zuiden is groenere savanne."
+    "feit": "Het land ligt geheel in het binnenland: het noorden loopt over in de Sahel, het zuiden is groenere savanne.",
+    "geschiedenis": "De Mossi-koninkrijken hielden invallers eeuwenlang buiten de deur, tot de Fransen kwamen. Thomas Sankara veranderde in 1984 de koloniale naam Opper-Volta in Burkina Faso, land van oprechte mensen, en werd in 1987 vermoord.",
+    "cultuur": "Ouagadougou is om het jaar het hart van de Afrikaanse film met het FESPACO-festival, het grootste van het werelddeel. Het land is beroemd om zijn bronsgietwerk en om de maskers van de Bwa en de Bobo."
   },
   "Niger": {
     "naam": "Naar de rivier de Niger, die door het zuidwesten stroomt.",
     "taal": "Hausa is de meest gesproken taal; Frans is lang de bestuurstaal geweest.",
-    "feit": "Ruim twee derde van het land is woestijn. Het heeft een van de jongste bevolkingen ter wereld."
+    "feit": "Ruim twee derde van het land is woestijn. Het heeft een van de jongste bevolkingen ter wereld.",
+    "geschiedenis": "Door dit gebied liepen de karavaanroutes door de Sahara, met Agadez als handelsstad van zout, goud en boeken. Frans vanaf het begin van de twintigste eeuw, onafhankelijk in 1960 en sindsdien meermaals door staatsgrepen bestuurd.",
+    "cultuur": "Bij de Wodaabe-nomaden maken de mánnen zich op en dansen zij om indruk te maken op de vrouwen, tijdens het Gerewol-feest. Bij Kouré leven de laatste wilde giraffen van West-Afrika."
   },
   "Chad": {
     "naam": "Naar het Tsjaadmeer, van een woord voor groot water.",
     "taal": "Frans en Arabisch zijn officieel.",
-    "feit": "Het Tsjaadmeer is in vijftig jaar sterk gekrompen door droogte en wateronttrekking."
+    "feit": "Het Tsjaadmeer is in vijftig jaar sterk gekrompen door droogte en wateronttrekking.",
+    "geschiedenis": "Rond het Tsjaadmeer lagen de rijken Kanem en Bornu, die bijna duizend jaar de handel over de Sahara beheersten. Frans vanaf 1900, onafhankelijk in 1960, daarna decennia van burgeroorlog en strijd met Libië.",
+    "cultuur": "Het Tsjaadmeer is sinds de jaren zestig sterk gekrompen, wat miljoenen vissers en boeren raakt. In het Ennedi-gebergte staan duizenden jaren oude rotstekeningen van koeien en zwemmers, op plekken waar nu alleen zand ligt."
   },
   "Senegal": {
     "naam": "Naar de rivier de Senegal, die de noordgrens vormt.",
     "taal": "Frans is officieel; Wolof is de taal die de meeste mensen dagelijks spreken.",
-    "feit": "Bij Dakar ligt het meest westelijke punt van het vasteland van Afrika."
+    "feit": "Bij Dakar ligt het meest westelijke punt van het vasteland van Afrika.",
+    "geschiedenis": "Het eiland Gorée voor Dakar was eeuwenlang een schakel in de trans-Atlantische slavenhandel en is nu werelderfgoed en herdenkingsplek. Senegal werd in 1960 onafhankelijk; eerste president Léopold Senghor was ook dichter en trad na twintig jaar uit zichzelf af.",
+    "cultuur": "Teranga — gastvrijheid — is het woord waarmee Senegalezen zichzelf omschrijven: een gast krijgt het beste bord. De worstelsport lutte trekt er meer publiek dan voetbal."
   },
   "Gambia": {
     "naam": "Naar de rivier de Gambia.",
     "taal": "Engels is officieel; Mandinka en Wolof worden veel gesproken.",
-    "feit": "Een lint van land aan weerszijden van de rivier, aan drie kanten omsloten door Senegal. Het kleinste land van het vasteland van Afrika."
+    "feit": "Een lint van land aan weerszijden van de rivier, aan drie kanten omsloten door Senegal. Het kleinste land van het vasteland van Afrika.",
+    "geschiedenis": "Het land is niet meer dan een strook aan weerszijden van de rivier; volgens de overlevering claimden de Britten precies zover als een kanonskogel vanaf een schip reikte. Onafhankelijk in 1965, volledig omsloten door Senegal.",
+    "cultuur": "Het boek en de televisieserie Roots brachten duizenden Amerikanen naar het dorp Juffureh, op zoek naar hun voorouders. Langs de rivier zijn meer dan zeshonderd vogelsoorten gezien, op een land ter grootte van een provincie."
   },
   "Guinea-Bissau": {
     "naam": "Guinee met de hoofdstad erachter, om het te onderscheiden van de buurlanden met dezelfde naam.",
     "taal": "Portugees is officieel; op straat spreekt men vooral Guinee-Bissau-Creools.",
-    "feit": "Voor de kust liggen de Bijagós-eilanden, tientallen eilanden vol mangrove."
+    "feit": "Voor de kust liggen de Bijagós-eilanden, tientallen eilanden vol mangrove.",
+    "geschiedenis": "Portugees sinds de vijftiende eeuw. De bevrijdingsstrijd onder Amílcar Cabral was zo doeltreffend dat die meehielp aan de omwenteling in Portugal zelf in 1974; sindsdien is het land geplaagd door staatsgrepen.",
+    "cultuur": "Voor de kust liggen de Bijagós-eilanden, waar vrouwen van oudsher de echtgenoot kiezen en priesteressen het religieuze leven leiden. Cashewnoten zijn veruit het belangrijkste product."
   },
   "Guinea": {
     "naam": "Een oude Europese naam voor de kust van West-Afrika; de herkomst is onzeker.",
     "taal": "Frans is officieel; Fulfulde, Malinke en Susu zijn de grootste landstalen.",
-    "feit": "In het bergland ontspringen de Niger, de Senegal en de Gambia: drie grote rivieren met één brongebied."
+    "feit": "In het bergland ontspringen de Niger, de Senegal en de Gambia: drie grote rivieren met één brongebied.",
+    "geschiedenis": "Als enige Franse kolonie stemde Guinee in 1958 tegen het voorstel om binnen de Franse gemeenschap te blijven. Frankrijk vertrok daarop abrupt en nam alles mee wat los zat; daarna volgden decennia van eenpartijbewind.",
+    "cultuur": "In het bergland ontspringen de Niger, de Senegal en de Gambia: Guinee heet daarom de watertoren van West-Afrika. Les Ballets Africains bracht als eerste gezelschap Afrikaanse dans op de wereldpodia."
   },
   "Sierra Leone": {
     "naam": "Portugees voor leeuwenbergen, de naam die een zeevaarder in de vijftiende eeuw aan de bergen bij de kust gaf.",
     "taal": "Engels is officieel; Krio is de omgangstaal die bijna iedereen spreekt.",
-    "feit": "De hoofdstad Freetown is in de achttiende eeuw gesticht als vestigingsplaats voor bevrijde tot slaaf gemaakten."
+    "feit": "De hoofdstad Freetown is in de achttiende eeuw gesticht als vestigingsplaats voor bevrijde tot slaaf gemaakten.",
+    "geschiedenis": "Freetown werd eind achttiende eeuw gesticht als thuis voor bevrijde slaven — vandaar de naam. Een burgeroorlog om diamanten (1991-2002) verwoestte het land, waarna de vrede terugkeerde.",
+    "cultuur": "De landsnaam betekent leeuwenberg, zoals een Portugese zeevaarder het bergland achter Freetown doopte. Krio, een taal op Engelse basis, is de gemeenschappelijke taal van tientallen volken."
   },
   "Liberia": {
     "naam": "Van het Latijnse liber, vrij. Het land werd in de negentiende eeuw gesticht als vestigingsplaats voor vrijgelaten tot slaaf gemaakten uit de Verenigde Staten.",
     "taal": "Engels.",
-    "feit": "De vlag lijkt op die van de Verenigde Staten, maar met één ster in plaats van vijftig."
+    "feit": "De vlag lijkt op die van de Verenigde Staten, maar met één ster in plaats van vijftig.",
+    "geschiedenis": "In 1822 gesticht door Amerikaanse genootschappen als bestemming voor bevrijde slaven; in 1847 riep het als eerste Afrikaanse republiek zijn onafhankelijkheid uit. De spanning tussen die kolonisten en de oorspronkelijke bevolking bleef en mondde uit in twee burgeroorlogen.",
+    "cultuur": "De vlag lijkt sterk op de Amerikaanse, met één ster in plaats van vijftig. Ellen Johnson Sirleaf werd in 2006 het eerste gekozen vrouwelijke staatshoofd van Afrika en kreeg de Nobelprijs voor de Vrede."
   },
   "Côte d'Ivoire": {
     "naam": "Ivoorkust, naar de handel in olifantenivoor. Het land vraagt de Franse naam ook in andere talen te gebruiken.",
     "taal": "Frans is officieel; daarnaast worden tientallen landstalen gesproken.",
-    "feit": "De grootste cacaoproducent ter wereld. Een flink deel van de chocolade in de winkel begint hier."
+    "feit": "De grootste cacaoproducent ter wereld. Een flink deel van de chocolade in de winkel begint hier.",
+    "geschiedenis": "Frans vanaf het einde van de negentiende eeuw, en na 1960 onder Félix Houphouët-Boigny lang stabiel en welvarend door de cacao. Na zijn dood volgden staatsgrepen en twee burgeroorlogen, die draaiden om de vraag wie er 'echt' Ivoriaan was.",
+    "cultuur": "Het land is de grootste cacaoproducent ter wereld: ongeveer veertig procent van alle chocola begint hier. In Yamoussoukro staat een basiliek naar het voorbeeld van de Sint-Pieter, en groter dan het origineel."
   },
   "Ghana": {
     "naam": "In 1957 gekozen naar het oude rijk Ghana, dat overigens verder naar het noordwesten lag.",
     "taal": "Engels is officieel; Twi is de meest gesproken landstaal.",
-    "feit": "Het eerste land ten zuiden van de Sahara dat onafhankelijk werd, in 1957. Langs de kust staan nog tientallen forten uit de slavenhandel."
+    "feit": "Het eerste land ten zuiden van de Sahara dat onafhankelijk werd, in 1957. Langs de kust staan nog tientallen forten uit de slavenhandel.",
+    "geschiedenis": "Het Ashanti-rijk werd rijk van goud en hield de Britten in vijf oorlogen tegen. In 1957 was Ghana onder Kwame Nkrumah de eerste kolonie in Afrika ten zuiden van de Sahara die onafhankelijk werd — het startsein voor het hele werelddeel.",
+    "cultuur": "Veel Ghanezen dragen een naam naar de dag waarop ze geboren zijn; Kofi betekent vrijdag. Begrafenissen zijn er grote feesten, met kisten in de vorm van een vis, een auto of een cacaoboon."
   },
   "Togo": {
     "naam": "Naar het dorp Togo aan een lagune, waar een verdrag werd gesloten.",
     "taal": "Frans is officieel; Ewe en Kabiyé zijn de grootste landstalen.",
-    "feit": "Een smalle strook van de kust tot ver het binnenland in, nergens meer dan ongeveer honderdvijftig kilometer breed."
+    "feit": "Een smalle strook van de kust tot ver het binnenland in, nergens meer dan ongeveer honderdvijftig kilometer breed.",
+    "geschiedenis": "Duits sinds 1884, en na de Eerste Wereldoorlog verdeeld tussen Frankrijk en Groot-Brittannië, waardoor het Ewe-volk over drie landen verspreid raakte. Onafhankelijk in 1960.",
+    "cultuur": "Op de markt van Lomé hadden de 'Nana Benz' de macht: vrouwen die de handel in gebloemde stoffen beheersten en zo rijk werden dat ze in Mercedessen reden. In het Tamberma-dal staan lemen woningen die eruitzien als kleine kastelen."
   },
   "Benin": {
     "naam": "Naar de Bocht van Benin. Tot 1975 heette het Dahomey, naar het koninkrijk dat hier lag.",
     "taal": "Frans is officieel; Fon en Yoruba worden veel gesproken.",
-    "feit": "Vodun, in het Westen bekend als voodoo, is hier een erkende godsdienst met een eigen feestdag."
+    "feit": "Vodun, in het Westen bekend als voodoo, is hier een erkende godsdienst met een eigen feestdag.",
+    "geschiedenis": "Het koninkrijk Dahomey was machtig en berucht: het had een legerkorps van vrouwelijke soldaten, de Agojie, en dreef zelf handel in slaven vanuit de haven Ouidah. Frans vanaf 1894, onafhankelijk in 1960.",
+    "cultuur": "Vodun (voodoo) is er een erkende godsdienst met een eigen nationale feestdag op 10 januari; het reisde met de slavenschepen mee naar Haïti en Brazilië. In Ganvié staat een heel dorp op palen midden in een meer."
   },
   "Nigeria": {
     "naam": "Naar de rivier de Niger.",
     "taal": "Engels is officieel; Hausa, Yoruba en Igbo zijn de drie grootste van ruim vijfhonderd landstalen.",
-    "feit": "Het land met de meeste inwoners van Afrika: ongeveer één op de zeven Afrikanen is Nigeriaan."
+    "feit": "Het land met de meeste inwoners van Afrika: ongeveer één op de zeven Afrikanen is Nigeriaan.",
+    "geschiedenis": "Het gebied kende grote rijken: Benin met zijn beroemde bronzen, de Hausa-stadstaten en het kalifaat van Sokoto. De Britten voegden noord en zuid in 1914 samen tot één kolonie; na de onafhankelijkheid in 1960 volgde de Biafra-oorlog.",
+    "cultuur": "Nollywood maakt per jaar meer films dan Hollywood. Met ruim tweehonderd miljoen inwoners en meer dan vijfhonderd talen is dit het volkrijkste land van Afrika, en afrobeats uit Lagos staat wereldwijd in de hitlijsten."
   },
   "Cameroon": {
     "naam": "Van het Portugese Rio dos Camarões, rivier van de garnalen.",
     "taal": "Frans en Engels zijn allebei officieel, een erfenis van twee koloniale bestuurders.",
-    "feit": "Het wordt Afrika in het klein genoemd: woestijn in het noorden, regenwoud in het zuiden, bergen en kust ertussen."
+    "feit": "Het wordt Afrika in het klein genoemd: woestijn in het noorden, regenwoud in het zuiden, bergen en kust ertussen.",
+    "geschiedenis": "Duits Kameroen werd na de Eerste Wereldoorlog tussen Frankrijk en Groot-Brittannië verdeeld; bij de onafhankelijkheid rond 1960 kwamen de delen weer samen. Die tweedeling in taal speelt tot vandaag, met een Engelstalig westen dat zich achtergesteld voelt.",
+    "cultuur": "Het land heet 'Afrika in het klein': woestijn, regenwoud, bergen en kust binnen één grens, met meer dan tweehonderdvijftig talen. De naam komt van de Portugese Rio dos Camarões, de rivier van de garnalen."
   },
   "Central African Rep.": {
     "naam": "De naam beschrijft de ligging: midden in het werelddeel.",
     "taal": "Sango en Frans zijn allebei officieel.",
-    "feit": "Het land ligt vrijwel precies in het midden van Afrika en heeft geen zeekust."
+    "feit": "Het land ligt vrijwel precies in het midden van Afrika en heeft geen zeekust.",
+    "geschiedenis": "Het Franse Oubangi-Chari werd in 1960 zelfstandig. Jean-Bédel Bokassa kroonde zichzelf in 1977 tot keizer in een ceremonie die zowat een jaarbegroting kostte; sindsdien is het land nauwelijks uit de instabiliteit gekomen.",
+    "cultuur": "In het regenwoud in het zuidwesten leven de Aka, bekend om hun meerstemmige zang, die op de UNESCO-lijst staat. Het land ligt vrijwel precies in het midden van Afrika en heeft geen kust."
   },
   "Eq. Guinea": {
     "naam": "Guinee bij de evenaar, al ligt het vasteland er net ten noorden van.",
     "taal": "Spaans, Frans en Portugees zijn officieel; Spaans is de omgangstaal.",
-    "feit": "Het enige land van Afrika waar Spaans de voertaal is. De hoofdstad Malabo ligt niet op het vasteland maar op een eiland."
+    "feit": "Het enige land van Afrika waar Spaans de voertaal is. De hoofdstad Malabo ligt niet op het vasteland maar op een eiland.",
+    "geschiedenis": "Het was Spaans Guinea tot 1968 en is daarmee het enige land van Afrika met Spaans als officiële taal. Sinds de olievondsten van de jaren negentig is het inkomen per hoofd hoog, terwijl het grootste deel van de bevolking arm bleef.",
+    "cultuur": "Het land bestaat uit een stuk vasteland en een aantal eilanden, en de hoofdstad Malabo ligt op zo'n eiland, ver van de rest. Spaans, Frans en Portugees zijn er alle drie officieel — een combinatie die nergens anders bestaat."
   },
   "Gabon": {
     "naam": "Van het Portugese gabão, een mantel met kap: naar de vorm van de riviermonding.",
     "taal": "Frans.",
-    "feit": "Ruim tachtig procent van het land is regenwoud en een groot deel daarvan is beschermd natuurgebied."
+    "feit": "Ruim tachtig procent van het land is regenwoud en een groot deel daarvan is beschermd natuurgebied.",
+    "geschiedenis": "Libreville werd in 1849 gesticht voor bevrijde slaven — vandaar de naam. Frans tot 1960, waarna één familie het land ruim vijftig jaar bestuurde, tot een staatsgreep in 2023.",
+    "cultuur": "Ruim tachtig procent is bos en een negende deel is nationaal park; er lopen bosolifanten over het strand. Albert Schweitzer bouwde er zijn ziekenhuis in Lambaréné."
   },
   "Congo": {
     "naam": "Vaak Congo-Brazzaville genoemd, naar de hoofdstad, om het van de grote buur te onderscheiden. Congo komt van het koninkrijk Kongo.",
     "taal": "Frans is officieel; Lingala en Kituba worden veel gesproken.",
-    "feit": "Brazzaville en Kinshasa liggen tegenover elkaar aan de Congo: na Rome en Vaticaanstad de dichtst bij elkaar liggende hoofdsteden ter wereld."
+    "feit": "Brazzaville en Kinshasa liggen tegenover elkaar aan de Congo: na Rome en Vaticaanstad de dichtst bij elkaar liggende hoofdsteden ter wereld.",
+    "geschiedenis": "Frans-Congo werd vanuit Brazzaville bestuurd, dat in de Tweede Wereldoorlog even de hoofdstad van Vrij Frankrijk was. Onafhankelijk in 1960, daarna een marxistische periode en een burgeroorlog in de jaren negentig.",
+    "cultuur": "De sapeurs van Brazzaville maken van goed gekleed gaan een kunst: pakken in felle kleuren, met stijl als levenshouding. De Congolese rumba staat op de UNESCO-lijst van tradities."
   },
   "Dem. Rep. Congo": {
     "naam": "Naar de rivier de Congo. Tussen 1971 en 1997 heette het Zaïre.",
     "taal": "Frans is officieel; Lingala, Swahili, Kikongo en Tshiluba zijn nationale talen.",
-    "feit": "Het grootste land van Afrika ten zuiden van de Sahara. Het levert het merendeel van het kobalt ter wereld, nodig voor accu's."
+    "feit": "Het grootste land van Afrika ten zuiden van de Sahara. Het levert het merendeel van het kobalt ter wereld, nodig voor accu's.",
+    "geschiedenis": "Van 1885 tot 1908 was het gebied persoonlijk bezit van koning Leopold II; de dwangarbeid voor rubber en ivoor kostte miljoenen mensen het leven. Belgisch Congo werd in 1960 onafhankelijk, waarna Mobutu het land 32 jaar bestuurde onder de naam Zaïre.",
+    "cultuur": "Congolese rumba en soukous bepaalden decennialang hoe heel Afrika danste. Het land is zo groot als West-Europa en herbergt het op een na grootste regenwoud ter wereld."
   },
   "Zambia": {
     "naam": "Naar de rivier de Zambezi.",
     "taal": "Engels is officieel; Bemba en Nyanja worden veel gesproken.",
-    "feit": "Op de grens met Zimbabwe stort de Zambezi meer dan honderd meter naar beneden: de Victoriawatervallen."
+    "feit": "Op de grens met Zimbabwe stort de Zambezi meer dan honderd meter naar beneden: de Victoriawatervallen.",
+    "geschiedenis": "Als Noord-Rhodesië werd het bestuurd door de maatschappij van Cecil Rhodes, met koper als inzet. Het werd in 1964 onafhankelijk onder Kenneth Kaunda, die tot 1991 aanbleef.",
+    "cultuur": "De Victoriawatervallen heten hier Mosi-oa-Tunya: de rook die dondert. Bij laag water kun je aan de rand zwemmen in de Devil's Pool, met het ravijn recht onder je."
   },
   "Zimbabwe": {
     "naam": "Naar Great Zimbabwe, de stenen stad die hier tussen de elfde en de vijftiende eeuw stond. De naam betekent huizen van steen.",
     "taal": "De grondwet erkent zestien talen; Shona, Ndebele en Engels worden het meest gebruikt.",
-    "feit": "De ruïnes van Great Zimbabwe vormen het grootste bouwwerk van steen ten zuiden van de Sahara van vóór de koloniale tijd."
+    "feit": "De ruïnes van Great Zimbabwe vormen het grootste bouwwerk van steen ten zuiden van de Sahara van vóór de koloniale tijd.",
+    "geschiedenis": "Groot-Zimbabwe was tussen de elfde en de vijftiende eeuw een stad van steen en een handelscentrum; de ruïnes gaven het land zijn naam. Na een lange guerrillaoorlog tegen het blanke minderheidsbewind van Rhodesië werd het in 1980 onafhankelijk onder Robert Mugabe, die tot 2017 aanbleef.",
+    "cultuur": "De hyperinflatie van 2008 leverde biljetten van honderd biljoen dollar op, die nu als souvenir worden verkocht. Shona-beeldhouwers in serpentijnsteen staan in musea over de hele wereld."
   },
   "Malawi": {
     "naam": "Naar het rijk Maravi. Tot 1964 heette het Nyasaland.",
     "taal": "Chichewa en Engels.",
-    "feit": "Het Malawimeer beslaat ongeveer een vijfde van het land en herbergt meer vissoorten dan enig ander meer ter wereld."
+    "feit": "Het Malawimeer beslaat ongeveer een vijfde van het land en herbergt meer vissoorten dan enig ander meer ter wereld.",
+    "geschiedenis": "David Livingstone bereikte het meer in 1859, waarna het gebied Brits Nyasaland werd en in 1964 het onafhankelijke Malawi. Hastings Banda regeerde daarna dertig jaar met harde hand.",
+    "cultuur": "Het land noemt zich het warme hart van Afrika, naar de gastvrijheid van zijn inwoners. Het Malawimeer beslaat een vijfde van het land en heeft meer vissoorten dan enig ander meer ter wereld."
   },
   "Mozambique": {
     "naam": "Naar Mussa bin Bique, een handelaar wiens naam de Portugezen aan een eiland voor de kust gaven.",
     "taal": "Portugees is officieel; thuis spreekt men vooral Bantoetalen zoals Makhuwa.",
-    "feit": "Een lange kust langs het Kanaal van Mozambique, met halverwege de monding van de Zambezi."
+    "feit": "Een lange kust langs het Kanaal van Mozambique, met halverwege de monding van de Zambezi.",
+    "geschiedenis": "Vijf eeuwen Portugees bestuur eindigden in 1975 na een lange bevrijdingsoorlog, waarna vrijwel meteen een burgeroorlog volgde die tot 1992 duurde. Het is het enige lid van het Gemenebest zonder Brits verleden.",
+    "cultuur": "De vlag is de enige ter wereld met een modern aanvalsgeweer erop, als symbool van de bevrijdingsstrijd. De marrabenta-muziek en de peri-peri-peper reisden de wereld over."
   },
   "Madagascar": {
     "naam": "Waarschijnlijk een verbastering die Marco Polo optekende en die per vergissing aan dit eiland is blijven hangen.",
     "taal": "Malagassisch en Frans.",
-    "feit": "Het eiland raakte tientallen miljoenen jaren geleden los van het vasteland. Ongeveer negen van de tien planten en dieren komen nergens anders voor."
+    "feit": "Het eiland raakte tientallen miljoenen jaren geleden los van het vasteland. Ongeveer negen van de tien planten en dieren komen nergens anders voor.",
+    "geschiedenis": "De eerste bewoners kwamen zo'n vijftienhonderd jaar geleden per boot uit Indonesië, dwars over de Indische Oceaan; daarna kwamen Afrikaanse en Arabische invloeden erbij. Het koninkrijk Merina verenigde het eiland in de negentiende eeuw, Frankrijk maakte er in 1896 een kolonie van en in 1960 werd het onafhankelijk.",
+    "cultuur": "Het Malagasi is verwant aan het Maleis, niet aan de Afrikaanse buurtalen. Bij het famadihana-gebruik worden de botten van voorouders opgegraven, in nieuwe doeken gewikkeld en meegenomen in een dans."
   },
   "Angola": {
     "naam": "Van ngola, de titel van de heerser van het koninkrijk Ndongo.",
     "taal": "Portugees is officieel; Umbundu en Kimbundu worden veel gesproken.",
-    "feit": "Het gebied Cabinda ligt los van de rest van het land, gescheiden door een strook Congolees gebied."
+    "feit": "Het gebied Cabinda ligt los van de rest van het land, gescheiden door een strook Congolees gebied.",
+    "geschiedenis": "Portugees vanaf de zestiende eeuw en een van de belangrijkste vertrekpunten van de slavenhandel naar Brazilië. Na de onafhankelijkheid in 1975 volgde een burgeroorlog die, gevoed door de Koude Oorlog, tot 2002 duurde.",
+    "cultuur": "De kizomba, die nu in heel Europa gedanst wordt, komt hiervandaan. In de woestijn in het zuiden groeit de welwitschia: een plant met maar twee bladeren, die tweeduizend jaar oud kan worden."
   },
   "Namibia": {
     "naam": "Naar de Namibwoestijn; de naam betekent zoiets als uitgestrekte vlakte.",
     "taal": "Engels is officieel; Oshiwambo, Afrikaans en Duits worden veel gesproken.",
-    "feit": "De Namib geldt als de oudste woestijn ter wereld. Het land heeft ook een smalle uitloper naar het oosten, de Caprivistrook."
+    "feit": "De Namib geldt als de oudste woestijn ter wereld. Het land heeft ook een smalle uitloper naar het oosten, de Caprivistrook.",
+    "geschiedenis": "Als Duits Zuidwest-Afrika was het het toneel van de moord op de Herero en Nama tussen 1904 en 1908, in 2021 door Duitsland erkend als genocide. Daarna bestuurde Zuid-Afrika het gebied; onafhankelijk werd het pas in 1990.",
+    "cultuur": "De Namibwoestijn is de oudste woestijn ter wereld, met duinen van driehonderd meter hoog. Er ligt ook de grootste meteoriet die ooit is gevonden: Hoba, zestig ton zwaar, en nooit verplaatst."
   },
   "Botswana": {
     "naam": "Land van de Tswana.",
     "taal": "Setswana en Engels.",
-    "feit": "De Okavango stroomt niet naar zee maar loopt dood in de Kalahari en vormt daar een enorme binnendelta vol dieren."
+    "feit": "De Okavango stroomt niet naar zee maar loopt dood in de Kalahari en vormt daar een enorme binnendelta vol dieren.",
+    "geschiedenis": "De Tswana-koningen vroegen in 1885 zelf om Britse bescherming tegen de Boeren, en het bleef protectoraat tot 1966. Kort na de onafhankelijkheid werden er diamanten gevonden, waarmee een van de armste landen ter wereld een middeninkomensland werd.",
+    "cultuur": "De Okavango stroomt niet naar zee maar loopt dood in de Kalahari, waar hij een delta vol dieren vormt. Het land heeft de grootste olifantenpopulatie ter wereld."
   },
   "South Africa": {
     "naam": "De naam zegt waar het ligt: het zuiden van het werelddeel.",
     "taal": "Twaalf officiële talen, waaronder Zoeloe, Xhosa, Afrikaans en Engels; sinds 2023 hoort ook gebarentaal erbij.",
-    "feit": "Het land heeft drie hoofdsteden: Pretoria voor het bestuur, Kaapstad voor het parlement en Bloemfontein voor de rechtspraak."
+    "feit": "Het land heeft drie hoofdsteden: Pretoria voor het bestuur, Kaapstad voor het parlement en Bloemfontein voor de rechtspraak.",
+    "geschiedenis": "Nederlandse en later Britse kolonisatie, twee Boerenoorlogen, en vanaf 1948 de apartheid, die de bevolking bij wet scheidde. Nelson Mandela kwam in 1990 na 27 jaar vrij en werd in 1994 in de eerste vrije verkiezingen president.",
+    "cultuur": "Elf officiële talen, en het volkslied bevat er vijf. De braai is meer dan een barbecue — er is een eigen feestdag voor — en het woord ubuntu, ik ben omdat wij zijn, vat de gedachte erachter samen."
   },
   "Lesotho": {
     "naam": "Land van de Sotho.",
     "taal": "Sesotho en Engels.",
-    "feit": "Volledig omsloten door Zuid-Afrika en het enige land ter wereld dat helemaal boven de duizend meter ligt."
+    "feit": "Volledig omsloten door Zuid-Afrika en het enige land ter wereld dat helemaal boven de duizend meter ligt.",
+    "geschiedenis": "Koning Moshoeshoe I bracht in de negentiende eeuw vluchtelingen samen op een bergplateau dat niet in te nemen was, en vroeg Britse bescherming om aan de Boeren te ontkomen. Onafhankelijk in 1966, volledig omsloten door Zuid-Afrika.",
+    "cultuur": "Het is het enige land ter wereld dat helemaal boven de 1400 meter ligt; het heet dan ook het koninkrijk in de hemel. De wollen deken die mannen als mantel dragen, de Basotho-deken, is nationaal kledingstuk."
   },
   "eSwatini": {
     "naam": "Land van de Swazi. Tot 2018 in het Westen Swaziland genoemd.",
     "taal": "Siswati en Engels.",
-    "feit": "Een van de laatste absolute monarchieën ter wereld, ingeklemd tussen Zuid-Afrika en Mozambique."
+    "feit": "Een van de laatste absolute monarchieën ter wereld, ingeklemd tussen Zuid-Afrika en Mozambique.",
+    "geschiedenis": "Het koninkrijk bleef bestaan onder Brits protectoraat en werd in 1968 onafhankelijk. In 2018 veranderde koning Mswati III de naam Swaziland in Eswatini, onder meer omdat het te vaak met Zwitserland werd verward.",
+    "cultuur": "Het is een van de laatste absolute monarchieën ter wereld. Bij de jaarlijkse rietdans dansen tienduizenden meisjes voor de koningin-moeder."
   },
   "Canada": {
     "naam": "Van kanata, dorp of nederzetting in een Iroquoistaal. Franse reizigers gingen het woord voor het hele gebied gebruiken.",
     "taal": "Engels en Frans zijn allebei officieel. In Quebec is Frans de dagelijkse taal.",
-    "feit": "Het op één na grootste land ter wereld, maar bijna de hele bevolking woont binnen driehonderd kilometer van de grens met de Verenigde Staten."
+    "feit": "Het op één na grootste land ter wereld, maar bijna de hele bevolking woont binnen driehonderd kilometer van de grens met de Verenigde Staten.",
+    "geschiedenis": "Frans en Brits om beurten: Nieuw-Frankrijk viel in 1763 aan de Britten toe, maar Quebec hield zijn taal en zijn recht. In 1867 werden de kolonies één land, dat pas in 1982 zijn grondwet volledig uit Britse handen kreeg.",
+    "cultuur": "Het is het op een na grootste land ter wereld, maar bijna iedereen woont binnen driehonderd kilometer van de Amerikaanse grens. Sorry zeggen zit er zo diep in dat er in Ontario een wet bestaat die vastlegt dat een excuus geen schuldbekentenis is."
   },
   "United States of America": {
     "naam": "Amerika is genoemd naar Amerigo Vespucci, de zeevaarder die als eerste beschreef dat dit een apart werelddeel was.",
     "taal": "Engels is de omgangstaal; Spaans is veruit de grootste tweede taal.",
-    "feit": "Vijftig staten met elk eigen wetten. De vijftig sterren op de vlag staan voor de staten, de dertien strepen voor de eerste dertien kolonies."
+    "feit": "Vijftig staten met elk eigen wetten. De vijftig sterren op de vlag staan voor de staten, de dertien strepen voor de eerste dertien kolonies.",
+    "geschiedenis": "Dertien Britse kolonies verklaarden zich in 1776 onafhankelijk. De burgeroorlog van 1861-1865 hield het land bijeen en maakte een einde aan de slavernij; de burgerrechtenbeweging van de jaren zestig maakte een einde aan de wettelijke rassenscheiding.",
+    "cultuur": "Er wonen meer Spaanstaligen dan in Spanje zelf. Thanksgiving in november is er groter dan Kerst en levert elk jaar de drukste reisdagen op."
   },
   "Mexico": {
     "naam": "Van Mexica, de eigen naam van de Azteken. Voluit heet het land Verenigde Mexicaanse Staten.",
     "taal": "Spaans is de omgangstaal; daarnaast erkent de staat achtenzestig inheemse talen, waaronder Nahuatl en Maya.",
-    "feit": "Mexico-Stad staat op de bodem van een drooggelegd meer en zakt daardoor elk jaar een stukje verder weg."
+    "feit": "Mexico-Stad staat op de bodem van een drooggelegd meer en zakt daardoor elk jaar een stukje verder weg.",
+    "geschiedenis": "Olmeken, Maya's en Azteken bouwden hier steden en piramides; in 1521 viel het Aztekenrijk voor Cortés. Onafhankelijk in 1821, en de revolutie van 1910 vormde het moderne land.",
+    "cultuur": "Op de Dag van de Doden wordt de dood niet weggestopt maar gevierd, met altaartjes, oranje bloemen en het lievelingseten van de overledene. De Mexicaanse keuken staat op de UNESCO-lijst, en mais, tomaat, avocado en chocolade komen hiervandaan."
   },
   "Belize": {
     "naam": "Waarschijnlijk naar de rivier de Belize; de herkomst is onzeker. Tot 1973 heette het Brits-Honduras.",
     "taal": "Engels is officieel, als enige land van Midden-Amerika. Spaans en Kriol worden veel gesproken.",
-    "feit": "Voor de kust ligt het op één na grootste koraalrif ter wereld."
+    "feit": "Voor de kust ligt het op één na grootste koraalrif ter wereld.",
+    "geschiedenis": "Als Brits Honduras was dit de enige Britse kolonie op het vasteland van Midden-Amerika; onafhankelijk werd het pas in 1981. Guatemala claimde het gebied lang, en die kwestie ligt nu bij het Internationaal Gerechtshof.",
+    "cultuur": "Het is het enige land van Midden-Amerika met Engels als officiële taal, maar op straat hoor je Kriol, Spaans, Maya en Garifuna door elkaar. Voor de kust ligt het op een na grootste koraalrif ter wereld, met het beroemde Blue Hole."
   },
   "Guatemala": {
     "naam": "Van een Nahuatl-woord dat plaats van veel bomen betekent.",
     "taal": "Spaans is officieel; daarnaast worden ruim twintig Mayatalen gesproken.",
-    "feit": "Het land met de meeste inwoners van Midden-Amerika, met een keten van vulkanen langs de Stille Oceaan."
+    "feit": "Het land met de meeste inwoners van Midden-Amerika, met een keten van vulkanen langs de Stille Oceaan.",
+    "geschiedenis": "Het hart van de Maya-beschaving, met Tikal als grote stad midden in het regenwoud. Na de onafhankelijkheid van Spanje volgde in de twintigste eeuw een burgeroorlog van 36 jaar (1960-1996), waarin vooral de Maya-bevolking het slachtoffer werd.",
+    "cultuur": "Naast het Spaans worden er meer dan twintig Maya-talen dagelijks gesproken. Elk dorp heeft zijn eigen weefpatroon in de huipil, zodat je aan iemands blouse kunt zien waar zij vandaan komt."
   },
   "El Salvador": {
     "naam": "Spaans voor de Verlosser.",
     "taal": "Spaans.",
-    "feit": "Het kleinste land van het vasteland van Amerika en het enige van Midden-Amerika zonder kust aan de Caribische Zee."
+    "feit": "Het kleinste land van het vasteland van Amerika en het enige van Midden-Amerika zonder kust aan de Caribische Zee.",
+    "geschiedenis": "Het kleinste land van het Amerikaanse vasteland kende van 1980 tot 1992 een burgeroorlog waarin tienduizenden omkwamen. Daarna werden de bendes het grote probleem, waartegen sinds 2022 een noodtoestand geldt.",
+    "cultuur": "Pupusas, dikke maispannenkoeken met vulling, zijn nationaal gerecht met een eigen feestdag. In 2021 voerde El Salvador als eerste land ter wereld bitcoin in als wettig betaalmiddel, een besluit dat later grotendeels is teruggedraaid."
   },
   "Honduras": {
     "naam": "Spaans voor diepten, naar het diepe water voor de kust.",
     "taal": "Spaans.",
-    "feit": "Bij Copán staan Mayaruïnes met de langste bekende hiëroglyfentrap, met meer dan tweeduizend tekens."
+    "feit": "Bij Copán staan Mayaruïnes met de langste bekende hiëroglyfentrap, met meer dan tweeduizend tekens.",
+    "geschiedenis": "Copán was een Maya-stad met het fijnste steenhouwwerk van de regio. In de twintigste eeuw bepaalden Amerikaanse fruitbedrijven de politiek zo sterk dat hier de term bananenrepubliek is ontstaan.",
+    "cultuur": "Aan de Caribische kust wonen de Garifuna, nakomelingen van Afrikanen en Cariben, met een eigen taal en muziek die op de UNESCO-lijst staan. In het departement Yoro valt volgens de overlevering elk jaar een regen van vissen."
   },
   "Nicaragua": {
     "naam": "Waarschijnlijk de naam van een inheemse leider, gecombineerd met het Spaanse agua, water.",
     "taal": "Spaans; aan de Caribische kust ook Engels-creools en Miskito.",
-    "feit": "Het Nicaraguameer is het grootste meer van Midden-Amerika en heeft haaien die vanuit zee de rivier zijn opgetrokken."
+    "feit": "Het Nicaraguameer is het grootste meer van Midden-Amerika en heeft haaien die vanuit zee de rivier zijn opgetrokken.",
+    "geschiedenis": "In de negentiende eeuw werd het land even bestuurd door een Amerikaanse avonturier die zichzelf tot president uitriep. De Sandinistische revolutie verjoeg in 1979 de familie Somoza, waarna de Contra-oorlog volgde met Amerikaanse steun.",
+    "cultuur": "In het Nicaraguameer leven haaien die zich aan zoet water hebben aangepast. Rubén Darío, de vader van het Spaanstalige modernisme, is er nationale held: dichters worden er gelezen als popsterren."
   },
   "Costa Rica": {
     "naam": "Spaans voor rijke kust.",
     "taal": "Spaans.",
-    "feit": "Het land schafte zijn leger in 1949 af en geeft dat geld sindsdien uit aan onderwijs en zorg."
+    "feit": "Het land schafte zijn leger in 1949 af en geeft dat geld sindsdien uit aan onderwijs en zorg.",
+    "geschiedenis": "In de koloniale tijd arm en dunbevolkt, waardoor er een land van kleine boeren ontstond in plaats van grootgrondbezitters. Na een korte burgeroorlog schafte het in 1948 zijn leger af en stak het dat geld in onderwijs en gezondheidszorg.",
+    "cultuur": "Pura vida is er groet, antwoord en levenshouding tegelijk. Ruim een kwart van het land is beschermd natuurgebied en de stroom komt vrijwel volledig uit water, wind en aardwarmte."
   },
   "Panama": {
     "naam": "Uit een inheemse taal, meestal uitgelegd als overvloed aan vissen.",
     "taal": "Spaans.",
-    "feit": "Het Panamakanaal verbindt sinds 1914 de Atlantische met de Stille Oceaan en scheelt schepen de reis om heel Zuid-Amerika."
+    "feit": "Het Panamakanaal verbindt sinds 1914 de Atlantische met de Stille Oceaan en scheelt schepen de reis om heel Zuid-Amerika.",
+    "geschiedenis": "Panama hoorde bij Colombia en werd in 1903 met Amerikaanse steun zelfstandig, waarna de Verenigde Staten het kanaal aanlegden en de strook eromheen bestuurden. In 1999 kwam het kanaal volledig in Panamese handen.",
+    "cultuur": "Het kanaal is zo bepalend dat het land de dollar naast de eigen munt gebruikt. Door de bocht in de landengte loopt het kanaal noord-zuid, en kijk je vanuit Panama-Stad naar het oosten uit over de Grote Oceaan."
   },
   "Cuba": {
     "naam": "Uit de Taínotaal van de oorspronkelijke bewoners; de betekenis is onzeker.",
     "taal": "Spaans.",
-    "feit": "Het grootste eiland van de Cariben. Sinds de revolutie van 1959 is het een eenpartijstaat."
+    "feit": "Het grootste eiland van de Cariben. Sinds de revolutie van 1959 is het een eenpartijstaat.",
+    "geschiedenis": "Spaans tot 1898 en daarna sterk onder Amerikaanse invloed, tot Fidel Castro in 1959 de revolutie won. De rakettencrisis van 1962 bracht de wereld dicht bij een kernoorlog.",
+    "cultuur": "Er rijden nog duizenden Amerikaanse auto's uit de jaren vijftig rond, aan de praat gehouden met zelfgemaakte onderdelen. Son, rumba en salsa komen hiervandaan, en het eiland stuurt al decennia artsen naar de hele wereld."
   },
   "Bahamas": {
     "naam": "Waarschijnlijk van het Spaanse baja mar, ondiepe zee.",
     "taal": "Engels.",
-    "feit": "Honderden eilanden en riffen op een uitgestrekte ondiepte. Columbus kwam in 1492 hier voor het eerst in Amerika aan land."
+    "feit": "Honderden eilanden en riffen op een uitgestrekte ondiepte. Columbus kwam in 1492 hier voor het eerst in Amerika aan land.",
+    "geschiedenis": "Columbus kwam in 1492 hier voor het eerst aan land in Amerika. Later waren de eilanden een uitvalsbasis voor piraten en tijdens de Amerikaanse drooglegging voor dranksmokkelaars; onafhankelijk in 1973.",
+    "cultuur": "Met Junkanoo trekt in de vroege ochtend van tweede kerstdag en nieuwjaarsdag een optocht van trommels en kostuums door de straten. Van de zevenhonderd eilanden zijn er maar een stuk of dertig bewoond."
   },
   "Haiti": {
     "naam": "Uit de Taínotaal: bergachtig land.",
     "taal": "Frans en Haïtiaans Creools zijn allebei officieel; vrijwel iedereen spreekt Creools.",
-    "feit": "Na een opstand van tot slaaf gemaakten werd Haïti in 1804 onafhankelijk: de eerste zwarte republiek ter wereld."
+    "feit": "Na een opstand van tot slaaf gemaakten werd Haïti in 1804 onafhankelijk: de eerste zwarte republiek ter wereld.",
+    "geschiedenis": "De enige geslaagde slavenopstand uit de geschiedenis: in 1804 riepen bevrijde slaven de onafhankelijkheid uit, als eerste zwarte republiek ter wereld. Frankrijk eiste daarna een enorme schadevergoeding, die het land generaties lang arm hield.",
+    "cultuur": "Het Haïtiaans Creools is een eigen taal met een eigen spelling, gegroeid uit het Frans en West-Afrikaanse talen. Vodou is er een erkende godsdienst, en de Haïtiaanse schilderkunst hangt in musea over de hele wereld."
   },
   "Dominican Rep.": {
     "naam": "Naar de hoofdstad Santo Domingo, die naar de heilige Dominicus is genoemd.",
     "taal": "Spaans.",
-    "feit": "Deelt het eiland Hispaniola met Haïti. De bergen in het midden houden de regen tegen, waardoor beide helften er heel anders uitzien."
+    "feit": "Deelt het eiland Hispaniola met Haïti. De bergen in het midden houden de regen tegen, waardoor beide helften er heel anders uitzien.",
+    "geschiedenis": "Santo Domingo was in 1496 de eerste blijvende Europese stad in Amerika. Het land werd in 1844 onafhankelijk van Haïti in plaats van van Spanje, en kende van 1930 tot 1961 de dictatuur van Trujillo.",
+    "cultuur": "Merengue en bachata zijn hier bedacht en staan allebei op de UNESCO-lijst. Honkbal is de nationale sport: geen land buiten de Verenigde Staten levert meer spelers aan de Amerikaanse competitie."
   },
   "Jamaica": {
     "naam": "Uit de Taínotaal: land van hout en water.",
     "taal": "Engels is officieel; in het dagelijks leven spreekt men Jamaicaans Patois.",
-    "feit": "Hier ontstonden ska en reggae, muziek die de hele wereld over ging."
+    "feit": "Hier ontstonden ska en reggae, muziek die de hele wereld over ging.",
+    "geschiedenis": "Spaans en daarna Brits, met suikerplantages en slavernij; de Maroons, gevluchte slaven, vochten zich in de bergen een eigen gebied bij elkaar. Onafhankelijk in 1962.",
+    "cultuur": "Reggae staat op de UNESCO-lijst en Bob Marley maakte het eiland wereldberoemd. Met minder dan drie miljoen inwoners levert het al decennia de snelste sprinters ter wereld."
   },
   "Trinidad and Tobago": {
     "naam": "Columbus noemde het grootste eiland Trinidad naar de Drie-eenheid; Tobago komt waarschijnlijk van tabak.",
     "taal": "Engels.",
-    "feit": "Het zuidelijkste land van de Cariben, vlak voor de kust van Venezuela. Hier is de steeldrum uitgevonden, gemaakt van olievaten."
+    "feit": "Het zuidelijkste land van de Cariben, vlak voor de kust van Venezuela. Hier is de steeldrum uitgevonden, gemaakt van olievaten.",
+    "geschiedenis": "Spaans, met een grotendeels Franstalige bevolking, en daarna Brits. Na de afschaffing van de slavernij kwamen er contractarbeiders uit India, waardoor het land nu twee grote bevolkingsgroepen kent; onafhankelijk in 1962.",
+    "cultuur": "De steeldrum is hier uitgevonden, gemaakt van olievaten: het enige akoestische instrument dat in de twintigste eeuw is bedacht. Carnaval met calypso en soca is het grootste feest van de Caraïben."
   },
   "Colombia": {
     "naam": "Naar Christoffel Columbus.",
     "taal": "Spaans.",
-    "feit": "Het enige land van Zuid-Amerika met kust aan zowel de Caribische Zee als de Stille Oceaan."
+    "feit": "Het enige land van Zuid-Amerika met kust aan zowel de Caribische Zee als de Stille Oceaan.",
+    "geschiedenis": "Simón Bolívar bevrijdde het gebied van Spanje en stichtte in 1819 Groot-Colombia, dat later uiteenviel. Het gewapend conflict met de FARC duurde ruim vijftig jaar en eindigde met het vredesakkoord van 2016.",
+    "cultuur": "Gabriel García Márquez maakte er het magisch realisme mee groot; het dorp Macondo uit Honderd jaar eenzaamheid is op zijn geboortestreek geënt. Na Nederland is Colombia de grootste bloemenexporteur ter wereld — een groot deel van de rozen op Valentijnsdag komt hiervandaan."
   },
   "Venezuela": {
     "naam": "Klein Venetië: Spaanse zeevaarders zagen paalwoningen in het water bij het Maracaibomeer.",
     "taal": "Spaans.",
-    "feit": "De Salto Ángel is met bijna duizend meter de hoogste waterval ter wereld; het water verstuift onderweg naar beneden."
+    "feit": "De Salto Ángel is met bijna duizend meter de hoogste waterval ter wereld; het water verstuift onderweg naar beneden.",
+    "geschiedenis": "Geboorteland van Simón Bolívar, de bevrijder van half Zuid-Amerika. De olie maakte het in de twintigste eeuw het rijkste land van het continent; sinds 2014 heeft een diepe crisis miljoenen mensen het land uit gedreven.",
+    "cultuur": "De Angelval is met bijna duizend meter de hoogste waterval ter wereld, in een landschap van tafelbergen dat Conan Doyle inspireerde tot The Lost World. Missverkiezingen zijn er een nationale bezigheid, met meer wereldtitels dan bijna elk ander land."
   },
   "Guyana": {
     "naam": "Uit een inheemse taal, meestal uitgelegd als land van veel water.",
     "taal": "Engels is officieel, als enige land van Zuid-Amerika.",
-    "feit": "Vrijwel de hele bevolking woont op de smalle kuststrook; het binnenland is regenwoud."
+    "feit": "Vrijwel de hele bevolking woont op de smalle kuststrook; het binnenland is regenwoud.",
+    "geschiedenis": "Eerst Nederlands (Essequibo, Demerara en Berbice), daarna Brits, met suikerplantages waar na de slavernij contractarbeiders uit India kwamen werken. Onafhankelijk in 1966; sinds de olievondst voor de kust in 2015 groeit de economie razendsnel.",
+    "cultuur": "Het is het enige Engelstalige land van Zuid-Amerika en kijkt cultureel meer naar de Caraïben dan naar het continent. Bijna het hele land is regenwoud, met de Kaieteurwaterval die bijna vijf keer zo hoog is als de Niagara."
   },
   "Suriname": {
     "naam": "Waarschijnlijk naar de Surinen, een inheems volk dat hier woonde.",
     "taal": "Nederlands is de officiële taal; het enige land buiten Europa waar dat zo is. Sranantongo is de gemeenschappelijke omgangstaal.",
-    "feit": "Het kleinste land van Zuid-Amerika en een van de bosrijkste ter wereld: ruim negentig procent is bos. Tot 1975 hoorde het bij Nederland."
+    "feit": "Het kleinste land van Zuid-Amerika en een van de bosrijkste ter wereld: ruim negentig procent is bos. Tot 1975 hoorde het bij Nederland.",
+    "geschiedenis": "In 1667 ruilde Nederland Nieuw-Amsterdam — het latere New York — met de Engelsen tegen Suriname. Na drie eeuwen plantage-economie en slavernij werd het land in 1975 onafhankelijk; in 1980 volgde een staatsgreep.",
+    "cultuur": "In één straat in Paramaribo staan een synagoge en een moskee naast elkaar. Hindostanen, Javanen, Creolen, Marrons, inheemsen en Chinezen wonen door elkaar, en op de markt liggen roti, bami en pom naast elkaar."
   },
   "Ecuador": {
     "naam": "Spaans voor evenaar. Die loopt vlak bij de hoofdstad Quito.",
     "overzee": "De eilanden ver in de Stille Oceaan zijn de Galápagoseilanden: een gewone provincie van Ecuador, ruim negenhonderd kilometer uit de kust.",
     "taal": "Spaans is officieel; Quichua en Shuar zijn erkend in de streken waar ze gesproken worden.",
-    "feit": "Wat Charles Darwin op de Galápagos zag, bracht hem op het spoor van de evolutietheorie."
+    "feit": "Wat Charles Darwin op de Galápagos zag, bracht hem op het spoor van de evolutietheorie.",
+    "geschiedenis": "Het gebied hoorde bij het Incarijk en daarna bij Spanje, en werd in 1830 zelfstandig toen Groot-Colombia uiteenviel. In 2008 was het het eerste land ter wereld dat rechten van de natuur in zijn grondwet opnam.",
+    "cultuur": "De Galápagoseilanden brachten Darwin op het spoor van de evolutie. De panamahoed komt uit Ecuador en niet uit Panama: hij werd daar alleen verscheept, en kreeg zo de verkeerde naam."
   },
   "Peru": {
     "naam": "Onzeker; mogelijk de naam van een lokale heerser die Spanjaarden verkeerd verstonden.",
     "taal": "Spaans, Quechua en Aymara zijn alle drie officieel.",
-    "feit": "Cusco was de hoofdstad van het Incarijk. Machu Picchu ligt hoog in de bergen en bleef eeuwenlang buiten beeld van de buitenwereld."
+    "feit": "Cusco was de hoofdstad van het Incarijk. Machu Picchu ligt hoog in de bergen en bleef eeuwenlang buiten beeld van de buitenwereld.",
+    "geschiedenis": "Cusco was de hoofdstad van het Incarijk, dat zonder wiel en zonder schrift een gebied van duizenden kilometers bestuurde, met knopenkoorden en een wegennet. Pizarro maakte daar in 1532 een einde aan; onafhankelijk werd het land in 1821.",
+    "cultuur": "Er groeien meer dan drieduizend soorten aardappel, in alle kleuren en maten. Machu Picchu bleef eeuwenlang onbekend bij buitenstaanders, en de Nazcalijnen zijn alleen vanuit de lucht te herkennen."
   },
   "Brazil": {
     "naam": "Naar het brazielhout, een rode verfhoutsoort die de eerste handelswaar van de kolonie was.",
     "taal": "Portugees; het enige land van Zuid-Amerika waar dat de taal is.",
-    "feit": "Het grootste land van Zuid-Amerika, met ongeveer zestig procent van het Amazoneregenwoud binnen de grenzen."
+    "feit": "Het grootste land van Zuid-Amerika, met ongeveer zestig procent van het Amazoneregenwoud binnen de grenzen.",
+    "geschiedenis": "Portugees vanaf 1500. Toen Napoleon Portugal binnenviel verhuisde het hele hof naar Rio, waardoor Brazilië even het centrum van het Portugese rijk was. Het werd in 1822 zelfstandig als keizerrijk en schafte in 1888 als laatste land van Amerika de slavernij af.",
+    "cultuur": "Het carnaval in Rio is het grootste feest ter wereld, met sambascholen die er het hele jaar voor oefenen. Het Portugees maakt Brazilië tot een taaleiland in Zuid-Amerika, en het is het enige land dat vijf keer het WK voetbal won."
   },
   "Bolivia": {
     "naam": "Naar Simón Bolívar, de leider van de onafhankelijkheidsstrijd tegen Spanje.",
     "taal": "Spaans en zesendertig inheemse talen zijn officieel, waaronder Quechua en Aymara.",
-    "feit": "Twee hoofdsteden: Sucre voor de rechtspraak, La Paz voor het bestuur. De Salar de Uyuni is de grootste zoutvlakte ter wereld."
+    "feit": "Twee hoofdsteden: Sucre voor de rechtspraak, La Paz voor het bestuur. De Salar de Uyuni is de grootste zoutvlakte ter wereld.",
+    "geschiedenis": "De zilverberg van Potosí financierde eeuwenlang het Spaanse rijk en kostte talloze dwangarbeiders het leven. In de Salpeteroorlog (1879-1884) verloor Bolivia zijn kuststrook aan Chili en sindsdien heeft het geen zee meer — al houdt het nog altijd een marine, op het Titicacameer.",
+    "cultuur": "Het land heeft 36 officiële talen, meer dan enig ander land ter wereld. In de zoutvlakte van Uyuni weerspiegelt na regen de hele hemel in een laagje water."
   },
   "Paraguay": {
     "naam": "Uit het Guaraní, naar de rivier de Paraguay; meestal uitgelegd als water dat naar het water gaat.",
     "taal": "Spaans en Guaraní zijn allebei officieel en de meeste mensen spreken ze allebei.",
-    "feit": "Een van de twee landen van Zuid-Amerika zonder zeekust; de rivier de Paraguay is de weg naar zee."
+    "feit": "Een van de twee landen van Zuid-Amerika zonder zeekust; de rivier de Paraguay is de weg naar zee.",
+    "geschiedenis": "Jezuïeten bouwden hier in de zeventiende eeuw dorpen waar de Guaraní eigen bestuur, ambacht en muziek hadden. In de oorlog tegen de Drievoudige Alliantie (1864-1870) verloor Paraguay een groot deel van zijn bevolking.",
+    "cultuur": "Het is het enige land van Amerika waar een inheemse taal, het Guaraní, door bijna iedereen wordt gesproken en officieel is. Het ñandutí-kantwerk is genoemd naar het spinnenweb waar het op lijkt."
   },
   "Uruguay": {
     "naam": "Uit het Guaraní, naar de rivier de Uruguay; over de betekenis wordt gestreden.",
     "taal": "Spaans.",
-    "feit": "Een van de kleinste landen van Zuid-Amerika, vrijwel vlak, met meer runderen dan mensen."
+    "feit": "Een van de kleinste landen van Zuid-Amerika, vrijwel vlak, met meer runderen dan mensen.",
+    "geschiedenis": "Lang betwist tussen Spanje en Portugal en later tussen Argentinië en Brazilië, tot het in 1828 als bufferstaat zelfstandig werd. Begin twintigste eeuw voerde het als een van de eerste landen ter wereld de achturige werkdag en de scheiding van kerk en staat in.",
+    "cultuur": "Uruguay won in 1930 het allereerste WK voetbal, in eigen land. Er zijn ongeveer vier koeien per inwoner, en elk rund is met een chip te volgen van de wei tot het bord."
   },
   "Argentina": {
     "naam": "Van het Latijnse argentum, zilver: de Spanjaarden hoopten hier zilver te vinden.",
     "taal": "Spaans.",
-    "feit": "Het land loopt door van de subtropen tot vlak bij Antarctica. De Aconcagua is met bijna zevenduizend meter de hoogste berg buiten Azië."
+    "feit": "Het land loopt door van de subtropen tot vlak bij Antarctica. De Aconcagua is met bijna zevenduizend meter de hoogste berg buiten Azië.",
+    "geschiedenis": "Onafhankelijk van Spanje in 1816. Rond 1900 was het door vlees en graan een van de rijkste landen ter wereld en trokken er miljoenen Italianen en Spanjaarden heen; de militaire dictatuur van 1976-1983 liet duizenden verdwenen mensen achter.",
+    "cultuur": "De tango komt uit de havenwijken van Buenos Aires en staat op de UNESCO-lijst. Maté wordt uit een kalebas met een metalen rietje gedronken en gaat de kring rond — zeg je 'dank je', dan betekent dat dat je geen slok meer wilt."
   },
   "Chile": {
     "naam": "Onzeker; waarschijnlijk uit een inheemse taal, met een betekenis als het einde van de wereld.",
     "taal": "Spaans.",
-    "feit": "Ruim vierduizend kilometer lang en gemiddeld nog geen tweehonderd breed. De Atacama is de droogste woestijn ter wereld."
+    "feit": "Ruim vierduizend kilometer lang en gemiddeld nog geen tweehonderd breed. De Atacama is de droogste woestijn ter wereld.",
+    "geschiedenis": "Vier eeuwen Spaans bestuur, onafhankelijk in 1818. In 1973 pleegde Pinochet een staatsgreep tegen de gekozen president Allende; die dictatuur duurde tot 1990.",
+    "cultuur": "Het land is ruim vierduizend kilometer lang en gemiddeld nog geen tweehonderd breed. In de Atacama valt op sommige plekken jarenlang geen regen — het is de droogste woestijn ter wereld, en daarom staan er de grootste telescopen."
   },
   "Australia": {
     "naam": "Van het Latijnse terra australis, zuidelijk land: een gebied waarvan Europeanen het bestaan vermoedden voordat ze het gezien hadden.",
     "taal": "Engels. Van de honderden Aboriginaltalen zijn er nog enkele tientallen in gebruik.",
-    "feit": "Tegelijk het kleinste werelddeel en een van de grootste landen. Het Groot Barrièrerif voor de oostkust is vanuit de ruimte te zien."
+    "feit": "Tegelijk het kleinste werelddeel en een van de grootste landen. Het Groot Barrièrerif voor de oostkust is vanuit de ruimte te zien.",
+    "geschiedenis": "De Aboriginals wonen er al zeker vijftigduizend jaar, wat hun cultuur de oudste doorlopende ter wereld maakt. Vanaf 1788 stichtten de Britten er strafkolonies, en in 1901 werden de kolonies samen één land.",
+    "cultuur": "Kerst valt er midden in de zomer, dus barbecue op het strand. Er zijn meer kangoeroes dan mensen, en de meeste dieren die er leven komen nergens anders ter wereld voor."
   },
   "Papua New Guinea": {
     "naam": "Papoea komt uit het Maleis. Nieuw-Guinea werd door een Spanjaard zo genoemd omdat het hem aan de kust van Guinee deed denken.",
     "taal": "Tok Pisin, Engels en Hiri Motu zijn officieel. Er worden meer dan achthonderd talen gesproken, meer dan in enig ander land.",
-    "feit": "Het deelt het eiland Nieuw-Guinea met Indonesië. Bergketens en dichte jungle hielden dalen eeuwenlang van elkaar gescheiden."
+    "feit": "Het deelt het eiland Nieuw-Guinea met Indonesië. Bergketens en dichte jungle hielden dalen eeuwenlang van elkaar gescheiden.",
+    "geschiedenis": "Het binnenland bleef zo lang ontoegankelijk dat er in de jaren dertig nog gemeenschappen werden aangetroffen die nooit een buitenstaander hadden gezien. Duits en Brits bestuurd, daarna Australisch; onafhankelijk in 1975.",
+    "cultuur": "Er worden meer dan achthonderd talen gesproken, meer dan in enig ander land: ruim een tiende van alle talen ter wereld. Op de sing-sing-festivals komen honderden groepen samen in verentooien en beschilderde gezichten."
   },
   "Solomon Is.": {
     "naam": "Een Spaanse zeevaarder noemde ze naar koning Salomo, in de veronderstelling diens legendarische goud gevonden te hebben.",
     "taal": "Engels is officieel; Pijin is de omgangstaal tussen de vele taalgroepen.",
-    "feit": "Honderden eilanden op de Vuurgordel, met vulkanen en regelmatig aardbevingen."
+    "feit": "Honderden eilanden op de Vuurgordel, met vulkanen en regelmatig aardbevingen.",
+    "geschiedenis": "De eilanden kregen hun naam van een Spanjaard die dacht dat hij het goud van koning Salomo had gevonden. In 1942-1943 werd er om Guadalcanal een van de zwaarste veldslagen van de Stille Oceaan gevochten; onafhankelijk in 1978.",
+    "cultuur": "Er worden ruim zeventig talen gesproken, met Pijin als gemeenschappelijke taal. Op sommige eilanden geldt schelpengeld nog altijd als echt betaalmiddel, bijvoorbeeld bij een huwelijk."
   },
   "Vanuatu": {
     "naam": "Uit een lokale taal: ons land staat overeind. Gekozen bij de onafhankelijkheid in 1980.",
     "taal": "Bislama, Engels en Frans zijn alle drie officieel.",
-    "feit": "Een van de weinige plekken ter wereld waar je van dichtbij in de krater van een actieve vulkaan kunt kijken."
+    "feit": "Een van de weinige plekken ter wereld waar je van dichtbij in de krater van een actieve vulkaan kunt kijken.",
+    "geschiedenis": "Het werd door Frankrijk én Groot-Brittannië tegelijk bestuurd, in een uniek condominium met van alles twee: twee politiekorpsen, twee rechtsstelsels, twee schoolsystemen. Onafhankelijk in 1980.",
+    "cultuur": "Op het eiland Pentecost springen mannen met lianen om hun enkels van houten torens; daar is het bungeejumpen op afgekeken. Het land staat vaak hoog in lijstjes van gelukkigste landen én bovenaan de lijst van landen met het grootste risico op natuurrampen."
   },
   "Fiji": {
     "naam": "Een verbastering van Viti, de naam van het grootste eiland, zoals buren die uitspraken.",
     "taal": "Fijisch, Engels en Fiji-Hindi zijn alle drie officieel.",
-    "feit": "Ruim driehonderd eilanden, waarvan er ongeveer honderd bewoond zijn. De datumgrens loopt er vlak langs."
+    "feit": "Ruim driehonderd eilanden, waarvan er ongeveer honderd bewoond zijn. De datumgrens loopt er vlak langs.",
+    "geschiedenis": "Britse kolonie vanaf 1874, met suikerriet en contractarbeiders uit India, waardoor het land nu twee grote bevolkingsgroepen kent. Onafhankelijk in 1970, met daarna meerdere staatsgrepen.",
+    "cultuur": "Gasten worden onthaald met kava, een drank van een wortel die je tong verdooft, in een plechtige ceremonie met vaste handklappen. 'Bula' is er groet en levenswens tegelijk."
   },
   "New Zealand": {
     "naam": "Door Nederlandse kaartenmakers Nieuw-Zeeland genoemd, naar de provincie Zeeland. In het Maori heet het Aotearoa, land van de lange witte wolk.",
     "overzee": "Het losse stipje ten oosten van het Zuidereiland zijn de Chathameilanden, ruim achthonderd kilometer verderop. Ze horen bij Nieuw-Zeeland en hebben een eigen tijdzone, drie kwartier voor op de rest van het land.",
     "taal": "Maori en Nieuw-Zeelandse gebarentaal zijn bij wet officieel. Engels is de taal die vrijwel iedereen spreekt.",
-    "feit": "Twee grote eilanden, ver van elk ander land. Doordat er lang geen landzoogdieren waren, ontstonden er vogels die niet kunnen vliegen, zoals de kiwi."
+    "feit": "Twee grote eilanden, ver van elk ander land. Doordat er lang geen landzoogdieren waren, ontstonden er vogels die niet kunnen vliegen, zoals de kiwi.",
+    "geschiedenis": "De Māori kwamen rond 1300 per kano uit Polynesië. In 1840 tekenden hun leiders met de Britten het Verdrag van Waitangi, waarvan de Engelse en de Māori-versie iets anders zeggen — een verschil dat tot vandaag doorwerkt. In 1893 was Nieuw-Zeeland het eerste land ter wereld met kiesrecht voor vrouwen.",
+    "cultuur": "De haka is niet alleen van het rugbyteam: hij wordt ook gedaan bij begrafenissen, bruiloften en verwelkomingen. Er zijn ongeveer vijf schapen per inwoner, en een heuvel in het land draagt een van de langste plaatsnamen ter wereld."
   },
-
   "zee:Atlantic Ocean": {
     "naam": "Genoemd naar Atlas uit de Griekse verhalen: de titaan die aan de westrand van de bekende wereld de hemel torste.",
     "feit": "Over de bodem loopt van noord naar zuid de Mid-Atlantische Rug, een bergketen onder water. Daar schuiven Amerika en Europa elk jaar een paar centimeter uit elkaar. IJsland ligt er bovenop."
@@ -894,7 +1229,6 @@
     "naam": "Gezien vanuit Nederland en Duitsland ligt hij in het oosten. In veel andere talen heet hij naar de Baltische kust.",
     "feit": "Veel rivieren en nauwelijks verbinding met de oceaan: het water is bijna zoet. De paalworm, die elders scheepshout opeet, kan daar niet tegen. Daardoor kon het Zweedse oorlogsschip Vasa, in 1628 gezonken, in 1961 vrijwel compleet worden geborgen."
   },
-
   "berg:Alps": {
     "naam": "Vermoedelijk van een heel oud woord voor hoge berg, of voor wit.",
     "feit": "Ontstaan doordat Afrika tegen Europa aan duwt, en dat gaat nog steeds door. Op de toppen liggen gesteenten die ooit zeebodem waren, met de schelpen er nog in."
