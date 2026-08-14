@@ -721,19 +721,27 @@ function evenGrootAls(c) {
   return best && bd <= Math.log(1.08) ? best : null;      // hooguit 8% ernaast
 }
 
-// Nederland als maatlat, want daar heeft ze gevoel bij. Voor Nederland zelf
-// natuurlijk niet ("Nederland past 1 keer in Nederland"), en alleen bij een
-// verschil van twee keer of meer - anders zegt het niets wat de regel hierboven
-// niet al zei. Bij een kleiner land draait de zin om: "Nederland is 16 keer zo
-// groot" leest een stuk soepeler dan "er passen 16 van deze landen in Nederland".
-function maatlat(c) {
+// Nederland als maatlat, want daar heeft ze gevoel bij. "Ongeveer even groot als
+// Burundi" is waar, maar zegt een Nederlander niets: dan weet je twee landen
+// niet in plaats van één. Daarom staat er ALTIJD een verhouding tot Nederland
+// bij - eerst stond dat er alleen bij een verschil van twee keer of meer, en dan
+// viel alles tussen de halve en de dubbele Nederland (Haïti, Denemarken, Estland)
+// door de mand.
+// Vier vormen, want één formule leest nergens goed: "0,7 keer zo groot als
+// Nederland" is geen Nederlands. Breuken in woorden wel.
+function maatlat(c, zelfde) {
   const NL = INFO['Netherlands'] && INFO['Netherlands'].opp;
-  const eigen = INFO[c.name].opp;
   if (!NL || c.name === 'Netherlands') return '';
-  const keer = eigen / NL;
-  if (keer >= 2) return ' Nederland past er ' + Math.round(keer) + ' keer in.';
-  if (keer <= 0.5) return ' Nederland is ' + Math.round(1 / keer) + ' keer zo groot.';
-  return '';
+  // Is Nederland zelf al het land van vergelijkbare grootte, dan zou de zin
+  // twee keer hetzelfde zeggen.
+  if (zelfde && zelfde.nl === 'Nederland') return '';
+  const keer = INFO[c.name].opp / NL;
+  if (keer >= 1.9) return ' Nederland past er ' + Math.round(keer) + ' keer in.';
+  if (keer <= 0.52) return ' Nederland is ' + Math.round(1 / keer) + ' keer zo groot.';
+  if (keer > 1.1) return ' Dat is ongeveer ' + keer.toFixed(1).replace('.', ',') + ' keer Nederland.';
+  if (keer >= 0.85) return ' Dat is bijna precies zo groot als Nederland.';
+  const breuk = keer < 0.62 ? 'ruim de helft' : keer < 0.72 ? 'ongeveer tweederde' : 'ongeveer driekwart';
+  return ' Dat is ' + breuk + ' van Nederland.';
 }
 
 function oppRegel(c, d) {
@@ -741,7 +749,7 @@ function oppRegel(c, d) {
   let s = '<p><b>Oppervlakte.</b> ' + getal(d.opp) + ' km²';
   const zelfde = evenGrootAls(c);
   s += zelfde ? ', ongeveer even groot als ' + esc(zelfde.nl) + ' (' + getal(zelfde.opp) + ' km²).' : '.';
-  s += maatlat(c);
+  s += maatlat(c, zelfde);
   // De vertekening alleen noemen waar hij merkbaar is. Bij de landen rond de
   // evenaar klopt de kaart vrijwel, en dan is "1,0 keer te groot" ruis.
   if (d.vertekend)
