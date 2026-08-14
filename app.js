@@ -508,15 +508,40 @@ function startSession() {
   // nu niet meepast staat de volgende sessie vooraan.
   const nieuwe = newItems.slice(0, state.settings.sessionLen);
   const herhaal = due.slice(0, Math.max(0, state.settings.sessionLen - nieuwe.length));
-  const queue = shuffle(herhaal.concat(nieuwe));
+  let queue = shuffle(herhaal.concat(nieuwe));
+  let extra = false;
   if (!queue.length) {
-    // niets te herhalen en niets nieuws (alles ken je al en nog niet toe aan herhaling)
-    alert('Niets te herhalen op dit moment — alles wat je koos ken je al goed. Kies meer ' + noem(soortNu(), true) + ', of kom later terug.');
-    state.sessionCounter--; return;
+    // Alles wat ze koos kent ze al en er is nog niets aan herhaling toe. Dat was
+    // een doodlopende weg: een melding, en verder niets. Nu is het een aanbod,
+    // want "ik wil nú oefenen" is een betere reden dan "het schema zegt nee" -
+    // en wie zin heeft moet niet worden weggestuurd.
+    // De extra ronde pakt wat het langst geleden aan de beurt was (laagste due
+    // eerst), dus wat het dichtst tegen zijn herhaling aan zit. Dat is van alles
+    // wat ze kent het meest de moeite waard.
+    const bekend = pool.filter(k => state.items[k][F.seen])
+      .sort((a, b) => state.items[a][F.due] - state.items[b][F.due]);
+    const n = Math.min(state.settings.sessionLen, bekend.length);
+    if (!n) {   // kan niet voorkomen (queue leeg betekent dat alles gezien is), maar nooit stil doodlopen
+      alert('Niets te herhalen op dit moment — alles wat je koos ken je al goed. Kies meer ' + noem(soortNu(), true) + ', of kom later terug.');
+      state.sessionCounter--; return;
+    }
+    // Het telt gewoon mee - haar keuze, gevraagd en beantwoord. Dat is ook het
+    // eerlijkst: een extra ronde die niets doet zou oefenen zonder gevolgen zijn,
+    // en dan vangt hij ook niet wat er stiekem is weggezakt. Goed is een bakje
+    // omhoog, fout gaat terug naar bakje 1 - precies als anders. Dat staat in de
+    // vraag, zodat ze weet wat ze aangaat voor ze ja zegt.
+    if (!confirm('Je kent alles wat je koos al, en er staat nu niets klaar om te herhalen.\n\n' +
+        'Toch verder oefenen? Je krijgt dan de ' + n + ' ' + noem(soortNu(), n !== 1) +
+        ' die het langst geleden aan de beurt zijn geweest.\n\n' +
+        'Het telt gewoon mee: goed is een bakje omhoog, fout gaat terug naar bakje 1.')) {
+      state.sessionCounter--; return;
+    }
+    queue = shuffle(bekend.slice(0, n));
+    extra = true;
   }
   kijk = null;
   el('stopBtn').textContent = 'Stop';
-  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: modeNu() };
+  session = { queue, idx: 0, correct: 0, results: [], now, answered: false, home: null, mode: modeNu(), extra };
   save();
   showQuiz();
   requestAnimationFrame(() => { fitScope(); session.home = { ...view }; nextQuestion(); });
@@ -1057,8 +1082,12 @@ function endSession() {
   sluitSheet();
   showEnd();
   el('endScore').textContent = session.correct + '/' + session.queue.length;
-  el('endWhat').textContent = STIPSOORT.has(soortNu()) ? 'goed benoemd'
-    : session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen';
+  // Bij een extra ronde erbij zeggen dát het er een was. Anders lijkt de uitslag
+  // op die van een gewone sessie, terwijl je hier alleen dingen kreeg die je al
+  // kende - een 20/20 betekent dan iets anders.
+  el('endWhat').textContent = (STIPSOORT.has(soortNu()) ? 'goed benoemd'
+    : session.mode === 'reverse' ? 'goed herkend' : 'goed aangewezen')
+    + (session.extra ? ' · extra ronde' : '');
   const rows = session.results.map(r => {
     const c = byName.get(r.key);
     return `<div class="er"><span>${c.nl}</span><span>${r.correct ? '✓' : '✗'}</span></div>`;
@@ -1264,9 +1293,19 @@ function updateProgress() {
   const wacht = due - herhaalN;
   const nw = noemN(s, nieuwN);
   const hh = `<b>${herhaalN}</b> ` + (herhaalN === 1 ? 'herhaling' : 'herhalingen');
-  el('startInfo').innerHTML = `Volgende sessie: ${nw} en ${hh}.` +
-    (wacht ? ` Nog <b>${wacht}</b> ` + (wacht === 1 ? 'herhaling wacht' : 'herhalingen wachten') +
-      ' op een volgende keer.' : '');
+  // Drie situaties, en ze verdienen elk een eigen zin. "Volgende sessie: 0 nieuwe
+  // landen en 0 herhalingen" is namelijk geen informatie maar een gesloten deur:
+  // je leest wat er níet kan en niet wat er wel kan.
+  el('startInfo').innerHTML =
+    !keys.length
+      ? (s === 'stad' ? 'Kies hieronder eerst een brok.' : 'Kies hieronder eerst een werelddeel of brok.')
+    : (nieuwN || herhaalN)
+      ? `Volgende sessie: ${nw} en ${hh}.` +
+        (wacht ? ` Nog <b>${wacht}</b> ` + (wacht === 1 ? 'herhaling wacht' : 'herhalingen wachten') +
+          ' op een volgende keer.' : '')
+      : `Je kent alle ${noem(s, true)} die je koos, en er staat nu niets klaar om te herhalen. ` +
+        'Wil je toch oefenen, druk dan gewoon op <b>Start sessie</b>: je krijgt een extra ronde ' +
+        'met wat het langst geleden aan de beurt was, en die telt mee.';
 }
 
 // ---------------------------------------------------------------- profielscherm
