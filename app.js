@@ -696,6 +696,61 @@ const esc = s => String(s).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', 
 // brokleden willen we het eerste, want het staat middenin een zin.
 const opsomming = a => a.length < 2 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' en ' + a[a.length - 1];
 
+// ---------------------------------------------------------------- oppervlakte
+// Hoe groot is een land écht? Dat is op een kaart niet af te lezen: elke platte
+// kaart rekt uit naarmate je verder van de evenaar komt. Op deze Robinson-kaart
+// staat Noorwegen 1,7 keer te groot; op de Mercator-kaart die de meeste mensen
+// kennen is Groenland zelfs veertien keer te groot en lijkt het zo groot als
+// Afrika. De cijfers staan daarom in de data (met de hand opgeschreven, op de
+// bol nagemeten door build/bereken-oppervlakte.js) en niet uit de tekening.
+const getal = n => n.toLocaleString('nl-NL');
+
+// Het land dat qua oppervlakte het dichtst bij dit land ligt. Alleen noemen als
+// het echt dichtbij is: "bijna even groot" bij 40% verschil is geen vergelijking
+// maar een misleiding. Zo lees je bij Groenland dat Congo groter is - precies
+// het punt dat een kaart niet kan maken.
+function evenGrootAls(c) {
+  let best = null, bd = Infinity;
+  for (const x of MAP.countries) {
+    if (!x.quiz || x === c || (x.soort || 'land') !== 'land') continue;
+    const o = INFO[x.name] && INFO[x.name].opp;
+    if (!o) continue;
+    const d = Math.abs(Math.log(o / INFO[c.name].opp));   // verhouding, niet verschil
+    if (d < bd) { bd = d; best = { nl: x.nl, opp: o }; }
+  }
+  return best && bd <= Math.log(1.08) ? best : null;      // hooguit 8% ernaast
+}
+
+// Nederland als maatlat, want daar heeft ze gevoel bij. Voor Nederland zelf
+// natuurlijk niet ("Nederland past 1 keer in Nederland"), en alleen bij een
+// verschil van twee keer of meer - anders zegt het niets wat de regel hierboven
+// niet al zei. Bij een kleiner land draait de zin om: "Nederland is 16 keer zo
+// groot" leest een stuk soepeler dan "er passen 16 van deze landen in Nederland".
+function maatlat(c) {
+  const NL = INFO['Netherlands'] && INFO['Netherlands'].opp;
+  const eigen = INFO[c.name].opp;
+  if (!NL || c.name === 'Netherlands') return '';
+  const keer = eigen / NL;
+  if (keer >= 2) return ' Nederland past er ' + Math.round(keer) + ' keer in.';
+  if (keer <= 0.5) return ' Nederland is ' + Math.round(1 / keer) + ' keer zo groot.';
+  return '';
+}
+
+function oppRegel(c, d) {
+  if (!d.opp) return '';
+  let s = '<p><b>Oppervlakte.</b> ' + getal(d.opp) + ' km²';
+  const zelfde = evenGrootAls(c);
+  s += zelfde ? ', ongeveer even groot als ' + esc(zelfde.nl) + ' (' + getal(zelfde.opp) + ' km²).' : '.';
+  s += maatlat(c);
+  // De vertekening alleen noemen waar hij merkbaar is. Bij de landen rond de
+  // evenaar klopt de kaart vrijwel, en dan is "1,0 keer te groot" ruis.
+  if (d.vertekend)
+    s += ' Let op de kaart: ' + esc(c.nl) + ' staat hier ongeveer ' +
+         String(d.vertekend).replace('.', ',') + ' keer te groot. Hoe verder van de evenaar, ' +
+         'hoe meer een platte kaart uitrekt.';
+  return s + '</p>';
+}
+
 // Wat er niet is, laten we weg in plaats van een leeg kopje te tonen.
 function meerRegels(c) {
   const d = INFO[c.name] || {};
@@ -735,6 +790,8 @@ function meerRegels(c) {
     r.push('<p><b>Buurlanden.</b> ' + c.buren.map(esc).join(', ') + '.</p>');
   else if (c.buren)
     r.push('<p><b>Buurlanden.</b> Geen: dit land grenst nergens aan land.</p>');
+  const opp = oppRegel(c, d);
+  if (opp) r.push(opp);
   if (d.overzee) r.push('<p><b>Hoort er ook bij.</b> ' + esc(d.overzee) + '</p>');
   if (d.taal)  r.push('<p><b>Taal.</b> ' + esc(d.taal) + '</p>');
   // Geschiedenis en cultuur staan ná de taal en vóór het losse feit. Reden: de

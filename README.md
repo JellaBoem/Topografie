@@ -18,6 +18,8 @@ later opnieuw terug — over sessies heen, niet op de klok.
 - Meerdere profielen op één toestel, elk met eigen voortgang en eigen instellingen
 - Per land te lezen wat de naam betekent, welke taal er gesproken wordt, hoe het land
   ontstond en welke gewoonte er opvalt — pas ná je antwoord
+- De échte oppervlakte per land, met een land van vergelijkbare grootte erbij en hoe
+  ver de kaart het uitrekt (Noorwegen staat 1,7× te groot)
 - Voortgang blijft op het toestel staan, ook na herstarten
 - Export/import van voortgang als bestand, per profiel
 - Werkt offline; installeerbaar op het beginscherm (iPhone: Safari → Deel → "Zet op beginscherm")
